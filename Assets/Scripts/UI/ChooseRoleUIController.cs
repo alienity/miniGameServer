@@ -25,10 +25,15 @@ public class ChooseRoleUIController : MonoBehaviour {
     public int userID;
 
     Queue<string> queueChooseRole;
+    //List<int> acceptSignUpPlayer = new List<int>();
+
+    // 数据控制器
+    private DataSaveController dataSaveController;
 
     // Use this for initialization
     private void Start()
     {
+        dataSaveController = DataSaveController.Instance;
         InitButtons();
         queueChooseRole = Network.GetComponent<Server>().queueChooseRoleCommands;
     }
@@ -72,12 +77,12 @@ public class ChooseRoleUIController : MonoBehaviour {
         DataSaveController.Instance.playerNumber = 4;
         JObject json = new JObject()
             {
-                {"commMode", 1},                                // 新增通讯模式字段，0表示单播，1表示组播
-                {"stageId", 1},                           // 正在哪个panel
-                { "gId", 0},                              // 组ID： 0~3表示四个组
-                { "uId", 0},                               // 用户ID：0或1， 0表示大将，1表示 马
+                {"commMode", 1},                // 新增通讯模式字段，0表示单播，1表示组播
+                {"stageId", 1},                 // 正在哪个panel
+                { "gId", 0},                    // 组ID： 0~3表示四个组
+                { "uId", 0},                    // 用户ID：0或1， 0表示大将，1表示 马
                 { "joystickAvailable", 1},      // 当前摇杆是否可以操控，0表示不行，1表示可以
-                { "coolingTime", 0}                   //剩余冷却时间
+                { "coolingTime", 0}             //剩余冷却时间
             };
         string output = json.ToString();//JsonConvert.SerializeObject(json);
 
@@ -89,6 +94,7 @@ public class ChooseRoleUIController : MonoBehaviour {
     private void FixedUpdate()
     {
         handleChooseRoleCommand();
+
     }
 
     private void handleChooseRoleCommand()
@@ -103,7 +109,9 @@ public class ChooseRoleUIController : MonoBehaviour {
             groupID = (int)JoysticMessage["gId"];           // 0~3表示四个组
             userID = (int)JoysticMessage["uId"];            // 0或1， 0表示大将，1表示 马
             int connID = groupID * 2 + userID;              // 通过gId和uId计算出对应通道号
-            buttons[connID].interactable = true;            // 人物激活
+            //buttons[connID].interactable = true;            // 人物激活
+            //acceptSignUpPlayer.Add(connID);
+            buttons[connID].image.color = dataSaveController.groupColor[groupID];
         }
     }
 
@@ -123,7 +131,8 @@ public class ChooseRoleUIController : MonoBehaviour {
         buttons[7] = Pig_4P;
         foreach (Button button in buttons)
         {
-            button.interactable = false;
+            //button.interactable = false;
+            button.image.color = Color.white;   //默认白色
         }
     }
 

@@ -14,9 +14,6 @@ public class Server : ICmdNetHandler
 {
     public static Server Instance { get; private set; }
 
-    //[Header("Movement direction")]
-    //public float LeftJoystickHorizontal;
-    //public float LeftJoystickVertical;
     [Header("User message")]
     public int panelID;             // 当前场景 用于控制状态切换
     public int groupID;
@@ -24,18 +21,6 @@ public class Server : ICmdNetHandler
     public int skill;
     public int joystickAvailable;  // 当前摇杆是否可以操控，0表示不行，1表示可以
     public int coolingTime;        // 剩余冷却时间
-    //[Header("GameObject")]
-    //public GameObject Canvas;
-    //[Header("PlayerBotton")]
-    //public Button Penguin_1P;
-    //public Button Penguin_2P;
-    //public Button Penguin_3P;
-    //public Button Penguin_4P;
-    //public Button Pig_1P;
-    //public Button Pig_2P;
-    //public Button Pig_3P;
-    //public Button Pig_4P;
-    //private Button[] buttons;
 
     Vector2 LeftJoystickVector2;
     Vector2 RightJoystickVector2;
@@ -88,7 +73,6 @@ public class Server : ICmdNetHandler
     {   
         SetupServer();
         BroadCast(portBroadCastUDP, broadcastInterval);
-        //InitButtons();
     }
 
     private void Update()
@@ -324,26 +308,6 @@ public class Server : ICmdNetHandler
             //}
         }
     }
-
-    /************************************************
-         * 按键
-    ************************************************/
-    //private void InitButtons()
-    //{
-    //    buttons = new Button[8];
-    //    buttons[0] = Penguin_1P;
-    //    buttons[1] = Pig_1P;
-    //    buttons[2] = Penguin_2P; 
-    //    buttons[3] = Pig_2P;
-    //    buttons[4] = Penguin_3P; 
-    //    buttons[5] = Pig_3P;
-    //    buttons[6] = Penguin_4P; 
-    //    buttons[7] = Pig_4P;
-    //    foreach (Button button in buttons)
-    //    {
-    //        button.interactable = false;
-    //    }
-    //}
 
 }
 
