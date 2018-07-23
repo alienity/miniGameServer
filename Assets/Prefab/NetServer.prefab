@@ -48,15 +48,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1059463760828458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81ebcc5be20c214498a069ce02521d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c61af5346fa62549b714a7c8c7ee41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelID: 0
-  groupID: 0
-  userID: 0
-  skill: 0
-  joystickAvailable: 0
-  coolingTime: 0
-  channelId: 0000000000000000000000000000000000000000000000000000000000000000
-  connectionId: 0000000000000000000000000000000000000000000000000000000000000000
-  flagClientUsing: 0000000000000000000000000000000000000000000000000000000000000000

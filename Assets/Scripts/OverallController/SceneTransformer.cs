@@ -10,11 +10,14 @@ public class SceneTransformer : MonoBehaviour
     // 下一个要切换的场景名
     public string nextSceneName;
 
-    // Use this for initialization
-    void Start()
+    private void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+
     }
 
     public void TransferToNextScene()

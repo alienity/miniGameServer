@@ -11,9 +11,9 @@ public class GroupAndCmdManager : MonoBehaviour {
     // 需要实例化的玩家Group对象
     public GroupPlayer groupPlayerToInstance;
     // 收发数据模块
-    public ICmdNetHandler cmdNetHandler;
+    public GameControllHandler gameControllHandler;
     // 每一帧接受的数据
-    private Queue<string> msgQueue;
+    private Queue<JoystickControllMsg> msgQueue;
     // 游戏是否结束
     private bool isGameOver = false;
 
@@ -26,27 +26,22 @@ public class GroupAndCmdManager : MonoBehaviour {
     {
         if (!isGameOver)
         {
-            if (cmdNetHandler != null)
+            if (gameControllHandler != null)
             {
                 HandleCmd();
                 SendBackCmd();
             }
             else
             {
-                cmdNetHandler = Server.Instance;
+                gameControllHandler = FindObjectOfType<GameControllHandler>();
             }
         }
         else
         {
             // TODO:添加切换手机端控制的代码
+
         }
     }
-
-    //// 结束所有执行过程：结束组角色的控制，并使组角色不受任何状态影响
-    //public void StopAllProcess()
-    //{
-    //    isGameOver = true;
-    //}
 
     // 检查是否死亡，并在给定的位置随机选择地点重生
     public void CheckDeathAndReborn(List<Transform> rebornTrans)
@@ -84,45 +79,29 @@ public class GroupAndCmdManager : MonoBehaviour {
     // 处理接收命令
     public void HandleCmd()
     {
-        msgQueue = cmdNetHandler.GetCommands();
-        
-        foreach (string cmdStr in msgQueue)
+        msgQueue = gameControllHandler.GetCommands();
+
+        foreach (JoystickControllMsg jcm in msgQueue)
         {
-            JObject jo = JObject.Parse(cmdStr);
-            int stageId = jo["stageId"].Value<int>();
-
-            if (stageId == 0)
+            int gId = jcm.gId;
+            int uId = jcm.uId;
+            Vector2 dir = jcm.direction;
+            bool skill = jcm.skill;
+            
+            Vector3 controllDir = new Vector3(dir.x, 0, dir.y);
+            if (uId == (int)GroupPlayer.PlayerType.PIG)
             {
-
+                groupPlayers[gId].PigMove(controllDir);
+                if (skill)
+                    groupPlayers[gId].PigAttack();
             }
-            else if (stageId == 1)
+            else if (uId == (int)GroupPlayer.PlayerType.PENGU)
             {
-                int gId = jo["gId"].Value<int>();
-                int uId = jo["uId"].Value<int>();
-                float dir_x = jo["direction"]["x"].Value<float>();
-                float dir_y = jo["direction"]["y"].Value<float>();
-                int skill = jo["skill"].Value<int>();
-
-                Vector3 controllDir = new Vector3(dir_x, 0, dir_y);
-                if (uId == (int)GroupPlayer.PlayerType.PIG)
-                {
-                    groupPlayers[gId].PigMove(controllDir);
-                    if (skill == 1)
-                        groupPlayers[gId].PigAttack();
-                }
-                else if (uId == (int)GroupPlayer.PlayerType.PENGU)
-                {
-                    groupPlayers[gId].PenguMove(controllDir);
-                    if (skill == 1)
-                        groupPlayers[gId].PenguAttack();
-                }
-            }
-            else if (stageId == 2)
-            {
-
+                groupPlayers[gId].PenguMove(controllDir);
+                if (skill)
+                    groupPlayers[gId].PenguAttack();
             }
         }
-
         msgQueue.Clear();
     }
 
@@ -137,25 +116,41 @@ public class GroupAndCmdManager : MonoBehaviour {
             float pigRemainCoolingTime = gp.CoolingTime(GroupPlayer.PlayerType.PIG);
 
             // 写出企鹅的状态
-            JObject penguJson = new JObject() {
-                { "commMode", 1 },
-                { "stageId", curStageId },
-                { "gId", gId },
-                { "uId", (int)GroupPlayer.PlayerType.PENGU },
-                { "joystickAvailable", isAlive ? 1 : 0 },
-                { "coolingTime",  penguRemainCoolingTime }
-            };
-            cmdNetHandler.SendCommand(penguJson.ToString());
+            PlayerStateMsg penguPsm = new PlayerStateMsg();
+            penguPsm.gId = gId;
+            penguPsm.uId = (int)GroupPlayer.PlayerType.PENGU;
+            penguPsm.joystickAvailable = isAlive;
+            penguPsm.coolingTime = penguRemainCoolingTime;
+            gameControllHandler.SendCommand(penguPsm);
+
             // 写出猪的状态
-            JObject pigJson = new JObject() {
-                { "commMode", 1 },
-                { "stageId", curStageId },
-                { "gId", gId },
-                { "uId", (int)GroupPlayer.PlayerType.PIG },
-                { "joystickAvailable", isAlive ? 1 : 0 },
-                { "coolingTime",  pigRemainCoolingTime }
-            };
-            cmdNetHandler.SendCommand(pigJson.ToString());
+            PlayerStateMsg pigPsm = new PlayerStateMsg();
+            pigPsm.gId = gId;
+            pigPsm.uId = (int)GroupPlayer.PlayerType.PENGU;
+            pigPsm.joystickAvailable = isAlive;
+            pigPsm.coolingTime = penguRemainCoolingTime;
+            gameControllHandler.SendCommand(pigPsm);
+
+            //// 写出企鹅的状态
+            //JObject penguJson = new JObject() {
+            //    { "commMode", 1 },
+            //    { "stageId", curStageId },
+            //    { "gId", gId },
+            //    { "uId", (int)GroupPlayer.PlayerType.PENGU },
+            //    { "joystickAvailable", isAlive ? 1 : 0 },
+            //    { "coolingTime",  penguRemainCoolingTime }
+            //};
+            //cmdNetHandler.SendCommand(penguJson.ToString());
+            //// 写出猪的状态
+            //JObject pigJson = new JObject() {
+            //    { "commMode", 1 },
+            //    { "stageId", curStageId },
+            //    { "gId", gId },
+            //    { "uId", (int)GroupPlayer.PlayerType.PIG },
+            //    { "joystickAvailable", isAlive ? 1 : 0 },
+            //    { "coolingTime",  pigRemainCoolingTime }
+            //};
+            //cmdNetHandler.SendCommand(pigJson.ToString());
 
         }
     }
