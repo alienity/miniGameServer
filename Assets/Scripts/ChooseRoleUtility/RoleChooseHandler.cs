@@ -14,6 +14,9 @@ public class RoleChooseHandler : MonoBehaviour
     public int countDownTime = 5;
     // 本次要选择的人数
     public int toNumberTransfer = 8;
+    // 已经确定的玩家
+    public List<int> confirmedPlayers;
+
 
     // 控制角色选择的UI控制器
     private RoleChoosingUIController roleChoosingUIController;
@@ -26,6 +29,10 @@ public class RoleChooseHandler : MonoBehaviour
             server = Server.Instance;
         if (roleChoosingUIController == null)
             roleChoosingUIController = FindObjectOfType<RoleChoosingUIController>();
+        if (confirmedPlayers == null)
+            confirmedPlayers = new List<int>();
+
+        ConfirmPlayerNums = 0;
 
         NetworkServer.RegisterHandler(CustomMsgType.Choose, OnReceiveChoose);
         NetworkServer.RegisterHandler(CustomMsgType.Confirm, OnPlayerCnfirm);
@@ -91,6 +98,11 @@ public class RoleChooseHandler : MonoBehaviour
     // 对玩家确定的回调
     public void OnPlayerCnfirm(NetworkMessage netmsg)
     {
+        ConfirmChooseMsg ccm = netmsg.ReadMessage<ConfirmChooseMsg>();
+        int connection = ccm.gid * 2 + ccm.uid;
+        if (confirmedPlayers.Contains(connection)) return;
+        confirmedPlayers.Add(connection);
+        Debug.Log("玩家确认!!!");
         ConfirmPlayerNums += 1;
         if (ConfirmPlayerNums == toNumberTransfer)
             StartCoroutine(CountDownToStartGame(countDownTime));
