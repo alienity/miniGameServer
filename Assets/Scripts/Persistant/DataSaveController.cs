@@ -11,6 +11,8 @@ public class DataSaveController : MonoBehaviour {
     // *********在选人场景下**********
     // 玩家数
     public int playerNumber;
+    // TODO
+    public List<string> playerName;
     public List<Color> groupColor;
     // *********在游戏场景下**********
     // 每个队伍的
