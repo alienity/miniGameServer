@@ -6,6 +6,10 @@ using UnityEngine.Networking;
 
 public class RoleChooseHandler : MonoBehaviour
 {
+    public static RoleChooseHandler Instance { get; private set; }
+
+    
+    
     // 确认选择的玩家数
     [HideInInspector]
     public int ConfirmPlayerNums { get; private set; }
@@ -23,6 +27,11 @@ public class RoleChooseHandler : MonoBehaviour
     // 不会终止的服务器
     private Server server;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+    
     private void Start()
     {
         if (server == null)
@@ -34,8 +43,6 @@ public class RoleChooseHandler : MonoBehaviour
 
         ConfirmPlayerNums = 0;
 
-        NetworkServer.RegisterHandler(CustomMsgType.Choose, OnReceiveChoose);
-        NetworkServer.RegisterHandler(CustomMsgType.Confirm, OnPlayerCnfirm);
     }
 
     /*
@@ -105,7 +112,11 @@ public class RoleChooseHandler : MonoBehaviour
         Debug.Log("玩家确认!!!");
         ConfirmPlayerNums += 1;
         if (ConfirmPlayerNums == toNumberTransfer)
+        {
             StartCoroutine(CountDownToStartGame(countDownTime));
+            SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("ChooseRoleScene", "GameScene");
+            NetworkServer.SendToAll(CustomMsgType.ClientChange, sceneTransferMsg);
+        }
     }
 
     IEnumerator CountDownToStartGame(int time)

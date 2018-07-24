@@ -5,20 +5,26 @@ using UnityEngine.Networking;
 public class GameControllHandler : MonoBehaviour
 {
 
+//    public static GameControllHandler Instance { get; private set; }
+
     // 存储所有操作命令的队列
     private Queue<JoystickControllMsg> cmdQueue = new Queue<JoystickControllMsg>();
 
     private Server server;
 
+//    private void Awake()
+//    {
+//        Instance = this;
+//    }
+    
     private void Start()
     {
         if (server == null)
             server = Server.Instance;
-
-        NetworkServer.RegisterHandler(CustomMsgType.GroupControll, OnReceiveControll);
-
     }
-    
+
+
+
     public void OnReceiveControll(NetworkMessage netmsg)
     {
         int curConnectionID = netmsg.conn.connectionId;

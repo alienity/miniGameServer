@@ -24,15 +24,21 @@ public class Server : MonoBehaviour
     private int clientConnectNum = 0;
 
     private NetworkDiscovery ServerCast;
-    
+    private RoleChooseHandler roleChooseHandler;
+    public GameControllHandler gameControllHandler;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
         Instance = this;
+        roleChooseHandler = RoleChooseHandler.Instance;
+//        gameControllHandler = GameControllHandler.Instance;
     }
 
     private void Start()
     {
+        gameControllHandler = GetComponent<GameControllHandler>();
+
         SetupServer();
 
         BroadCast(portBroadCastUDP, broadcastInterval);
@@ -58,10 +64,9 @@ public class Server : MonoBehaviour
         NetworkServer.RegisterHandler(MsgType.Connect, OnClientConnect);
         NetworkServer.RegisterHandler(MsgType.Disconnect, OnClientDisConnect);
 
-        //NetworkServer.RegisterHandler(CustomMsgType.Choose, roleChooseHandler.OnReceiveChoose);
-        //NetworkServer.RegisterHandler(CustomMsgType.Confirm, roleChooseHandler.OnPlayerCnfirm);
-
-        //NetworkServer.RegisterHandler(CustomMsgType.GroupControll, gameControllHandler.OnReceiveControll);
+        NetworkServer.RegisterHandler(CustomMsgType.Choose, roleChooseHandler.OnReceiveChoose);
+        NetworkServer.RegisterHandler(CustomMsgType.Confirm, roleChooseHandler.OnPlayerCnfirm);
+        NetworkServer.RegisterHandler(CustomMsgType.GroupControll, gameControllHandler.OnReceiveControll);
 
     }
 
