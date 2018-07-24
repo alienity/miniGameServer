@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class WaterSurface : BoxEffects
 {
-    private float radio = 4;
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("die");
         if (other.gameObject.tag == "Player")
-            other.gameObject.GetComponent<GroupPlayer>().GetComponent<Rigidbody>().drag /= 2; ;
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-            other.gameObject.GetComponent<GroupPlayer>().GetComponent<Rigidbody>().drag *= 2; ;
+            other.gameObject.GetComponent<GroupPlayer>().Die() ;
     }
 }

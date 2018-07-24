@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplosionTree : BoxEffects
-
 {
-    private short lifeNumber = 5;
-    private float explosionRadius = 5;
-    private float radio = -3.5f;
+    public short lifeNumber = 5;
+    public float explosionRadius = 50;
+    public float radio = -30.5f;
 
     private void explode()
     {
@@ -23,7 +22,7 @@ public class ExplosionTree : BoxEffects
                 Rigidbody b = col[i].GetComponent<Rigidbody>();
                 if (b != null)
                 {
-                    Vector3 explosionvelocity = (explosionRadius - velocityDir.magnitude) * velocityDir.normalized;
+                    Vector3 explosionvelocity = (10 - velocityDir.magnitude) * velocityDir.normalized;
                     explosionvelocity = explosionvelocity * radio;
                     b.velocity = explosionvelocity;
                 }

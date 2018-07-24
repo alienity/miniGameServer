@@ -13,11 +13,12 @@ public class SpringWall :BoxEffects
 
         if (collider.tag == "Ball")
         {
+            Vector3 symmetryAxis = gameObject.transform.position - collider.transform.position;
+            Vector3 Forward = collider.transform.forward;
 
-            float newX= collider.transform.forward.x, newZ= collider.transform.forward.z;
-            if (newX > newZ) newX = -newX;
-               else newZ = -newZ; 
-            collider.transform.forward = new Vector3(newX, 0, newZ);
+            Vector3 newVector3 = -2 * (Vector3.Dot(Forward, symmetryAxis)) / (Vector3.Dot(Forward, Forward)) * Forward -symmetryAxis;
+            Debug.Log(newVector3.ToString());
+            collider.transform.forward = newVector3; 
         }
     }
 }

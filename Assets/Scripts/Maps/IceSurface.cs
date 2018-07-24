@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class IceSurface : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Use this for initialization
+    public float radio = 4;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+            other.gameObject.GetComponent<GroupPlayer>().GetComponent<Rigidbody>().drag /=radio;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+            other.gameObject.GetComponent<GroupPlayer>().GetComponent<Rigidbody>().drag *= radio; ;
+    }
 }
