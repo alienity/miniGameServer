@@ -1724,7 +1724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDownTime: 5
-  toNumberTransfer: 1
+  toNumberTransfer: 4
   confirmedPlayers: 
 --- !u!114 &114745398949492484
 MonoBehaviour:

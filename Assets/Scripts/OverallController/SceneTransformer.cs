@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class SceneTransformer : MonoBehaviour
@@ -20,10 +21,18 @@ public class SceneTransformer : MonoBehaviour
 
     }
 
+    public void AskClientToChange()
+    {
+        string curSceneName = SceneManager.GetActiveScene().name;
+        SceneTransferMsg stm = new SceneTransferMsg(curSceneName, nextSceneName);
+        NetworkServer.SendToAll(CustomMsgType.ClientChange, stm);
+    }
+
     public void TransferToNextScene()
     {
+        AskClientToChange();
         FreeResource();
-        SceneManager.LoadSceneAsync(nextSceneName);
+        SceneManager.LoadScene(nextSceneName);
     }
 
     // 释放没用的资源，手动GC

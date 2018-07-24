@@ -24,6 +24,4 @@ public class DataSaveController : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-
-
 }

@@ -22,6 +22,8 @@ public class GroupPlayer : MonoBehaviour
     // 重生无敌时间
     public float rebornRestTime = 3f;
 
+    // 组的颜色
+    private Color groupColor;
     // 队伍Trans
     public Transform groupTrans;
     // 重生时设置地点
@@ -103,10 +105,12 @@ public class GroupPlayer : MonoBehaviour
     }
 
     // 首次出生
-    public GameObject FirstBorn(int gId, Vector3 bornPos)
+    public GameObject FirstBorn(int gId, Vector3 bornPos, Color groupColor)
     {
         this.gId = gId;
-        return Instantiate(gameObject, bornPos, Quaternion.identity);
+        this.groupColor = groupColor;
+        GameObject group = Instantiate(gameObject, bornPos, Quaternion.identity);
+        return group;
     }
 
     // 设置ScoreController

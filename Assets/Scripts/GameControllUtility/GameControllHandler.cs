@@ -21,9 +21,8 @@ public class GameControllHandler : MonoBehaviour
     {
         if (server == null)
             server = Server.Instance;
+		NetworkServer.RegisterHandler(CustomMsgType.GroupControll, OnReceiveControll);
     }
-
-
 
     public void OnReceiveControll(NetworkMessage netmsg)
     {

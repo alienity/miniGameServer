@@ -60,7 +60,6 @@ public class RoleChooseHandler : MonoBehaviour
         int selectingGid = curRequest.gid,
             selectingUid = curRequest.uid,
             selectingRoleId = selectingGid * 2 + selectingUid;
-        result.stageId = 0;
         if (server.role2connectionID.ContainsKey(selectingGid * 2 + selectingUid)) // 要选择的角色已经不可用
         {
             result.succeed = false;
@@ -116,6 +115,7 @@ public class RoleChooseHandler : MonoBehaviour
             StartCoroutine(CountDownToStartGame(countDownTime));
             SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("ChooseRoleScene", "GameScene");
             NetworkServer.SendToAll(CustomMsgType.ClientChange, sceneTransferMsg);
+			DataSaveController.Instance.playerNumber = confirmedPlayers.Count;
         }
     }
 

@@ -61,9 +61,9 @@ public class GroupAndCmdManager : MonoBehaviour {
     }
 
     // 生成组对象
-    public void AddPlayerGroup(int gId, Transform bornTrans)
+    public void AddPlayerGroup(int gId, Transform bornTrans, Color groupColor)
     {
-        GameObject groupPlayerInstance = groupPlayerToInstance.FirstBorn(gId, bornTrans.position);
+        GameObject groupPlayerInstance = groupPlayerToInstance.FirstBorn(gId, bornTrans.position, groupColor);
         GroupPlayer gp = groupPlayerInstance.GetComponent<GroupPlayer>();
         AddGroupPlayerToList(gp);
     }
@@ -87,6 +87,7 @@ public class GroupAndCmdManager : MonoBehaviour {
             int uId = jcm.uId;
             Vector2 dir = jcm.direction;
             bool skill = jcm.skill;
+            bool finish = jcm.finish;
             
             Vector3 controllDir = new Vector3(dir.x, 0, dir.y);
             if (uId == (int)GroupPlayer.PlayerType.PIG)

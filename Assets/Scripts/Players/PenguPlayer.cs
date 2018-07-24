@@ -35,7 +35,7 @@ public class PenguPlayer : MonoBehaviour
 
 
         // ********************测试代码*******************
-        /**/
+        /*
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -60,7 +60,7 @@ public class PenguPlayer : MonoBehaviour
         {
             PenguPlayerAttack();
         }
-        
+        */
         // ********************测试代码*******************
 
     }
@@ -99,6 +99,18 @@ public class PenguPlayer : MonoBehaviour
         if ((curBallController != null && curBallController.RemainNums() == 0)
             || (curBallController == null))
             curBallController = snowBallController;
+    }
+
+    // 开始蓄力
+    public void PenguPlayerStartCharge()
+    {
+
+    }
+
+    // 结束蓄力
+    public void PenguPlayerFinishCharge()
+    {
+
     }
 
     // 发射雪球

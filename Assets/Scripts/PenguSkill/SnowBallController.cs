@@ -7,7 +7,6 @@ public class SnowBallController : ShotBallController
     
     // Ball的冷却时间
     public float snowBallColdingTime;
-
     // Use this for initialization
     void Start () {
         if (ball == null)

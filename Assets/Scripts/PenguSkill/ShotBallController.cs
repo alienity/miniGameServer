@@ -8,7 +8,8 @@ public class ShotBallController : MonoBehaviour {
     public ShotBall ball;
     // Ball在发动后剩余的冷却时间
     protected float remainColdingTime;
-    
+    // 蓄力时长
+    public float maxChargeTime = 4;
 
     // 使用一个Ball
     public virtual void UseBall(int ownerId, Vector3 position, Quaternion rotation)
@@ -26,6 +27,13 @@ public class ShotBallController : MonoBehaviour {
     public virtual int AvailableNow()
     {
         return 1;
+    }
+
+    // 设置蓄力
+    public void SetChargeAttackTime(float time = 0)
+    {
+        if (time > maxChargeTime) time = maxChargeTime;
+        ball.SetChargeAttackTime(time);
     }
 
     // 剩余冷却时间

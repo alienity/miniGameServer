@@ -31,12 +31,12 @@ public class Server : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         Instance = this;
-        roleChooseHandler = RoleChooseHandler.Instance;
 //        gameControllHandler = GameControllHandler.Instance;
     }
 
     private void Start()
     {
+        roleChooseHandler = RoleChooseHandler.Instance;
         gameControllHandler = GetComponent<GameControllHandler>();
 
         SetupServer();

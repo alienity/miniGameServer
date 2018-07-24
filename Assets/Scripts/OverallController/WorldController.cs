@@ -39,7 +39,7 @@ public class WorldController : MonoBehaviour {
             gUIController = GameUIController.Instance;
 
         // ********************测试生成角色代码*********************
-        InstanceAllGroups(bornTrans.Count);
+        InstanceAllGroups();
         // ********************测试生成角色代码*********************
         // 游戏初始化游戏计时
         totalPastGameTime = 0;
@@ -99,16 +99,29 @@ public class WorldController : MonoBehaviour {
     }
 
     // 实例化组对象
-    public void InstanceAllGroups(int gps)
+    public void InstanceAllGroups()
     {
-        groupCounts = gps;
+        groupCounts = Mathf.CeilToInt(DataSaveController.Instance.playerNumber / 2.0f);
+        if (groupCounts <= 0) return;
         for (int i = 0; i < groupCounts; ++i)
         {
-            gcManager.AddPlayerGroup(i, bornTrans[i]);
+            gcManager.AddPlayerGroup(i, bornTrans[i], DataSaveController.Instance.groupColor[i]);
         }
         scoreController.SetGroupPlayers(gcManager.groupPlayers);
         gUIController.SetGroupInitial(groupCounts);
     }
+
+    //// 实例化组对象
+    //public void InstanceAllGroups(int gps)
+    //{
+    //    groupCounts = gps;
+    //    for (int i = 0; i < groupCounts; ++i)
+    //    {
+    //        gcManager.AddPlayerGroup(i, bornTrans[i]);
+    //    }
+    //    scoreController.SetGroupPlayers(gcManager.groupPlayers);
+    //    gUIController.SetGroupInitial(groupCounts);
+    //}
 
     // 返回游戏剩余时长
     public float GetRemainGameTime()

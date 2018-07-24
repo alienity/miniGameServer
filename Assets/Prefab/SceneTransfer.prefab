@@ -19,8 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4390686214655440}
-  - component: {fileID: 114729338210524886}
-  - component: {fileID: 114461705108298362}
+  - component: {fileID: 114060482176932856}
   m_Layer: 0
   m_Name: SceneTransfer
   m_TagString: Untagged
@@ -41,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114461705108298362
+--- !u!114 &114060482176932856
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,21 +48,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1066874935194038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bf2d80e78c046c4f92ecebf61464259, type: 3}
+  m_Script: {fileID: 11500000, guid: 40eeac4ef9ed8b645a00e819fe189b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
-  groupColor: []
-  scores: 
---- !u!114 &114729338210524886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1066874935194038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 865e2dda0d479a5498b93362e69f8cdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: GameOverScene
+  nextSceneName: GameScene
