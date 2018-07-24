@@ -68,18 +68,24 @@ public class GameUIController : MonoBehaviour
     {
         if(uId == (int)GroupPlayer.PlayerType.PENGU)
         {
-            coldingText[gId].penguColdingTime.text = time.ToString();
+            coldingText[gId].penguColdingTime.text = TimeToShow(time);
         }
         else if (uId == (int)GroupPlayer.PlayerType.PIG)
         {
-            coldingText[gId].pigColdingTime.text = time.ToString();
+            coldingText[gId].pigColdingTime.text = TimeToShow(time);
         }
     }
 
     // 更新计时数据
     public void UpdateRemainTimes(float remainTimes)
     {
-        countdownText.text = remainTimes.ToString();
+        countdownText.text = TimeToShow(remainTimes);
+    }
+
+
+    private string TimeToShow(float time)
+    {
+        return time > 1.0f ? time.ToString("F0") : time.ToString("F1");
     }
 
 }
