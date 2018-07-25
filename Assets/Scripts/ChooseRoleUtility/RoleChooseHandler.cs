@@ -112,6 +112,7 @@ public class RoleChooseHandler : MonoBehaviour
         ConfirmPlayerNums += 1;
         if (ConfirmPlayerNums == toNumberTransfer)
         {
+            roleChoosingUIController.CountDownTextSetActive();
             StartCoroutine(CountDownToStartGame(countDownTime));
             SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("ChooseRoleScene", "GameScene");
             NetworkServer.SendToAll(CustomMsgType.ClientChange, sceneTransferMsg);
@@ -121,7 +122,12 @@ public class RoleChooseHandler : MonoBehaviour
 
     IEnumerator CountDownToStartGame(int time)
     {
-        yield return new WaitForSeconds(time);
+        while (time >= 0)
+        {
+            roleChoosingUIController.CountDownPlay(time);
+            yield return new WaitForSeconds(1);
+            --time;
+        }
         //server.StopBroadCast();
         SceneTransformer.Instance.TransferToNextScene();
     }

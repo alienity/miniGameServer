@@ -18,10 +18,13 @@ public class RoleChoosingUIController : MonoBehaviour {
     public Button P4Pig;
 
     private Button[] buttons;
+
+    public Text CountDown;
     
     private void Start()
     {
         InitArray();
+        CountDown.gameObject.SetActive(false);
     }
 
     private void InitArray()
@@ -49,14 +52,26 @@ public class RoleChoosingUIController : MonoBehaviour {
         Debug.Log(gid+ " " + uid + " available");
 
         buttons[gid*2 + uid].interactable = true;
-        buttons[gid * 2 + uid].image.color = DataSaveController.Instance.groupColor[gid];
+        //buttons[gid * 2 + uid].image.color = DataSaveController.Instance.groupColor[gid];
+        buttons[gid * 2 + uid].image.color = Color.white;
+       
     }
 
     // todo 到时候在这里为 button 设置效果
     public void SetButtonRoleSelected(int gid, int uid)
     {
         Debug.Log(gid + " " + uid + " selected");
-        buttons[gid*2 + uid].interactable = false;
+        //buttons[gid*2 + uid].interactable = false;
+        buttons[gid * 2 + uid].image.color = DataSaveController.Instance.groupColor[gid];
     }
-    
+
+    public void CountDownTextSetActive()
+    {
+        CountDown.gameObject.SetActive(true);
+    }
+
+    public void CountDownPlay(int time)
+    {
+        CountDown.text = time.ToString();
+    }
 }
