@@ -7,8 +7,11 @@ public class GameControllHandler : MonoBehaviour
 
 //    public static GameControllHandler Instance { get; private set; }
 
-    // 存储所有操作命令的队列
-    private Queue<JoystickControllMsg> cmdQueue = new Queue<JoystickControllMsg>();
+    // 存储摇杆操作
+    private Queue<JoystickMsg> jcmQueue = new Queue<JoystickMsg>();
+    // 存储蓄力操作
+    private Queue<ChargeSkillMsg> csmQueue = new Queue<ChargeSkillMsg>();
+    private Queue<RushSkillMag> rsmQueue = new Queue<RushSkillMag>();
 
     private Server server;
 
@@ -21,19 +24,34 @@ public class GameControllHandler : MonoBehaviour
     {
         if (server == null)
             server = Server.Instance;
-		NetworkServer.RegisterHandler(CustomMsgType.GroupControll, OnReceiveControll);
+
+		NetworkServer.RegisterHandler(CustomMsgType.GroupJoystick, OnReceiveJoystick);
+        NetworkServer.RegisterHandler(CustomMsgType.GroupChargeSkill, OnReceiveChargeSkill);
+        NetworkServer.RegisterHandler(CustomMsgType.GroupRushSkill, OnReceiveRushSkill);
     }
 
-    public void OnReceiveControll(NetworkMessage netmsg)
+    public void OnReceiveJoystick(NetworkMessage netmsg)
     {
-        int curConnectionID = netmsg.conn.connectionId;
-        JoystickControllMsg curControllMsg = netmsg.ReadMessage<JoystickControllMsg>();
-        cmdQueue.Enqueue(curControllMsg);
+        //int curConnectionID = netmsg.conn.connectionId;
+        JoystickMsg curControllMsg = netmsg.ReadMessage<JoystickMsg>();
+        jcmQueue.Enqueue(curControllMsg);
     }
     
+    public void OnReceiveChargeSkill(NetworkMessage netmsg)
+    {
+        ChargeSkillMsg curControllMsg = netmsg.ReadMessage<ChargeSkillMsg>();
+        csmQueue.Enqueue(curControllMsg);
+    }
+
+    public void OnReceiveRushSkill(NetworkMessage netmsg)
+    {
+        RushSkillMag rushSkillMsg = netmsg.ReadMessage<RushSkillMag>();
+        rsmQueue.Enqueue(rushSkillMsg);
+    }
+
     //--------------------------------------------------------------------------------------------
 
-    public void SendCommand(PlayerStateMsg psm)
+    public void SendGroupStatus(PlayerStateMsg psm)
     {
         int gId = psm.gId;
         int uId = psm.uId;
@@ -43,10 +61,20 @@ public class GameControllHandler : MonoBehaviour
         int connectionId = server.role2connectionID[selectionId];
         NetworkServer.SendToClient(connectionId, CustomMsgType.GroupState, psm);
     }
-
-    public Queue<JoystickControllMsg> GetCommands()
+    
+    public Queue<JoystickMsg> GetJoystickQueue()
     {
-        return cmdQueue;
+        return jcmQueue;
+    }
+
+    public Queue<ChargeSkillMsg> GetChargeSkillQueue()
+    {
+        return csmQueue;
     }
     
+    public Queue<RushSkillMag> GetRushSkillQueue()
+    {
+        return rsmQueue;
+    }
+
 }

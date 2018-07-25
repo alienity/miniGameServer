@@ -46,7 +46,7 @@ Shader "Hidden/Vignetting" {
 		half coordDot = dot (coords,coords);
 		half4 color = tex2D (_MainTex, uv);	 
 
-		float mask = 1.0 - coordDot * _Intensity; 
+		float mask = 1.0 - coordDot * _Intensity * 0.1; 
 		
 		half4 colorBlur = tex2D (_VignetteTex, i.uv2);
 		color = lerp (color, colorBlur, saturate (_Blur * coordDot));
@@ -59,8 +59,10 @@ Shader "Hidden/Vignetting" {
 Subshader {
  Pass {
 	  ZTest Always Cull Off ZWrite Off
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma fragmentoption ARB_precision_hint_fastest 
       #pragma vertex vert
       #pragma fragment frag
       ENDCG

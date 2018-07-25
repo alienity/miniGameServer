@@ -30,11 +30,11 @@ public class SnowBall : ShotBall
     
     private void FixedUpdate()
     {
-        if (fliedTime < flyTime &&( fliedDist < flyDist ))
+        if (fliedTime < flyTime && ( fliedDist < flyDist ))
         {
             mTrans.position += mTrans.forward * flySpeed * Time.deltaTime;
             fliedTime += Time.deltaTime;
-            fliedDist += Time.deltaTime * (flySpeed+chargeAttackTime);
+            fliedDist += Time.deltaTime * (flySpeed + chargeAttackTime);
             Debug.Log("flying....");
         }
         else
@@ -51,7 +51,6 @@ public class SnowBall : ShotBall
             if (otherId == attackerId) return;
             GroupPlayer gp = other.GetComponent<GroupPlayer>();
             gp.EffectSpeedMovement(mTrans.forward * (suddenSpeed + chargeAttackTime * attackStrength));
-            //积分
             gp.SetAttacker(attackerId); // 设置攻击者Id
             DestroySelf();
         }

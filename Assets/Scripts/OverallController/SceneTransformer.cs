@@ -8,6 +8,8 @@ public class SceneTransformer : MonoBehaviour
 
     public static SceneTransformer Instance { get; private set; }
 
+    public bool trans = false;
+
     // 下一个要切换的场景名
     public string nextSceneName;
 
@@ -16,9 +18,10 @@ public class SceneTransformer : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    private void Update()
     {
-
+        if (trans)
+            TransferToNextScene();
     }
 
     public void AskClientToChange()

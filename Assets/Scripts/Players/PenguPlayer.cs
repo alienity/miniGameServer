@@ -16,7 +16,13 @@ public class PenguPlayer : MonoBehaviour
     public ShotBallController snowBallController;
     // 且新捡到的投掷物品
     public ShotBallController curBallController;
-    
+    //// 蓄力时长
+    //public float maxChargeTime;
+
+    //// 记录开始蓄力
+    //private float chargeStartTime = -1;
+    //// 记录蓄力到现在，当前时刻
+    //private float chargeCurrentTime = -1;
     // 自有对象
     private Transform mTrans;
 
@@ -98,19 +104,38 @@ public class PenguPlayer : MonoBehaviour
     {
         if ((curBallController != null && curBallController.RemainNums() == 0)
             || (curBallController == null))
+        {
             curBallController = snowBallController;
+            //maxChargeTime = curBallController.MaxChargeTime();
+        }
+    }
+    /*
+    // 开始蓄力
+    private void PenguPlayerStartCharge(float startTime)
+    {
+        chargeStartTime = startTime;
+        chargeCurrentTime = startTime;
     }
 
-    // 开始蓄力
-    public void PenguPlayerStartCharge()
+    // 蓄力进行中
+    private void PenguPlayerChargin(float curTime)
     {
-
+        chargeCurrentTime = curTime;
     }
 
     // 结束蓄力
-    public void PenguPlayerFinishCharge()
+    private void PenguPlayerFinishCharge()
     {
+        chargeStartTime = -1;
 
+    }
+    */
+    // 根据时间处理蓄力技能
+    public void HandleChargeSkill(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
+    {
+        // 测试蓄力
+        curBallController.HandleChargeAttack(chargeStartTime, chargeCurrentTime);
+        if (chargeReturn) PenguPlayerAttack();
     }
 
     // 发射雪球

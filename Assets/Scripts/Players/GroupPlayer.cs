@@ -168,7 +168,8 @@ public class GroupPlayer : MonoBehaviour
 
         pigPlayer.SetDirection(dir.normalized);
     }
-
+    
+    // 猪受到雪球等的攻击后被击退
     public void EffectSpeedMovement(Vector3 addedSpeed)
     {
         if (!isAlive) return;
@@ -184,6 +185,7 @@ public class GroupPlayer : MonoBehaviour
         pigPlayer.ReceiveForce(addedForce);
     }
 
+    // 猪发动技能
     public void PigAttack()
     {
         if (!isAlive) return;
@@ -199,13 +201,14 @@ public class GroupPlayer : MonoBehaviour
         penguPlayer.SetArrowDirection(dir.normalized);
     }
 
-    public void PenguAttack()
+    // 企鹅蓄力攻击
+    public void PenguChargeAttack(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
     {
         if (!isAlive) return;
 
-        penguPlayer.PenguPlayerAttack();
+        penguPlayer.HandleChargeSkill(chargeStartTime, chargeCurrentTime, chargeReturn);
     }
-
+    
     // 获取猪和企鹅的数据用于返回到控制界面
     public bool IsJoysticjAvai()
     {

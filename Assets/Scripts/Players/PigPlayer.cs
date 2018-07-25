@@ -65,11 +65,15 @@ public class PigPlayer : MonoBehaviour
                 float cosDegree = Vector3.Dot(velocityDirection, pigMoveDirection);
                 float sinDegree = Mathf.Sqrt(1 - cosDegree * cosDegree);
 
+                // 加速
                 if (groupRd.velocity.magnitude < pigNormalSpeed)
                     groupRd.AddForce(velocityDirection * (groupRd.drag + accForce * cosDegree));
                 else
                     groupRd.AddForce(velocityDirection * groupRd.drag);
-                groupRd.AddForce(velocityCrossDirection * (groupRd.drag + accForce * sinDegree));
+                // 偏移
+                Vector3 biasForce = velocityCrossDirection * (groupRd.drag + accForce * sinDegree);
+                if(biasForce.magnitude != 0)
+                    groupRd.AddForce(biasForce);
             }
         }
 
@@ -142,6 +146,7 @@ public class PigPlayer : MonoBehaviour
     // 发动冲刺
     public void PigPlayerAttack()
     {
+        Debug.Log("pig Attack");
         if(curSkillController != null)
         {
             if (curSkillController.RemainNums() == 0)

@@ -13,7 +13,9 @@ public class GroupAndCmdManager : MonoBehaviour {
     // 收发数据模块
     public GameControllHandler gameControllHandler;
     // 每一帧接受的数据
-    private Queue<JoystickControllMsg> msgQueue;
+    private Queue<JoystickMsg> jsmQueue;
+    private Queue<ChargeSkillMsg> csmQueue;
+    private Queue<RushSkillMag> rsmQueue;
     // 游戏是否结束
     private bool isGameOver = false;
 
@@ -22,7 +24,7 @@ public class GroupAndCmdManager : MonoBehaviour {
         isGameOver = false;
     }
 	
-    private void Update()
+    private void FixedUpdate()
     {
         if (!isGameOver)
         {
@@ -79,31 +81,59 @@ public class GroupAndCmdManager : MonoBehaviour {
     // 处理接收命令
     public void HandleCmd()
     {
-        msgQueue = gameControllHandler.GetCommands();
+        jsmQueue = gameControllHandler.GetJoystickQueue();
+        csmQueue = gameControllHandler.GetChargeSkillQueue();
+        rsmQueue = gameControllHandler.GetRushSkillQueue();
 
-        foreach (JoystickControllMsg jcm in msgQueue)
+        foreach (JoystickMsg jcm in jsmQueue)
         {
             int gId = jcm.gId;
             int uId = jcm.uId;
             Vector2 dir = jcm.direction;
-            bool skill = jcm.skill;
-            bool finish = jcm.finish;
             
             Vector3 controllDir = new Vector3(dir.x, 0, dir.y);
+            controllDir = controllDir.normalized;
             if (uId == (int)GroupPlayer.PlayerType.PIG)
             {
                 groupPlayers[gId].PigMove(controllDir);
-                if (skill)
-                    groupPlayers[gId].PigAttack();
             }
             else if (uId == (int)GroupPlayer.PlayerType.PENGU)
             {
                 groupPlayers[gId].PenguMove(controllDir);
-                if (skill)
-                    groupPlayers[gId].PenguAttack();
             }
         }
-        msgQueue.Clear();
+
+        foreach (ChargeSkillMsg csm in csmQueue)
+        {
+            int gId = csm.gId;
+            int uId = csm.uId;
+            float chargeStartTime = csm.chargeStartTime;
+            float currrentTime = csm.chargeCurrentTime;
+            bool chargeReturn = csm.chargeReturn;
+
+            if (uId == (int)GroupPlayer.PlayerType.PENGU)
+            {
+                groupPlayers[gId].PenguChargeAttack(chargeStartTime, currrentTime, chargeReturn);
+            }
+
+        }
+
+        foreach (RushSkillMag rsm in rsmQueue)
+        {
+            int gId = rsm.gId;
+            int uId = rsm.uId;
+            bool skill = rsm.skill;
+
+            if(uId == (int)GroupPlayer.PlayerType.PIG)
+            {
+                groupPlayers[gId].PigAttack();
+            }
+
+        }
+
+        jsmQueue.Clear();
+        csmQueue.Clear();
+        rsmQueue.Clear();
     }
 
     // 返回控制指令到手机端
@@ -122,15 +152,15 @@ public class GroupAndCmdManager : MonoBehaviour {
             penguPsm.uId = (int)GroupPlayer.PlayerType.PENGU;
             penguPsm.joystickAvailable = isAlive;
             penguPsm.coolingTime = penguRemainCoolingTime;
-            gameControllHandler.SendCommand(penguPsm);
+            gameControllHandler.SendGroupStatus(penguPsm);
 
             // 写出猪的状态
             PlayerStateMsg pigPsm = new PlayerStateMsg();
             pigPsm.gId = gId;
             pigPsm.uId = (int)GroupPlayer.PlayerType.PENGU;
             pigPsm.joystickAvailable = isAlive;
-            pigPsm.coolingTime = penguRemainCoolingTime;
-            gameControllHandler.SendCommand(pigPsm);
+            pigPsm.coolingTime = pigRemainCoolingTime;
+            gameControllHandler.SendGroupStatus(pigPsm);
 
             //// 写出企鹅的状态
             //JObject penguJson = new JObject() {

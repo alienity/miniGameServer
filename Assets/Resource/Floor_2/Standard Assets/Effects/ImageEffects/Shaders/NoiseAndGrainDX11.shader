@@ -169,6 +169,7 @@ Shader "Hidden/NoiseAndGrainDX11" {
 	
 	SubShader {
 		ZTest Always Cull Off ZWrite Off Blend Off
+		Fog { Mode off }  
 
 		Pass {
 	
@@ -178,6 +179,7 @@ Shader "Hidden/NoiseAndGrainDX11" {
 		#pragma target 5.0
 		#pragma vertex vert
 		#pragma fragment fragDX11
+		#pragma fragmentoption ARB_precision_hint_fastest 
 		
 		ENDCG
 		 
@@ -191,6 +193,7 @@ Shader "Hidden/NoiseAndGrainDX11" {
 		#pragma target 5.0
 		#pragma vertex vert
 		#pragma fragment fragDX11Monochrome
+		#pragma fragmentoption ARB_precision_hint_fastest 
 
 		ENDCG
 		 
@@ -204,6 +207,7 @@ Shader "Hidden/NoiseAndGrainDX11" {
 		#pragma target 5.0
 		#pragma vertex vert
 		#pragma fragment fragDX11Tmp
+		#pragma fragmentoption ARB_precision_hint_fastest 
 	
 		ENDCG
 		 
@@ -217,6 +221,7 @@ Shader "Hidden/NoiseAndGrainDX11" {
 		#pragma target 5.0
 		#pragma vertex vert
 		#pragma fragment fragDX11MonochromeTmp
+		#pragma fragmentoption ARB_precision_hint_fastest 
 		
 		ENDCG
 		 
@@ -230,6 +235,7 @@ Shader "Hidden/NoiseAndGrainDX11" {
 		#pragma target 5.0
 		#pragma vertex vert
 		#pragma fragment fragOverlayBlend
+		#pragma fragmentoption ARB_precision_hint_fastest 
 		
 		ENDCG
 		 

@@ -16,6 +16,7 @@ Pass {
 
 	#pragma vertex vert
 	#pragma fragment frag
+	#pragma glsl
 
 	#include "UnityCG.cginc"
 

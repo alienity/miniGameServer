@@ -7,24 +7,37 @@ public class SnowBallController : ShotBallController
     
     // Ball的冷却时间
     public float snowBallColdingTime;
-    // Use this for initialization
+    
     void Start () {
         if (ball == null)
             ball = FindObjectOfType<SnowBall>();
         remainColdingTime = 0;
     }
 	
-	// Update is called once per frame
 	void Update () {
         if(remainColdingTime > 0)
             remainColdingTime -= Time.deltaTime;
+
+        if (startCharge && !chargeFinished)
+        {
+            float chargedPastTime = chargeCurrentTime - chargeCurrentTime;
+            if (chargedPastTime >= maxChargeTime)
+            {
+                chargeFinished = true;
+            }
+        }
+
     }
 
+    // 充能结束后释放
     public override void UseBall(int ownerId, Vector3 position, Quaternion rotation)
     {
         if (0 == AvailableNow()) return;
-        ball.SpawnBall(ownerId, position, rotation);
+        if (!startCharge) return; // 如果没有开始蓄力，而接受到了蓄力结束，就直接忽略掉
+        float chargedPastTime = chargeCurrentTime - chargeStartTime;
+        ball.SpawnBall(ownerId, position, rotation, chargedPastTime);
         remainColdingTime = snowBallColdingTime;
+        ResetCharge();
     }
 
     // 剩余的能用的ball的数量

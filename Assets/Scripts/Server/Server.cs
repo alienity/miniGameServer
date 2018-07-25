@@ -25,7 +25,7 @@ public class Server : MonoBehaviour
 
     private NetworkDiscovery ServerCast;
     private RoleChooseHandler roleChooseHandler;
-    public GameControllHandler gameControllHandler;
+    //public GameControllHandler gameControllHandler;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class Server : MonoBehaviour
     private void Start()
     {
         roleChooseHandler = RoleChooseHandler.Instance;
-        gameControllHandler = GetComponent<GameControllHandler>();
+        //gameControllHandler = GetComponent<GameControllHandler>();
 
         SetupServer();
 
@@ -66,8 +66,10 @@ public class Server : MonoBehaviour
 
         NetworkServer.RegisterHandler(CustomMsgType.Choose, roleChooseHandler.OnReceiveChoose);
         NetworkServer.RegisterHandler(CustomMsgType.Confirm, roleChooseHandler.OnPlayerCnfirm);
-        NetworkServer.RegisterHandler(CustomMsgType.GroupControll, gameControllHandler.OnReceiveControll);
-
+        
+        //NetworkServer.RegisterHandler(CustomMsgType.GroupControll, gameControllHandler.OnReceiveControll);
+        //NetworkServer.RegisterHandler(CustomMsgType.GroupChargeSkill, gameControllHandler.OnReceiveChargeSkill);
+        //NetworkServer.RegisterHandler(CustomMsgType.GroupJoystick, gameControllHandler.OnReceiveJoystick);
     }
 
     // 开启广播，寻找客户端

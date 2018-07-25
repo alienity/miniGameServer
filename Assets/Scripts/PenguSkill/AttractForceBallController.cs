@@ -24,6 +24,15 @@ public class AttractForceBallController : ShotBallController {
             remainColdingTime -= Time.deltaTime;
         if (RemainNums() == 0)
             Destroy(gameObject);
+
+        if (startCharge && !chargeFinished)
+        {
+            float chargedPastTime = chargeCurrentTime - chargeCurrentTime;
+            if (chargedPastTime >= maxChargeTime)
+            {
+                chargeFinished = true;
+            }
+        }
     }
 
     public void ReSet()
@@ -34,7 +43,7 @@ public class AttractForceBallController : ShotBallController {
     public override void UseBall(int ownerId, Vector3 position, Quaternion rotation)
     {
         if (0 == AvailableNow()) return;
-        ball.SpawnBall(ownerId, position, rotation);
+        ball.SpawnBall(ownerId, position, rotation, 0);
         remainBallNums -= 1;
         remainColdingTime = coldingTime;
     }
@@ -52,5 +61,5 @@ public class AttractForceBallController : ShotBallController {
             return 1;
         return 0;
     }
-    
+
 }

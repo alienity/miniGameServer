@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotBallController : MonoBehaviour {
+public abstract class ShotBallController : MonoBehaviour {
 
     // 控制的ball的对象
     public ShotBall ball;
@@ -10,11 +10,43 @@ public class ShotBallController : MonoBehaviour {
     protected float remainColdingTime;
     // 蓄力时长
     public float maxChargeTime = 4;
+    // 记录开始蓄力
+    protected float chargeStartTime = -1;
+    // 记录蓄力到现在，当前时刻
+    protected float chargeCurrentTime = -1;
+    // 完成蓄力
+    protected bool chargeFinished = false;
+    // 开始蓄力
+    protected bool startCharge = false;
 
     // 使用一个Ball
-    public virtual void UseBall(int ownerId, Vector3 position, Quaternion rotation)
-    {
+    public abstract void UseBall(int ownerId, Vector3 position, Quaternion rotation);
 
+    // 持续充能
+    public bool HandleChargeAttack(float chargeStartTime, float chargeCurrentTime)
+    {
+        if (!startCharge && this.chargeStartTime != chargeStartTime)
+        {
+            startCharge = true;
+            this.chargeStartTime = chargeStartTime;
+        }
+
+        if (startCharge && !chargeFinished)
+        {
+            this.chargeCurrentTime = chargeCurrentTime;
+        }
+
+        return chargeFinished;
+
+    }
+
+    // 重置充能
+    public void ResetCharge()
+    {
+        chargeStartTime = -1;
+        chargeCurrentTime = -1;
+        chargeFinished = false;
+        startCharge = false;
     }
 
     // 剩余的能用的数量
@@ -42,5 +74,10 @@ public class ShotBallController : MonoBehaviour {
         return remainColdingTime;
     }
     
+    // 最大蓄力时长
+    public float MaxChargeTime()
+    {
+        return maxChargeTime;
+    }
 
 }
