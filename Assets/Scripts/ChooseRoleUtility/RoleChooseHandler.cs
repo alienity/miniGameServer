@@ -7,8 +7,6 @@ using UnityEngine.Networking;
 public class RoleChooseHandler : MonoBehaviour
 {
     public static RoleChooseHandler Instance { get; private set; }
-
-    
     
     // 确认选择的玩家数
     [HideInInspector]

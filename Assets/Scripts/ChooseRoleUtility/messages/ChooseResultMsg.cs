@@ -2,7 +2,6 @@
 
 public class ChooseResultMsg : MessageBase
 {
-    //public int stageId;  // 0,1,2 表示第几个场景
     public bool succeed; // 0 -> 成功  -1 -> 失败
     public bool hasOld;
     public int gid;

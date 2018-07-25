@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections.Generic;
-
 public class Server : MonoBehaviour
 {
 
@@ -36,9 +35,11 @@ public class Server : MonoBehaviour
 
     private void Start()
     {
-        roleChooseHandler = RoleChooseHandler.Instance;
-        gameControllHandler = GetComponent<GameControllHandler>();
-
+        roleChooseHandler = FindObjectOfType<RoleChooseHandler>();
+        gameControllHandler = FindObjectOfType<GameControllHandler>();
+        
+        Debug.Assert(roleChooseHandler != null);
+        Debug.Assert(gameControllHandler != null);
         SetupServer();
 
         BroadCast(portBroadCastUDP, broadcastInterval);

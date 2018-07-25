@@ -49,7 +49,7 @@ public class RoleChoosingUIController : MonoBehaviour {
         Debug.Log(gid+ " " + uid + " available");
 
         buttons[gid*2 + uid].interactable = true;
-        buttons[gid * 2 + uid].image.color = DataSaveController.Instance.groupColor[gid];
+       
     }
 
     // todo 到时候在这里为 button 设置效果
