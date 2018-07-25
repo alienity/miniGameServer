@@ -8,7 +8,7 @@ public class RoleChooseHandler : MonoBehaviour
 {
     public static RoleChooseHandler Instance { get; private set; }
 
-    
+
     
     // 确认选择的玩家数
     [HideInInspector]
@@ -45,6 +45,18 @@ public class RoleChooseHandler : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (roleChoosingUIController.StartCanvas.activeInHierarchy)
+        {
+            roleChoosingUIController.ProgressBarPlay(server.connections.Count, toNumberTransfer);
+        }
+        if(server.connections.Count == toNumberTransfer)
+        {
+            roleChoosingUIController.changeCanvas();
+            Debug.Log("changeCanvas");
+        }
+    }
     /*
      * 如果 <uid, gid> 已经被选中了，那么返回用户该角色不可再选择
      * 没有选中时，先检查该用户之前是否已经选择过角色
