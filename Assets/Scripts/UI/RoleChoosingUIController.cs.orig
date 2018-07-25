@@ -52,8 +52,11 @@ public class RoleChoosingUIController : MonoBehaviour {
         Debug.Log(gid+ " " + uid + " available");
 
         buttons[gid*2 + uid].interactable = true;
+<<<<<<< HEAD
         //buttons[gid * 2 + uid].image.color = DataSaveController.Instance.groupColor[gid];
         buttons[gid * 2 + uid].image.color = Color.white;
+=======
+>>>>>>> 23f3e099b437395bf6a530689edd298569596ebd
        
     }
 

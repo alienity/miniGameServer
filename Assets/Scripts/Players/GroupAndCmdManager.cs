@@ -54,7 +54,7 @@ public class GroupAndCmdManager : MonoBehaviour {
                 if (!gp.IsAlive)
                 {
                     int randomRebornIdx = Random.Range(0, rebornTrans.Count);
-                    gp.ReBorn(rebornTrans[randomRebornIdx]);
+                    StartCoroutine(gp.ReBorn(rebornTrans[randomRebornIdx]));
                 }
             }
         }

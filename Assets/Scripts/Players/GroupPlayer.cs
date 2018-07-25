@@ -17,8 +17,8 @@ public class GroupPlayer : MonoBehaviour
     // 无敌
     private bool isInvincible = false;
 
-    //// 死亡后重生等待时间
-    //public float reboenDelay = 2f;
+    // 死亡后重生等待时间
+    public float rebornDelay = 2f;
     // 重生无敌时间
     public float rebornRestTime = 3f;
 
@@ -128,12 +128,21 @@ public class GroupPlayer : MonoBehaviour
     }
 
     // 在指定位置重生
-    public void ReBorn(Transform reBirthTrans)
+    public IEnumerator ReBorn(Transform reBirthTrans)
     {
-        if (isAlive == true) return;
-        isAlive = true;
-        groupTrans.position = reBirthTrans.position;
-        StartCoroutine(InvincibleCoroutine());
+        //if (isAlive == true) return;
+        //isAlive = true;
+        //groupTrans.position = reBirthTrans.position;
+        //StartCoroutine(InvincibleCoroutine());
+        if (isAlive != true)
+        {
+            yield return new WaitForSeconds(rebornDelay);
+            isAlive = true;
+            groupTrans.position = reBirthTrans.position;
+            isInvincible = true;
+            yield return new WaitForSeconds(rebornRestTime);
+            isInvincible = false;
+        }
     }
     
     // 捡去物品并分配到各个角色，捡取成功返回true
