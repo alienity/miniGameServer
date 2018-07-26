@@ -2300,8 +2300,7 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &1221138784 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4690150207867734, guid: c1b2d30a35969445d9119d6e0ea79e25,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 1221138783}
 --- !u!114 &1221138785 stripped
 MonoBehaviour:
