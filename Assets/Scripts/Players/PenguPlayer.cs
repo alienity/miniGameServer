@@ -30,18 +30,19 @@ public class PenguPlayer : MonoBehaviour
     void Start()
     {
         mTrans = GetComponent<Transform>();
-        Reset();
+        snowBallController = Instantiate(snowBallController, mTrans);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         // 修改当前朝向
-        mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
+        if(penguCurDirection.magnitude != 0)
+            mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
 
 
         // ********************测试代码*******************
-        /**/
+        /*
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -66,17 +67,9 @@ public class PenguPlayer : MonoBehaviour
         {
             PenguPlayerAttack();
         }
-        
+        */
         // ********************测试代码*******************
 
-    }
-
-    // 重生后重置参数
-    public void Reset()
-    {
-        if (snowBallController == null)
-            snowBallController = GetComponent<SnowBallController>();
-        //curBallController = snowBallController;
     }
 
     // 设置组ID

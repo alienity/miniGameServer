@@ -35,7 +35,6 @@ public class SnowBall : ShotBall
             mTrans.position += mTrans.forward * flySpeed * Time.deltaTime;
             fliedTime += Time.deltaTime;
             fliedDist += Time.deltaTime * (flySpeed + chargeAttackTime);
-            Debug.Log("flying....");
         }
         else
         {

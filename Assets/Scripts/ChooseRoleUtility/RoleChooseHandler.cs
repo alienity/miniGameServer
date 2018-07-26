@@ -43,6 +43,8 @@ public class RoleChooseHandler : MonoBehaviour
 
         ConfirmPlayerNums = 0;
 
+        NetworkServer.RegisterHandler(CustomMsgType.Choose, OnReceiveChoose);
+        NetworkServer.RegisterHandler(CustomMsgType.Confirm, OnPlayerCnfirm);
     }
 
     private void Update()
@@ -126,8 +128,6 @@ public class RoleChooseHandler : MonoBehaviour
         {
             roleChoosingUIController.CountDownTextSetActive();
             StartCoroutine(CountDownToStartGame(countDownTime));
-            SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("ChooseRoleScene", "GameScene");
-            NetworkServer.SendToAll(CustomMsgType.ClientChange, sceneTransferMsg);
 			DataSaveController.Instance.playerNumber = confirmedPlayers.Count;
         }
     }

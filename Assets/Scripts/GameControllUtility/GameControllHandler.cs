@@ -28,11 +28,13 @@ public class GameControllHandler : MonoBehaviour
 		NetworkServer.RegisterHandler(CustomMsgType.GroupJoystick, OnReceiveJoystick);
         NetworkServer.RegisterHandler(CustomMsgType.GroupChargeSkill, OnReceiveChargeSkill);
         NetworkServer.RegisterHandler(CustomMsgType.GroupRushSkill, OnReceiveRushSkill);
+
+        SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("ChooseRoleScene", "GameScene");
+        NetworkServer.SendToAll(CustomMsgType.ClientChange, sceneTransferMsg);
     }
 
     public void OnReceiveJoystick(NetworkMessage netmsg)
     {
-        //int curConnectionID = netmsg.conn.connectionId;
         JoystickMsg curControllMsg = netmsg.ReadMessage<JoystickMsg>();
         jcmQueue.Enqueue(curControllMsg);
     }

@@ -52,7 +52,7 @@ public class PigRushController : PigSkillController {
     }
     public override int AvailableNow()
     {
-        if (remainColdingTime < 0)
+        if (remainColdingTime <= 0)
             return 1;
         return 0;
     }

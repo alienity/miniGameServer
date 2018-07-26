@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public class GroupAndCmdManager : MonoBehaviour {
-
+    
     // 0表示在选人场景，1表示在游戏场景，2表示在结束场景
     public int curStageId = 1;
     // 所有的队伍
@@ -11,7 +11,7 @@ public class GroupAndCmdManager : MonoBehaviour {
     // 需要实例化的玩家Group对象
     public GroupPlayer groupPlayerToInstance;
     // 收发数据模块
-    public GameControllHandler gameControllHandler;
+    private GameControllHandler gameControllHandler;
     // 每一帧接受的数据
     private Queue<JoystickMsg> jsmQueue;
     private Queue<ChargeSkillMsg> csmQueue;
