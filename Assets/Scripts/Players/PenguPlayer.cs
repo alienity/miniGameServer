@@ -16,7 +16,8 @@ public class PenguPlayer : MonoBehaviour
     public ShotBallController snowBallController;
     // 且新捡到的投掷物品
     public ShotBallController curBallController;
-    
+    // Animator Component
+    Animator anim;
     // 自有对象
     private Transform mTrans;
 

@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 4009375668748324}
   - component: {fileID: 95320900383882588}
   m_Layer: 0
-  m_Name: PenguPlayer
+  m_Name: PlayerPengu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

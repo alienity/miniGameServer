@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 4044941503023546}
   - component: {fileID: 95369355252674020}
   m_Layer: 0
-  m_Name: PigPlayer
+  m_Name: PlayerPig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
