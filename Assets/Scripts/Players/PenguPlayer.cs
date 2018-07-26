@@ -41,7 +41,7 @@ public class PenguPlayer : MonoBehaviour
 
 
         // ********************测试代码*******************
-        /*
+        /**/
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -66,7 +66,7 @@ public class PenguPlayer : MonoBehaviour
         {
             PenguPlayerAttack();
         }
-        */
+        
         // ********************测试代码*******************
 
     }
