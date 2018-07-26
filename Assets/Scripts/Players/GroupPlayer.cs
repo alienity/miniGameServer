@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.Networking;
 public class GroupPlayer : MonoBehaviour
 {
-    
+    private AudioSource audioSource;
+    public AudioClip attackedMusic;
     public enum PlayerType
     {
         PENGU,  // 企鹅玩家
@@ -55,6 +56,8 @@ public class GroupPlayer : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = attackedMusic;
         groupTrans = GetComponent<Transform>();
 
         pigPlayer.SetId(gId, 1);
@@ -81,8 +84,12 @@ public class GroupPlayer : MonoBehaviour
             attackerId = attackGroup.gId;
             countdownPast = countdownTime;
         }
+        if (collision.gameObject.tag == "Ball")
+            audioSource.Play();
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+    }
     // 被攻击打中后设置攻击者是谁
     public void SetAttacker(int atkId)
     {
