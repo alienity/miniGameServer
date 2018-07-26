@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.Networking;
 public class GroupPlayer : MonoBehaviour
 {
     
@@ -102,8 +102,18 @@ public class GroupPlayer : MonoBehaviour
             scoreController.IncreaseScoreForPlayer(toKillerScore, attackerId);
         else
             scoreController.IncreaseScoreForAll(suicideScore);
+        {
+            SendMessage();
+        }
     }
-
+    //需要修改
+    public void SendMessage()
+    {
+        AdvanceControlMsg msg = new AdvanceControlMsg();
+        msg.type = AdvanceControlType.Viberate;
+        for (int i = 0; i < 2; i++)
+            NetworkServer.SendToClient(Server.Instance.role2connectionID[pigPlayer.gId * 2 + i], CustomMsgType.AdvanceControl, msg);
+    }
     // 首次出生
     public GameObject FirstBorn(int gId, Vector3 bornPos, Color groupColor)
     {
@@ -172,7 +182,7 @@ public class GroupPlayer : MonoBehaviour
     public void EffectSpeedMovement(Vector3 addedSpeed)
     {
         if (!isAlive) return;
-
+        SendMessage();
         pigPlayer.ReceiveSuddenSpeed(addedSpeed);
     }
 
