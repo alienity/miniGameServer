@@ -326,8 +326,11 @@ Subshader {
  
  Pass {
 	  ZTest Always Cull Off ZWrite Off
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertDofApply
       #pragma fragment fragDofApplyBg
       
@@ -339,8 +342,11 @@ Subshader {
  Pass {
 	  ZTest Always Cull Off ZWrite Off
 	  ColorMask RGB
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertDofApply
       #pragma fragment fragDofApplyFgDebug
 
@@ -352,8 +358,11 @@ Subshader {
  Pass {
 	  ZTest Always Cull Off ZWrite Off
 	  ColorMask RGB
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertDofApply
       #pragma fragment fragDofApplyBgDebug
 
@@ -367,8 +376,11 @@ Subshader {
  Pass {
 	  ZTest Always Cull Off ZWrite Off
 	  ColorMask A
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment fragCocBg
 
@@ -383,8 +395,11 @@ Subshader {
 	  ZTest Always Cull Off ZWrite Off
 	  ColorMask RGB
 	  //Blend One One
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertDofApply
       #pragma fragment fragDofApplyFg
       
@@ -396,8 +411,11 @@ Subshader {
  Pass {
 	  ZTest Always Cull Off ZWrite Off
 	  ColorMask ARGB
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment fragCocFg
 
@@ -408,8 +426,11 @@ Subshader {
  
  Pass {
 	  ZTest Always Cull Off ZWrite Off
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertDownsampleWithCocConserve
       #pragma fragment fragDownsampleWithCocConserve
 
@@ -422,8 +443,11 @@ Subshader {
  Pass { 
 	  ZTest Always Cull Off ZWrite Off
 	  ColorMask RGBA
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment fragMask
 
@@ -436,8 +460,11 @@ Subshader {
 	  ZTest Always Cull Off ZWrite Off
 	  Blend SrcAlpha OneMinusSrcAlpha
 	  ColorMask RGB
+  	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment fragAddBokeh
 
@@ -450,8 +477,11 @@ Subshader {
 	  ZTest Always Cull Off ZWrite Off
 	  Blend One One
 	  ColorMask RGB
+	  Fog { Mode off }       
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertWithRadius
       #pragma fragment fragExtractAndAddToBokeh
 
@@ -462,8 +492,11 @@ Subshader {
  
  Pass {
 	  ZTest Always Cull Off ZWrite Off
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertWithRadius
       #pragma fragment fragDarkenForBokeh
 
@@ -474,8 +507,11 @@ Subshader {
  
  Pass {
 	  ZTest Always Cull Off ZWrite Off
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma exclude_renderers flash
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertWithRadius
       #pragma fragment fragExtractAndAddToBokeh
 

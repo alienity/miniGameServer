@@ -423,11 +423,15 @@ Subshader {
 	// pass 0
 	Pass {
 		ZTest Always Cull Off ZWrite On Blend Off
+		Fog { Mode off }      
 
 		CGPROGRAM
 		#pragma target 3.0
 		#pragma vertex vert
 		#pragma fragment CameraVelocity
+		#pragma fragmentoption ARB_precision_hint_fastest
+		#pragma glsl
+		#pragma exclude_renderers d3d11_9x 
 
 		ENDCG
 	}
@@ -435,11 +439,15 @@ Subshader {
 	// pass 1
 	Pass {
 		ZTest Always Cull Off ZWrite Off Blend Off
+		Fog { Mode off }      
 
 		CGPROGRAM
 		#pragma target 3.0
 		#pragma vertex vert
 		#pragma fragment Debug
+		#pragma fragmentoption ARB_precision_hint_fastest
+		#pragma glsl
+		#pragma exclude_renderers d3d11_9x 
 
 		ENDCG
 	}
@@ -447,11 +455,15 @@ Subshader {
 	// pass 2
 	Pass {
 		ZTest Always Cull Off ZWrite Off Blend Off
+		Fog { Mode off }      
 
 		CGPROGRAM
 		#pragma target 3.0
 		#pragma vertex vert
 		#pragma fragment TileMax
+		#pragma fragmentoption ARB_precision_hint_fastest
+		#pragma glsl
+		#pragma exclude_renderers d3d11_9x       
 
 		ENDCG
 	}
@@ -459,11 +471,15 @@ Subshader {
 	// pass 3
 	Pass {
 		ZTest Always Cull Off ZWrite Off Blend Off
+		Fog { Mode off }      
 
 		CGPROGRAM
 		#pragma target 3.0
 		#pragma vertex vert
 		#pragma fragment NeighbourMax
+		#pragma fragmentoption ARB_precision_hint_fastest
+		#pragma glsl
+		#pragma exclude_renderers d3d11_9x       
 
 		ENDCG
 	}
@@ -471,11 +487,15 @@ Subshader {
 	// pass 4
 	Pass {
 		ZTest Always Cull Off ZWrite Off Blend Off
+		Fog { Mode off }      
 
 		CGPROGRAM
 		#pragma target 3.0
 		#pragma vertex vert 
 		#pragma fragment ReconstructFilterBlur
+		#pragma fragmentoption ARB_precision_hint_fastest
+		#pragma glsl
+		#pragma exclude_renderers d3d11_9x       
 
 		ENDCG
 	}
@@ -483,33 +503,45 @@ Subshader {
 	// pass 5
 	Pass {
 		ZTest Always Cull Off ZWrite Off Blend Off
+		Fog { Mode off }      
 
 		CGPROGRAM
 		#pragma target 3.0
 		#pragma vertex vert
 		#pragma fragment SimpleBlur
+		#pragma fragmentoption ARB_precision_hint_fastest
+		#pragma glsl
+		#pragma exclude_renderers d3d11_9x       
 		ENDCG
 	}
 
   	// pass 6
 	Pass {
 		ZTest Always Cull Off ZWrite Off Blend Off
+		Fog { Mode off }      
 
 		CGPROGRAM
 		#pragma target 3.0
 		#pragma vertex vert
 		#pragma fragment MotionVectorBlur
+		#pragma fragmentoption ARB_precision_hint_fastest
+		#pragma glsl
+		#pragma exclude_renderers d3d11_9x
 		ENDCG
 	}
 
   	// pass 7
 	Pass {
 		ZTest Always Cull Off ZWrite Off Blend Off
+		Fog { Mode off }      
 
 		CGPROGRAM
 		#pragma target 3.0
 		#pragma vertex vert
 		#pragma fragment ReconstructionDiscBlur
+		#pragma fragmentoption ARB_precision_hint_fastest
+		#pragma glsl
+		#pragma exclude_renderers d3d11_9x
 		ENDCG
 	}  	
   }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PigPlayer : MonoBehaviour
@@ -7,8 +7,7 @@ public class PigPlayer : MonoBehaviour
     public int gId;
     private int uId = 1;
     public int playerId;
-
-
+    
     // 更新函数
     public delegate void ContinueSkill(Vector3 dir);
     // 持续更新函数
@@ -24,11 +23,13 @@ public class PigPlayer : MonoBehaviour
     // 维持猪的加速度给的力
     public float accForce;
     // 猪箭头指向
-    public Vector3 pigCurDirection;
+    public Vector3 pigCurDirection = Vector3.forward;
     // 猪移动向量
     public Vector3 pigMoveDirection;
     // 猪正常移动速度
     public float pigNormalSpeed;
+    // Animator Component
+    Animator anim;
 
     // 猪默认技能
     public PigSkillController pigRushController;
@@ -38,12 +39,13 @@ public class PigPlayer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if(groupTrans == null)
+        anim = GetComponent<Animator>();
+        mTrans = GetComponent<Transform>();
+        if (groupTrans == null)
             groupTrans = GetComponentInParent<Transform>();
         if(groupRd == null)
             groupRd = GetComponentInParent<Rigidbody>();
-        mTrans = GetComponent<Transform>();
-
+        pigRushController = Instantiate(pigRushController, mTrans);
     }
 
     // Update is called once per frame
@@ -51,10 +53,14 @@ public class PigPlayer : MonoBehaviour
     {
         // 修改箭头指向
         mTrans.rotation = Quaternion.LookRotation(pigCurDirection);
-
+        // 猪猪动画播放
+        bool walking = pigMoveDirection.magnitude != 0;
+        anim.SetBool("IsWaking", walking);
         //移动更新，加速到最大速度后匀速运动
-        if(pigMoveDirection.magnitude != 0)
+        if (pigMoveDirection.magnitude != 0)
         {
+            // 猪猪IsWaking动画播放
+            
             if (groupRd.velocity.magnitude == 0)
             {
                 groupRd.AddForce(pigMoveDirection * (groupRd.drag + accForce));
@@ -67,11 +73,15 @@ public class PigPlayer : MonoBehaviour
                 float cosDegree = Vector3.Dot(velocityDirection, pigMoveDirection);
                 float sinDegree = Mathf.Sqrt(1 - cosDegree * cosDegree);
 
+                // 加速
                 if (groupRd.velocity.magnitude < pigNormalSpeed)
                     groupRd.AddForce(velocityDirection * (groupRd.drag + accForce * cosDegree));
                 else
                     groupRd.AddForce(velocityDirection * groupRd.drag);
-                groupRd.AddForce(velocityCrossDirection * (groupRd.drag + accForce * sinDegree));
+                // 偏移
+                Vector3 biasForce = velocityCrossDirection * (groupRd.drag + accForce * sinDegree);
+                if(biasForce.magnitude != 0)
+                    groupRd.AddForce(biasForce);
             }
         }
 
@@ -144,6 +154,7 @@ public class PigPlayer : MonoBehaviour
     // 发动冲刺
     public void PigPlayerAttack()
     {
+        Debug.Log("pig Attack");
         if(curSkillController != null)
         {
             if (curSkillController.RemainNums() == 0)

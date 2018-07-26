@@ -137,7 +137,7 @@ SubShader
 
 Pass
 {
-	ZWrite Off ZTest Always Cull Off
+	ZWrite Off ZTest Always Cull Off Fog { Mode Off }
 
 	CGPROGRAM
 
@@ -204,7 +204,7 @@ Pass
 
 Pass {
 
-	ZWrite Off ZTest Always Cull Off
+	ZWrite Off ZTest Always Cull Off Fog { Mode Off }
 	Blend One One, One One
 	ColorMask RGBA
 
@@ -230,7 +230,7 @@ Pass {
 
 Pass {
 
-	ZWrite Off ZTest Always Cull Off
+	ZWrite Off ZTest Always Cull Off Fog { Mode Off }
 	BlendOp Add, Add
 	Blend DstAlpha One, Zero One
 	ColorMask RGBA

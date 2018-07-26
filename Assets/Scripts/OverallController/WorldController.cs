@@ -36,7 +36,11 @@ public class WorldController : MonoBehaviour {
     private void Start ()
     {
         if (gUIController == null)
-            gUIController = GameUIController.Instance;
+            gUIController = FindObjectOfType<GameUIController>();
+        if (scoreController == null)
+            scoreController = FindObjectOfType<ScoreController>();
+        if (gcManager == null)
+            gcManager = FindObjectOfType<GroupAndCmdManager>();
 
         // ********************测试生成角色代码*********************
         InstanceAllGroups();

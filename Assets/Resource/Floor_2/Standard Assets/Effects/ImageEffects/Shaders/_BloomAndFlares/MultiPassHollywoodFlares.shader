@@ -110,10 +110,12 @@ Shader "Hidden/MultipassHollywoodFlares" {
 	
 Subshader {
 	  ZTest Always Cull Off ZWrite Off
+	  Fog { Mode off } 
  Pass {     
 
       CGPROGRAM
       
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment fragPrepare
       
@@ -124,6 +126,7 @@ Subshader {
 
       CGPROGRAM
       
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertStretch
       #pragma fragment fragStretch
       
@@ -134,6 +137,7 @@ Subshader {
 
       CGPROGRAM
       
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertVerticalCoords
       #pragma fragment fragPreAndCut
       
@@ -144,6 +148,7 @@ Subshader {
 
       CGPROGRAM
       
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertVerticalCoords
       #pragma fragment fragPost
       

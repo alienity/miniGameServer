@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
+
 public class GroupPlayer : MonoBehaviour
 {
-    private AudioSource audioSource;
-    public AudioClip attackedMusic;
+    
     public enum PlayerType
     {
         PENGU,  // 企鹅玩家
@@ -56,8 +55,6 @@ public class GroupPlayer : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = attackedMusic;
         groupTrans = GetComponent<Transform>();
 
         pigPlayer.SetId(gId, 1);
@@ -84,12 +81,8 @@ public class GroupPlayer : MonoBehaviour
             attackerId = attackGroup.gId;
             countdownPast = countdownTime;
         }
-        if (collision.gameObject.tag == "Ball")
-            audioSource.Play();
     }
-    private void OnTriggerEnter(Collider other)
-    {
-    }
+
     // 被攻击打中后设置攻击者是谁
     public void SetAttacker(int atkId)
     {
@@ -109,18 +102,8 @@ public class GroupPlayer : MonoBehaviour
             scoreController.IncreaseScoreForPlayer(toKillerScore, attackerId);
         else
             scoreController.IncreaseScoreForAll(suicideScore);
-        {
-            SendMessage();
-        }
     }
-    //需要修改
-    public void SendMessage()
-    {
-        AdvanceControlMsg msg = new AdvanceControlMsg();
-        msg.type = AdvanceControlType.Viberate;
-        for (int i = 0; i < 2; i++)
-            NetworkServer.SendToClient(Server.Instance.role2connectionID[pigPlayer.gId * 2 + i], CustomMsgType.AdvanceControl, msg);
-    }
+
     // 首次出生
     public GameObject FirstBorn(int gId, Vector3 bornPos, Color groupColor)
     {
@@ -185,11 +168,12 @@ public class GroupPlayer : MonoBehaviour
 
         pigPlayer.SetDirection(dir.normalized);
     }
-
+    
+    // 猪受到雪球等的攻击后被击退
     public void EffectSpeedMovement(Vector3 addedSpeed)
     {
         if (!isAlive) return;
-        SendMessage();
+
         pigPlayer.ReceiveSuddenSpeed(addedSpeed);
     }
 
@@ -201,6 +185,7 @@ public class GroupPlayer : MonoBehaviour
         pigPlayer.ReceiveForce(addedForce);
     }
 
+    // 猪发动技能
     public void PigAttack()
     {
         if (!isAlive) return;
@@ -216,13 +201,14 @@ public class GroupPlayer : MonoBehaviour
         penguPlayer.SetArrowDirection(dir.normalized);
     }
 
-    public void PenguAttack()
+    // 企鹅蓄力攻击
+    public void PenguChargeAttack(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
     {
         if (!isAlive) return;
 
-        penguPlayer.PenguPlayerAttack();
+        penguPlayer.HandleChargeSkill(chargeStartTime, chargeCurrentTime, chargeReturn);
     }
-
+    
     // 获取猪和企鹅的数据用于返回到控制界面
     public bool IsJoysticjAvai()
     {

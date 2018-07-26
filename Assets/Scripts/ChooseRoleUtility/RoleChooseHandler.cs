@@ -43,6 +43,8 @@ public class RoleChooseHandler : MonoBehaviour
 
         ConfirmPlayerNums = 0;
 
+        NetworkServer.RegisterHandler(CustomMsgType.Choose, OnReceiveChoose);
+        NetworkServer.RegisterHandler(CustomMsgType.Confirm, OnPlayerCnfirm);
     }
 
     private void Update()

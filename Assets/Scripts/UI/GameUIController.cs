@@ -6,7 +6,7 @@ using DG.Tweening;
 public class GameUIController : MonoBehaviour
 {
 
-    public static GameUIController Instance { get; private set; }
+    //public static GameUIController Instance { get; private set; }
     
     [System.Serializable]
     public struct GroupColdingTime
@@ -24,10 +24,10 @@ public class GameUIController : MonoBehaviour
     // 剩余游戏时长计时显示
     public Text countdownText;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
+    //private void Awake()
+    //{
+    //    Instance = this;
+    //}
 
     //// Use this for initialization
     //private void Start()

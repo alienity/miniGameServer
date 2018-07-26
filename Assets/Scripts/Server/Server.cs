@@ -61,8 +61,6 @@ public class Server : MonoBehaviour
         NetworkServer.RegisterHandler(MsgType.Connect, OnClientConnect);
         NetworkServer.RegisterHandler(MsgType.Disconnect, OnClientDisConnect);
 
-        NetworkServer.RegisterHandler(CustomMsgType.Choose, roleChooseHandler.OnReceiveChoose);
-        NetworkServer.RegisterHandler(CustomMsgType.Confirm, roleChooseHandler.OnPlayerCnfirm);
 
     }
 

@@ -1,11 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PenguPlayer : MonoBehaviour
 {
-    /* 音乐控制*/
-    private AudioSource _audioSource;
-    public AudioClip attckMusic;
 
     public int gId;
     private int uId = 1;
@@ -19,7 +16,13 @@ public class PenguPlayer : MonoBehaviour
     public ShotBallController snowBallController;
     // 且新捡到的投掷物品
     public ShotBallController curBallController;
-    
+    //// 蓄力时长
+    //public float maxChargeTime;
+
+    //// 记录开始蓄力
+    //private float chargeStartTime = -1;
+    //// 记录蓄力到现在，当前时刻
+    //private float chargeCurrentTime = -1;
     // 自有对象
     private Transform mTrans;
 
@@ -27,16 +30,15 @@ public class PenguPlayer : MonoBehaviour
     void Start()
     {
         mTrans = GetComponent<Transform>();
-        _audioSource = GetComponent<AudioSource>();
-        _audioSource.clip = attckMusic;
-        Reset();
+        snowBallController = Instantiate(snowBallController, mTrans);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         // 修改当前朝向
-        mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
+        if(penguCurDirection.magnitude != 0)
+            mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
 
 
         // ********************测试代码*******************
@@ -70,14 +72,6 @@ public class PenguPlayer : MonoBehaviour
 
     }
 
-    // 重生后重置参数
-    public void Reset()
-    {
-        if (snowBallController == null)
-            snowBallController = GetComponent<SnowBallController>();
-        //curBallController = snowBallController;
-    }
-
     // 设置组ID
     public void SetId(int gId, int pId)
     {
@@ -103,19 +97,38 @@ public class PenguPlayer : MonoBehaviour
     {
         if ((curBallController != null && curBallController.RemainNums() == 0)
             || (curBallController == null))
+        {
             curBallController = snowBallController;
+            //maxChargeTime = curBallController.MaxChargeTime();
+        }
+    }
+    /*
+    // 开始蓄力
+    private void PenguPlayerStartCharge(float startTime)
+    {
+        chargeStartTime = startTime;
+        chargeCurrentTime = startTime;
     }
 
-    // 开始蓄力
-    public void PenguPlayerStartCharge()
+    // 蓄力进行中
+    private void PenguPlayerChargin(float curTime)
     {
-
+        chargeCurrentTime = curTime;
     }
 
     // 结束蓄力
-    public void PenguPlayerFinishCharge()
+    private void PenguPlayerFinishCharge()
     {
+        chargeStartTime = -1;
 
+    }
+    */
+    // 根据时间处理蓄力技能
+    public void HandleChargeSkill(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
+    {
+        // 测试蓄力
+        curBallController.HandleChargeAttack(chargeStartTime, chargeCurrentTime);
+        if (chargeReturn) PenguPlayerAttack();
     }
 
     // 发射雪球
@@ -125,7 +138,6 @@ public class PenguPlayer : MonoBehaviour
         CheckSkillController();
         if (curBallController.AvailableNow() == 1)
             curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);
-        _audioSource.Play();
     }
 
     // 返回技能剩余冷却时间，同步到手机端
