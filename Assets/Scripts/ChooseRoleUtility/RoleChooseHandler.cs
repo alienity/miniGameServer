@@ -126,8 +126,6 @@ public class RoleChooseHandler : MonoBehaviour
         {
             roleChoosingUIController.CountDownTextSetActive();
             StartCoroutine(CountDownToStartGame(countDownTime));
-            SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("ChooseRoleScene", "GameScene");
-            NetworkServer.SendToAll(CustomMsgType.ClientChange, sceneTransferMsg);
 			DataSaveController.Instance.playerNumber = confirmedPlayers.Count;
         }
     }

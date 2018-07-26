@@ -22,12 +22,15 @@ public class GameControllHandler : MonoBehaviour
         if (server == null)
             server = Server.Instance;
 		NetworkServer.RegisterHandler(CustomMsgType.GroupControll, OnReceiveControll);
+        SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("ChooseRoleScene", "GameScene");
+        NetworkServer.SendToAll(CustomMsgType.ClientChange, sceneTransferMsg);
     }
 
     public void OnReceiveControll(NetworkMessage netmsg)
     {
         int curConnectionID = netmsg.conn.connectionId;
         JoystickControllMsg curControllMsg = netmsg.ReadMessage<JoystickControllMsg>();
+        Debug.Log("receive control " + curControllMsg.gId + ", " + curControllMsg.uId);
         cmdQueue.Enqueue(curControllMsg);
     }
     

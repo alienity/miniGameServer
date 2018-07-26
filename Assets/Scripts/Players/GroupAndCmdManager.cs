@@ -11,7 +11,7 @@ public class GroupAndCmdManager : MonoBehaviour {
     // 需要实例化的玩家Group对象
     public GroupPlayer groupPlayerToInstance;
     // 收发数据模块
-    public GameControllHandler gameControllHandler;
+    private GameControllHandler gameControllHandler;
     // 每一帧接受的数据
     private Queue<JoystickControllMsg> msgQueue;
     // 游戏是否结束
