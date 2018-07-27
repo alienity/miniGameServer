@@ -977,7 +977,7 @@ GameObject:
   - component: {fileID: 114710055422727224}
   m_Layer: 0
   m_Name: GroupPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2594,7 +2594,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1304342233334938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4087082043490952}
@@ -2765,7 +2765,7 @@ Transform:
   m_GameObject: {fileID: 1429578992884982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 391, y: 220, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4275606740333002}
   - {fileID: 4043557644229482}
@@ -3112,7 +3112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1400619177551032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.702, z: -0.408}
+  m_LocalPosition: {x: 0, y: 0.702, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4176154794428540}
@@ -4969,7 +4969,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!95 &95118939705604168
 Animator:
@@ -5025,7 +5025,7 @@ MonoBehaviour:
   accForce: 78
   pigCurDirection: {x: 1, y: 0, z: 0}
   pigMoveDirection: {x: 0, y: 0, z: 0}
-  pigNormalSpeed: 6
+  pigNormalSpeed: 8
   pigRushController: {fileID: 114177424281042246, guid: 91519b87da97d9f4a8153d85ac20d68b,
     type: 2}
   curSkillController: {fileID: 0}

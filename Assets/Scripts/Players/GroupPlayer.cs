@@ -134,12 +134,13 @@ public class GroupPlayer : MonoBehaviour
         //isAlive = true;
         //groupTrans.position = reBirthTrans.position;
         //StartCoroutine(InvincibleCoroutine());
-        if (isAlive != true)
+        if (isAlive != true && !isInvincible)
         {
+            isInvincible = true;
             yield return new WaitForSeconds(rebornDelay);
             isAlive = true;
             groupTrans.position = reBirthTrans.position;
-            isInvincible = true;
+            pigPlayer.Reset();
             yield return new WaitForSeconds(rebornRestTime);
             isInvincible = false;
         }

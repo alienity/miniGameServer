@@ -122,6 +122,7 @@ public class PigPlayer : MonoBehaviour
     public void Reset()
     {
         groupRd.velocity = Vector3.zero;
+        pigMoveDirection = Vector3.zero;
     }
 
     // 停止运动
