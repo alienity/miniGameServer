@@ -88,31 +88,22 @@ public class RoleChooseHandler : MonoBehaviour
                     oldUid = oldRoleId % 2;
                 server.connectionID2role.Remove(curConnectionID);
                 server.role2connectionID.Remove(oldRoleId);
-                result.hasOld = true;
                 SubstituteRole(selectingGid, selectingUid, oldGid, oldUid);
             }
             else // 如果之前没有选择过角色
             {
-                SendRoleMessageToALl(new RoleStateMsg(selectingGid, selectingUid, false));
                 roleChoosingUIController.SetButtonRoleSelected(selectingGid, selectingUid);
-                result.hasOld = false;
             }
 
             // 给选择的用户发送成功选上的信息
             result.succeed = true;
             result.gid = selectingGid;
             result.uid = selectingUid;
-            result.oldUid = curRequest.oldUid;
-            result.oldGid = curRequest.oldGid;
         }
         // 新的角色和用户对应关系添加入记录中
         server.connectionID2role[curConnectionID] = selectingRoleId;
         server.role2connectionID[selectingRoleId] = curConnectionID;
-        SendChooseMessage(result, curConnectionID);
-
-        // 测试跳转
-        //if (server.connections.Count == toNumberTransfer)
-        //    StartCoroutine(CountDownToStartGame(countDownTime));
+        SendRoleMessageToALl(new RoleStateMsg(server.connectionID2role));
     }
 
     // 对玩家确定的回调
@@ -149,12 +140,7 @@ public class RoleChooseHandler : MonoBehaviour
     {
         roleChoosingUIController.SetButtonRoleAvailable(oldGid, oldUid);
         roleChoosingUIController.SetButtonRoleSelected(selectingGid, selectingUid);
-        // 广播旧角色可用的信息
-        RoleStateMsg oldRoleState = new RoleStateMsg(oldGid, oldUid, true);
-        SendRoleMessageToALl(oldRoleState);
-        // 这个角色被选择后，需要把该角色不可选的消息广播给所有用户
-        RoleStateMsg roleState = new RoleStateMsg(selectingGid, selectingUid, false);
-        SendRoleMessageToALl(roleState);
+        
     }
 
     private void SendRoleMessageToALl(RoleStateMsg roleState)
