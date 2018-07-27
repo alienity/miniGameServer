@@ -16,4 +16,5 @@ public class CustomMsgType
 
 
     public const short Session = MsgType.Highest + 11; // 断线重连功能
+    public const short Stage = MsgType.Highest + 12; // 通知客户端切换阶段（gamming, chooseRole, prepare etc...）
 }

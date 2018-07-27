@@ -3,41 +3,36 @@ using UnityEngine.Networking;
 
 public class ClientScenChangeUtil
 {
-    public static void ChangeScence(int connectionId, Stage stage)
+    public static void ChangeClientStage(int connectionId, Stage stage)
     {
-        string nextScence = "";
-        switch (stage)
-        {
-                case Stage.ChoosingRoleStage:
-                    nextScence = "ChooseRoleStage";
-                    break;
-                case Stage.GammingStage:
-                    nextScence = "GammingStage";
-                    break;
-                case Stage.Prepare:
-                    nextScence = "Prepare Stage";
-                    break;
-        }
-        SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("", nextScence);
-        NetworkServer.SendToClient(connectionId, CustomMsgType.ClientChange, sceneTransferMsg);
+        
+        StageTransferMsg stageSwitchMsg = new StageTransferMsg(stage);
+        NetworkServer.SendToClient(connectionId, CustomMsgType.Stage, stageSwitchMsg);
     }
-    
-    public static void ChangeScenceAll(Stage stage)
+    public static void ChangeAllClientStage(Stage stage)
     {
-        string nextScence = "";
-        switch (stage)
-        {
-            case Stage.ChoosingRoleStage:
-                nextScence = "ChooseRoleStage";
-                break;
-            case Stage.GammingStage:
-                nextScence = "GammingStage";
-                break;
-            case Stage.Prepare:
-                nextScence = "Prepare Stage";
-                break;
-        }
-        SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("", nextScence);
-        NetworkServer.SendToAll(CustomMsgType.ClientChange, sceneTransferMsg);
+        StageTransferMsg sceneTransferMsg = new StageTransferMsg(stage);
+        NetworkServer.SendToAll(CustomMsgType.Stage, sceneTransferMsg);
     }
+
+//    private string StageToScene(Stage stage)
+//    {
+//        string sceneName = null;
+//        switch (stage)
+//        {
+//            case Stage.StartStage:
+//                sceneName = "StartStage"
+//            case Stage.ChoosingRoleStage:
+//                sceneName = "ChooseRoleStage";
+//                break;
+//            case Stage.GammingStage:
+//                sceneName = "GammingStage";
+//                break;
+//            case Stage.Prepare:
+//                sceneName = "PrepareStage";
+//                break;
+//        }
+//
+//        return sceneName;
+//    }
 }
