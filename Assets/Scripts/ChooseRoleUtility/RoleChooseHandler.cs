@@ -24,6 +24,7 @@ public class RoleChooseHandler : MonoBehaviour
 
     // 控制角色选择的UI控制器
     private RoleChoosingUIController roleChoosingUIController;
+
     // 不会终止的服务器
     private Server server;
 
@@ -38,6 +39,7 @@ public class RoleChooseHandler : MonoBehaviour
             server = Server.Instance;
         if (roleChoosingUIController == null)
             roleChoosingUIController = FindObjectOfType<RoleChoosingUIController>();
+
         if (confirmedPlayers == null)
             confirmedPlayers = new List<int>();
 
@@ -84,6 +86,7 @@ public class RoleChooseHandler : MonoBehaviour
             {
 
                 int oldRoleId = server.connectionID2role[curConnectionID];
+                server.session2role.Remove(server.connection2session[curConnectionID]);
                 server.connectionID2role.Remove(curConnectionID);
                 server.role2connectionID.Remove(oldRoleId);
             }
@@ -100,6 +103,7 @@ public class RoleChooseHandler : MonoBehaviour
         // 新的角色和用户对应关系添加入记录中
         server.connectionID2role[curConnectionID] = selectingRoleId;
         server.role2connectionID[selectingRoleId] = curConnectionID;
+        server.session2role[server.connection2session[curConnectionID]] = selectingRoleId;
         SendRoleMessageToALl(new RoleStateMsg(server.connectionID2role));
         UpdateRoleChoosingUI();
     }

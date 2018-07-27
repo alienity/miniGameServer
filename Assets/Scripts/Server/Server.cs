@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using System.Security.Policy;
 
 public class Server : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class Server : MonoBehaviour
     // 连接客户端记录
     public HashSet<int> connections = new HashSet<int>();
 
-    // connectionId到gId和uId的映射表, connectionId = gId * 2 + uId
+    // connectionId到gId和uId的映射表, roleId = gId * 2 + uId
     public Dictionary<int, int> role2connectionID = new Dictionary<int, int>();
     public Dictionary<int, int> connectionID2role = new Dictionary<int, int>();
+    public Dictionary<int, int> session2connection = new Dictionary<int, int>();
+    public Dictionary<int, int> connection2session = new Dictionary<int, int>();
+    public Dictionary<int, int> session2role = new Dictionary<int, int>();
+    public HashSet<int> kownSessions = new HashSet<int>();
 
     // 服务器配置
     const short ClientNum = 8;     //客户端数量+1个服务器=8
@@ -25,7 +30,12 @@ public class Server : MonoBehaviour
 
     private NetworkDiscovery ServerCast;
     private RoleChooseHandler roleChooseHandler;
+    private ReConnectHandler reconnectHandler;
 
+
+
+    [HideInInspector] public Stage stage = Stage.Prepare;
+    
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -35,6 +45,8 @@ public class Server : MonoBehaviour
     private void Start()
     {
         roleChooseHandler = RoleChooseHandler.Instance;
+        // Todo  reconnectHandler需要在所有场景中存在，暂时挂载在server上了
+        reconnectHandler = gameObject.AddComponent<ReConnectHandler>();
 
         SetupServer();
 
@@ -94,7 +106,14 @@ public class Server : MonoBehaviour
     public void OnClientConnect(NetworkMessage netmsg)
     {
         Debug.Log("client connected");
+        
+        reconnectHandler.OnClientConnect(netmsg);
         connections.Add(netmsg.conn.connectionId);
+        // 人数到达游戏人数后，发送消息给client切换到选人界面 
+        if (connections.Count == roleChooseHandler.toNumberTransfer)
+        {
+            ClientScenChangeUtil.ChangeScenceAll(Stage.ChoosingRoleStage);
+        }
     }
 
 
