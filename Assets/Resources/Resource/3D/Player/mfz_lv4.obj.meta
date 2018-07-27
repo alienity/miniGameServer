@@ -1,0 +1,98 @@
+fileFormatVersion: 2
+guid: 87209f1920be845919679e3080e79631
+timeCreated: 1459821719
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface4_polySurface30_polySurface16
+    100004: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface5_polySurface16_polySurface31
+    100006: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface12_polySurface32
+    100008: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface16_polySurface32
+    100010: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface17_polySurface32
+    400000: //RootNode
+    400002: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface4_polySurface30_polySurface16
+    400004: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface5_polySurface16_polySurface31
+    400006: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface12_polySurface32
+    400008: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface16_polySurface32
+    400010: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface17_polySurface32
+    2300000: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface4_polySurface30_polySurface16
+    2300002: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface5_polySurface16_polySurface31
+    2300004: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface12_polySurface32
+    2300006: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface16_polySurface32
+    2300008: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface17_polySurface32
+    3300000: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface4_polySurface30_polySurface16
+    3300002: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface5_polySurface16_polySurface31
+    3300004: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface12_polySurface32
+    3300006: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface16_polySurface32
+    3300008: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface17_polySurface32
+    4300000: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface4_polySurface30_polySurface16
+    4300002: mota_mfz_lv5:pCube8_mota_mfz_lv5:polySurface5_polySurface16_polySurface31
+    4300004: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface12_polySurface32
+    4300006: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface16_polySurface32
+    4300008: mota_mfz_lv5:pPyramid10_mota_mfz_lv5:polySurface17_polySurface32
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

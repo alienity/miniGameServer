@@ -1,0 +1,546 @@
+fileFormatVersion: 2
+guid: 2e97b14be80344649addbcaa7595bb86
+timeCreated: 1459504758
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: box_character_cat2_bangding_1_:box_character_cat:polySurface6
+    100002: box_character_cat2_bangding_1_:cat_joint_ear_l
+    100004: box_character_cat2_bangding_1_:cat_joint_ear_l2
+    100006: box_character_cat2_bangding_1_:cat_joint_ear_r
+    100008: box_character_cat2_bangding_1_:cat_joint_ear_r2
+    100010: box_character_cat2_bangding_1_:cat_joint_foot_l
+    100012: box_character_cat2_bangding_1_:cat_joint_foot_l1
+    100014: box_character_cat2_bangding_1_:cat_joint_head
+    100016: box_character_cat2_bangding_1_:cat_joint_head2
+    100018: box_character_cat2_bangding_1_:cat_joint_head3
+    100020: box_character_cat2_bangding_1_:cat_joint_jian_l
+    100022: box_character_cat2_bangding_1_:cat_joint_jian_r
+    100024: box_character_cat2_bangding_1_:cat_joint_pg
+    100026: box_character_cat2_bangding_1_:cat_joint_s_l
+    100028: box_character_cat2_bangding_1_:cat_joint_s_r
+    100030: box_character_cat2_bangding_1_:cat_joint_sz_l
+    100032: box_character_cat2_bangding_1_:cat_joint_sz_r
+    100034: box_character_cat2_bangding_1_:cat_joint_tui_r
+    100036: box_character_cat2_bangding_1_:cat_joint_tui_r1
+    100038: box_character_cat2_bangding_1_:cat_joint_xg_l
+    100040: box_character_cat2_bangding_1_:cat_joint_xg_l1
+    100042: box_character_cat2_bangding_1_:cat_joint_xiong
+    100044: box_character_cat2_bangding_1_:cat_joint_yao
+    100046: box_character_cat2_bangding_1_:joint23
+    100048: box_character_cat2_bangding_1_:joint24
+    100050: //RootNode
+    100052: mofashi_hat:pCube1
+    400000: box_character_cat2_bangding_1_:box_character_cat:polySurface6
+    400002: box_character_cat2_bangding_1_:cat_joint_ear_l
+    400004: box_character_cat2_bangding_1_:cat_joint_ear_l2
+    400006: box_character_cat2_bangding_1_:cat_joint_ear_r
+    400008: box_character_cat2_bangding_1_:cat_joint_ear_r2
+    400010: box_character_cat2_bangding_1_:cat_joint_foot_l
+    400012: box_character_cat2_bangding_1_:cat_joint_foot_l1
+    400014: box_character_cat2_bangding_1_:cat_joint_head
+    400016: box_character_cat2_bangding_1_:cat_joint_head2
+    400018: box_character_cat2_bangding_1_:cat_joint_head3
+    400020: box_character_cat2_bangding_1_:cat_joint_jian_l
+    400022: box_character_cat2_bangding_1_:cat_joint_jian_r
+    400024: box_character_cat2_bangding_1_:cat_joint_pg
+    400026: box_character_cat2_bangding_1_:cat_joint_s_l
+    400028: box_character_cat2_bangding_1_:cat_joint_s_r
+    400030: box_character_cat2_bangding_1_:cat_joint_sz_l
+    400032: box_character_cat2_bangding_1_:cat_joint_sz_r
+    400034: box_character_cat2_bangding_1_:cat_joint_tui_r
+    400036: box_character_cat2_bangding_1_:cat_joint_tui_r1
+    400038: box_character_cat2_bangding_1_:cat_joint_xg_l
+    400040: box_character_cat2_bangding_1_:cat_joint_xg_l1
+    400042: box_character_cat2_bangding_1_:cat_joint_xiong
+    400044: box_character_cat2_bangding_1_:cat_joint_yao
+    400046: box_character_cat2_bangding_1_:joint23
+    400048: box_character_cat2_bangding_1_:joint24
+    400050: //RootNode
+    400052: mofashi_hat:pCube1
+    2300000: mofashi_hat:pCube1
+    3300000: mofashi_hat:pCube1
+    4300000: box_character_cat2_bangding_1_:box_character_cat:polySurface6
+    4300002: mofashi_hat:pCube1
+    7400000: mofashi_walk
+    7400002: mofashi_jineng
+    7400004: mofashi_dead
+    7400006: mofashi_loding_1
+    7400008: mofashi_loding_2
+    9500000: //RootNode
+    13700000: box_character_cat2_bangding_1_:box_character_cat:polySurface6
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: mofashi_walk
+      takeName: box_character_cat_animation_mofashi_fbx2
+      firstFrame: 6
+      lastFrame: 53
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: box_character_cat2_bangding_1_:box_character_cat:polySurface6
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l/box_character_cat2_bangding_1_:cat_joint_foot_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1/box_character_cat2_bangding_1_:cat_joint_foot_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l/box_character_cat2_bangding_1_:cat_joint_ear_l2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r/box_character_cat2_bangding_1_:cat_joint_ear_r2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l/box_character_cat2_bangding_1_:cat_joint_s_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r/box_character_cat2_bangding_1_:cat_joint_s_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23/box_character_cat2_bangding_1_:joint24
+        weight: 1
+      - path: mofashi_hat:pCube1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: mofashi_jineng
+      takeName: box_character_cat_animation_mofashi_fbx2
+      firstFrame: 60
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: box_character_cat2_bangding_1_:box_character_cat:polySurface6
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l/box_character_cat2_bangding_1_:cat_joint_foot_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1/box_character_cat2_bangding_1_:cat_joint_foot_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l/box_character_cat2_bangding_1_:cat_joint_ear_l2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r/box_character_cat2_bangding_1_:cat_joint_ear_r2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l/box_character_cat2_bangding_1_:cat_joint_s_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r/box_character_cat2_bangding_1_:cat_joint_s_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23/box_character_cat2_bangding_1_:joint24
+        weight: 1
+      - path: mofashi_hat:pCube1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: mofashi_dead
+      takeName: box_character_cat_animation_mofashi_fbx2
+      firstFrame: 71
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: box_character_cat2_bangding_1_:box_character_cat:polySurface6
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l/box_character_cat2_bangding_1_:cat_joint_foot_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1/box_character_cat2_bangding_1_:cat_joint_foot_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l/box_character_cat2_bangding_1_:cat_joint_ear_l2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r/box_character_cat2_bangding_1_:cat_joint_ear_r2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l/box_character_cat2_bangding_1_:cat_joint_s_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r/box_character_cat2_bangding_1_:cat_joint_s_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23/box_character_cat2_bangding_1_:joint24
+        weight: 1
+      - path: mofashi_hat:pCube1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: mofashi_loding_1
+      takeName: box_character_cat_animation_mofashi_fbx2
+      firstFrame: 85
+      lastFrame: 121
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: box_character_cat2_bangding_1_:box_character_cat:polySurface6
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l/box_character_cat2_bangding_1_:cat_joint_foot_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1/box_character_cat2_bangding_1_:cat_joint_foot_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l/box_character_cat2_bangding_1_:cat_joint_ear_l2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r/box_character_cat2_bangding_1_:cat_joint_ear_r2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l/box_character_cat2_bangding_1_:cat_joint_s_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r/box_character_cat2_bangding_1_:cat_joint_s_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23/box_character_cat2_bangding_1_:joint24
+        weight: 1
+      - path: mofashi_hat:pCube1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: mofashi_loding_2
+      takeName: box_character_cat_animation_mofashi_fbx2
+      firstFrame: 122
+      lastFrame: 141
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: box_character_cat2_bangding_1_:box_character_cat:polySurface6
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r/box_character_cat2_bangding_1_:cat_joint_xg_l/box_character_cat2_bangding_1_:cat_joint_foot_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_tui_r1/box_character_cat2_bangding_1_:cat_joint_xg_l1/box_character_cat2_bangding_1_:cat_joint_foot_l1
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_l/box_character_cat2_bangding_1_:cat_joint_ear_l2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_head/box_character_cat2_bangding_1_:cat_joint_head2/box_character_cat2_bangding_1_:cat_joint_head3/box_character_cat2_bangding_1_:cat_joint_ear_r/box_character_cat2_bangding_1_:cat_joint_ear_r2
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_l/box_character_cat2_bangding_1_:cat_joint_sz_l/box_character_cat2_bangding_1_:cat_joint_s_l
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:cat_joint_yao/box_character_cat2_bangding_1_:cat_joint_xiong/box_character_cat2_bangding_1_:cat_joint_jian_r/box_character_cat2_bangding_1_:cat_joint_sz_r/box_character_cat2_bangding_1_:cat_joint_s_r
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23
+        weight: 1
+      - path: box_character_cat2_bangding_1_:cat_joint_pg/box_character_cat2_bangding_1_:joint23/box_character_cat2_bangding_1_:joint24
+        weight: 1
+      - path: mofashi_hat:pCube1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

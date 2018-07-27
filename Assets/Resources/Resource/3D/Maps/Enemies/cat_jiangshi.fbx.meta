@@ -1,0 +1,369 @@
+fileFormatVersion: 2
+guid: 264129a5e82736949b4429353436b243
+timeCreated: 1455774812
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: box_character_cat:polySurface6
+    100002: //RootNode
+    100004: cat_joint_ear_l
+    100006: cat_joint_ear_l2
+    100008: cat_joint_ear_r
+    100010: cat_joint_ear_r2
+    100012: cat_joint_foot_l
+    100014: cat_joint_foot_l1
+    100016: cat_joint_head
+    100018: cat_joint_head2
+    100020: cat_joint_head3
+    100022: cat_joint_jian_l
+    100024: cat_joint_jian_r
+    100026: cat_joint_pg
+    100028: cat_joint_s_l
+    100030: cat_joint_s_r
+    100032: cat_joint_sz_l
+    100034: cat_joint_sz_r
+    100036: cat_joint_tui_r
+    100038: cat_joint_tui_r1
+    100040: cat_joint_xg_l
+    100042: cat_joint_xg_l1
+    100044: cat_joint_xiong
+    100046: cat_joint_yao
+    100048: joint23
+    100050: joint24
+    400000: box_character_cat:polySurface6
+    400002: //RootNode
+    400004: cat_joint_ear_l
+    400006: cat_joint_ear_l2
+    400008: cat_joint_ear_r
+    400010: cat_joint_ear_r2
+    400012: cat_joint_foot_l
+    400014: cat_joint_foot_l1
+    400016: cat_joint_head
+    400018: cat_joint_head2
+    400020: cat_joint_head3
+    400022: cat_joint_jian_l
+    400024: cat_joint_jian_r
+    400026: cat_joint_pg
+    400028: cat_joint_s_l
+    400030: cat_joint_s_r
+    400032: cat_joint_sz_l
+    400034: cat_joint_sz_r
+    400036: cat_joint_tui_r
+    400038: cat_joint_tui_r1
+    400040: cat_joint_xg_l
+    400042: cat_joint_xg_l1
+    400044: cat_joint_xiong
+    400046: cat_joint_yao
+    400048: joint23
+    400050: joint24
+    4300000: box_character_cat:polySurface6
+    7400000: jiangshi_walk
+    7400002: jiangshi_dead
+    7400004: jiangshi_jizhong
+    9500000: //RootNode
+    13700000: box_character_cat:polySurface6
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: jiangshi_walk
+      takeName: box_character_cat_animation_mofashi_fbx2
+      firstFrame: 1
+      lastFrame: 72
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: box_character_cat:polySurface6
+        weight: 1
+      - path: cat_joint_pg
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r/cat_joint_xg_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r/cat_joint_xg_l/cat_joint_foot_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r1
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r1/cat_joint_xg_l1
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r1/cat_joint_xg_l1/cat_joint_foot_l1
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_l/cat_joint_ear_l2
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_r/cat_joint_ear_r2
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_l/cat_joint_sz_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_l/cat_joint_sz_l/cat_joint_s_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_r/cat_joint_sz_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_r/cat_joint_sz_r/cat_joint_s_r
+        weight: 1
+      - path: cat_joint_pg/joint23
+        weight: 1
+      - path: cat_joint_pg/joint23/joint24
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: jiangshi_dead
+      takeName: box_character_cat_animation_mofashi_fbx2
+      firstFrame: 80
+      lastFrame: 92
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: box_character_cat:polySurface6
+        weight: 1
+      - path: cat_joint_pg
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r/cat_joint_xg_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r/cat_joint_xg_l/cat_joint_foot_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r1
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r1/cat_joint_xg_l1
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r1/cat_joint_xg_l1/cat_joint_foot_l1
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_l/cat_joint_ear_l2
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_r/cat_joint_ear_r2
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_l/cat_joint_sz_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_l/cat_joint_sz_l/cat_joint_s_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_r/cat_joint_sz_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_r/cat_joint_sz_r/cat_joint_s_r
+        weight: 1
+      - path: cat_joint_pg/joint23
+        weight: 1
+      - path: cat_joint_pg/joint23/joint24
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: jiangshi_jizhong
+      takeName: box_character_cat_animation_mofashi_fbx2
+      firstFrame: 73
+      lastFrame: 79
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: box_character_cat:polySurface6
+        weight: 1
+      - path: cat_joint_pg
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r/cat_joint_xg_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r/cat_joint_xg_l/cat_joint_foot_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r1
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r1/cat_joint_xg_l1
+        weight: 1
+      - path: cat_joint_pg/cat_joint_tui_r1/cat_joint_xg_l1/cat_joint_foot_l1
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_l/cat_joint_ear_l2
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_head/cat_joint_head2/cat_joint_head3/cat_joint_ear_r/cat_joint_ear_r2
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_l/cat_joint_sz_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_l/cat_joint_sz_l/cat_joint_s_l
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_r/cat_joint_sz_r
+        weight: 1
+      - path: cat_joint_pg/cat_joint_yao/cat_joint_xiong/cat_joint_jian_r/cat_joint_sz_r/cat_joint_s_r
+        weight: 1
+      - path: cat_joint_pg/joint23
+        weight: 1
+      - path: cat_joint_pg/joint23/joint24
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
