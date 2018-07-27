@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShotBall : MonoBehaviour {
 
     // 本次攻击的发起者
-    protected int attackerId;
+    public int attackerId;
     [HideInInspector]
     public float chargeAttackTime = 0;
     

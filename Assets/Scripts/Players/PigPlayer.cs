@@ -26,7 +26,11 @@ public class PigPlayer : MonoBehaviour
     public Vector3 pigMoveDirection;
     // 猪正常移动速度
     public float pigNormalSpeed;
-    // Animator Component
+
+    // 猪冲撞时能冲撞走球
+    public bool isCrazy = false;
+
+    // 猪的动画组件
     Animator anim;
 
     //wwq 音源
@@ -34,6 +38,9 @@ public class PigPlayer : MonoBehaviour
     // 音乐片段
     public AudioClip runingClip;
     public AudioClip rushClip;
+
+    // 猪的阴影
+    public GameObject shadowObj;
 
     // 猪默认技能
     public PigSkillController pigRushController;
@@ -49,30 +56,43 @@ public class PigPlayer : MonoBehaviour
             groupTrans = GetComponentInParent<Transform>();
         if(groupRd == null)
             groupRd = GetComponentInParent<Rigidbody>();
-        //wwq
-        selfAudioSource = gameObject.AddComponent<AudioSource>();
+        if(selfAudioSource == null)
+            selfAudioSource = GetComponent<AudioSource>();
         selfAudioSource.clip = runingClip;
         
         pigRushController = Instantiate(pigRushController, mTrans);
     }
 
-    // Update is called once per frame
+    private void Update()
+    {
+        // 设置降下来的时候阴影在地面上
+        RaycastHit hit;
+        if (Physics.Raycast(groupTrans.position, Vector3.down, out hit))
+        {
+            shadowObj.transform.position = hit.point + 0.1f * Vector3.up;
+        }
+    }
+
     private void FixedUpdate()
     {
         
-        // 猪猪动画播放
-        bool walking = pigMoveDirection.magnitude != 0;
-        anim.SetBool("IsWaking", walking);
         // 修改箭头指向
         mTrans.rotation = Quaternion.LookRotation(pigCurDirection);
+        
         // 根据移动速度更改音乐播放
-        if (groupRd.velocity.magnitude > 0.02)
+        Vector2 horizontalVel = new Vector2(groupRd.velocity.x, groupRd.velocity.z);
+        if (horizontalVel.magnitude > 0.02)
         {
-            if (selfAudioSource.clip != runingClip)
-                selfAudioSource.clip = runingClip;
+            // 播放移动动画
+            anim.SetBool("IsWaking", true);
+            // 播放音效
             if (!selfAudioSource.isPlaying)
+            {
+                if (selfAudioSource.clip != runingClip)
+                    selfAudioSource.clip = runingClip;
                 selfAudioSource.Play();
-            selfAudioSource.volume = Mathf.Lerp(0, 1, groupRd.velocity.magnitude / pigNormalSpeed);
+                selfAudioSource.volume = Mathf.Lerp(0, 0.3f, horizontalVel.magnitude / pigNormalSpeed);
+            }
         }
         else
         {
@@ -84,7 +104,7 @@ public class PigPlayer : MonoBehaviour
         if (pigMoveDirection.magnitude != 0)
         {
             // 猪猪IsWaking动画播放
-            if (groupRd.velocity.magnitude == 0)
+            if (groupRd.velocity.magnitude < 0.01)
             {
                 groupRd.AddForce(pigMoveDirection * (groupRd.drag + accForce));
             }
@@ -113,7 +133,7 @@ public class PigPlayer : MonoBehaviour
             continueSkills(pigCurDirection);
 
         // ********************测试代码*******************
-        /*
+        /**/
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
@@ -138,7 +158,7 @@ public class PigPlayer : MonoBehaviour
         {
             PigPlayerAttack();
         }
-        */
+
         // ********************测试代码*******************
     }
 
@@ -174,17 +194,16 @@ public class PigPlayer : MonoBehaviour
     public void PigPlayerAttack()
     {
         Debug.Log("pig Attack");
-        if(curSkillController != null)
+        CheckSkillController();
+
+        if (curSkillController.AvailableNow() == 1)
         {
-            if (curSkillController.RemainNums() == 0)
-                curSkillController = pigRushController;
-            if (curSkillController.AvailableNow() == 1)
+            if (selfAudioSource.clip != rushClip)
             {
-                if(selfAudioSource.clip != rushClip)
-                    selfAudioSource.clip = rushClip;
-                selfAudioSource.Play();
-                curSkillController.UseSkill(this);
+                selfAudioSource.volume = 1;
+                selfAudioSource.PlayOneShot(rushClip);
             }
+            curSkillController.UseSkill(this);
         }
     }
 

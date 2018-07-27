@@ -50,13 +50,20 @@ public class SnowBall : ShotBall
     {
         if (other.tag == "Player")
         {
+            GroupPlayer gp = other.GetComponent<GroupPlayer>();
+            // 当组是无敌的时候，执行组的对应的方法
+            if (gp.isInvulnerable)
+            {
+                gp.ReflectAttack(transform);
+                return;
+            }
+            // 正常情况下执行触碰攻击方法
             if (!canTouchSelf)
             {
                 int otherId = other.GetComponent<GroupPlayer>().gId;
                 if (otherId == attackerId) return;
             }
-            GroupPlayer gp = other.GetComponent<GroupPlayer>();
-            gp.EffectSpeedMovement(mTrans.forward * (suddenSpeed + chargeAttackTime * attackStrength));
+            gp.EffectSpeedMovement(transform.forward * (suddenSpeed + chargeAttackTime * attackStrength));
             gp.SetAttacker(attackerId); // 设置攻击者Id
             DestroySelf();
         }

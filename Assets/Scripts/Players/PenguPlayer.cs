@@ -38,8 +38,7 @@ public class PenguPlayer : MonoBehaviour
 
         //暂时只加入一种声音
         selfAudioSource.clip = throwSnowBall;
-
-        //
+        
         mTrans = GetComponent<Transform>();
         snowBallController = Instantiate(snowBallController, mTrans);
     }

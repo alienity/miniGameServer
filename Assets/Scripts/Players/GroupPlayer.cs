@@ -20,9 +20,9 @@ public class GroupPlayer : MonoBehaviour
     private bool isInvincible = false;
 
     // 死亡后重生等待时间
-    public float rebornDelay = 2f;
-    // 重生无敌时间
-    public float rebornRestTime = 3f;
+    public float rebornDelay = 0;
+    //// 重生无敌时间
+    //public float rebornRestTime = 3f;
 
     // 组的颜色
     private Color groupColor;
@@ -38,6 +38,9 @@ public class GroupPlayer : MonoBehaviour
     // 重置计时
     private float countdownPast = 0;
 
+    // 猪无敌
+    [HideInInspector]
+    public bool isInvulnerable = false;
 
     // 分数控制器
     private ScoreController scoreController;
@@ -58,7 +61,7 @@ public class GroupPlayer : MonoBehaviour
     public bool IsAlive { get { return isAlive; } }
     public bool IsInvincible { get { return isInvincible; } }
 
-    void Start()
+    private void Start()
     {
         groupTrans = GetComponent<Transform>();
         // wwq
@@ -69,7 +72,7 @@ public class GroupPlayer : MonoBehaviour
         penguPlayer.gId = gId;
     }
 
-    void Update()
+    private void Update()
     {
         if (!isAlive) return;
 
@@ -78,12 +81,14 @@ public class GroupPlayer : MonoBehaviour
         else
             attackerId = -1;
 
+        // 当猪冲撞的时候，队伍是无敌的
+        isInvulnerable = pigPlayer.isCrazy;
     }
 
     // 玩家相互碰撞后记录碰撞体是谁的
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             GroupPlayer attackGroup = collision.gameObject.GetComponent<GroupPlayer>();
             attackerId = attackGroup.gId;
@@ -96,6 +101,18 @@ public class GroupPlayer : MonoBehaviour
     {
         attackerId = atkId;
         countdownPast = countdownTime;
+    }
+
+    // 猪无敌的时候反弹打到身上的攻击，该方法是Ball来调用的
+    public void ReflectAttack(Transform atTrans)
+    {
+        Vector3 symmetryAxis = transform.position - atTrans.position;
+        Vector3 forward = atTrans.forward;
+
+        Vector3 newVector3 = -2 * (Vector3.Dot(forward, symmetryAxis)) / (Vector3.Dot(forward, forward)) * forward - symmetryAxis;
+        newVector3.y = 0;
+        Debug.Log(newVector3.ToString());
+        atTrans.forward = newVector3;
     }
 
     // 队伍死亡
@@ -127,13 +144,13 @@ public class GroupPlayer : MonoBehaviour
         scoreController = sc;
     }
 
-    // 计时无敌时间的协程
-    IEnumerator InvincibleCoroutine()
-    {
-        isInvincible = true;
-        yield return new WaitForSeconds(rebornRestTime);
-        isInvincible = false;
-    }
+    //// 计时无敌时间的协程
+    //IEnumerator InvincibleCoroutine()
+    //{
+    //    isInvincible = true;
+    //    yield return new WaitForSeconds(rebornRestTime);
+    //    isInvincible = false;
+    //}
 
     // 在指定位置重生
     public IEnumerator ReBorn(Transform reBirthTrans)
@@ -142,17 +159,19 @@ public class GroupPlayer : MonoBehaviour
         //isAlive = true;
         //groupTrans.position = reBirthTrans.position;
         //StartCoroutine(InvincibleCoroutine());
-        if (isAlive != true && !isInvincible)
+        if (isAlive != true /*&& !isInvincible*/)
         {
-            isInvincible = true;
+            //isInvincible = true;
+            
             yield return new WaitForSeconds(rebornDelay);
+
+            pigPlayer.Reset();
 
             groupTrans.position = reBirthTrans.position;
             
-            pigPlayer.Reset();
-            yield return new WaitForSeconds(rebornRestTime);
+            //yield return new WaitForSeconds(rebornRestTime);
             isAlive = true;
-            isInvincible = false;
+            //isInvincible = false;
 
             //isInvincible = true;
             //yield return new WaitForSeconds(rebornRestTime);
@@ -188,8 +207,9 @@ public class GroupPlayer : MonoBehaviour
     public void EffectSpeedMovement(Vector3 addedSpeed)
     {
         if (!isAlive) return;
-        if(selfAudioSource.clip != hittedAudio)
-            selfAudioSource.Play();
+        if (selfAudioSource.clip != hittedAudio)
+            selfAudioSource.clip = hittedAudio;
+        selfAudioSource.Play();
         pigPlayer.ReceiveSuddenSpeed(addedSpeed);
     }
 

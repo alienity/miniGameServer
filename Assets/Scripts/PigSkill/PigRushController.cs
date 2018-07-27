@@ -12,6 +12,8 @@ public class PigRushController : PigSkillController {
     private float pigPastTime;
     // 技能持续时间
     public float pigRushTime;
+    // 控制组的无敌时间
+    private GroupPlayer gpPlayer;
 
     // Use this for initialization
     void Start () {

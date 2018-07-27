@@ -33,7 +33,7 @@ public class SnowBallController : ShotBallController
     public override void UseBall(int ownerId, Vector3 position, Quaternion rotation)
     {
         if (0 == AvailableNow()) return;
-        if (!startCharge) return; // 如果没有开始蓄力，而接受到了蓄力结束，就直接忽略掉
+        //if (!startCharge) return; // 如果没有开始蓄力，而接受到了蓄力结束，就直接忽略掉
         float chargedPastTime = chargeCurrentTime - chargeStartTime;
         ball.SpawnBall(ownerId, position, rotation, chargedPastTime);
         remainColdingTime = snowBallColdingTime;
