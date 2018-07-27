@@ -84,11 +84,8 @@ public class RoleChooseHandler : MonoBehaviour
             {
 
                 int oldRoleId = server.connectionID2role[curConnectionID];
-                int oldGid = oldRoleId / 2,
-                    oldUid = oldRoleId % 2;
                 server.connectionID2role.Remove(curConnectionID);
                 server.role2connectionID.Remove(oldRoleId);
-                SubstituteRole(selectingGid, selectingUid, oldGid, oldUid);
             }
             else // 如果之前没有选择过角色
             {
@@ -104,6 +101,22 @@ public class RoleChooseHandler : MonoBehaviour
         server.connectionID2role[curConnectionID] = selectingRoleId;
         server.role2connectionID[selectingRoleId] = curConnectionID;
         SendRoleMessageToALl(new RoleStateMsg(server.connectionID2role));
+        UpdateRoleChoosingUI();
+    }
+
+    private void UpdateRoleChoosingUI()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            roleChoosingUIController.SetButtonRoleAvailable(i / 2, i % 2);
+        }
+
+        foreach (KeyValuePair<int,int> connection2role in server.connectionID2role)
+        {
+            int gid = connection2role.Value / 2;
+            int uid = connection2role.Value % 2;
+            roleChoosingUIController.SetButtonRoleSelected(gid, uid);
+        }
     }
 
     // 对玩家确定的回调
@@ -133,14 +146,6 @@ public class RoleChooseHandler : MonoBehaviour
         }
         //server.StopBroadCast();
         SceneTransformer.Instance.TransferToNextScene();
-    }
-
-    // 替换原先选择的角色
-    private void SubstituteRole(int selectingGid, int selectingUid, int oldGid, int oldUid)
-    {
-        roleChoosingUIController.SetButtonRoleAvailable(oldGid, oldUid);
-        roleChoosingUIController.SetButtonRoleSelected(selectingGid, selectingUid);
-        
     }
 
     private void SendRoleMessageToALl(RoleStateMsg roleState)
