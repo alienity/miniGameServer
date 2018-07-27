@@ -5,9 +5,8 @@ public class PenguPlayer : MonoBehaviour
 {
     private AudioSource selfAudioSource;
 
-    public int gId;
-    private int uId = 1;
-    public int playerId;
+    public int gId { get; set; }
+    private const int uId = 1;
 
     // 企鹅攻击指向
     public Vector3 penguCurDirection;
@@ -19,6 +18,8 @@ public class PenguPlayer : MonoBehaviour
     public ShotBallController curBallController;
     //// 蓄力时长
     //public float maxChargeTime;
+    // 发雪球的音效
+    public AudioClip throwSnowBall;
 
     //// 记录开始蓄力
     //private float chargeStartTime = -1;
@@ -27,13 +28,16 @@ public class PenguPlayer : MonoBehaviour
     // 自有对象
     private Transform mTrans;
 
+    // 死亡
+    public bool IsDie { get; set; }
+
     // Use this for initialization
     void Start()
     {
         selfAudioSource = gameObject.AddComponent<AudioSource>();
 
         //暂时只加入一种声音
-        selfAudioSource.clip = Resources.Load("ThrowSnowball") as AudioClip;
+        selfAudioSource.clip = throwSnowBall;
 
         //
         mTrans = GetComponent<Transform>();
@@ -43,6 +47,8 @@ public class PenguPlayer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (IsDie) return;
+
         // 修改当前朝向
         if(penguCurDirection.magnitude != 0)
             mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
@@ -79,12 +85,16 @@ public class PenguPlayer : MonoBehaviour
 
     }
 
-    // 设置组ID
-    public void SetId(int gId, int pId)
+    public void Reset()
     {
-        this.gId = gId;
-        this.playerId = pId;
+        
     }
+
+    //// 设置组ID
+    //public void SetId(int gId, int pId)
+    //{
+    //    this.gId = gId;
+    //}
 
     // 设置指向
     public void SetArrowDirection(Vector3 dir)

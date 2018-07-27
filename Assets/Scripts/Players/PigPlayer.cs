@@ -3,10 +3,8 @@ using System.Collections;
 
 public class PigPlayer : MonoBehaviour
 {
-
-    public int gId;
-    private int uId = 1;
-    public int playerId;
+    public int gId { get; set; }
+    private const int uId = 1;
     
     // 更新函数
     public delegate void ContinueSkill(Vector3 dir);
@@ -31,6 +29,12 @@ public class PigPlayer : MonoBehaviour
     // Animator Component
     Animator anim;
 
+    //wwq 音源
+    private AudioSource selfAudioSource;
+    // 音乐片段
+    public AudioClip runingClip;
+    public AudioClip rushClip;
+
     // 猪默认技能
     public PigSkillController pigRushController;
     // 且新捡到的投掷物品
@@ -45,22 +49,41 @@ public class PigPlayer : MonoBehaviour
             groupTrans = GetComponentInParent<Transform>();
         if(groupRd == null)
             groupRd = GetComponentInParent<Rigidbody>();
+        //wwq
+        selfAudioSource = gameObject.AddComponent<AudioSource>();
+        selfAudioSource.clip = runingClip;
+        
         pigRushController = Instantiate(pigRushController, mTrans);
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        // 修改箭头指向
-        mTrans.rotation = Quaternion.LookRotation(pigCurDirection);
+        
         // 猪猪动画播放
         bool walking = pigMoveDirection.magnitude != 0;
         anim.SetBool("IsWaking", walking);
+        // 修改箭头指向
+        mTrans.rotation = Quaternion.LookRotation(pigCurDirection);
+        // 根据移动速度更改音乐播放
+        if (groupRd.velocity.magnitude > 0.02)
+        {
+            if (selfAudioSource.clip != runingClip)
+                selfAudioSource.clip = runingClip;
+            if (!selfAudioSource.isPlaying)
+                selfAudioSource.Play();
+            selfAudioSource.volume = Mathf.Lerp(0, 1, groupRd.velocity.magnitude / pigNormalSpeed);
+        }
+        else
+        {
+            if (!selfAudioSource.isPlaying)
+                selfAudioSource.Stop();
+        }
+        
         //移动更新，加速到最大速度后匀速运动
         if (pigMoveDirection.magnitude != 0)
         {
             // 猪猪IsWaking动画播放
-            
             if (groupRd.velocity.magnitude == 0)
             {
                 groupRd.AddForce(pigMoveDirection * (groupRd.drag + accForce));
@@ -84,13 +107,13 @@ public class PigPlayer : MonoBehaviour
                     groupRd.AddForce(biasForce);
             }
         }
-
+        
         // 更新持续技能
-        if(continueSkills != null)
+        if (continueSkills != null)
             continueSkills(pigCurDirection);
 
         // ********************测试代码*******************
-        /**/
+        /*
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
@@ -115,7 +138,7 @@ public class PigPlayer : MonoBehaviour
         {
             PigPlayerAttack();
         }
-        
+        */
         // ********************测试代码*******************
     }
 
@@ -123,20 +146,15 @@ public class PigPlayer : MonoBehaviour
     {
         groupRd.velocity = Vector3.zero;
         pigMoveDirection = Vector3.zero;
+        selfAudioSource.Stop();
     }
 
-    // 停止运动
-    public void StopNow()
-    {
-        groupRd.velocity = Vector3.zero;
-    }
-
-    // 设置组ID
-    public void SetId(int gId, int pId)
-    {
-        this.gId = gId;
-        this.playerId = pId;
-    }
+    //// 设置组ID
+    //public void SetId(int gId, int pId)
+    //{
+    //    this.gId = gId;
+    //    this.playerId = pId;
+    //}
 
     // 捡物品
     public void CatchItem(PigSkillController pigSkillController)
@@ -161,7 +179,12 @@ public class PigPlayer : MonoBehaviour
             if (curSkillController.RemainNums() == 0)
                 curSkillController = pigRushController;
             if (curSkillController.AvailableNow() == 1)
+            {
+                if(selfAudioSource.clip != rushClip)
+                    selfAudioSource.clip = rushClip;
+                selfAudioSource.Play();
                 curSkillController.UseSkill(this);
+            }
         }
     }
 

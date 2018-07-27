@@ -15,17 +15,21 @@ public class SnowBall : ShotBall
     public float suddenSpeed;
     // 蓄力击退强度
     public float attackStrength = 8;
-    
+    // 可以碰到自己
+    private bool canTouchSelf = false;
+    // 多少秒之后取消自己的碰撞
+    public float cancelTouchDuring = 0.8f;
     // 自有组件
     private Collider mCollider;
     private Transform mTrans;
 
-    void Start()
+    private void Start()
     {
         mCollider = GetComponent<Collider>();
         mTrans = GetComponent<Transform>();
         flyDist = flyTime * flySpeed;
         fliedTime = 0;
+        StartCoroutine(CountDownTouchSelf(cancelTouchDuring));
     }
     
     private void FixedUpdate()
@@ -46,13 +50,23 @@ public class SnowBall : ShotBall
     {
         if (other.tag == "Player")
         {
-            int otherId = other.GetComponent<GroupPlayer>().gId;
-            if (otherId == attackerId) return;
+            if (!canTouchSelf)
+            {
+                int otherId = other.GetComponent<GroupPlayer>().gId;
+                if (otherId == attackerId) return;
+            }
             GroupPlayer gp = other.GetComponent<GroupPlayer>();
             gp.EffectSpeedMovement(mTrans.forward * (suddenSpeed + chargeAttackTime * attackStrength));
             gp.SetAttacker(attackerId); // 设置攻击者Id
             DestroySelf();
         }
+    }
+
+    IEnumerator CountDownTouchSelf(float time)
+    {
+        canTouchSelf = false;
+        yield return new WaitForSeconds(time);
+        canTouchSelf = true;
     }
 
     private void DestroySelf()

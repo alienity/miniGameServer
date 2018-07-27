@@ -3690,8 +3690,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1201891572466990}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.036}
-  m_LocalScale: {x: 0.22, y: 1, z: 0.12}
+  m_LocalPosition: {x: 0, y: 0, z: 0.029}
+  m_LocalScale: {x: 0.2, y: 1, z: 0.12}
   m_Children: []
   m_Father: {fileID: 4043557644229482}
   m_RootOrder: 2
@@ -5091,14 +5091,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525f91834fc77b94ab53b12edbde3e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gId: 0
-  playerId: 0
   groupTrans: {fileID: 0}
   groupRd: {fileID: 0}
   accForce: 78
   pigCurDirection: {x: 1, y: 0, z: 0}
   pigMoveDirection: {x: 0, y: 0, z: 0}
   pigNormalSpeed: 8
+  runingClip: {fileID: 8300000, guid: fd086fef254f64f43b61ca633cfd94c7, type: 3}
+  rushClip: {fileID: 8300000, guid: 46b215a58ed1e234b85e5198e922fea7, type: 3}
   pigRushController: {fileID: 114177424281042246, guid: 91519b87da97d9f4a8153d85ac20d68b,
     type: 2}
   curSkillController: {fileID: 0}
@@ -5125,6 +5125,7 @@ MonoBehaviour:
   toKillerScore: 15
   pigPlayer: {fileID: 114149878119587884}
   penguPlayer: {fileID: 114984092748271382}
+  hittedAudio: {fileID: 8300000, guid: 4fdd77fd809d7064487156e43484d810, type: 3}
 --- !u!114 &114984092748271382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5136,13 +5137,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44cd92f55a5eaf440952bc0ea177eddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gId: 0
-  playerId: 0
   penguCurDirection: {x: 0, y: 0, z: 0}
   penguRotateSpeed: 72
   snowBallController: {fileID: 114138809279114266, guid: eed92ea51ed717245944eabd6a37b8d3,
     type: 2}
   curBallController: {fileID: 0}
+  throwSnowBall: {fileID: 8300000, guid: 5715524742f313843a1b9986a0b379b2, type: 3}
 --- !u!136 &136823836038361200
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -52,6 +52,9 @@ public class GroupPlayer : MonoBehaviour
     public PigPlayer pigPlayer;
     public PenguPlayer penguPlayer;
 
+    // 被撞击音效
+    public AudioClip hittedAudio;
+
     public bool IsAlive { get { return isAlive; } }
     public bool IsInvincible { get { return isInvincible; } }
 
@@ -60,10 +63,10 @@ public class GroupPlayer : MonoBehaviour
         groupTrans = GetComponent<Transform>();
         // wwq
         selfAudioSource = gameObject.AddComponent<AudioSource>();
-        selfAudioSource.clip = Resources.Load("HitTheTarget") as AudioClip;
-        // wwq
-        pigPlayer.SetId(gId, 1);
-        penguPlayer.SetId(gId, 0);
+        //selfAudioSource.clip = Resources.Load("HitTheTarget") as AudioClip;
+
+        pigPlayer.gId = gId;
+        penguPlayer.gId = gId;
     }
 
     void Update()
@@ -99,7 +102,7 @@ public class GroupPlayer : MonoBehaviour
     public void Die()
     {
         isAlive = false;
-        pigPlayer.StopNow();
+        pigPlayer.Reset();
 
         Debug.Assert(scoreController != null);
 
@@ -185,7 +188,8 @@ public class GroupPlayer : MonoBehaviour
     public void EffectSpeedMovement(Vector3 addedSpeed)
     {
         if (!isAlive) return;
-        selfAudioSource.Play();
+        if(selfAudioSource.clip != hittedAudio)
+            selfAudioSource.Play();
         pigPlayer.ReceiveSuddenSpeed(addedSpeed);
     }
 
@@ -217,7 +221,7 @@ public class GroupPlayer : MonoBehaviour
     public void PenguChargeAttack(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
     {
         if (!isAlive) return;
-
+    
         penguPlayer.HandleChargeSkill(chargeStartTime, chargeCurrentTime, chargeReturn);
     }
     

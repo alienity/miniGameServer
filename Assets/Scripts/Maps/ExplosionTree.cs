@@ -8,10 +8,16 @@ public class ExplosionTree : BoxEffects
     public float explosionRadius = 50;
     public float radio = -30.5f;
 
+    private AudioSource selfAudioSource;
+    public void Start()
+    {
+        selfAudioSource = gameObject.AddComponent<AudioSource>();
+        selfAudioSource.clip = Resources.Load("Explosion") as AudioClip;
+    }
     private void explode()
     {
         Collider[] col = Physics.OverlapSphere(transform.position, explosionRadius);
-
+        selfAudioSource.Play();
         if (col.Length > 0)
         {
             Debug.Log(" tree die!!!!! = .= ");

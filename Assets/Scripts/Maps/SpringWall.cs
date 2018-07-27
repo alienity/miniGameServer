@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class SpringWall :BoxEffects
 {
-    public AudioSource selfAudioSource;
-    private void Awake()
+    private AudioSource selfAudioSource;
+    public AudioClip hittedAudio;
+
+    private void Start()
     {
-        selfAudioSource = gameObject.AddComponent<AudioSource>();
-        selfAudioSource.clip = Resources.Load("HitTheBlock") as AudioClip;
+        selfAudioSource = GetComponent<AudioSource>(); ;
+        selfAudioSource.clip = hittedAudio;
         Debug.Log("spring start");
     }
+
     private void OnTriggerEnter(Collider collider)
     {
 
