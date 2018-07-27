@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class SpringWall :BoxEffects
 {
+    public AudioSource selfAudioSource;
     private void Awake()
     {
+        selfAudioSource = gameObject.AddComponent<AudioSource>();
+        selfAudioSource.clip = Resources.Load("HitTheBlock") as AudioClip;
         Debug.Log("spring start");
     }
     private void OnTriggerEnter(Collider collider)
@@ -13,6 +16,9 @@ public class SpringWall :BoxEffects
 
         if (collider.tag == "Ball")
         {
+
+            selfAudioSource.Play();
+
             Vector3 symmetryAxis = gameObject.transform.position - collider.transform.position;
             Vector3 forward = collider.transform.forward;
 

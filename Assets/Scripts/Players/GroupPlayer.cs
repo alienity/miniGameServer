@@ -3,7 +3,9 @@ using System.Collections;
 
 public class GroupPlayer : MonoBehaviour
 {
-    
+    // wwq 音源
+    private AudioSource selfAudioSource;
+
     public enum PlayerType
     {
         PENGU,  // 企鹅玩家
@@ -56,7 +58,10 @@ public class GroupPlayer : MonoBehaviour
     void Start()
     {
         groupTrans = GetComponent<Transform>();
-
+        // wwq
+        selfAudioSource = gameObject.AddComponent<AudioSource>();
+        selfAudioSource.clip = Resources.Load("HitTheTarget") as AudioClip;
+        // wwq
         pigPlayer.SetId(gId, 1);
         penguPlayer.SetId(gId, 0);
     }
@@ -138,11 +143,12 @@ public class GroupPlayer : MonoBehaviour
         {
             isInvincible = true;
             yield return new WaitForSeconds(rebornDelay);
-            isAlive = true;
+
             groupTrans.position = reBirthTrans.position;
             
             pigPlayer.Reset();
             yield return new WaitForSeconds(rebornRestTime);
+            isAlive = true;
             isInvincible = false;
 
             //isInvincible = true;
@@ -179,7 +185,7 @@ public class GroupPlayer : MonoBehaviour
     public void EffectSpeedMovement(Vector3 addedSpeed)
     {
         if (!isAlive) return;
-
+        selfAudioSource.Play();
         pigPlayer.ReceiveSuddenSpeed(addedSpeed);
     }
 

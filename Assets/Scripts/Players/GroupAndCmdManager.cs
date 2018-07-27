@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GroupAndCmdManager : MonoBehaviour {
     
-    // 0表示在选人场景，1表示在游戏场景，2表示在结束场景
-    public int curStageId = 1;
+    //// 0表示在选人场景，1表示在游戏场景，2表示在结束场景
+    //public int curStageId = 1;
     // 所有的队伍
     public List<GroupPlayer> groupPlayers;
     // 需要实例化的玩家Group对象

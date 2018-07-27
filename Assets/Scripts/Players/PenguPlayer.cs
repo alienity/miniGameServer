@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PenguPlayer : MonoBehaviour
 {
+    private AudioSource selfAudioSource;
 
     public int gId;
     private int uId = 1;
@@ -29,6 +30,12 @@ public class PenguPlayer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        selfAudioSource = gameObject.AddComponent<AudioSource>();
+
+        //暂时只加入一种声音
+        selfAudioSource.clip = Resources.Load("ThrowSnowball") as AudioClip;
+
+        //
         mTrans = GetComponent<Transform>();
         snowBallController = Instantiate(snowBallController, mTrans);
     }
@@ -137,7 +144,10 @@ public class PenguPlayer : MonoBehaviour
         Vector3 ballBirthPlace = mTrans.position;// + mTrans.forward * 0.1f;
         CheckSkillController();
         if (curBallController.AvailableNow() == 1)
+        {
+            selfAudioSource.Play();
             curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);
+        }
     }
 
     // 返回技能剩余冷却时间，同步到手机端
