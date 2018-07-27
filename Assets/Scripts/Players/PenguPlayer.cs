@@ -42,7 +42,7 @@ public class PenguPlayer : MonoBehaviour
 
 
         // ********************测试代码*******************
-        /*
+        /**/
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -67,7 +67,7 @@ public class PenguPlayer : MonoBehaviour
         {
             PenguPlayerAttack();
         }
-        */
+        
         // ********************测试代码*******************
 
     }
@@ -134,7 +134,7 @@ public class PenguPlayer : MonoBehaviour
     // 发射雪球
     public void PenguPlayerAttack()
     {
-        Vector3 ballBirthPlace = mTrans.position + mTrans.forward * 1.2f;
+        Vector3 ballBirthPlace = mTrans.position;// + mTrans.forward * 0.1f;
         CheckSkillController();
         if (curBallController.AvailableNow() == 1)
             curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);

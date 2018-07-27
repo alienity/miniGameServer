@@ -90,7 +90,7 @@ public class PigPlayer : MonoBehaviour
             continueSkills(pigCurDirection);
 
         // ********************测试代码*******************
-        /*
+        /**/
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
@@ -115,7 +115,7 @@ public class PigPlayer : MonoBehaviour
         {
             PigPlayerAttack();
         }
-        */
+        
         // ********************测试代码*******************
     }
 

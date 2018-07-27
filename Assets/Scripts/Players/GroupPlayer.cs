@@ -140,9 +140,14 @@ public class GroupPlayer : MonoBehaviour
             yield return new WaitForSeconds(rebornDelay);
             isAlive = true;
             groupTrans.position = reBirthTrans.position;
+            
             pigPlayer.Reset();
             yield return new WaitForSeconds(rebornRestTime);
             isInvincible = false;
+
+            //isInvincible = true;
+            //yield return new WaitForSeconds(rebornRestTime);
+            //isInvincible = false;
         }
     }
     

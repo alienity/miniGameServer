@@ -8,7 +8,7 @@ public class WaterSurface : BoxEffects
     {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<Rigidbody>().useGravity = true;
+            // other.GetComponent<Rigidbody>().useGravity = true;
             other.GetComponent<GroupPlayer>().Die();
         }
     }
@@ -16,7 +16,8 @@ public class WaterSurface : BoxEffects
     {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<Rigidbody>().useGravity = false;
+            other.GetComponent<GroupPlayer>().Die();
         }
     }
+
 }
