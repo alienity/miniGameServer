@@ -36,6 +36,13 @@ public class SceneTransformer : MonoBehaviour
         AskClientToChange();
         FreeResource();
         SceneManager.LoadScene(nextSceneName);
+        /*
+         * 切换到游戏场景是将stage设置为 GammingStage，记录当前场景
+         */
+        if (nextSceneName == "GameScene")
+        {
+            Server.Instance.stage = Stage.GammingStage;
+        }
     }
 
     // 释放没用的资源，手动GC

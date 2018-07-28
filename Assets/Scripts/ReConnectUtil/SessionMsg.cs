@@ -34,12 +34,12 @@ public class SessionMsg : MessageBase
     {
     }
 
-    public SessionMsg(bool askSession, bool provideSessionId, int sessionId, int stage, bool provideRoleId, int gid, int uid, bool confirmed, Dictionary<int, int> session2role)
+    public SessionMsg(bool askSession, bool provideSessionId, int sessionId, Stage stage, bool provideRoleId, int gid, int uid, bool confirmed, Dictionary<int, int> session2role)
     {
         this.askSession = askSession;
         this.provideSessionId = provideSessionId;
         this.sessionId = sessionId;
-        this.stage = stage;
+        this.stage = (int)stage;
         this.provideRoleId = provideRoleId;
         this.gid = gid;
         this.uid = uid;
@@ -50,5 +50,15 @@ public class SessionMsg : MessageBase
     public Dictionary<int, int> GetSession2Role()
     {
         return JsonConvert.DeserializeObject<Dictionary<int, int>>(session2role);
+    }
+
+    public void SetSession2Role(Dictionary<int, int> session2role)
+    {
+        this.session2role = JsonConvert.SerializeObject(session2role);
+    }
+
+    public override string ToString()
+    {
+        return string.Format("AskSession: {0}, ProvideSessionId: {1}, SessionId: {2}, Stage: {3}, ProvideRoleId: {4}, Gid: {5}, Uid: {6}, Confirmed: {7}, Session2Role: {8}", askSession, provideSessionId, sessionId, stage, provideRoleId, gid, uid, confirmed, session2role);
     }
 }

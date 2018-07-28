@@ -4,5 +4,6 @@
      Prepare, // 开始游戏后的等待连接界面
      ChoosingRoleStage,
      GammingStage,
-     OfflineStage    //客户端掉线界面
+     OfflineStage,    //客户端掉线界面
+     GameOverStage
  }

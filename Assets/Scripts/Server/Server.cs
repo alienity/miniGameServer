@@ -110,9 +110,10 @@ public class Server : MonoBehaviour
         reconnectHandler.OnClientConnect(netmsg);
         connections.Add(netmsg.conn.connectionId);
         // 人数到达游戏人数后，发送消息给client切换到选人界面 
-        if (connections.Count == roleChooseHandler.toNumberTransfer)
+        if (stage == Stage.Prepare && connections.Count == roleChooseHandler.toNumberTransfer)
         {
             ClientScenChangeUtil.ChangeAllClientStage(Stage.ChoosingRoleStage);
+            stage = Stage.ChoosingRoleStage;
         }
     }
 

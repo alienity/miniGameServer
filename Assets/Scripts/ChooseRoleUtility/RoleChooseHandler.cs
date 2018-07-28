@@ -149,6 +149,7 @@ public class RoleChooseHandler : MonoBehaviour
             --time;
         }
         //server.StopBroadCast();
+        Server.Instance.stage = Stage.GammingStage;
         SceneTransformer.Instance.TransferToNextScene();
     }
 
