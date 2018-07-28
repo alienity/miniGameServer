@@ -16,16 +16,21 @@ public class PenguPlayer : MonoBehaviour
     public ShotBallController snowBallController;
     // 且新捡到的投掷物品
     public ShotBallController curBallController;
-    //// 蓄力时长
-    //public float maxChargeTime;
     // 发雪球的音效
     public AudioClip throwSnowBall;
 
-    //// 记录开始蓄力
-    //private float chargeStartTime = -1;
-    //// 记录蓄力到现在，当前时刻
-    //private float chargeCurrentTime = -1;
-    // 自有对象
+    // 动画控制器
+    private Animator animator;
+    private int attackAnimId;
+
+    // 企鹅箭头
+    public SpriteRenderer arrowRender;
+    // 箭头最长距离
+    public float arrowMaxRatio = 3f;
+    // 箭头最短距离
+    public float arrowMinRatio = 1f;
+
+    // 自身transform
     private Transform mTrans;
 
     // 死亡
@@ -34,13 +39,17 @@ public class PenguPlayer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        selfAudioSource = gameObject.AddComponent<AudioSource>();
+        if(selfAudioSource == null)
+            selfAudioSource = GetComponent<AudioSource>();
 
         //暂时只加入一种声音
         selfAudioSource.clip = throwSnowBall;
         
         mTrans = GetComponent<Transform>();
         snowBallController = Instantiate(snowBallController, mTrans);
+
+        animator = GetComponent<Animator>();
+        attackAnimId = Animator.StringToHash("shot");
     }
 
     // Update is called once per frame
@@ -139,12 +148,32 @@ public class PenguPlayer : MonoBehaviour
 
     }
     */
+    
+    // 设置箭头颜色
+    public void SetArrowColor(Color arrowColor)
+    {
+        arrowRender.color = arrowColor;
+    }
+
+    // 修改箭头长度
+    public void SetArrowLen(float arrowRatio)
+    {
+        Vector2 arrowSize = arrowRender.size;
+        arrowSize.y = Mathf.Lerp(arrowMinRatio, arrowMaxRatio, arrowRatio);
+        arrowRender.size = arrowSize;
+    }
+
     // 根据时间处理蓄力技能
     public void HandleChargeSkill(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
     {
         // 测试蓄力
-        curBallController.HandleChargeAttack(chargeStartTime, chargeCurrentTime);
-        if (chargeReturn) PenguPlayerAttack();
+        float chargeRatio = curBallController.HandleChargeAttack(chargeStartTime, chargeCurrentTime);
+        SetArrowLen(chargeRatio);
+        if (chargeReturn)
+        {
+            SetArrowLen(0);
+            PenguPlayerAttack();
+        }
     }
 
     // 发射雪球
@@ -155,6 +184,7 @@ public class PenguPlayer : MonoBehaviour
         if (curBallController.AvailableNow() == 1)
         {
             selfAudioSource.Play();
+            animator.SetTrigger(attackAnimId);
             curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);
         }
     }

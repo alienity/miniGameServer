@@ -31,13 +31,16 @@ public class PigPlayer : MonoBehaviour
     public bool IsCrazy { get; set; }
 
     // 猪的动画组件
-    Animator anim;
+    private Animator animator;
+    private int runSpeedId;
 
     //wwq 音源
     private AudioSource selfAudioSource;
     // 音乐片段
     public AudioClip runingClip;
     public AudioClip rushClip;
+    // 声音播放速度
+    public float maxAudioRatio;
 
     // 猪的阴影
     public GameObject shadowObj;
@@ -50,7 +53,9 @@ public class PigPlayer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        runSpeedId = Animator.StringToHash("speed");
+
         mTrans = GetComponent<Transform>();
         if (groupTrans == null)
             groupTrans = GetComponentInParent<Transform>();
@@ -81,21 +86,25 @@ public class PigPlayer : MonoBehaviour
         
         // 根据移动速度更改音乐播放
         Vector2 horizontalVel = new Vector2(groupRd.velocity.x, groupRd.velocity.z);
+        // 根据速度调整动画
+        animator.SetFloat(runSpeedId, Mathf.Lerp(0.01f, pigNormalSpeed, horizontalVel.magnitude / pigNormalSpeed));
+        // 根据速度调整音效
         if (horizontalVel.magnitude > 0.02)
         {
-            // 播放移动动画
-            anim.SetBool("IsWaking", true);
             // 播放音效
             if (!selfAudioSource.isPlaying)
             {
                 if (selfAudioSource.clip != runingClip)
                     selfAudioSource.clip = runingClip;
                 selfAudioSource.Play();
+                selfAudioSource.pitch = 1f;
                 selfAudioSource.volume = Mathf.Lerp(0, 0.3f, horizontalVel.magnitude / pigNormalSpeed);
+                selfAudioSource.pitch = Mathf.Lerp(1f, maxAudioRatio + 1f, horizontalVel.magnitude / pigNormalSpeed);
             }
         }
         else
         {
+            // 停止移动动画播放
             if (!selfAudioSource.isPlaying)
                 selfAudioSource.Stop();
         }

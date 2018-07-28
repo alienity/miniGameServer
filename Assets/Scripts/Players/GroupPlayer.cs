@@ -64,12 +64,13 @@ public class GroupPlayer : MonoBehaviour
     private void Start()
     {
         groupTrans = GetComponent<Transform>();
-        // wwq
-        selfAudioSource = gameObject.AddComponent<AudioSource>();
-        //selfAudioSource.clip = Resources.Load("HitTheTarget") as AudioClip;
+
+        if(selfAudioSource == null)
+            selfAudioSource = GetComponent<AudioSource>();
 
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
+        penguPlayer.SetArrowColor(groupColor);
     }
 
     private void Update()

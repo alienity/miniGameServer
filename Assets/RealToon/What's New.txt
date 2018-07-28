@@ -1,0 +1,73 @@
+RealToon V4.0.3 Update (June 2018)
+=====================================
+
+[New]
+
+"Frame By Frame Rendering (Tool)"
+- Frame by frame render to Image Sequence or PNG Sequence.
+- For Animation & Illustration/Art Use.
+
+"Now supports Nintendo Switch."
+
+======================================
+[Texture Color - New Options/Controls]
+======================================
+
+"Vertex Colors Intensity"
+
+* Show vertex colors.
+
+======================================
+[Shadow - New Options/Controls]
+======================================
+
+"Custom Light Direction"
+
+* Custom light direction for Self Shadow & ShadowT.
+* Useful for anime faces.
+* Use this if you want Self Shadow & ShadowT follow other object by script.
+
+
+"Light Intensity Affect (OC - AL - CT - PT) (Directional Light)"
+
+* Use this if you only use directional light and want directional light intensity affect Override Color, Add Light, Shadow Color Texture & PTexture.
+
+
+"ShadowT Color"
+"Shadow PTexture Power"
+
+======================================
+[Outline - New Options/Controls]
+======================================
+
+"Outline Width Control (Texture)"
+* Controls outline width by texture.
+* Use this if you don't want some parts of your object to have outline.
+
+
+"Outline Offset"
+* Adjust outline position.
+
+======================================
+[Refraction Shader - New Options/Controls]
+======================================
+
+"Main Color Affect Texture"
+
+"Depth"
+* Water depth style effect or simple water foam effect. 
+
+======================================
+[Cutout Shader - New Options/Controls]
+======================================
+
+"Use Secondary Cutout Only"
+
+======================================
+[Fade Transparency Shader - New Options/Controls]
+======================================
+
+"Affect Shadow"
+* Opacity affect shadow.
+
+(Read "RealToon (User Guide).pdf" for more info about the new controls, tools & tips)

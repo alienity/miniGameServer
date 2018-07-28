@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Left
+  m_Shader: {fileID: 4800000, guid: 214f7ca7ee8f2374bb81ea3571f7bcc8, type: 3}
+  m_ShaderKeywords: _ENABLELIGHTFALLOFF_ON _MAINTEXTURECOLORSMIXSHADOWCOLOR_ON _SHOWSHADOWTONAMBIENTLIGHT_ON
+    _SHOWSHADOWTONLIGHT_ON _SHOWSHADOWTONSELFSHADOW_ON _SHOWSHADOWTONSHADOW_ON _USEGILIGHTING_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FReflection:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlossMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlossTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskFReflection:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskGloss:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskReflection:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskSelfLit:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowColorTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowPTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowTTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AdjustLightDirectionalLight: 1
+    - _AdjustLightPointSpotlight: 1
+    - _AdjustLightPointSpotlightOnly: 1
+    - _Cutoff: 0.5
+    - _DefaultReflectionRoughtness: 0
+    - _DirectionalLightAffectShadow: 0
+    - _DoubleSided: 2
+    - _DynamicNoiseOutline: 0
+    - _EnableLightFalloff: 1
+    - _FReflectionIntensity: 0
+    - _FReflectionTextureBlend: 0
+    - _FresnelFill: 1
+    - _FresnelIntensity: 0
+    - _FresnelOnLight: 0
+    - _FresnelOnShadow: 0
+    - _FresnelOnShadowDark: 0
+    - _FresnelVisibleOnDarkAmbientLight: 0
+    - _GIFlatShade: 0
+    - _GIShadeSize: 0
+    - _GlossIntensity: 0
+    - _GlossTextureFollowLight: 0
+    - _GlossTextureFollowObjectRotation: 0
+    - _GlossTextureIntensity: 0
+    - _GlossTextureRotate: 0
+    - _Glossiness: 0.5
+    - _HardEdgeFresnel: 0
+    - _LightFalloffAffectShadowT: 0
+    - _MainTextureColorGloss: 0
+    - _MainTextureColorSMixShadowColor: 0.44
+    - _MainTextureColorSSaturation: 1
+    - _MainTextureColorSTSaturation: 1
+    - _MainTextureColorShadow: 0
+    - _MainTextureColorShadowT: 0
+    - _NormalIntensity: 1
+    - _OutlineNoiseIntensity: 0
+    - _OutlineWidth: 0.001
+    - _ReceiveShadowsIntensity: 1
+    - _ReduceWhite: 0
+    - _ReflectionBlendToMainTexture: 0
+    - _ReflectionIntensity: 0
+    - _Saturation: 1
+    - _SaturationPointSpotlight: 1
+    - _SelfLitHighContrast: 0
+    - _SelfLitIntensity: 0
+    - _SelfLitPower: 1
+    - _SelfShadowHardness: 1
+    - _SelfShadowIntensity: 1
+    - _SelfShadowSize: 0.56
+    - _SelfShadowatViewDirection: 0
+    - _ShadowAddLight: 1
+    - _ShadowColorTextureIntensity: 0
+    - _ShadowColorTexturePower: 0
+    - _ShadowIntensity: 1
+    - _ShadowMaskGlossTexture: 0
+    - _ShadowPTextureIntensity: 0
+    - _ShadowTIntensity: 0
+    - _ShadowTLightSize: 0.5
+    - _ShadowTLimit: 1.5
+    - _ShadowTShadowSize: 0
+    - _ShadowTSize: 0
+    - _ShowShadowTOnLight: 1
+    - _ShowShadowTOnSelfShadow: 1
+    - _ShowShadowTonAmbientLight: 1
+    - _ShowShadowTonLight: 1
+    - _ShowShadowTonShadow: 1
+    - _SoftGloss: 0
+    - _TexturePatternStyle: 0
+    - _TextureWashout: 0
+    - _Transparent: 0
+    - _UseFReflection: 0
+    - _UseGILighting: 1
+    m_Colors:
+    - _Color: {r: 0.2997234, g: 0.27850002, b: 0.5, a: 1}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 0.8014706, g: 0.8014706, b: 0.8014706, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SelfLitColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SelfShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ShadowOverrideColor: {r: 1, g: 1, b: 1, a: 1}

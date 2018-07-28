@@ -12,12 +12,12 @@ public class WaterSurface : BoxEffects
             other.GetComponent<GroupPlayer>().Die();
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            other.GetComponent<GroupPlayer>().Die();
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        other.GetComponent<GroupPlayer>().Die();
+    //    }
+    //}
 
 }
