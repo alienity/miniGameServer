@@ -10,43 +10,70 @@ public class GameOverSceneController : MonoBehaviour {
     private GameOverUIController gOverUIController;
     // Use this for initialization
     void Start () {
+        /**  测试代码
+         
+        gOverUIController = GameOverUIController.Instance;
+        testShowScoresAndWinnerICone();
+        */
+        /**  屏蔽真实场景中的代码*/
         dataSaveController = DataSaveController.Instance;
         gOverUIController = GameOverUIController.Instance;
-        if (dataSaveController != null && gOverUIController != null && gOverUIController.playerNameScore!=null)
+        if (dataSaveController != null && gOverUIController != null && gOverUIController.playerNameScore != null)
             ShowScoresAndWinnerICone();
+
     }
 
     private void ShowScoresAndWinnerICone()
     {
         int groupNumbers = dataSaveController.playerNumber / 2;
-        Dictionary<string, int> nameScoreDic = new Dictionary<string, int>();
+        Dictionary<int, int> nameScoreDic = new Dictionary<int, int>();
         int winnerId = 0;
         int winnerScores = 0;
         for (int i = 0; i < groupNumbers; ++i)
         {
             // TODO:替换成真实用户名
-            nameScoreDic.Add("P" + i.ToString() + "," + "P" + (i + 1).ToString(), dataSaveController.scores[i]);
+            nameScoreDic.Add(i, dataSaveController.scores[i]);
             if (winnerScores < dataSaveController.scores[i])
             {
                 winnerScores = dataSaveController.scores[i];
                 winnerId = i;
             }
         }
-        List<KeyValuePair<string, int>> lst = new List<KeyValuePair<string, int>>(nameScoreDic);
+        List<KeyValuePair<int, int>> lst = new List<KeyValuePair<int, int>>(nameScoreDic);
         // Sort
-        lst.Sort(delegate (KeyValuePair<string, int> s1, KeyValuePair<string, int> s2)
+        lst.Sort(delegate (KeyValuePair<int, int> s1, KeyValuePair<int, int> s2)
         {
             return s2.Value.CompareTo(s1.Value);
         });
 
+        gOverUIController.gameResultsDisplay(lst, groupNumbers);
+    }
+
+    // 测试代码
+    private void testShowScoresAndWinnerICone()
+    {
+        int groupNumbers = 4;
+        Dictionary<int, int> nameScoreDic = new Dictionary<int, int>();
+        int winnerId = 0;
+        int winnerScores = 0;
         for (int i = 0; i < groupNumbers; ++i)
         {
-            gOverUIController.playerNameScore[i].name.text = lst[i].Key.ToString();
-            gOverUIController.playerNameScore[i].score.text = lst[i].Value.ToString() + "分";
+            // TODO:替换成真实用户名
+            nameScoreDic.Add(i, Random.Range(80, 1000));
+            if (winnerScores < nameScoreDic[i])
+            {
+                winnerScores = nameScoreDic[i];
+                winnerId = i;
+            }
         }
+        List<KeyValuePair<int, int>> lst = new List<KeyValuePair<int, int>>(nameScoreDic);
+        // Sort
+        lst.Sort(delegate (KeyValuePair<int, int> s1, KeyValuePair<int, int> s2)
+        {
+            return s2.Value.CompareTo(s1.Value);
+        });
 
-        // TODO:展示winner的ICone
-        gOverUIController.winnerImage.color = dataSaveController.groupColor[winnerId];
+        gOverUIController.gameResultsDisplay(lst, groupNumbers);
     }
 
 }
