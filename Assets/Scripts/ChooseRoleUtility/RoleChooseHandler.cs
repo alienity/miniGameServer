@@ -24,6 +24,7 @@ public class RoleChooseHandler : MonoBehaviour
 
     // 控制角色选择的UI控制器
     private RoleChoosingUIController roleChoosingUIController;
+
     // 不会终止的服务器
     private Server server;
 
@@ -38,6 +39,7 @@ public class RoleChooseHandler : MonoBehaviour
             server = Server.Instance;
         if (roleChoosingUIController == null)
             roleChoosingUIController = FindObjectOfType<RoleChoosingUIController>();
+
         if (confirmedPlayers == null)
             confirmedPlayers = new List<int>();
 
@@ -53,7 +55,7 @@ public class RoleChooseHandler : MonoBehaviour
         {
             roleChoosingUIController.ProgressBarPlay(server.connections.Count, toNumberTransfer);
         }
-        if(server.connections.Count == toNumberTransfer)
+        if(!roleChoosingUIController.ChooseRoleCanvas.activeInHierarchy && server.connections.Count == toNumberTransfer)
         {
             roleChoosingUIController.changeCanvas();
             Debug.Log("changeCanvas");
@@ -84,35 +86,41 @@ public class RoleChooseHandler : MonoBehaviour
             {
 
                 int oldRoleId = server.connectionID2role[curConnectionID];
-                int oldGid = oldRoleId / 2,
-                    oldUid = oldRoleId % 2;
+                server.session2role.Remove(server.connection2session[curConnectionID]);
                 server.connectionID2role.Remove(curConnectionID);
                 server.role2connectionID.Remove(oldRoleId);
-                result.hasOld = true;
-                SubstituteRole(selectingGid, selectingUid, oldGid, oldUid);
             }
             else // 如果之前没有选择过角色
             {
-                SendRoleMessageToALl(new RoleStateMsg(selectingGid, selectingUid, false));
                 roleChoosingUIController.SetButtonRoleSelected(selectingGid, selectingUid);
-                result.hasOld = false;
             }
 
             // 给选择的用户发送成功选上的信息
             result.succeed = true;
             result.gid = selectingGid;
             result.uid = selectingUid;
-            result.oldUid = curRequest.oldUid;
-            result.oldGid = curRequest.oldGid;
         }
         // 新的角色和用户对应关系添加入记录中
         server.connectionID2role[curConnectionID] = selectingRoleId;
         server.role2connectionID[selectingRoleId] = curConnectionID;
-        SendChooseMessage(result, curConnectionID);
+        server.session2role[server.connection2session[curConnectionID]] = selectingRoleId;
+        SendRoleMessageToALl(new RoleStateMsg(server.connectionID2role));
+        UpdateRoleChoosingUI();
+    }
 
-        // 测试跳转
-        //if (server.connections.Count == toNumberTransfer)
-        //    StartCoroutine(CountDownToStartGame(countDownTime));
+    private void UpdateRoleChoosingUI()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            roleChoosingUIController.SetButtonRoleAvailable(i / 2, i % 2);
+        }
+
+        foreach (KeyValuePair<int,int> connection2role in server.connectionID2role)
+        {
+            int gid = connection2role.Value / 2;
+            int uid = connection2role.Value % 2;
+            roleChoosingUIController.SetButtonRoleSelected(gid, uid);
+        }
     }
 
     // 对玩家确定的回调
@@ -142,20 +150,8 @@ public class RoleChooseHandler : MonoBehaviour
             --time;
         }
         //server.StopBroadCast();
+        Server.Instance.stage = Stage.GammingStage;
         SceneTransformer.Instance.TransferToNextScene();
-    }
-
-    // 替换原先选择的角色
-    private void SubstituteRole(int selectingGid, int selectingUid, int oldGid, int oldUid)
-    {
-        roleChoosingUIController.SetButtonRoleAvailable(oldGid, oldUid);
-        roleChoosingUIController.SetButtonRoleSelected(selectingGid, selectingUid);
-        // 广播旧角色可用的信息
-        RoleStateMsg oldRoleState = new RoleStateMsg(oldGid, oldUid, true);
-        SendRoleMessageToALl(oldRoleState);
-        // 这个角色被选择后，需要把该角色不可选的消息广播给所有用户
-        RoleStateMsg roleState = new RoleStateMsg(selectingGid, selectingUid, false);
-        SendRoleMessageToALl(roleState);
     }
 
     private void SendRoleMessageToALl(RoleStateMsg roleState)
