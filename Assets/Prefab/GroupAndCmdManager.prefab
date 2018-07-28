@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee99f23c571a33a499e226bf3960599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curStageId: 1
   groupPlayers: []
-  groupPlayerToInstance: {fileID: 114710055422727224, guid: b1e1ace6c69c9574eb4eb843669a6bc4,
+  groupPlayerToInstance: {fileID: 114496643577708858, guid: 9bc265ce87d2512439589790b2b87b3e,
     type: 2}

@@ -70,6 +70,7 @@ public class GroupPlayer : MonoBehaviour
 
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
+        penguPlayer.SetArrowColor(groupColor);
     }
 
     private void Update()

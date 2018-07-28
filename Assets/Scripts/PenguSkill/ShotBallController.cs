@@ -23,7 +23,7 @@ public abstract class ShotBallController : MonoBehaviour {
     public abstract void UseBall(int ownerId, Vector3 position, Quaternion rotation);
 
     // 持续充能
-    public bool HandleChargeAttack(float chargeStartTime, float chargeCurrentTime)
+    public float HandleChargeAttack(float chargeStartTime, float chargeCurrentTime)
     {
         if (!startCharge && this.chargeStartTime != chargeStartTime)
         {
@@ -36,8 +36,7 @@ public abstract class ShotBallController : MonoBehaviour {
             this.chargeCurrentTime = chargeCurrentTime;
         }
 
-        return chargeFinished;
-
+        return Mathf.Lerp(0, 1, (this.chargeCurrentTime - this.chargeStartTime) / maxChargeTime);
     }
 
     // 重置充能
