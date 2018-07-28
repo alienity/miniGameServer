@@ -21,6 +21,10 @@ public class PenguPlayer : MonoBehaviour
     // 发雪球的音效
     public AudioClip throwSnowBall;
 
+    // 动画控制器
+    private Animator animator;
+    private int attackAnimId;
+
     //// 记录开始蓄力
     //private float chargeStartTime = -1;
     //// 记录蓄力到现在，当前时刻
@@ -41,6 +45,9 @@ public class PenguPlayer : MonoBehaviour
         
         mTrans = GetComponent<Transform>();
         snowBallController = Instantiate(snowBallController, mTrans);
+
+        animator = GetComponent<Animator>();
+        attackAnimId = Animator.StringToHash("shot");
     }
 
     // Update is called once per frame
@@ -155,6 +162,7 @@ public class PenguPlayer : MonoBehaviour
         if (curBallController.AvailableNow() == 1)
         {
             selfAudioSource.Play();
+            animator.SetTrigger(attackAnimId);
             curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);
         }
     }
