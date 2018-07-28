@@ -28,7 +28,7 @@ public class PigPlayer : MonoBehaviour
     public float pigNormalSpeed;
 
     // 猪冲撞时能冲撞走球
-    public bool isCrazy = false;
+    public bool IsCrazy { get; set; }
 
     // 猪的动画组件
     Animator anim;

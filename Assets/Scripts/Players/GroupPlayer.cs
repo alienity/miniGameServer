@@ -82,7 +82,7 @@ public class GroupPlayer : MonoBehaviour
             attackerId = -1;
 
         // 当猪冲撞的时候，队伍是无敌的
-        isInvulnerable = pigPlayer.isCrazy;
+        isInvulnerable = pigPlayer.IsCrazy;
     }
 
     // 玩家相互碰撞后记录碰撞体是谁的

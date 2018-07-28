@@ -32,12 +32,14 @@ public class PigRushController : PigSkillController {
         if (pigPastTime < pigRushTime)
         {
             pigRd.AddForce(pigCurDirection * pigRushForce);
-            Debug.Log("冲刺技能更新中");
+            pigPlayer.IsCrazy = true;
+            Debug.Log("冲刺技能更新中，变无敌");
         }
         else
         {
             pigPlayer.RemoveContinueSkills(ContinueUpdate);
-            Debug.Log("冲刺技能结束");
+            pigPlayer.IsCrazy = false;
+            Debug.Log("冲刺技能结束，无敌取消");
         }
     }
 
