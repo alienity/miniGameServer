@@ -123,6 +123,7 @@ public class RoleChooseHandler : MonoBehaviour
         if (confirmedPlayers.Contains(connection)) return;
         confirmedPlayers.Add(connection);
         Debug.Log("玩家确认!!!");
+        roleChoosingUIController.SetButtonRoleLocked(ccm.gid, ccm.uid);
         ConfirmPlayerNums += 1;
         if (ConfirmPlayerNums == toNumberTransfer)
         {
@@ -134,7 +135,7 @@ public class RoleChooseHandler : MonoBehaviour
 
     IEnumerator CountDownToStartGame(int time)
     {
-        while (time >= 0)
+        while (time > 0)
         {
             roleChoosingUIController.CountDownPlay(time);
             yield return new WaitForSeconds(1);

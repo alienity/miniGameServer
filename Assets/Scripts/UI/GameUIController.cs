@@ -85,7 +85,9 @@ public class GameUIController : MonoBehaviour
 
     private string TimeToShow(float time)
     {
-        return time > 1.0f ? time.ToString("F0") : time.ToString("F1");
+        //return time > 1.0f ? time.ToString("F0") : time.ToString("F1");
+        int secends = (int)time;
+        return (secends / 60).ToString() + ":" + (secends % 60).ToString();
     }
 
 }

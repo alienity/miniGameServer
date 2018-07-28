@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -26,6 +25,12 @@ public class RoleChoosingUIController : MonoBehaviour {
     public Button P3Pig;
     public Button P4Pengu;
     public Button P4Pig;
+    public Sprite PenguHeadAltern;
+    public Sprite PenguHeadSelect;
+    public Sprite PenguHeadLock;
+    public Sprite PigHeadAltern;
+    public Sprite PigHeadSelect;
+    public Sprite PigHeadLock;
     private Button[] buttons;
     // 进入GameScene前的倒计时
     public Text CountDown;
@@ -66,9 +71,11 @@ public class RoleChoosingUIController : MonoBehaviour {
         buttons[6] = P4Pengu;
         buttons[7] = P4Pig;
 
-        foreach (Button button in buttons)
+        for(int i = 0; i < 4; ++i )
         {
-            button.image.color = Color.white;
+            //button.image.color = Color.white;D:\github_MiniGame\miniGameServer\Assets\Resource\Textures\ChooseRoleSceneICon
+            buttons[2 * i].GetComponent<Image>().sprite = PenguHeadAltern;
+            buttons[2 * i + 1].GetComponent<Image>().sprite = PigHeadAltern;
         }
 
     }
@@ -78,10 +85,11 @@ public class RoleChoosingUIController : MonoBehaviour {
     {
         Debug.Log(gid+ " " + uid + " available");
 
-        buttons[gid*2 + uid].interactable = true;
+        buttons[gid * 2 + uid].GetComponent<Image>().sprite = (uid == 0) ? PenguHeadAltern : PigHeadAltern;
+        //buttons[gid*2 + uid].interactable = true;
         //buttons[gid * 2 + uid].image.color = DataSaveController.Instance.groupColor[gid];
-        buttons[gid * 2 + uid].image.color = Color.white;
-       
+        //buttons[gid * 2 + uid].image.color = Color.white;
+
     }
 
     // todo 到时候在这里为 button 设置效果
@@ -89,7 +97,14 @@ public class RoleChoosingUIController : MonoBehaviour {
     {
         Debug.Log(gid + " " + uid + " selected");
         //buttons[gid*2 + uid].interactable = false;
-        buttons[gid * 2 + uid].image.color = DataSaveController.Instance.groupColor[gid];
+        //buttons[gid * 2 + uid].image.color = DataSaveController.Instance.groupColor[gid];
+        buttons[gid * 2 + uid].GetComponent<Image>().sprite = (uid == 0) ? PenguHeadSelect : PigHeadSelect;
+    }
+
+    public void SetButtonRoleLocked(int gid, int uid)
+    {
+        Debug.Log(gid + " " + uid + " Locked");
+        buttons[gid * 2 + uid].GetComponent<Image>().sprite = (uid == 0) ? PenguHeadLock : PigHeadLock;
     }
 
     public void CountDownTextSetActive()
