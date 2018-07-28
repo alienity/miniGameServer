@@ -13,4 +13,8 @@ public class CustomMsgType
     public const short GroupState = MsgType.Highest + 7;       // 发送到手机端状态信息
 
     public const short AdvanceControl = MsgType.Highest + 10; // 震动等消息调用
+
+
+    public const short Session = MsgType.Highest + 11; // 断线重连功能
+    public const short Stage = MsgType.Highest + 12; // 通知客户端切换阶段（gamming, chooseRole, prepare etc...）
 }

@@ -29,8 +29,8 @@ public class GameControllHandler : MonoBehaviour
         NetworkServer.RegisterHandler(CustomMsgType.GroupChargeSkill, OnReceiveChargeSkill);
         NetworkServer.RegisterHandler(CustomMsgType.GroupRushSkill, OnReceiveRushSkill);
 
-        SceneTransferMsg sceneTransferMsg = new SceneTransferMsg("ChooseRoleScene", "GameScene");
-        NetworkServer.SendToAll(CustomMsgType.ClientChange, sceneTransferMsg);
+        SceneTransferMsg stageTransferMsg = new SceneTransferMsg("ChooseRoleScene", "GameScene");
+        NetworkServer.SendToAll(CustomMsgType.ClientChange, stageTransferMsg);
     }
 
     public void OnReceiveJoystick(NetworkMessage netmsg)
