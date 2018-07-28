@@ -104,7 +104,7 @@ public class RoleChooseHandler : MonoBehaviour
         server.connectionID2role[curConnectionID] = selectingRoleId;
         server.role2connectionID[selectingRoleId] = curConnectionID;
         server.session2role[server.connection2session[curConnectionID]] = selectingRoleId;
-        SendRoleMessageToALl(new RoleStateMsg(server.connectionID2role));
+        SendRoleMessageToALl(new RoleStateMsg(server.session2role));
         UpdateRoleChoosingUI();
     }
 
