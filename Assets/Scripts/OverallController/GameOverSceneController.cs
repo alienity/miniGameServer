@@ -11,7 +11,7 @@ public class GameOverSceneController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         /**  测试代码
-         
+
         gOverUIController = GameOverUIController.Instance;
         testShowScoresAndWinnerICone();
         */
@@ -20,7 +20,7 @@ public class GameOverSceneController : MonoBehaviour {
         gOverUIController = GameOverUIController.Instance;
         if (dataSaveController != null && gOverUIController != null && gOverUIController.playerNameScore != null)
             ShowScoresAndWinnerICone();
-
+        
     }
 
     private void ShowScoresAndWinnerICone()
