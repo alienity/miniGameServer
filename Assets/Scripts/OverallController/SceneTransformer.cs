@@ -46,12 +46,18 @@ public class SceneTransformer : MonoBehaviour
     }
 
     // 释放没用的资源，手动GC
-    private void FreeResource()
+    private static void FreeResource()
     {
         Resources.UnloadUnusedAssets();
         System.GC.Collect();
         System.GC.WaitForPendingFinalizers();
         System.GC.Collect();
+    }
+
+    public static void TransferScene(string sceneName)
+    {
+        FreeResource();
+        SceneManager.LoadScene(sceneName);
     }
 
 }

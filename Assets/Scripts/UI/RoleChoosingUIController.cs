@@ -35,6 +35,19 @@ public class RoleChoosingUIController : MonoBehaviour {
     // 进入GameScene前的倒计时
     public Text CountDown;
     
+    // 改名字的部分
+    public List<Text> playerNames;
+    private List<string> defaultNames = new List<string>()
+    {
+        "唐吉诃鹅 - P1",
+        "罗齐南猪 - P1",
+        "唐吉诃鹅 - P2",
+        "罗齐南猪 - P2",
+        "唐吉诃鹅 - P3",
+        "罗齐南猪 - P3",
+        "唐吉诃鹅 - P4",
+        "罗齐南猪 - P4",
+    };
     
     private void Start()
     {
@@ -115,5 +128,13 @@ public class RoleChoosingUIController : MonoBehaviour {
     public void CountDownPlay(int time)
     {
         CountDown.text = time.ToString();
+    }
+
+    public void SetRoleNames(Dictionary<int, string> role2Name)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            playerNames[i].text = role2Name.ContainsKey(i) ? role2Name[i] : defaultNames[i];
+        }
     }
 }

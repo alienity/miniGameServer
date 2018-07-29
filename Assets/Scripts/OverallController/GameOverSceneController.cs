@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GameOverSceneController : MonoBehaviour {
 
@@ -21,6 +22,24 @@ public class GameOverSceneController : MonoBehaviour {
         if (dataSaveController != null && gOverUIController != null && gOverUIController.playerNameScore != null)
             ShowScoresAndWinnerICone();
         
+        // 将阶段设为 gameover阶段, todo 发送gameover指令后，客户端会主动断开连接，后续就发送不了信息了，所以手机需要主动计时
+        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.GameOverStage));
+        Server.Instance.stage = Stage.GameOverStage;
+        StartCoroutine(CountDownToPrepareStage(10));
+    }
+    
+    IEnumerator CountDownToPrepareStage(int time)
+    {
+        while (time > 0)
+        {
+            yield return new WaitForSeconds(1);
+            --time;
+        }
+        //server.StopBroadCast();
+        Server.Instance.stage = Stage.Prepare;
+        Server.Instance.ClearData();
+//        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.StartStage));
+        SceneTransformer.TransferScene("ChooseRoleScene");
     }
 
     private void ShowScoresAndWinnerICone()

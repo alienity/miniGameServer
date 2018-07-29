@@ -99,16 +99,7 @@ public class WorldController : MonoBehaviour {
 
         // 加载下一个场景
         //SceneManager.LoadSceneAsync(nextSceneName);
-        /*
-         * 游戏结束，发送消息给客户端游戏结束，并且清空数据
-         */
-        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.GameOverStage));
-        Server.Instance.role2connectionID.Clear();
-        Server.Instance.connectionID2role.Clear();
-        Server.Instance.session2connection.Clear();
-        Server.Instance.connection2session.Clear();
-        Server.Instance.connections.Clear();
-        Server.Instance.kownSessions.Clear();
+        
         SceneTransformer.Instance.TransferToNextScene();
     }
 

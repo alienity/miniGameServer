@@ -3969,10 +3969,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0c4c08d67f7f445bfbd03390fd2b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gId: 1
+  dieEffect: {fileID: 19823922, guid: c3162dfcad030c241919e903dbd4aeab, type: 2}
+  rebornEffect: {fileID: 19832018, guid: 31f1a82435965944bb6d0f5989c42f1e, type: 2}
+  gId: 0
   rebornDelay: 0
   groupTrans: {fileID: 4473423072795734}
-  bornTrans: {fileID: 0}
   attackerId: -1
   countdownTime: 30
   isInvulnerable: 0
@@ -3982,6 +3983,7 @@ MonoBehaviour:
   pigPlayer: {fileID: 114023272929347878}
   penguPlayer: {fileID: 114963088637738928}
   hittedAudio: {fileID: 8300000, guid: 4fdd77fd809d7064487156e43484d810, type: 3}
+  rebornAudio: {fileID: 8300000, guid: 885f0ffe170f946fd980bfa2430daaca, type: 3}
 --- !u!114 &114963088637738928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4000,6 +4002,9 @@ MonoBehaviour:
   curBallController: {fileID: 0}
   throwSnowBall: {fileID: 8300000, guid: 5715524742f313843a1b9986a0b379b2, type: 3}
   arrowRender: {fileID: 212961659130256936}
+  arrowMaxRatio: 3
+  arrowMinRatio: 1
+  birthForward: 0.02
 --- !u!136 &136362130238231080
 CapsuleCollider:
   m_ObjectHideFlags: 1

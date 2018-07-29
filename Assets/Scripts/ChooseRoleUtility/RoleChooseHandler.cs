@@ -1,18 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class RoleChooseHandler : MonoBehaviour
 {
     public static RoleChooseHandler Instance { get; private set; }
-
-
-    
-    // 确认选择的玩家数
-    [HideInInspector]
-    public int ConfirmPlayerNums { get; private set; }
 
     // 等待开始游戏的时间
     public int countDownTime = 5;
@@ -39,9 +34,6 @@ public class RoleChooseHandler : MonoBehaviour
             server = Server.Instance;
         if (roleChoosingUIController == null)
             roleChoosingUIController = FindObjectOfType<RoleChoosingUIController>();
-
-
-        ConfirmPlayerNums = 0;
 
         NetworkServer.RegisterHandler(CustomMsgType.Choose, OnReceiveChoose);
         NetworkServer.RegisterHandler(CustomMsgType.Confirm, OnPlayerCnfirm);
@@ -73,6 +65,8 @@ public class RoleChooseHandler : MonoBehaviour
         int selectingGid = curRequest.gid,
             selectingUid = curRequest.uid,
             selectingRoleId = selectingGid * 2 + selectingUid;
+        string playerName = curRequest.name;
+        server.session2name[server.connection2session[netmsg.conn.connectionId]] = playerName;
         if (!server.role2connectionID.ContainsKey(selectingGid * 2 + selectingUid)) // 只有选择的人物可选，才更改玩家和人物的对应关系
         {
             if (server.connectionID2role.ContainsKey(curConnectionID)) // 如果之前已经选择过角色
@@ -93,7 +87,7 @@ public class RoleChooseHandler : MonoBehaviour
             server.session2role[server.connection2session[curConnectionID]] = selectingRoleId;
         }
         
-        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed));
+        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed, server.session2name));
         UpdateRoleChoosingUI();
     }
 
@@ -116,6 +110,16 @@ public class RoleChooseHandler : MonoBehaviour
             int roleId = server.session2role[sessionId];
             roleChoosingUIController.SetButtonRoleLocked(roleId/2, roleId%2);
         }
+        
+        Dictionary<int, string> role2name = new Dictionary<int, string>();
+        foreach (int sessionid in server.session2name.Keys)
+        {
+            string name = server.session2name[sessionid];
+            int role = server.session2role[sessionid];
+            role2name.Add(role, name);
+        }
+        roleChoosingUIController.SetRoleNames(role2name);
+
     }
 
     // 对玩家确定的回调
@@ -124,20 +128,20 @@ public class RoleChooseHandler : MonoBehaviour
         ConfirmChooseMsg ccm = netmsg.ReadMessage<ConfirmChooseMsg>();
         if (Server.Instance.sessionIsConfirmed.Contains(Server.Instance.connection2session[netmsg.conn.connectionId])) return;
         Server.Instance.sessionIsConfirmed.Add(Server.Instance.connection2session[netmsg.conn.connectionId]);
-        Debug.Log("玩家确认!!!");
+        Debug.Log("玩家确认!!! session2role " + JsonConvert.SerializeObject(Server.Instance.session2role));
+        
         foreach (int session in Server.Instance.sessionIsConfirmed)
         {
             int roleId = Server.Instance.session2role[session];
             roleChoosingUIController.SetButtonRoleLocked(roleId/2, roleId%2);
         }
-        ConfirmPlayerNums += 1;
-        if (ConfirmPlayerNums == toNumberTransfer)
+        if (server.sessionIsConfirmed.Count == toNumberTransfer)
         {
             roleChoosingUIController.CountDownTextSetActive();
             StartCoroutine(CountDownToStartGame(countDownTime));
 			DataSaveController.Instance.playerNumber = Server.Instance.kownSessions.Count;
         }
-        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed));
+        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed, server.session2name));
     }
 
     IEnumerator CountDownToStartGame(int time)

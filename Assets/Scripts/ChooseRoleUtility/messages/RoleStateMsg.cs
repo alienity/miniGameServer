@@ -7,12 +7,14 @@ public class RoleStateMsg : MessageBase
 {
     public string session2role;
     public string session2confirm;
+    public string session2name;
 
-    public RoleStateMsg(Dictionary<int, int> session2role, HashSet<int> session2confirm)
+    public RoleStateMsg(Dictionary<int, int> session2role, HashSet<int> session2confirm, Dictionary<int,string> session2name)
     {
         
         this.session2role = JsonConvert.SerializeObject(session2role);
         this.session2confirm = JsonConvert.SerializeObject(session2confirm);
+        this.session2name =  JsonConvert.SerializeObject(session2name);
     }
 
     public Dictionary<int, int> GetSessionToRole()
@@ -24,6 +26,13 @@ public class RoleStateMsg : MessageBase
     {
         return JsonConvert.DeserializeObject<HashSet<int>>(this.session2confirm);
     }
+    
+    public Dictionary<int, string> GetSessionToName()
+    {
+        return JsonConvert.DeserializeObject<Dictionary<int, string>>(session2name);
+    }
+
+    
     public RoleStateMsg()
     {
     }
