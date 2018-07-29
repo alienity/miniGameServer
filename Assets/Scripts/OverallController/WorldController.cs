@@ -78,7 +78,7 @@ public class WorldController : MonoBehaviour {
             float pigRemainColdingTime = gcManager.groupPlayers[gId].RemainCoolingTime(GroupPlayer.PlayerType.PIG);
             gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PENGU, penguRemainColdingTime);
             gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PIG, pigRemainColdingTime);
-            scoreController.GetScore(gId);
+            gUIController.UpdateScores(gId, scoreController.GetScore(gId));
         }
         gUIController.UpdateRemainTimes(totalGameTime - totalPastGameTime);
     }
@@ -89,8 +89,9 @@ public class WorldController : MonoBehaviour {
         isGameOver = true;
         Time.timeScale = 0;
 
+        // 把分数信息添加到总的数据保存器中
+        DataSaveController.Instance.scores = scoreController.GetAllScores();
 
-        
         gUIController.blackPanel.gameObject.SetActive(true);
         //gcManager.StopAllProcess();
 

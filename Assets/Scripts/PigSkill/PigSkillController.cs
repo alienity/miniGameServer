@@ -11,7 +11,7 @@ public abstract class PigSkillController : MonoBehaviour
     // 猪在发动后剩余的冷却时间
     protected float remainColdingTime;
     // 技能最大冷却时间
-    protected float maxColdingTime;
+    [SerializeField] protected float maxColdingTime;
 
     // 技能持续更新，只有部分技能会用到
     public virtual void ContinueUpdate(Vector3 pigCurDirection)

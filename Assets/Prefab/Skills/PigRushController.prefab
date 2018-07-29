@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11acfd27a9281df48a91912b94047ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxColdingTime: 2
   pigRushForce: 92
-  coldingTime: 8
   pigRushTime: 2
