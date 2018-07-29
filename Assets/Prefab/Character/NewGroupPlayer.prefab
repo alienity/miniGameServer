@@ -3983,6 +3983,7 @@ MonoBehaviour:
   pigPlayer: {fileID: 114023272929347878}
   penguPlayer: {fileID: 114963088637738928}
   hittedAudio: {fileID: 8300000, guid: 4fdd77fd809d7064487156e43484d810, type: 3}
+  rebornAudio: {fileID: 8300000, guid: 885f0ffe170f946fd980bfa2430daaca, type: 3}
 --- !u!114 &114963088637738928
 MonoBehaviour:
   m_ObjectHideFlags: 1
