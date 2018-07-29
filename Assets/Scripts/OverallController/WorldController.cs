@@ -90,7 +90,7 @@ public class WorldController : MonoBehaviour {
     public void GameOver()
     {
         isGameOver = true;
-        Time.timeScale = 0;
+//        Time.timeScale = 0;
 
         // 把分数信息添加到总的数据保存器中
         DataSaveController.Instance.scores = scoreController.GetAllScores();

@@ -22,15 +22,10 @@ public class GameOverSceneController : MonoBehaviour {
         if (dataSaveController != null && gOverUIController != null && gOverUIController.playerNameScore != null)
             ShowScoresAndWinnerICone();
         
-        // 将阶段设为 gameover阶段
+        // 将阶段设为 gameover阶段, todo 发送gameover指令后，客户端会主动断开连接，后续就发送不了信息了，所以手机需要主动计时
         NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.GameOverStage));
         Server.Instance.stage = Stage.GameOverStage;
-//        StartCoroutine(CountDownToPrepareStage(10));
-        // todo 改为CountDownToPrepareStage
-        Server.Instance.stage = Stage.Prepare;
-        Server.Instance.ClearData();
-        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.StartStage));
-        SceneTransformer.TransferScene("ChooseRoleScene");
+        StartCoroutine(CountDownToPrepareStage(10));
     }
     
     IEnumerator CountDownToPrepareStage(int time)
@@ -43,7 +38,7 @@ public class GameOverSceneController : MonoBehaviour {
         //server.StopBroadCast();
         Server.Instance.stage = Stage.Prepare;
         Server.Instance.ClearData();
-        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.StartStage));
+//        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.StartStage));
         SceneTransformer.TransferScene("ChooseRoleScene");
     }
 

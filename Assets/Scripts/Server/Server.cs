@@ -7,7 +7,26 @@ using System.Security.Policy;
 public class Server : MonoBehaviour
 {
 
-    public static Server Instance { get; private set; }
+    public static Server Instance
+    {
+        get
+        {
+            if (instance != null)
+                return instance;
+
+            instance = FindObjectOfType<Server>();
+
+            if (instance != null)
+                return instance;
+
+            GameObject Server = new GameObject("Server");
+            instance = Server.AddComponent<Server>();
+
+            return instance;
+        }
+    }
+
+    protected static Server instance;
 
     // 连接客户端记录
     public HashSet<int> connections = new HashSet<int>();
@@ -41,11 +60,13 @@ public class Server : MonoBehaviour
     
     private void Awake()
     {
-        if (Instance == null)
+        if(Instance != this)
         {
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
+            Destroy(gameObject);
+            return;
         }
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

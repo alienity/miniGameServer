@@ -9,9 +9,6 @@ public class RoleChooseHandler : MonoBehaviour
 {
     public static RoleChooseHandler Instance { get; private set; }
 
-
-    
-
     // 等待开始游戏的时间
     public int countDownTime = 5;
     // 本次要选择的人数
