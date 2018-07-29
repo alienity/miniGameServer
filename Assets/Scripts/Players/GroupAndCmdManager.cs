@@ -144,8 +144,8 @@ public class GroupAndCmdManager : MonoBehaviour {
         {
             GroupPlayer gp = groupPlayers[gId];
             bool isAlive = gp.IsAlive;
-            float penguRemainCoolingTime = gp.CoolingTime((int)GroupPlayer.PlayerType.PENGU);
-            float pigRemainCoolingTime = gp.CoolingTime((int)GroupPlayer.PlayerType.PIG);
+            float penguRemainCoolingTime = gp.RemainCoolingTime(GroupPlayer.PlayerType.PENGU);
+            float pigRemainCoolingTime = gp.RemainCoolingTime(GroupPlayer.PlayerType.PIG);
 
             // 写出企鹅的状态
             PlayerStateMsg penguPsm = new PlayerStateMsg();
