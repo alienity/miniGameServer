@@ -3,7 +3,26 @@ using UnityEngine;
 
 public class DataSaveController : MonoBehaviour {
 
-    public static DataSaveController Instance { get; private set; }
+    public static DataSaveController Instance
+    {
+        get
+        {
+            if (instance != null)
+                return instance;
+
+            instance = FindObjectOfType<DataSaveController>();
+
+            if (instance != null)
+                return instance;
+
+            GameObject dataSaveController = new GameObject("DataSaveController");
+            instance = dataSaveController.AddComponent<DataSaveController>();
+
+            return instance;
+        }
+    }
+
+    protected static DataSaveController instance;
 
     // 记录所有要在不同使用的数据
 
@@ -19,8 +38,12 @@ public class DataSaveController : MonoBehaviour {
 
     private void Awake()
     {
-        if(Instance == null)
-            Instance = this;
+        if(Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
         DontDestroyOnLoad(gameObject);
     }
 

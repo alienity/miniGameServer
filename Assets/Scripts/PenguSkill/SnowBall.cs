@@ -21,16 +21,26 @@ public class SnowBall : ShotBall
     private bool canTouchSelf = false;
     // 多少秒之后取消自己的碰撞
     public float cancelTouchDuring = 0.4f;
+
+    // 特效组件
+    public GameObject impactParticle;
+    public GameObject projectileParticle;
+    public GameObject muzzleParticle;
+    public GameObject[] trailParticles;
+    [HideInInspector]
+    public Vector3 impactNormal; //Used to rotate impactparticle.
+
     // 自有组件
-    private Collider mCollider;
     private Transform mTrans;
 
     private void Start()
     {
-        mCollider = GetComponent<Collider>();
         mTrans = GetComponent<Transform>();
         flyDist = flyTime * flySpeed;
         fliedTime = 0;
+        
+        AddParticles();
+
         StartCoroutine(CountDownTouchSelf(cancelTouchDuring));
     }
     
@@ -45,6 +55,7 @@ public class SnowBall : ShotBall
         }
         else
         {
+            ShowHitParticleEffects(impactNormal);
             DestroySelf();
         }
     }
@@ -68,6 +79,12 @@ public class SnowBall : ShotBall
             }
             gp.EffectSpeedMovement(transform.forward * (suddenSpeed + chargeAttackTime * attackStrength));
             gp.SetAttacker(attackerId); // 设置攻击者Id
+
+            if (isHitted) return;
+            isHitted = true;
+
+            ShowHitParticleEffects(impactNormal);
+
             DestroySelf();
         }
     }
@@ -81,7 +98,55 @@ public class SnowBall : ShotBall
 
     private void DestroySelf()
     {
-        Destroy(gameObject); // 后期优化做修改
+        Destroy(gameObject, 3f); // 后期优化做修改
+    }
+
+    // 启动时添加粒子效果
+    private void AddParticles()
+    {
+        impactNormal = mTrans.forward;
+        projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
+        projectileParticle.transform.parent = transform;
+        projectileParticle.transform.localScale = Vector3.one;
+        if (muzzleParticle)
+        {
+            muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;
+            muzzleParticle.transform.localScale = Vector3.one;
+            Destroy(muzzleParticle, 1.5f); // Lifetime of muzzle effect.
+        }
+    }
+
+    // 碰撞到时，添加粒子特效
+    private void ShowHitParticleEffects(Vector3 impactNormal)
+    {
+
+        impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
+
+        //yield WaitForSeconds (0.05);
+        foreach (GameObject trail in trailParticles)
+        {
+            GameObject curTrail = transform.Find(projectileParticle.name + "/" + trail.name).gameObject;
+            curTrail.transform.parent = null;
+            curTrail.transform.localScale = Vector3.one;
+            Destroy(curTrail, 3f);
+        }
+        Destroy(projectileParticle, 3f);
+        Destroy(impactParticle, 5f);
+        Destroy(gameObject);
+        //projectileParticle.Stop();
+
+        ParticleSystem[] trails = GetComponentsInChildren<ParticleSystem>();
+        //Component at [0] is that of the parent i.e. this object (if there is any)
+        for (int i = 1; i < trails.Length; i++)
+        {
+            ParticleSystem trail = trails[i];
+            if (!trail.gameObject.name.Contains("Trail"))
+                continue;
+
+            trail.transform.SetParent(null);
+            trail.transform.localScale = Vector3.one;
+            Destroy(trail.gameObject, 2);
+        }
     }
 
 }

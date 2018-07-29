@@ -28,7 +28,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1249823669486304
 GameObject:
   m_ObjectHideFlags: 1
@@ -304,13 +304,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackerId: 0
-  chargeAttackTime: 4.0090637
+  chargeAttackTime: 0.33140182
   flySpeed: 20
   flySpeedAdd: 3
   flyTime: 5
-  suddenSpeed: 12
+  suddenSpeed: 30
   attackStrength: 8
   cancelTouchDuring: 0.4
+  impactParticle: {fileID: 153912, guid: 932046b7eaf3b554f8d74c81e2f00558, type: 2}
+  projectileParticle: {fileID: 160792, guid: 7e9a3591984cda1499dc675622a57b0b, type: 2}
+  muzzleParticle: {fileID: 157556, guid: f217d1d708cdaf14e8cfa730ff75126e, type: 2}
+  trailParticles: []
+  impactNormal: {x: 0, y: 0, z: 0}
 --- !u!135 &135828476656166958
 SphereCollider:
   m_ObjectHideFlags: 1

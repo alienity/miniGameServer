@@ -7,14 +7,18 @@ public class ShotBall : MonoBehaviour {
 
     // 本次攻击的发起者
     public int attackerId;
+    // 已经击中了
+    public bool isHitted = false;
     [HideInInspector]
     public float chargeAttackTime = 0;
     
     public void SpawnBall(int ownerId, Vector3 position, Quaternion rotation, float chargeTime)
     {
-        attackerId = ownerId;
+        this.isHitted = false;
+        this.attackerId = ownerId;
         SetChargeAttackTime(chargeTime);
         GameObject cloneBall = Instantiate(gameObject, position, rotation);
+        Debug.Log(cloneBall.GetComponent<ShotBall>().isHitted ? "击中" : "未击中");
         //cloneBall.GetComponent<ShotBall>().SetChargeAttackTime(chargeAttackTime);
     }
 
