@@ -66,17 +66,18 @@ public class GameUIController : MonoBehaviour
     }
 
     // 更新cd数据
-    public void UpdateColdingTime(int gId, int uId, float time)
+    public void UpdateColdingTime(int gId, int uId, float time, float MaxCoolingTime)
     {
         if(uId == (int)GroupPlayer.PlayerType.PENGU)
         {
             //coldingText[gId].penguColdingTime.text = TimeToShow(time);
             // TODO: 这里没写完 缺少一个获取冷却总时间获取，
-            //coldingText[gId].penguColdingImage.fillAmount = (time);
+            coldingText[gId].penguColdingImage.fillAmount = time / MaxCoolingTime;
         }
         else if (uId == (int)GroupPlayer.PlayerType.PIG)
         {
             //coldingText[gId].pigColdingTime.text = TimeToShow(time);
+            coldingText[gId].pigColdingImage.fillAmount = time / MaxCoolingTime;
         }
     }
 

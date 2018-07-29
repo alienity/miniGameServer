@@ -20,7 +20,7 @@ public class GroupPlayer : MonoBehaviour
     private bool isInvincible = false;
 
     // 死亡后重生等待时间
-    [SerializeField] private float rebornDelay = 0;
+    public float rebornDelay = 0;
     //// 重生无敌时间
     //public float rebornRestTime = 3f;
 
@@ -28,11 +28,13 @@ public class GroupPlayer : MonoBehaviour
     private Color groupColor;
     // 队伍Trans
     public Transform groupTrans;
+    // 重生时设置地点
+    public Transform bornTrans;
 
     // 被某个组攻击到，该组的ID
-    [SerializeField] private int attackerId = -1;
+    public int attackerId = -1;
     // 重置攻击者倒计时时长
-    [SerializeField] private float countdownTime = 30;
+    public float countdownTime = 30;
     // 重置计时
     private float countdownPast = 0;
 
@@ -43,15 +45,15 @@ public class GroupPlayer : MonoBehaviour
     // 分数控制器
     private ScoreController scoreController;
     // 本局获得的分数
-    [SerializeField] private int totalScore = 0;
+    public int totalScore = 0;
     // 自杀身亡给所有的平均加分
-    [SerializeField] private int suicideScore = 5;
+    public int suicideScore = 5;
     // 被杀身亡给凶手的加分
-    [SerializeField] private int toKillerScore = 15;
+    public int toKillerScore = 15;
 
     // 组内玩家
-    [SerializeField] private PigPlayer pigPlayer;
-    [SerializeField] private PenguPlayer penguPlayer;
+    public PigPlayer pigPlayer;
+    public PenguPlayer penguPlayer;
 
     // 被撞击音效
     public AudioClip hittedAudio;
@@ -65,8 +67,6 @@ public class GroupPlayer : MonoBehaviour
 
         if(selfAudioSource == null)
             selfAudioSource = GetComponent<AudioSource>();
-        if (scoreController == null)
-            scoreController = FindObjectOfType<ScoreController>();
 
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
@@ -259,13 +259,13 @@ public class GroupPlayer : MonoBehaviour
     }
 
     // 返回冷却时间
-    public float RemainCoolingTime(PlayerType playerType)
+    public float CoolingTime(int playerType)
     {
-        if(playerType == PlayerType.PENGU)
+        if(playerType == (int)PlayerType.PENGU)
         {
             return penguPlayer.RemainingColdingTime();
         }
-        else if (playerType == PlayerType.PIG)
+        else if (playerType == (int)PlayerType.PIG)
         {
             return pigPlayer.RemainingColdingTime();
         }
