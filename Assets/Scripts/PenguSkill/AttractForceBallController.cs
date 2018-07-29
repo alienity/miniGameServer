@@ -8,8 +8,6 @@ public class AttractForceBallController : ShotBallController {
     public int totalBallNums = 5;
     // 剩余的数量
     private int remainBallNums;
-    // Ball的冷却时间
-    public float coldingTime;
 
     // Use this for initialization
     void Start () {
@@ -25,7 +23,7 @@ public class AttractForceBallController : ShotBallController {
         if (RemainNums() == 0)
             Destroy(gameObject);
 
-        if (startCharge && !chargeFinished)
+        if (chargeStarted && !chargeFinished)
         {
             float chargedPastTime = chargeCurrentTime - chargeCurrentTime;
             if (chargedPastTime >= maxChargeTime)
@@ -45,7 +43,7 @@ public class AttractForceBallController : ShotBallController {
         if (0 == AvailableNow()) return;
         ball.SpawnBall(ownerId, position, rotation, 0);
         remainBallNums -= 1;
-        remainColdingTime = coldingTime;
+        remainColdingTime = maxColdingTime;
     }
 
     // 剩余的能用的ball的数量

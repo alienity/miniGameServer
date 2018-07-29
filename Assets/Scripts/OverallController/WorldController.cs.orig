@@ -31,7 +31,8 @@ public class WorldController : MonoBehaviour {
     
     private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+            Instance = this;
     }
     
     private void Start ()
@@ -50,7 +51,7 @@ public class WorldController : MonoBehaviour {
         totalPastGameTime = 0;
     }
     
-    void Update () {
+    private void Update () {
 
         if (isGameOver) return;
 
@@ -73,15 +74,13 @@ public class WorldController : MonoBehaviour {
     {
         for (int gId = 0; gId < groupCounts; ++gId)
         {
-            // 更新CD
-            float penguRemainColdingTime = gcManager.groupPlayers[gId].RemainCoolingTime(GroupPlayer.PlayerType.PENGU);
-            float pigRemainColdingTime = gcManager.groupPlayers[gId].RemainCoolingTime(GroupPlayer.PlayerType.PIG);
-            float penguMaxColdingTime = gcManager.groupPlayers[gId].MaxCoolingTime(GroupPlayer.PlayerType.PENGU);
-            float pigMaxColdingTime = gcManager.groupPlayers[gId].MaxCoolingTime(GroupPlayer.PlayerType.PIG);
-            gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PENGU, penguRemainColdingTime, penguMaxColdingTime);
-            gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PIG, pigRemainColdingTime, pigMaxColdingTime);
-            // 更新分数
-            gUIController.UpdateScores(gId, scoreController.GetScore(gId));
+            float penguRemainColdingTime = gcManager.groupPlayers[gId].penguPlayer.RemainingColdingTime();
+            float penguMaxCoolingTime = gcManager.groupPlayers[gId].MaxCoolingTime(GroupPlayer.PlayerType.PENGU);
+            float pigRemainColdingTime = gcManager.groupPlayers[gId].pigPlayer.RemainingColdingTime();
+            float pigMaxCoolingTime   = gcManager.groupPlayers[gId].MaxCoolingTime(GroupPlayer.PlayerType.PIG);
+            gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PENGU, penguRemainColdingTime, penguMaxCoolingTime);
+            gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PIG, pigRemainColdingTime, pigMaxCoolingTime);
+            scoreController.GetScore(gId);
         }
         gUIController.UpdateRemainTimes(totalGameTime - totalPastGameTime);
     }
@@ -92,15 +91,23 @@ public class WorldController : MonoBehaviour {
         isGameOver = true;
         Time.timeScale = 0;
 
-        // 把分数信息添加到总的数据保存器中
-        DataSaveController.Instance.scores = scoreController.GetAllScores();
 
+        
         gUIController.blackPanel.gameObject.SetActive(true);
         //gcManager.StopAllProcess();
 
         // 加载下一个场景
         //SceneManager.LoadSceneAsync(nextSceneName);
-        
+        /*
+         * 游戏结束，发送消息给客户端游戏结束，并且清空数据
+         */
+        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.GameOverStage));
+        Server.Instance.role2connectionID.Clear();
+        Server.Instance.connectionID2role.Clear();
+        Server.Instance.session2connection.Clear();
+        Server.Instance.connection2session.Clear();
+        Server.Instance.connections.Clear();
+        Server.Instance.kownSessions.Clear();
         SceneTransformer.Instance.TransferToNextScene();
     }
 

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PigFlashController : PigSkillController {
-
-    // 技能冷却时间
-    public float coldingTime;
+    
     // 闪现距离
     public float flashDistance;
     // 技能剩余次数
@@ -33,7 +31,7 @@ public class PigFlashController : PigSkillController {
         groupTrans.position = showPlace;
 
         remainNums -= 1;
-        remainColdingTime = coldingTime;
+        remainColdingTime = maxColdingTime;
     }
 
     public override int RemainNums()

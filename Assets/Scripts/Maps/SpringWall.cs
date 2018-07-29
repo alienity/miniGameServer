@@ -27,7 +27,6 @@ public class SpringWall :BoxEffects
 
             Vector3 newVector3 = -2 * (Vector3.Dot(forward, symmetryAxis)) / (Vector3.Dot(forward, forward)) * forward - symmetryAxis;
             newVector3.y = 0;
-            Debug.Log(newVector3.ToString());
             collider.transform.forward = newVector3; 
         }
     }

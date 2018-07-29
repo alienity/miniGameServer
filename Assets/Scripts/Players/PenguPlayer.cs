@@ -30,6 +30,9 @@ public class PenguPlayer : MonoBehaviour
     // 箭头最短距离
     public float arrowMinRatio = 1f;
 
+    // 雪球出生前向偏移
+    public float birthForward = 0.02f;
+
     // 自身transform
     private Transform mTrans;
 
@@ -63,7 +66,7 @@ public class PenguPlayer : MonoBehaviour
 
 
         // ********************测试代码*******************
-        /**/
+        /*
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -88,7 +91,7 @@ public class PenguPlayer : MonoBehaviour
         {
             PenguPlayerAttack();
         }
-        
+        */
         // ********************测试代码*******************
 
     }
@@ -166,27 +169,32 @@ public class PenguPlayer : MonoBehaviour
     // 根据时间处理蓄力技能
     public void HandleChargeSkill(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
     {
-        // 测试蓄力
-        float chargeRatio = curBallController.HandleChargeAttack(chargeStartTime, chargeCurrentTime);
-        SetArrowLen(chargeRatio);
-        if (chargeReturn)
+        if (!chargeReturn)
         {
-            SetArrowLen(0);
-            PenguPlayerAttack();
+            float ratio = curBallController.HandleChargeAttack(chargeStartTime, chargeCurrentTime);
+            SetArrowLen(ratio);
+        }
+        else
+        {
+            if(curBallController.chargeStarted)
+            {
+                SetArrowLen(0);
+                PenguPlayerAttack();
+            }
         }
     }
 
     // 发射雪球
     public void PenguPlayerAttack()
     {
-        Vector3 ballBirthPlace = mTrans.position;// + mTrans.forward * 0.1f;
-        CheckSkillController();
+        Vector3 ballBirthPlace = mTrans.position + mTrans.forward * birthForward;
         if (curBallController.AvailableNow() == 1)
         {
             selfAudioSource.Play();
             animator.SetTrigger(attackAnimId);
             curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);
         }
+        CheckSkillController();
     }
 
     // 返回技能剩余冷却时间，同步到手机端
@@ -198,6 +206,13 @@ public class PenguPlayer : MonoBehaviour
             return 0;
         else
             return remainColdingTime;
+    }
+
+    // 返回技能的最大冷却时间
+    public float MaxColdingTime()
+    {
+        CheckSkillController();
+        return curBallController.MaxColdingTime();
     }
 
 }

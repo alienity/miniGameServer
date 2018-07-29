@@ -5,6 +5,8 @@ public class SnowBall : ShotBall
 {
     // 移动速度
     public float flySpeed;
+    // 飞行速度加成
+    public float flySpeedAdd;
     // 持续时间
     private float flyDist;
     public float flyTime;
@@ -18,7 +20,7 @@ public class SnowBall : ShotBall
     // 可以碰到自己
     private bool canTouchSelf = false;
     // 多少秒之后取消自己的碰撞
-    public float cancelTouchDuring = 0.8f;
+    public float cancelTouchDuring = 0.4f;
     // 自有组件
     private Collider mCollider;
     private Transform mTrans;
@@ -34,11 +36,12 @@ public class SnowBall : ShotBall
     
     private void FixedUpdate()
     {
-        if (fliedTime < flyTime && ( fliedDist < flyDist ))
+        if ((fliedTime < flyTime) && ( fliedDist < flyDist))
         {
-            mTrans.position += mTrans.forward * flySpeed * Time.deltaTime;
+            float newSpeed = flySpeed + flySpeedAdd * chargeAttackTime;
+            mTrans.position += mTrans.forward * newSpeed * Time.deltaTime;
             fliedTime += Time.deltaTime;
-            fliedDist += Time.deltaTime * (flySpeed + chargeAttackTime);
+            fliedDist += Time.deltaTime * newSpeed;
         }
         else
         {

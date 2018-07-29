@@ -6,8 +6,6 @@ public class PigRushController : PigSkillController {
 
     // 维持猪的加速度给的力
     public float pigRushForce;
-    // 技能冷却时间
-    public float coldingTime;
     // 发动后过去时间
     private float pigPastTime;
     // 技能持续时间
@@ -51,7 +49,7 @@ public class PigRushController : PigSkillController {
             pigRd = pigPlayer.groupRd;
             pigPlayer.AddContinueSkills(ContinueUpdate);
             pigPastTime = 0;
-            remainColdingTime = coldingTime;
+            remainColdingTime = maxColdingTime;
         }
     }
     public override int AvailableNow()

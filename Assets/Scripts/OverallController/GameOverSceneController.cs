@@ -12,7 +12,7 @@ public class GameOverSceneController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         /**  测试代码
-         
+
         gOverUIController = GameOverUIController.Instance;
         testShowScoresAndWinnerICone();
         */
