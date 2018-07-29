@@ -3969,8 +3969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0c4c08d67f7f445bfbd03390fd2b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dieEffect: {fileID: 19882620, guid: 402cfc0892ef54047b74d53d5a560238, type: 2}
-  rebornEffect: {fileID: 19873900, guid: 992c31aa5088a9649851c996f2a08b7e, type: 2}
+  dieEffect: {fileID: 19823922, guid: c3162dfcad030c241919e903dbd4aeab, type: 2}
+  rebornEffect: {fileID: 19832018, guid: 31f1a82435965944bb6d0f5989c42f1e, type: 2}
   gId: 0
   rebornDelay: 0
   groupTrans: {fileID: 4473423072795734}
