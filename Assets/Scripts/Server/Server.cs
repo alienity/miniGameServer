@@ -20,6 +20,8 @@ public class Server : MonoBehaviour
     public Dictionary<int, int> session2role = new Dictionary<int, int>();
     public HashSet<int> sessionIsConfirmed = new HashSet<int>();
     public HashSet<int> kownSessions = new HashSet<int>();
+    
+    public Dictionary<int, string> session2name = new Dictionary<int, string>();
 
     // 服务器配置
     const short ClientNum = 8;     //客户端数量+1个服务器=8
@@ -39,33 +41,43 @@ public class Server : MonoBehaviour
     
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        Instance = this;
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
     }
 
     private void Start()
     {
-        roleChooseHandler = RoleChooseHandler.Instance;
-        // Todo  reconnectHandler需要在所有场景中存在，暂时挂载在server上了
-        reconnectHandler = gameObject.AddComponent<ReConnectHandler>();
+        if (roleChooseHandler == null)
+        {
+            roleChooseHandler = RoleChooseHandler.Instance;
+        }
 
-        SetupServer();
+        if (reconnectHandler == null)
+        {
+            // Todo  reconnectHandler需要在所有场景中存在，暂时挂载在server上了
+            reconnectHandler = gameObject.AddComponent<ReConnectHandler>();
+        }
 
-        BroadCast(portBroadCastUDP, broadcastInterval);
+        if (!NetworkServer.active)
+        {
+            SetupServer();
+            BroadCast(portBroadCastUDP, broadcastInterval);
+        }
     }
     
     public void SetupServer()
     {
-        if (!NetworkServer.active)
-        {
-            Debug.Log("setup server");
-            ServerRegisterHandler();
-            NetworkServer.Listen(portTCP);
+       
+        Debug.Log("setup server");
+        ServerRegisterHandler();
+        NetworkServer.Listen(portTCP);
 
-            if (NetworkServer.active)
-            {
-                Debug.Log("Server setup ok.");
-            }
+        if (NetworkServer.active)
+        {
+            Debug.Log("Server setup ok.");
         }
     }
 	// 服务器端注册事件

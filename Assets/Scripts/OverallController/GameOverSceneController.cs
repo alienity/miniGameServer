@@ -22,6 +22,18 @@ public class GameOverSceneController : MonoBehaviour {
             ShowScoresAndWinnerICone();
 
     }
+    
+    IEnumerator CountDownToPrepareStage(int time)
+    {
+        while (time > 0)
+        {
+            yield return new WaitForSeconds(1);
+            --time;
+        }
+        //server.StopBroadCast();
+        Server.Instance.stage = Stage.Prepare;
+        SceneTransformer.TransferScene("ChooseRoleScene");
+    }
 
     private void ShowScoresAndWinnerICone()
     {

@@ -73,6 +73,8 @@ public class RoleChooseHandler : MonoBehaviour
         int selectingGid = curRequest.gid,
             selectingUid = curRequest.uid,
             selectingRoleId = selectingGid * 2 + selectingUid;
+        string playerName = curRequest.name;
+        server.session2name[server.connection2session[netmsg.conn.connectionId]] = playerName;
         if (!server.role2connectionID.ContainsKey(selectingGid * 2 + selectingUid)) // 只有选择的人物可选，才更改玩家和人物的对应关系
         {
             if (server.connectionID2role.ContainsKey(curConnectionID)) // 如果之前已经选择过角色
@@ -93,7 +95,7 @@ public class RoleChooseHandler : MonoBehaviour
             server.session2role[server.connection2session[curConnectionID]] = selectingRoleId;
         }
         
-        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed));
+        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed, server.session2name));
         UpdateRoleChoosingUI();
     }
 
@@ -116,6 +118,16 @@ public class RoleChooseHandler : MonoBehaviour
             int roleId = server.session2role[sessionId];
             roleChoosingUIController.SetButtonRoleLocked(roleId/2, roleId%2);
         }
+        
+        Dictionary<int, string> role2name = new Dictionary<int, string>();
+        foreach (int sessionid in server.session2name.Keys)
+        {
+            string name = server.session2name[sessionid];
+            int role = server.session2role[sessionid];
+            role2name.Add(role, name);
+        }
+        roleChoosingUIController.SetRoleNames(role2name);
+
     }
 
     // 对玩家确定的回调
@@ -137,7 +149,7 @@ public class RoleChooseHandler : MonoBehaviour
             StartCoroutine(CountDownToStartGame(countDownTime));
 			DataSaveController.Instance.playerNumber = Server.Instance.kownSessions.Count;
         }
-        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed));
+        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed, server.session2name));
     }
 
     IEnumerator CountDownToStartGame(int time)

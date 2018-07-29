@@ -904,6 +904,11 @@ Prefab:
       propertyPath: bornTrans.Array.data[3]
       value: 
       objectReference: {fileID: 427006875}
+    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
+        type: 2}
+      propertyPath: totalGameTime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 862201f92af0b71468e74dcef3ae9855, type: 2}
   m_IsPrefabParent: 0
