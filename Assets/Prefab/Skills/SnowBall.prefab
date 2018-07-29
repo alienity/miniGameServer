@@ -303,13 +303,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fab6409794bdf5488644e21450e6a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackerId: 1
-  chargeAttackTime: 0
+  attackerId: 0
+  chargeAttackTime: 4.0090637
   flySpeed: 20
+  flySpeedAdd: 3
   flyTime: 5
   suddenSpeed: 12
   attackStrength: 8
-  cancelTouchDuring: 0.8
+  cancelTouchDuring: 0.4
 --- !u!135 &135828476656166958
 SphereCollider:
   m_ObjectHideFlags: 1

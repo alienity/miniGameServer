@@ -8,6 +8,9 @@ public abstract class ShotBallController : MonoBehaviour {
     public ShotBall ball;
     // Ball在发动后剩余的冷却时间
     protected float remainColdingTime;
+    // Ball的最大冷却时间
+    [SerializeField]
+    protected float maxColdingTime;
     // 蓄力时长
     public float maxChargeTime = 4;
     // 记录开始蓄力
@@ -15,9 +18,9 @@ public abstract class ShotBallController : MonoBehaviour {
     // 记录蓄力到现在，当前时刻
     protected float chargeCurrentTime = -1;
     // 完成蓄力
-    protected bool chargeFinished = false;
+    public bool chargeFinished { get; protected set; }
     // 开始蓄力
-    protected bool startCharge = false;
+    public bool chargeStarted { get; protected set; }
 
     // 使用一个Ball
     public abstract void UseBall(int ownerId, Vector3 position, Quaternion rotation);
@@ -25,16 +28,34 @@ public abstract class ShotBallController : MonoBehaviour {
     // 持续充能
     public float HandleChargeAttack(float chargeStartTime, float chargeCurrentTime)
     {
-        if (!startCharge && this.chargeStartTime != chargeStartTime)
+        Debug.Log("chargeCurrentTime = " + chargeCurrentTime);
+
+        if (chargeStartTime == -1) return 0;
+
+        if ((remainColdingTime > 0) || (chargeStarted && this.chargeStartTime != chargeStartTime)
+            || (!chargeStarted && chargeCurrentTime == -1))
         {
-            startCharge = true;
+            ResetCharge();
+            return 0;
+        }
+        
+        if (!chargeStarted)
+        {
+            chargeStarted = true;
             this.chargeStartTime = chargeStartTime;
         }
 
-        if (startCharge && !chargeFinished)
+        if (chargeStarted && !chargeFinished)
         {
             this.chargeCurrentTime = chargeCurrentTime;
         }
+
+        if (this.chargeCurrentTime - this.chargeStartTime >= maxChargeTime)
+        {
+            chargeFinished = true;
+        }
+
+        Debug.Log("Internal Time = " + (this.chargeCurrentTime - this.chargeStartTime));
 
         return Mathf.Lerp(0, 1, (this.chargeCurrentTime - this.chargeStartTime) / maxChargeTime);
     }
@@ -45,7 +66,7 @@ public abstract class ShotBallController : MonoBehaviour {
         chargeStartTime = -1;
         chargeCurrentTime = -1;
         chargeFinished = false;
-        startCharge = false;
+        chargeStarted = false;
     }
 
     // 剩余的能用的数量
@@ -66,17 +87,23 @@ public abstract class ShotBallController : MonoBehaviour {
         if (time > maxChargeTime) time = maxChargeTime;
         ball.SetChargeAttackTime(time);
     }
-
-    // 剩余冷却时间
-    public float RemainColdingTime()
-    {
-        return remainColdingTime;
-    }
     
     // 最大蓄力时长
     public float MaxChargeTime()
     {
         return maxChargeTime;
+    }
+
+    // 最长冷却时间
+    public float MaxColdingTime()
+    {
+        return maxColdingTime;
+    }
+
+    // 剩余冷却时间
+    public float RemainColdingTime()
+    {
+        return remainColdingTime;
     }
 
 }

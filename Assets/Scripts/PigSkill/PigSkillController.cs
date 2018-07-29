@@ -8,10 +8,12 @@ public abstract class PigSkillController : MonoBehaviour
     // pig刚体
     protected Rigidbody pigRd;
 
-    // Ball在发动后剩余的冷却时间
+    // 猪在发动后剩余的冷却时间
     protected float remainColdingTime;
+    // 技能最大冷却时间
+    protected float maxColdingTime;
 
-    // 技能持续更新
+    // 技能持续更新，只有部分技能会用到
     public virtual void ContinueUpdate(Vector3 pigCurDirection)
     {
 
@@ -36,6 +38,12 @@ public abstract class PigSkillController : MonoBehaviour
     public float RemainColdingTime()
     {
         return remainColdingTime;
+    }
+
+    // 最大冷却时间
+    public float MaxColdingTime()
+    {
+        return maxColdingTime;
     }
 
 }

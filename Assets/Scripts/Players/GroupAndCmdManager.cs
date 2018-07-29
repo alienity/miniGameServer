@@ -66,9 +66,9 @@ public class GroupAndCmdManager : MonoBehaviour {
     // 生成组对象
     public void AddPlayerGroup(int gId, Transform bornTrans, Color groupColor)
     {
-        GameObject groupPlayerInstance = groupPlayerToInstance.FirstBorn(gId, bornTrans.position, groupColor);
-        GroupPlayer gp = groupPlayerInstance.GetComponent<GroupPlayer>();
-        AddGroupPlayerToList(gp);
+        GroupPlayer groupPlayerInstance = groupPlayerToInstance.FirstBorn(gId, bornTrans.position, groupColor);
+        //GroupPlayer gp = groupPlayerInstance.GetComponent<GroupPlayer>();
+        AddGroupPlayerToList(groupPlayerInstance);
     }
 
     // 添加生成的组对象

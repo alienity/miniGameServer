@@ -5,8 +5,8 @@ using UnityEngine;
 public class SnowBallController : ShotBallController
 {
     
-    // Ball的冷却时间
-    public float snowBallColdingTime;
+    //// Ball的冷却时间
+    //public float snowBallColdingTime;
     // Ball的指向箭头
     public Sprite snowArrow;
     
@@ -17,19 +17,19 @@ public class SnowBallController : ShotBallController
     }
 	
 	void Update () {
-        if(remainColdingTime > 0)
-            remainColdingTime -= Time.deltaTime;
+        // 没有开始蓄力，就是释放结束了
+        if (!chargeStarted)
+        {
+            if (remainColdingTime > 0)
+                remainColdingTime -= Time.deltaTime;
+        }
 
-        if (startCharge && !chargeFinished)
+        if (chargeStarted && !chargeFinished)
         {
             float chargedPastTime = chargeCurrentTime - chargeCurrentTime;
             if (chargedPastTime >= maxChargeTime)
             {
                 chargeFinished = true;
-            }
-            else
-            {
-
             }
         }
 
@@ -39,10 +39,10 @@ public class SnowBallController : ShotBallController
     public override void UseBall(int ownerId, Vector3 position, Quaternion rotation)
     {
         if (0 == AvailableNow()) return;
-        if (!startCharge) return; // 如果没有开始蓄力，而接受到了蓄力结束，就直接忽略掉
+        if (!chargeStarted) return; // 如果没有开始蓄力，而接受到了蓄力结束，就直接忽略掉
         float chargedPastTime = chargeCurrentTime - chargeStartTime;
         ball.SpawnBall(ownerId, position, rotation, chargedPastTime);
-        remainColdingTime = snowBallColdingTime;
+        remainColdingTime = maxColdingTime;
         ResetCharge();
     }
 
@@ -60,5 +60,5 @@ public class SnowBallController : ShotBallController
             return 1;
         return 0;
     }
-    
+
 }

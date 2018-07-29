@@ -97,7 +97,6 @@ public class PigPlayer : MonoBehaviour
                 if (selfAudioSource.clip != runingClip)
                     selfAudioSource.clip = runingClip;
                 selfAudioSource.Play();
-                selfAudioSource.pitch = 1f;
                 selfAudioSource.volume = Mathf.Lerp(0, 0.3f, horizontalVel.magnitude / pigNormalSpeed);
                 selfAudioSource.pitch = Mathf.Lerp(1f, maxAudioRatio + 1f, horizontalVel.magnitude / pigNormalSpeed);
             }
@@ -210,6 +209,7 @@ public class PigPlayer : MonoBehaviour
             if (selfAudioSource.clip != rushClip)
             {
                 selfAudioSource.volume = 1;
+                selfAudioSource.pitch = 1;
                 selfAudioSource.PlayOneShot(rushClip);
             }
             curSkillController.UseSkill(this);
@@ -257,6 +257,14 @@ public class PigPlayer : MonoBehaviour
             return 0;
         else
             return remainColdingTime;
+    }
+
+    // 返回技能的最大冷却时间
+    public float MaxColdingTime()
+    {
+        CheckSkillController();
+
+        return curSkillController.MaxColdingTime();
     }
 
 }

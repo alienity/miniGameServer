@@ -131,11 +131,15 @@ public class GroupPlayer : MonoBehaviour
     }
 
     // 首次出生
-    public GameObject FirstBorn(int gId, Vector3 bornPos, Color groupColor)
+    public GroupPlayer FirstBorn(int gId, Vector3 bornPos, Color groupColor)
     {
         this.gId = gId;
         this.groupColor = groupColor;
-        GameObject group = Instantiate(gameObject, bornPos, Quaternion.identity);
+
+        GroupPlayer group = Instantiate(this, bornPos, Quaternion.identity);
+        group.gId = gId;
+        group.groupColor = groupColor;
+
         return group;
     }
 
@@ -238,7 +242,7 @@ public class GroupPlayer : MonoBehaviour
         penguPlayer.SetArrowDirection(dir.normalized);
     }
 
-    // 企鹅蓄力攻击
+    // 企鹅蓄力攻击,chargeId : -1 表示开始蓄力， 0 表示正在蓄力， 1 表示结束蓄力
     public void PenguChargeAttack(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
     {
         if (!isAlive) return;
@@ -264,6 +268,20 @@ public class GroupPlayer : MonoBehaviour
         else if (playerType == PlayerType.PIG)
         {
             return pigPlayer.RemainingColdingTime();
+        }
+        return 0;
+    }
+
+    // 返回最大冷却时间
+    public float MaxCoolingTime(PlayerType playerType)
+    {
+        if (playerType == PlayerType.PENGU)
+        {
+            return penguPlayer.MaxColdingTime();
+        }
+        else if (playerType == PlayerType.PIG)
+        {
+            return pigPlayer.MaxColdingTime();
         }
         return 0;
     }
