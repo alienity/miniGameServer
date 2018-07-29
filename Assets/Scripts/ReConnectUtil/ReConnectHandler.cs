@@ -84,6 +84,9 @@ public class ReConnectHandler : MonoBehaviour
                         sessionDuringChoosing.uid = roleIdChosen % 2;
                         sessionDuringChoosing.SetSession2Role(Server.Instance.session2role);
                     }
+
+                    sessionDuringChoosing.confirmed = Server.Instance.sessionIsConfirmed.Contains(sessionId);
+                    
                     SendSessionMsg(netmsg.conn.connectionId, sessionDuringChoosing);
                     Debug.Log("send roll back to choosing: " + sessionDuringChoosing);
 

@@ -12,8 +12,10 @@ public class GameUIController : MonoBehaviour
     public struct GroupColdingTime
     {
         public Canvas groupPlayersImage;
-        public Text penguColdingTime;
-        public Text pigColdingTime;
+        //public Text penguColdingTime;
+        //public Text pigColdingTime;
+        public Image penguColdingImage;
+        public Image pigColdingImage;
         public Text groupScores;
     }
 
@@ -68,11 +70,13 @@ public class GameUIController : MonoBehaviour
     {
         if(uId == (int)GroupPlayer.PlayerType.PENGU)
         {
-            coldingText[gId].penguColdingTime.text = TimeToShow(time);
+            //coldingText[gId].penguColdingTime.text = TimeToShow(time);
+            // TODO: 这里没写完 缺少一个获取冷却总时间获取，
+            //coldingText[gId].penguColdingImage.fillAmount = (time);
         }
         else if (uId == (int)GroupPlayer.PlayerType.PIG)
         {
-            coldingText[gId].pigColdingTime.text = TimeToShow(time);
+            //coldingText[gId].pigColdingTime.text = TimeToShow(time);
         }
     }
 
@@ -87,8 +91,8 @@ public class GameUIController : MonoBehaviour
     {
         //return time > 1.0f ? time.ToString("F0") : time.ToString("F1");
         int secends = (int)time;
-        //return (secends / 60).ToString() + ":" + (secends % 60).ToString();
-        return secends.ToString();
+        return (secends / 60).ToString() + ":" + (secends % 60).ToString();
+        //return secends.ToString();
     }
 
 }
