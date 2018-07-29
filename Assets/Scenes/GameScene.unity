@@ -288,7 +288,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eef9e61d831264216b54d1c573b877f0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -598,7 +598,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 465369400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 9, z: 0}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 727546856}
@@ -1052,6 +1052,10 @@ Prefab:
     - target: {fileID: 4473423072795734, guid: 9bc265ce87d2512439589790b2b87b3e, type: 2}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832277825541354, guid: 9bc265ce87d2512439589790b2b87b3e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9bc265ce87d2512439589790b2b87b3e, type: 2}
@@ -1715,12 +1719,12 @@ Prefab:
     - target: {fileID: 224192722149022778, guid: 327e73f5093ccfa4bb6d427299a191da,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 8
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: 224192722149022778, guid: 327e73f5093ccfa4bb6d427299a191da,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -120
+      value: -88.3
       objectReference: {fileID: 0}
     - target: {fileID: 224348029354221772, guid: 327e73f5093ccfa4bb6d427299a191da,
         type: 2}
@@ -1731,6 +1735,11 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 15.999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 224192722149022778, guid: 327e73f5093ccfa4bb6d427299a191da,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 135
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 327e73f5093ccfa4bb6d427299a191da, type: 2}
@@ -1784,11 +1793,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 996174540}
     m_Modifications:
-    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
-        type: 2}
-      propertyPath: bornTrans.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4797910107688204, guid: 862201f92af0b71468e74dcef3ae9855, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1823,11 +1827,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
         type: 2}
-      propertyPath: gUIController
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
-        type: 2}
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 263169483}
@@ -1856,11 +1855,6 @@ Prefab:
       propertyPath: bornTrans.Array.data[3]
       value: 
       objectReference: {fileID: 427006875}
-    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
-        type: 2}
-      propertyPath: totalGameTime
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 862201f92af0b71468e74dcef3ae9855, type: 2}
   m_IsPrefabParent: 0
@@ -2182,6 +2176,10 @@ Prefab:
     - target: {fileID: 4197125448290924, guid: 1cf2a115b066e8e4a9e18ae30d66f3e3, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979926799372360, guid: 1cf2a115b066e8e4a9e18ae30d66f3e3, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1cf2a115b066e8e4a9e18ae30d66f3e3, type: 2}

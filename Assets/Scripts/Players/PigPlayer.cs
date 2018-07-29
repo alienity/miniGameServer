@@ -66,6 +66,8 @@ public class PigPlayer : MonoBehaviour
         selfAudioSource.clip = runingClip;
         
         pigRushController = Instantiate(pigRushController, mTrans);
+        pigRushController.transform.position = mTrans.position;
+        pigRushController.transform.rotation = mTrans.rotation;
     }
 
     private void Update()

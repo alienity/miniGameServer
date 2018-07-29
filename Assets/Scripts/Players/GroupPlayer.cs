@@ -188,23 +188,20 @@ public class GroupPlayer : MonoBehaviour
             yield return new WaitForSeconds(rebornDelay);
 
             pigPlayer.Reset();
+            
+            groupTrans.position = reBirthTrans.position;
 
-            Vector3 v = reBirthTrans.position;
-            groupTrans.position = new Vector3(v.x,v.y+18,v.z);
-            //
             selfAudioSource.clip = rebornAudio;
             selfAudioSource.Play();
             Debug.Log("Play");
-            //
             
-            
+
             curEffect = Instantiate(rebornEffect) as ParticleSystem;
             Vector3 temVector3 = gameObject.transform.position;
             curEffect.transform.position = temVector3;
             //new Vector3(temVector3.x,temVector3.y-149,temVector3.z);
             Debug.Log("wwq ok");
             curEffect.transform.parent = gameObject.transform;
-            curEffect.transform.localScale = new Vector3(5f, 5f, 300);
             
             Destroy(curEffect.gameObject, 2f); 
             //yield return new WaitForSeconds(rebornRestTime);

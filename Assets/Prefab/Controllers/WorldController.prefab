@@ -54,6 +54,10 @@ MonoBehaviour:
   gUIController: {fileID: 0}
   scoreController: {fileID: 0}
   gcManager: {fileID: 0}
-  bornTrans: []
+  bornTrans:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   groupCounts: 0
-  totalGameTime: 180
+  totalGameTime: 300

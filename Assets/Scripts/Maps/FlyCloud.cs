@@ -13,15 +13,15 @@ public class FlyCloud : MonoBehaviour
 		public float radius;
 	}
 
-	public GameObject skyCloud;  //云纹理
-	public Transform center;     //天空的中心
-	public float minRadius;      //最小距离中心点
-	public float maxRadius;      //最大距离中心点
-	public int cloudNum;         //云朵的数目
-	public float minSpeed;       //最小旋转速度
-	public float maxSpeed;       //最大旋转速度
+    [SerializeField] private GameObject skyCloud;  //云纹理
+    [SerializeField] private Transform center;     //天空的中心
+    [SerializeField] private float minRadius;      //最小距离中心点
+    [SerializeField] private float maxRadius;      //最大距离中心点
+    [SerializeField] private int cloudNum;         //云朵的数目
+    [SerializeField] private float minSpeed;       //最小旋转速度
+    [SerializeField] private float maxSpeed;       //最大旋转速度
 
-	List<Cloud> clouds;
+    [SerializeField] private List<Cloud> clouds;
 
 	void Start ()
 	{

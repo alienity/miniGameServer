@@ -28,7 +28,7 @@ public abstract class ShotBallController : MonoBehaviour {
     // 持续充能
     public float HandleChargeAttack(float chargeStartTime, float chargeCurrentTime)
     {
-        Debug.Log("chargeCurrentTime = " + chargeCurrentTime);
+        //Debug.Log("chargeCurrentTime = " + chargeCurrentTime);
 
         if (chargeStartTime == -1) return 0;
 
