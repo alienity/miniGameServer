@@ -31,7 +31,8 @@ public class WorldController : MonoBehaviour {
     
     private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+            Instance = this;
     }
     
     private void Start ()
@@ -50,7 +51,7 @@ public class WorldController : MonoBehaviour {
         totalPastGameTime = 0;
     }
     
-    void Update () {
+    private void Update () {
 
         if (isGameOver) return;
 
@@ -73,8 +74,8 @@ public class WorldController : MonoBehaviour {
     {
         for (int gId = 0; gId < groupCounts; ++gId)
         {
-            float penguRemainColdingTime = gcManager.groupPlayers[gId].penguPlayer.RemainingColdingTime();
-            float pigRemainColdingTime = gcManager.groupPlayers[gId].pigPlayer.RemainingColdingTime();
+            float penguRemainColdingTime = gcManager.groupPlayers[gId].RemainCoolingTime(GroupPlayer.PlayerType.PENGU);
+            float pigRemainColdingTime = gcManager.groupPlayers[gId].RemainCoolingTime(GroupPlayer.PlayerType.PIG);
             gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PENGU, penguRemainColdingTime);
             gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PIG, pigRemainColdingTime);
             scoreController.GetScore(gId);
@@ -88,6 +89,8 @@ public class WorldController : MonoBehaviour {
         isGameOver = true;
         Time.timeScale = 0;
 
+
+        
         gUIController.blackPanel.gameObject.SetActive(true);
         //gcManager.StopAllProcess();
 
