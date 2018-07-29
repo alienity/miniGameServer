@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
 public class GroupPlayer : MonoBehaviour
 {
@@ -134,8 +135,9 @@ public class GroupPlayer : MonoBehaviour
         Debug.Log("oh! shut pig die");
         Destroy(curEffect.gameObject, 1);
         pigPlayer.Reset();
-
-
+        
+        SendViberateToGroup();
+        
         Debug.Assert(scoreController != null);
 
         if (attackerId != -1)
@@ -143,6 +145,7 @@ public class GroupPlayer : MonoBehaviour
         else
             scoreController.IncreaseScoreForAll(suicideScore);
     }
+
 
     // 首次出生
     public GroupPlayer FirstBorn(int gId, Vector3 bornPos, Color groupColor)
@@ -246,6 +249,7 @@ public class GroupPlayer : MonoBehaviour
             selfAudioSource.clip = hittedAudio;
         selfAudioSource.Play();
         pigPlayer.ReceiveSuddenSpeed(addedSpeed);
+        SendViberateToGroup();
     }
 
     // 受力是一个持续的过程，必须外面的方法持续调用该方法
@@ -327,5 +331,21 @@ public class GroupPlayer : MonoBehaviour
     {
         totalScore += scoreToAdd;
     }
+    
+    
+    // 向猪和企鹅发送震动信息
+    private void SendViberateToGroup()
+    {
+        int roleId = gId * 2;
+        for (int i = 0; i < 2; i++)
+        {
+            if (Server.Instance.role2connectionID.ContainsKey(roleId + i))
+            {
+                NetworkServer.SendToClient(Server.Instance.role2connectionID[roleId + i], CustomMsgType.AdvanceControl,
+                    new AdvanceControlMsg(AdvanceControlType.Viberate));
+            }
+        }
+    }
+
 
 }

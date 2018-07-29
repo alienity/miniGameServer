@@ -6,6 +6,10 @@ public enum AdvanceControlType
 }
 public class AdvanceControlMsg: MessageBase
 {
-    public AdvanceControlType type; 
-    
+    public AdvanceControlType type;
+
+    public AdvanceControlMsg(AdvanceControlType type)
+    {
+        this.type = type;
+    }
 }
