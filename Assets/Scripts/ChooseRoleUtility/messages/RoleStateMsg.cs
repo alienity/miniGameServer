@@ -5,17 +5,24 @@ using UnityEngine.Networking;
 // 服务器告知客户端对应的角色是否可用
 public class RoleStateMsg : MessageBase
 {
-    public string connection2role;
+    public string session2role;
+    public string session2confirm;
 
-    public RoleStateMsg(Dictionary<int, int> connection2Role)
+    public RoleStateMsg(Dictionary<int, int> session2role, HashSet<int> session2confirm)
     {
         
-        connection2role = JsonConvert.SerializeObject(connection2Role);
+        this.session2role = JsonConvert.SerializeObject(session2role);
+        this.session2confirm = JsonConvert.SerializeObject(session2confirm);
     }
 
-    public Dictionary<int, int> GetConnection2Role()
+    public Dictionary<int, int> GetSessionToRole()
     {
-        return JsonConvert.DeserializeObject<Dictionary<int, int>>(connection2role);
+        return JsonConvert.DeserializeObject<Dictionary<int, int>>(session2role);
+    }
+
+    public HashSet<int> GetSesssion2Confirm()
+    {
+        return JsonConvert.DeserializeObject<HashSet<int>>(this.session2confirm);
     }
     public RoleStateMsg()
     {
@@ -23,6 +30,6 @@ public class RoleStateMsg : MessageBase
 
     public override string ToString()
     {
-        return string.Format("Connection2Role: {0}", connection2role);
+        return string.Format("Session2Role: {0}, Session2Confirm: {1}", session2role, session2confirm);
     }
 }
