@@ -3,7 +3,13 @@ guid: 0a0c4c08d67f7f445bfbd03390fd2b55
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dieEffect: {fileID: 19838648, guid: 225085907981d1a4f9901b6ced5b2657, type: 2}
+  - rebornEffect: {fileID: 19873900, guid: 992c31aa5088a9649851c996f2a08b7e, type: 2}
+  - groupTrans: {instanceID: 0}
+  - pigPlayer: {instanceID: 0}
+  - penguPlayer: {instanceID: 0}
+  - hittedAudio: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

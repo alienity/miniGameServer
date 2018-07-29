@@ -6,6 +6,12 @@ public class GroupPlayer : MonoBehaviour
     // wwq 音源
     private AudioSource selfAudioSource;
 
+    //wwq effect
+    public ParticleSystem dieEffect;
+    public ParticleSystem rebornEffect;
+    private ParticleSystem curEffect;
+
+
     public enum PlayerType
     {
         PENGU,  // 企鹅玩家
@@ -120,7 +126,15 @@ public class GroupPlayer : MonoBehaviour
     public void Die()
     {
         isAlive = false;
+
+        //wwq
+        curEffect = Instantiate(dieEffect) as  ParticleSystem;
+        curEffect.transform.localScale = new Vector3(12, 12, 12);
+        curEffect.transform.position = gameObject.transform.position;
+        Debug.Log("oh! shut pig die");
+        Destroy(curEffect.gameObject, 1);
         pigPlayer.Reset();
+
 
         Debug.Assert(scoreController != null);
 
@@ -173,7 +187,17 @@ public class GroupPlayer : MonoBehaviour
             pigPlayer.Reset();
 
             groupTrans.position = reBirthTrans.position;
-            
+
+            //
+            curEffect = Instantiate(rebornEffect) as ParticleSystem;
+            Vector3 temVector3 = gameObject.transform.position;
+            curEffect.transform.position = temVector3;
+            //new Vector3(temVector3.x,temVector3.y-149,temVector3.z);
+            Debug.Log("wwq ok");
+            curEffect.transform.parent = gameObject.transform;
+            curEffect.transform.localScale = new Vector3(5f, 5f, 300);
+          
+            Destroy(curEffect.gameObject, 2f); 
             //yield return new WaitForSeconds(rebornRestTime);
             isAlive = true;
             //isInvincible = false;
