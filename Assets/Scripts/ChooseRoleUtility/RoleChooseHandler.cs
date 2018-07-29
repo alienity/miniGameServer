@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -10,9 +11,6 @@ public class RoleChooseHandler : MonoBehaviour
 
 
     
-    // 确认选择的玩家数
-    [HideInInspector]
-    public int ConfirmPlayerNums { get; private set; }
 
     // 等待开始游戏的时间
     public int countDownTime = 5;
@@ -39,9 +37,6 @@ public class RoleChooseHandler : MonoBehaviour
             server = Server.Instance;
         if (roleChoosingUIController == null)
             roleChoosingUIController = FindObjectOfType<RoleChoosingUIController>();
-
-
-        ConfirmPlayerNums = 0;
 
         NetworkServer.RegisterHandler(CustomMsgType.Choose, OnReceiveChoose);
         NetworkServer.RegisterHandler(CustomMsgType.Confirm, OnPlayerCnfirm);
@@ -136,14 +131,14 @@ public class RoleChooseHandler : MonoBehaviour
         ConfirmChooseMsg ccm = netmsg.ReadMessage<ConfirmChooseMsg>();
         if (Server.Instance.sessionIsConfirmed.Contains(Server.Instance.connection2session[netmsg.conn.connectionId])) return;
         Server.Instance.sessionIsConfirmed.Add(Server.Instance.connection2session[netmsg.conn.connectionId]);
-        Debug.Log("玩家确认!!!");
+        Debug.Log("玩家确认!!! session2role " + JsonConvert.SerializeObject(Server.Instance.session2role));
+        
         foreach (int session in Server.Instance.sessionIsConfirmed)
         {
             int roleId = Server.Instance.session2role[session];
             roleChoosingUIController.SetButtonRoleLocked(roleId/2, roleId%2);
         }
-        ConfirmPlayerNums += 1;
-        if (ConfirmPlayerNums == toNumberTransfer)
+        if (server.sessionIsConfirmed.Count == toNumberTransfer)
         {
             roleChoosingUIController.CountDownTextSetActive();
             StartCoroutine(CountDownToStartGame(countDownTime));

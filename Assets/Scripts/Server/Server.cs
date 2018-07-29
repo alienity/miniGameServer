@@ -131,5 +131,19 @@ public class Server : MonoBehaviour
     }
 
 
+    public void ClearData()
+    {
+        role2connectionID.Clear();
+        connectionID2role.Clear();
+        session2connection.Clear();
+        session2role.Clear();
+        connection2session.Clear();
+        connections.Clear();
+        kownSessions.Clear();
+        sessionIsConfirmed.Clear();
+        session2name.Clear();
+    }
+
+
 }
 

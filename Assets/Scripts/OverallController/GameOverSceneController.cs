@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GameOverSceneController : MonoBehaviour {
 
@@ -20,7 +21,16 @@ public class GameOverSceneController : MonoBehaviour {
         gOverUIController = GameOverUIController.Instance;
         if (dataSaveController != null && gOverUIController != null && gOverUIController.playerNameScore != null)
             ShowScoresAndWinnerICone();
-
+        
+        // 将阶段设为 gameover阶段
+        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.GameOverStage));
+        Server.Instance.stage = Stage.GameOverStage;
+//        StartCoroutine(CountDownToPrepareStage(10));
+        // todo 改为CountDownToPrepareStage
+        Server.Instance.stage = Stage.Prepare;
+        Server.Instance.ClearData();
+        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.StartStage));
+        SceneTransformer.TransferScene("ChooseRoleScene");
     }
     
     IEnumerator CountDownToPrepareStage(int time)
@@ -32,6 +42,8 @@ public class GameOverSceneController : MonoBehaviour {
         }
         //server.StopBroadCast();
         Server.Instance.stage = Stage.Prepare;
+        Server.Instance.ClearData();
+        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.StartStage));
         SceneTransformer.TransferScene("ChooseRoleScene");
     }
 

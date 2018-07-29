@@ -764,7 +764,7 @@ Prefab:
     - target: {fileID: 114422754632500682, guid: 9b62672c8495c714b988cc7c01533b6e,
         type: 2}
       propertyPath: toNumberTransfer
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114892009298087592, guid: 9b62672c8495c714b988cc7c01533b6e,
         type: 2}
