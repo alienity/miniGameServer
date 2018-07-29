@@ -18,6 +18,7 @@ public class Server : MonoBehaviour
     public Dictionary<int, int> session2connection = new Dictionary<int, int>();
     public Dictionary<int, int> connection2session = new Dictionary<int, int>();
     public Dictionary<int, int> session2role = new Dictionary<int, int>();
+    public HashSet<int> sessionIsConfirmed = new HashSet<int>();
     public HashSet<int> kownSessions = new HashSet<int>();
 
     // 服务器配置

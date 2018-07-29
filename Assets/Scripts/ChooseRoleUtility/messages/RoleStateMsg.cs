@@ -6,16 +6,23 @@ using UnityEngine.Networking;
 public class RoleStateMsg : MessageBase
 {
     public string session2role;
+    public string session2confirm;
 
-    public RoleStateMsg(Dictionary<int, int> session2role)
+    public RoleStateMsg(Dictionary<int, int> session2role, HashSet<int> session2confirm)
     {
         
         this.session2role = JsonConvert.SerializeObject(session2role);
+        this.session2confirm = JsonConvert.SerializeObject(session2confirm);
     }
 
     public Dictionary<int, int> GetSessionToRole()
     {
         return JsonConvert.DeserializeObject<Dictionary<int, int>>(session2role);
+    }
+
+    public HashSet<int> GetSesssion2Confirm()
+    {
+        return JsonConvert.DeserializeObject<HashSet<int>>(this.session2confirm);
     }
     public RoleStateMsg()
     {
@@ -23,6 +30,6 @@ public class RoleStateMsg : MessageBase
 
     public override string ToString()
     {
-        return string.Format("Connection2Role: {0}", session2role);
+        return string.Format("Session2Role: {0}, Session2Confirm: {1}", session2role, session2confirm);
     }
 }
