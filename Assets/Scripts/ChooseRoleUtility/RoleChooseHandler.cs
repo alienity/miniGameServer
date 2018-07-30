@@ -86,8 +86,10 @@ public class RoleChooseHandler : MonoBehaviour
             server.role2connectionID[selectingRoleId] = curConnectionID;
             server.session2role[server.connection2session[curConnectionID]] = selectingRoleId;
         }
-        
-        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed, server.session2name));
+
+        var roleStatesMsg = new RoleStateMsg(server.session2role, server.sessionIsConfirmed, server.session2name);
+        SendRoleMessageToALl(roleStatesMsg);
+        Debug.Log("send " + roleStatesMsg);
         UpdateRoleChoosingUI();
     }
 
@@ -125,11 +127,18 @@ public class RoleChooseHandler : MonoBehaviour
     // 对玩家确定的回调
     public void OnPlayerCnfirm(NetworkMessage netmsg)
     {
+        /*
+         * 更新sessionIsConfirmed变量
+         */
         ConfirmChooseMsg ccm = netmsg.ReadMessage<ConfirmChooseMsg>();
-        if (Server.Instance.sessionIsConfirmed.Contains(Server.Instance.connection2session[netmsg.conn.connectionId])) return;
-        Server.Instance.sessionIsConfirmed.Add(Server.Instance.connection2session[netmsg.conn.connectionId]);
+        int playerSessionId = Server.Instance.connection2session[netmsg.conn.connectionId];
+        if (Server.Instance.sessionIsConfirmed.Contains(playerSessionId)) return;
+        Server.Instance.sessionIsConfirmed.Add(playerSessionId);
         Debug.Log("玩家确认!!! session2role " + JsonConvert.SerializeObject(Server.Instance.session2role));
         
+        /*
+         * 2. 设置button样式
+         */
         foreach (int session in Server.Instance.sessionIsConfirmed)
         {
             int roleId = Server.Instance.session2role[session];

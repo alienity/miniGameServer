@@ -39,6 +39,6 @@ public class RoleStateMsg : MessageBase
 
     public override string ToString()
     {
-        return string.Format("Session2Role: {0}, Session2Confirm: {1}", session2role, session2confirm);
+        return string.Format("Session2Role: {0}, Session2Confirm: {1}, Session2Name: {2}", session2role, session2confirm, session2name);
     }
 }
