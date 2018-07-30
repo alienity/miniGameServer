@@ -9,14 +9,19 @@ public class GroupPlayer : MonoBehaviour
 
     //wwq effect
     public ParticleSystem dieEffect;
-    public ParticleSystem rebornEffect;
-    private ParticleSystem curEffect;
+    // 死亡爆炸幅度
+    public float exploseStrenth = 12f;
+    //public ParticleSystem rebornEffect;
+    //private ParticleSystem curEffect;
+    // 重生光环
+    public GameObject rebornCircleEffect;
+    private GameObject rebornCircleEffectInstance;
 
 
     public enum PlayerType
     {
         PENGU,  // 企鹅玩家
-        PIG     // 猪玩家    
+        PIG     // 猪玩家
     }
 
     // 组ID
@@ -65,6 +70,8 @@ public class GroupPlayer : MonoBehaviour
     public AudioClip rebornAudio;
     public bool IsAlive { get { return isAlive; } }
     public bool IsInvincible { get { return isInvincible; } }
+
+    // 
 
     private void Start()
     {
@@ -128,12 +135,14 @@ public class GroupPlayer : MonoBehaviour
     {
         isAlive = false;
 
-        //wwq
-        curEffect = Instantiate(dieEffect) as  ParticleSystem;
-        curEffect.transform.localScale = new Vector3(12, 12, 12);
-        curEffect.transform.position = gameObject.transform.position;
-        Debug.Log("oh! shut pig die");
-        Destroy(curEffect.gameObject, 1);
+        ////wwq
+        //curEffect = Instantiate(dieEffect) as  ParticleSystem;
+        //curEffect.transform.localScale = Vector3.one * exploseStrenth;
+        //curEffect.transform.position = gameObject.transform.position;
+        //Debug.Log("oh! shut pig die");
+        //Destroy(curEffect.gameObject, 1);
+
+
         pigPlayer.Reset();
         
         SendViberateToGroup();
@@ -194,16 +203,22 @@ public class GroupPlayer : MonoBehaviour
             selfAudioSource.clip = rebornAudio;
             selfAudioSource.Play();
             Debug.Log("Play");
-            
 
-            curEffect = Instantiate(rebornEffect) as ParticleSystem;
-            Vector3 temVector3 = gameObject.transform.position;
-            curEffect.transform.position = temVector3;
-            //new Vector3(temVector3.x,temVector3.y-149,temVector3.z);
-            Debug.Log("wwq ok");
-            curEffect.transform.parent = gameObject.transform;
-            
-            Destroy(curEffect.gameObject, 2f); 
+
+            StartCoroutine(LightCircleDown());
+
+
+            //curEffect = Instantiate(rebornEffect) as ParticleSystem;
+            //Vector3 temVector3 = gameObject.transform.position;
+            //curEffect.transform.position = temVector3;
+            ////new Vector3(temVector3.x,temVector3.y-149,temVector3.z);
+            //Debug.Log("wwq ok");
+            //curEffect.transform.parent = gameObject.transform;
+
+            //Destroy(curEffect.gameObject, 2f); 
+
+
+
             //yield return new WaitForSeconds(rebornRestTime);
             isAlive = true;
             //isInvincible = false;
@@ -214,6 +229,36 @@ public class GroupPlayer : MonoBehaviour
         }
     }
     
+
+
+    IEnumerator LightCircleDown()
+    {
+        if (rebornCircleEffectInstance == null)
+            rebornCircleEffectInstance = Instantiate(rebornCircleEffect);
+        
+        rebornCircleEffectInstance.SetActive(true);
+
+        float planeHight = 6f;
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down);
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.tag == "Plane")
+            {
+                planeHight = hit.point.y;
+                break;
+            }
+        }
+        
+        while (transform.position.y > planeHight + 1)
+        {
+            Vector3 curPos = transform.position;
+            rebornCircleEffectInstance.transform.position = new Vector3(curPos.x, planeHight, curPos.z);
+            yield return new WaitForEndOfFrame();
+        }
+
+        rebornCircleEffectInstance.SetActive(false);
+    }
+
     // 捡去物品并分配到各个角色，捡取成功返回true
     public bool CatchItem(SkillItem skillItem)
     {

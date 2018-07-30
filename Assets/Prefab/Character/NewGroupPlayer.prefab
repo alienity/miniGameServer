@@ -3970,7 +3970,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 19823922, guid: c3162dfcad030c241919e903dbd4aeab, type: 2}
-  rebornEffect: {fileID: 19832018, guid: 31f1a82435965944bb6d0f5989c42f1e, type: 2}
+  exploseStrenth: 12
+  rebornCircleEffect: {fileID: 1324001765682460, guid: f0944807e4e5b5e4181061d9034edc32,
+    type: 2}
   gId: 0
   rebornDelay: 0
   groupTrans: {fileID: 4473423072795734}

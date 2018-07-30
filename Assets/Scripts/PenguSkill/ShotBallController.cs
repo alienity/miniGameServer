@@ -17,6 +17,8 @@ public abstract class ShotBallController : MonoBehaviour {
     protected float chargeStartTime = -1;
     // 记录蓄力到现在，当前时刻
     protected float chargeCurrentTime = -1;
+    // 记录蓄力时间偏差
+    protected float chargeBiasTime = -1;
     // 完成蓄力
     public bool chargeFinished { get; protected set; }
     // 开始蓄力
@@ -30,10 +32,10 @@ public abstract class ShotBallController : MonoBehaviour {
     {
         //Debug.Log("chargeCurrentTime = " + chargeCurrentTime);
 
-        if (chargeStartTime == -1) return 0;
+        if (chargeStartTime == 0) return 0;
 
         if ((remainColdingTime > 0) || (chargeStarted && this.chargeStartTime != chargeStartTime)
-            || (!chargeStarted && chargeCurrentTime == -1))
+            || (!chargeStarted && chargeCurrentTime == 0))
         {
             ResetCharge();
             return 0;
@@ -43,6 +45,8 @@ public abstract class ShotBallController : MonoBehaviour {
         {
             chargeStarted = true;
             this.chargeStartTime = chargeStartTime;
+            if (chargeStartTime != chargeCurrentTime)
+                this.chargeBiasTime = chargeCurrentTime - chargeStartTime;
         }
 
         if (chargeStarted && !chargeFinished)
@@ -50,21 +54,24 @@ public abstract class ShotBallController : MonoBehaviour {
             this.chargeCurrentTime = chargeCurrentTime;
         }
 
-        if (this.chargeCurrentTime - this.chargeStartTime >= maxChargeTime)
+        float chargedPastTime = this.chargeCurrentTime - (this.chargeBiasTime + this.chargeStartTime);
+
+        if (chargedPastTime >= maxChargeTime)
         {
             chargeFinished = true;
         }
 
-        Debug.Log("Internal Time = " + (this.chargeCurrentTime - this.chargeStartTime));
+        Debug.Log("Internal Time = " + chargedPastTime);
 
-        return Mathf.Lerp(0, 1, (this.chargeCurrentTime - this.chargeStartTime) / maxChargeTime);
+        return Mathf.Lerp(0, 1, chargedPastTime / maxChargeTime);
     }
 
     // 重置充能
     public void ResetCharge()
     {
-        chargeStartTime = -1;
-        chargeCurrentTime = -1;
+        chargeStartTime = 0;
+        chargeCurrentTime = 0;
+        chargeBiasTime = 0;
         chargeFinished = false;
         chargeStarted = false;
     }

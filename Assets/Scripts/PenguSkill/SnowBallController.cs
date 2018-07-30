@@ -40,8 +40,8 @@ public class SnowBallController : ShotBallController
     {
         if (0 == AvailableNow()) return;
         if (!chargeStarted) return; // 如果没有开始蓄力，而接受到了蓄力结束，就直接忽略掉
-        float chargedPastTime = chargeCurrentTime - chargeStartTime;
-        ball.SpawnBall(ownerId, position, rotation, chargedPastTime);
+        float chargedPastTime = this.chargeCurrentTime - (this.chargeBiasTime + this.chargeStartTime);
+        ball.SpawnBall(ownerId, position, rotation, Mathf.Clamp(chargedPastTime, 0, maxChargeTime));
         remainColdingTime = maxColdingTime;
         ResetCharge();
     }
