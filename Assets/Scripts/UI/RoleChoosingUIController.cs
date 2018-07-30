@@ -96,7 +96,6 @@ public class RoleChoosingUIController : MonoBehaviour {
     // todo 到时候在这里为 button 设置效果
     public void SetButtonRoleAvailable(int gid, int uid)
     {
-        Debug.Log(gid+ " " + uid + " available");
 
         buttons[gid * 2 + uid].GetComponent<Image>().sprite = (uid == 0) ? PenguHeadAltern : PigHeadAltern;
         //buttons[gid*2 + uid].interactable = true;
@@ -108,7 +107,6 @@ public class RoleChoosingUIController : MonoBehaviour {
     // todo 到时候在这里为 button 设置效果
     public void SetButtonRoleSelected(int gid, int uid)
     {
-        Debug.Log(gid + " " + uid + " selected");
         //buttons[gid*2 + uid].interactable = false;
         //buttons[gid * 2 + uid].image.color = DataSaveController.Instance.groupColor[gid];
         buttons[gid * 2 + uid].GetComponent<Image>().sprite = (uid == 0) ? PenguHeadSelect : PigHeadSelect;
@@ -116,7 +114,6 @@ public class RoleChoosingUIController : MonoBehaviour {
 
     public void SetButtonRoleLocked(int gid, int uid)
     {
-        Debug.Log(gid + " " + uid + " Locked");
         buttons[gid * 2 + uid].GetComponent<Image>().sprite = (uid == 0) ? PenguHeadLock : PigHeadLock;
     }
 

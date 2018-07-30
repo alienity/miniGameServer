@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 19951384}
   - component: {fileID: 8235714}
   m_Layer: 0
-  m_Name: MysticExplosionWhite
+  m_Name: MysticExplosionWhite_fart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
