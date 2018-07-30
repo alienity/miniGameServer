@@ -136,11 +136,7 @@ public class GroupPlayer : MonoBehaviour
         isAlive = false;
 
         ////wwq
-        //curEffect = Instantiate(dieEffect) as  ParticleSystem;
-        //curEffect.transform.localScale = Vector3.one * exploseStrenth;
-        //curEffect.transform.position = gameObject.transform.position;
-        //Debug.Log("oh! shut pig die");
-        //Destroy(curEffect.gameObject, 1);
+        DieEffect();
 
 
         pigPlayer.Reset();
@@ -228,7 +224,15 @@ public class GroupPlayer : MonoBehaviour
             //isInvincible = false;
         }
     }
-    
+    void DieEffect()
+    {
+        ParticleSystem curEffect;
+        curEffect = Instantiate(dieEffect) as  ParticleSystem;
+        curEffect.transform.localScale = Vector3.one * exploseStrenth;
+        curEffect.transform.position = gameObject.transform.position;
+        Debug.Log("oh! shut pig die");
+        Destroy(curEffect.gameObject, 1);
+    }
 
 
     IEnumerator LightCircleDown()

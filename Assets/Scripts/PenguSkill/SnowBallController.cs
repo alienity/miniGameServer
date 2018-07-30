@@ -7,8 +7,8 @@ public class SnowBallController : ShotBallController
     
     //// Ball的冷却时间
     //public float snowBallColdingTime;
-    // Ball的指向箭头
-    public Sprite snowArrow;
+    //// Ball的指向箭头
+    //public Sprite snowArrow;
     
     void Start () {
         if (ball == null)

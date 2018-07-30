@@ -47,4 +47,10 @@ public class DataSaveController : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+    // 清除所有的分数
+    public void CLearSocres()
+    {
+        scores.Clear();
+    }
+
 }

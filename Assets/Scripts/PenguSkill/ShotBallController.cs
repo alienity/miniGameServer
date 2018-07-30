@@ -12,7 +12,7 @@ public abstract class ShotBallController : MonoBehaviour {
     [SerializeField]
     protected float maxColdingTime;
     // 蓄力时长
-    public float maxChargeTime = 4;
+    public float maxChargeTime = 3;
     // 记录开始蓄力
     protected float chargeStartTime = -1;
     // 记录蓄力到现在，当前时刻

@@ -52,6 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 114021379439471926, guid: 1cf2a115b066e8e4a9e18ae30d66f3e3, type: 2}
-  maxColdingTime: 3
-  maxChargeTime: 4
-  snowArrow: {fileID: 0}
+  maxColdingTime: 2
+  maxChargeTime: 3

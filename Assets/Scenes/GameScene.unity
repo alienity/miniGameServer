@@ -1858,7 +1858,7 @@ Prefab:
     - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
         type: 2}
       propertyPath: totalGameTime
-      value: 10
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 862201f92af0b71468e74dcef3ae9855, type: 2}

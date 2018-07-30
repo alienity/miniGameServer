@@ -3971,9 +3971,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 19823922, guid: c3162dfcad030c241919e903dbd4aeab, type: 2}
   exploseStrenth: 12
-  rebornCircleEffect: {fileID: 1324001765682460, guid: f0944807e4e5b5e4181061d9034edc32,
+  rebornCircleEffect: {fileID: 1324001765682460, guid: 6b89588e13a8a4b1f9d9e39e9c9ee6ea,
     type: 2}
-  gId: 0
+  gId: 3
   rebornDelay: 0
   groupTrans: {fileID: 4473423072795734}
   attackerId: -1
@@ -4005,7 +4005,7 @@ MonoBehaviour:
   throwSnowBall: {fileID: 8300000, guid: 5715524742f313843a1b9986a0b379b2, type: 3}
   arrowRender: {fileID: 212961659130256936}
   arrowMaxRatio: 3
-  arrowMinRatio: 1
+  arrowMinRatio: 1.6
   birthForward: 0.02
 --- !u!136 &136362130238231080
 CapsuleCollider:
@@ -4432,7 +4432,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.4, y: 1}
+  m_Size: {x: 0.8, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
