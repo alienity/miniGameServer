@@ -167,32 +167,40 @@ public class PenguPlayer : MonoBehaviour
     }
 
     // 根据时间处理蓄力技能
-    public void HandleChargeSkill(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
+    public void HandleChargeSkill(string processId, float currrentTime, int touchId)
     {
-        if (!chargeReturn)
-        {
-            float ratio = curBallController.HandleChargeAttack(chargeStartTime, chargeCurrentTime);
-            SetArrowLen(ratio);
-        }
-        else
-        {
-            if(curBallController.chargeStarted)
-            {
-                SetArrowLen(0);
-                PenguPlayerAttack();
-            }
-        }
+
+        float ratio = curBallController.HandleChargeAttack(processId, currrentTime, touchId);
+        SetArrowLen(ratio);
+        PenguPlayerAttack();
+        //if (!chargeReturn)
+        //{
+        //    float ratio = curBallController.HandleChargeAttack(chargeStartTime, chargeCurrentTime);
+        //    SetArrowLen(ratio);
+        //}
+        //else
+        //{
+        //    if(curBallController.chargeStarted)
+        //    {
+        //        SetArrowLen(0);
+        //        PenguPlayerAttack();
+        //    }
+        //}
     }
 
     // 发射雪球
     public void PenguPlayerAttack()
     {
-        Vector3 ballBirthPlace = mTrans.position + mTrans.forward * birthForward;
         if (curBallController.AvailableNow() == 1)
         {
-            selfAudioSource.Play();
-            animator.SetTrigger(attackAnimId);
-            curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);
+            if (curBallController.chargeFinished)
+            {
+                selfAudioSource.Play();
+                animator.SetTrigger(attackAnimId);
+                Vector3 ballBirthPlace = mTrans.position + mTrans.forward * birthForward;
+                curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);
+                SetArrowLen(0);
+            }
         }
         CheckSkillController();
     }

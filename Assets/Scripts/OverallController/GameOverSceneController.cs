@@ -35,6 +35,8 @@ public class GameOverSceneController : MonoBehaviour {
             yield return new WaitForSeconds(1);
             --time;
         }
+        // 清除分数数据
+        DataSaveController.Instance.CLearSocres();
         //server.StopBroadCast();
         Server.Instance.stage = Stage.Prepare;
         Server.Instance.ClearData();

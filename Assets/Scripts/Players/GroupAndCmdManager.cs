@@ -108,13 +108,16 @@ public class GroupAndCmdManager : MonoBehaviour {
         {
             int gId = csm.gId;
             int uId = csm.uId;
-            float chargeStartTime = csm.chargeStartTime;
+            string processId = csm.processId;
+            //float chargeStartTime = csm.chargeStartTime;
             float currrentTime = csm.chargeCurrentTime;
-            bool chargeReturn = csm.chargeReturn;
+            //bool chargeReturn = csm.chargeReturn;
+            int touchId = csm.touchId;
 
             if (uId == (int)GroupPlayer.PlayerType.PENGU)
             {
-                groupPlayers[gId].PenguChargeAttack(chargeStartTime, currrentTime, chargeReturn);
+                groupPlayers[gId].PenguChargeAttack(processId, currrentTime, touchId);
+                //groupPlayers[gId].PenguChargeAttack(chargeStartTime, currrentTime, chargeReturn);
             }
 
         }

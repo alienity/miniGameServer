@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
-
+using UnityEngine.UI;
 public class GroupPlayer : MonoBehaviour
 {
     // wwq 音源
     private AudioSource selfAudioSource;
 
+    //wwq slider
+    public Slider pigSlider, penguSlider;
     //wwq effect
     public ParticleSystem dieEffect;
     // 死亡爆炸幅度
@@ -70,8 +72,7 @@ public class GroupPlayer : MonoBehaviour
     public AudioClip rebornAudio;
     public bool IsAlive { get { return isAlive; } }
     public bool IsInvincible { get { return isInvincible; } }
-
-    // 
+    
 
     private void Start()
     {
@@ -81,6 +82,8 @@ public class GroupPlayer : MonoBehaviour
             selfAudioSource = GetComponent<AudioSource>();
         if (scoreController == null)
             scoreController = FindObjectOfType<ScoreController>();
+        pigSlider.maxValue = pigSlider.value = pigPlayer.MaxColdingTime();
+        penguSlider.maxValue =penguSlider.value = penguPlayer.MaxColdingTime();
 
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
@@ -96,6 +99,9 @@ public class GroupPlayer : MonoBehaviour
         else
             attackerId = -1;
 
+        pigSlider.value = pigSlider.maxValue - pigPlayer.RemainingColdingTime();
+        penguSlider.value = penguSlider.maxValue - penguPlayer.RemainingColdingTime();
+        Debug.Log(penguSlider.value);
         // 当猪冲撞的时候，队伍是无敌的
         isInvulnerable = pigPlayer.IsCrazy;
     }
@@ -135,10 +141,8 @@ public class GroupPlayer : MonoBehaviour
     {
         isAlive = false;
 
-        ////wwq
         DieEffect();
-
-
+        
         pigPlayer.Reset();
         
         SendViberateToGroup();
@@ -321,13 +325,13 @@ public class GroupPlayer : MonoBehaviour
 
         penguPlayer.SetArrowDirection(dir.normalized);
     }
-
-    // 企鹅蓄力攻击,chargeId : -1 表示开始蓄力， 0 表示正在蓄力， 1 表示结束蓄力
-    public void PenguChargeAttack(float chargeStartTime, float chargeCurrentTime, bool chargeReturn)
+    
+    // 企鹅蓄力攻击
+    public void PenguChargeAttack(string processId, float currrentTime, int touchId)
     {
         if (!isAlive) return;
     
-        penguPlayer.HandleChargeSkill(chargeStartTime, chargeCurrentTime, chargeReturn);
+        penguPlayer.HandleChargeSkill(processId, currrentTime, touchId);
     }
     
     // 获取猪和企鹅的数据用于返回到控制界面
@@ -389,6 +393,7 @@ public class GroupPlayer : MonoBehaviour
             {
                 NetworkServer.SendToClient(Server.Instance.role2connectionID[roleId + i], CustomMsgType.AdvanceControl,
                     new AdvanceControlMsg(AdvanceControlType.Viberate));
+                Debug.Log("振动");
             }
         }
     }

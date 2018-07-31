@@ -22,15 +22,6 @@ public class AttractForceBallController : ShotBallController {
             remainColdingTime -= Time.deltaTime;
         if (RemainNums() == 0)
             Destroy(gameObject);
-
-        if (chargeStarted && !chargeFinished)
-        {
-            float chargedPastTime = chargeCurrentTime - chargeCurrentTime;
-            if (chargedPastTime >= maxChargeTime)
-            {
-                chargeFinished = true;
-            }
-        }
     }
 
     public void ReSet()
@@ -44,6 +35,7 @@ public class AttractForceBallController : ShotBallController {
         ball.SpawnBall(ownerId, position, rotation, 0);
         remainBallNums -= 1;
         remainColdingTime = maxColdingTime;
+        this.ResetCharge();
     }
 
     // 剩余的能用的ball的数量

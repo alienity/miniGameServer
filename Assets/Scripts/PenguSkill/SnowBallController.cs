@@ -18,29 +18,18 @@ public class SnowBallController : ShotBallController
 	
 	void Update () {
         // 没有开始蓄力，就是释放结束了
-        if (!chargeStarted)
+        if (this.attackFinished)
         {
             if (remainColdingTime > 0)
                 remainColdingTime -= Time.deltaTime;
         }
-
-        if (chargeStarted && !chargeFinished)
-        {
-            float chargedPastTime = chargeCurrentTime - chargeCurrentTime;
-            if (chargedPastTime >= maxChargeTime)
-            {
-                chargeFinished = true;
-            }
-        }
-
     }
 
     // 充能结束后释放
     public override void UseBall(int ownerId, Vector3 position, Quaternion rotation)
     {
         if (0 == AvailableNow()) return;
-        if (!chargeStarted) return; // 如果没有开始蓄力，而接受到了蓄力结束，就直接忽略掉
-        float chargedPastTime = this.chargeCurrentTime - (this.chargeBiasTime + this.chargeStartTime);
+        float chargedPastTime = this.chargeCurrentTime - this.chargeStartTime;
         ball.SpawnBall(ownerId, position, rotation, Mathf.Clamp(chargedPastTime, 0, maxChargeTime));
         remainColdingTime = maxColdingTime;
         ResetCharge();
