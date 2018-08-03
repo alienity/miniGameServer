@@ -8,13 +8,15 @@ public class PlayerStateMsg : MessageBase
     public int uId;
     public bool joystickAvailable;
     public float coolingTime;
+    public float totalCoolingTime;
 
-    public PlayerStateMsg(int gid, int uid, bool joystickAvailable, float coolingTime)
+    public PlayerStateMsg(int gid, int uid, bool joystickAvailable, float coolingTime, float totalCoolingTime)
     {
         this.gId = gid;
         this.uId = uid;
         this.joystickAvailable = joystickAvailable;
         this.coolingTime = coolingTime;
+        this.totalCoolingTime = totalCoolingTime;
     }
 
     public PlayerStateMsg()

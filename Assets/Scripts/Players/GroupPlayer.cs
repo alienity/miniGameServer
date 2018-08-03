@@ -101,7 +101,7 @@ public class GroupPlayer : MonoBehaviour
 
         pigSlider.value = pigSlider.maxValue - pigPlayer.RemainingColdingTime();
         penguSlider.value = penguSlider.maxValue - penguPlayer.RemainingColdingTime();
-        Debug.Log(penguSlider.value);
+        //Debug.Log(penguSlider.value);
         // 当猪冲撞的时候，队伍是无敌的
         isInvulnerable = pigPlayer.IsCrazy;
     }
@@ -150,9 +150,12 @@ public class GroupPlayer : MonoBehaviour
         Debug.Assert(scoreController != null);
 
         if (attackerId != -1)
-            scoreController.IncreaseScoreForPlayer(toKillerScore, attackerId);
+        {
+            if(attackerId != gId)
+                scoreController.IncreaseScoreForPlayer(toKillerScore, attackerId);
+        }
         else
-            scoreController.IncreaseScoreForAll(suicideScore);
+            scoreController.IncreaseScoreForAll(suicideScore, gId);
     }
 
 

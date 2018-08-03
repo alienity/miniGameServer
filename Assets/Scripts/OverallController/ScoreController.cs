@@ -36,11 +36,12 @@ public class ScoreController : MonoBehaviour
     }
 
     // 为所有玩家增加分数
-    public void IncreaseScoreForAll(int score)
+    public void IncreaseScoreForAll(int score, int excludeGroupId)
     {
         for (int gId = 0; gId < groupPlayers.Count; ++gId)
         {
-            IncreaseScoreForPlayer(score, gId);
+            if(gId != excludeGroupId)
+                IncreaseScoreForPlayer(score, gId);
         }
     }
     

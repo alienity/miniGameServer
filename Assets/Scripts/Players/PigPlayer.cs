@@ -113,7 +113,6 @@ public class PigPlayer : MonoBehaviour
         //移动更新，加速到最大速度后匀速运动
         if (pigMoveDirection.magnitude != 0)
         {
-            // 猪猪IsWaking动画播放
             if (groupRd.velocity.magnitude < 0.01)
             {
                 groupRd.AddForce(pigMoveDirection * (groupRd.drag + accForce));

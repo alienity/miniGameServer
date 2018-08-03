@@ -30,6 +30,12 @@ public class SnowBall : ShotBall
     [HideInInspector]
     public Vector3 impactNormal; //Used to rotate impactparticle.
 
+    // 特效组建实例
+    private GameObject impactParticleInstance;
+    private GameObject projectileParticleInstance;
+    private GameObject muzzleParticleInstance;
+    private GameObject[] trailParticlesInstance;
+
     // 自有组件
     private Transform mTrans;
 
@@ -64,6 +70,7 @@ public class SnowBall : ShotBall
     {
         if (other.tag == "Player")
         {
+
             GroupPlayer gp = other.GetComponent<GroupPlayer>();
             // 当组是无敌的时候，执行组的对应的方法
             if (gp.isInvulnerable)
@@ -77,11 +84,12 @@ public class SnowBall : ShotBall
                 int otherId = other.GetComponent<GroupPlayer>().gId;
                 if (otherId == attackerId) return;
             }
-            gp.EffectSpeedMovement(transform.forward * (suddenSpeed + chargeAttackTime * attackStrength));
-            gp.SetAttacker(attackerId); // 设置攻击者Id
 
             if (isHitted) return;
             isHitted = true;
+
+            gp.EffectSpeedMovement(transform.forward * (suddenSpeed + chargeAttackTime * attackStrength));
+            gp.SetAttacker(attackerId); // 设置攻击者Id
 
             ShowHitParticleEffects(impactNormal);
 
@@ -98,21 +106,21 @@ public class SnowBall : ShotBall
 
     private void DestroySelf()
     {
-        Destroy(gameObject, 3f); // 后期优化做修改
+        Destroy(gameObject, 5f); // 后期优化做修改
     }
 
     // 启动时添加粒子效果
     private void AddParticles()
     {
         impactNormal = mTrans.forward;
-        projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
-        projectileParticle.transform.parent = transform;
-        projectileParticle.transform.localScale = Vector3.one;
+        projectileParticleInstance = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
+        projectileParticleInstance.transform.parent = transform;
+        projectileParticleInstance.transform.localScale = Vector3.one;
         if (muzzleParticle)
         {
-            muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;
-            muzzleParticle.transform.localScale = Vector3.one;
-            Destroy(muzzleParticle, 1.5f); // Lifetime of muzzle effect.
+            muzzleParticleInstance = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;
+            muzzleParticleInstance.transform.localScale = Vector3.one;
+            Destroy(muzzleParticleInstance, 1.5f); // Lifetime of muzzle effect.
         }
     }
 
@@ -120,7 +128,7 @@ public class SnowBall : ShotBall
     private void ShowHitParticleEffects(Vector3 impactNormal)
     {
 
-        impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
+        impactParticleInstance = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
 
         //yield WaitForSeconds (0.05);
         foreach (GameObject trail in trailParticles)
@@ -130,8 +138,8 @@ public class SnowBall : ShotBall
             curTrail.transform.localScale = Vector3.one;
             Destroy(curTrail, 3f);
         }
-        Destroy(projectileParticle, 3f);
-        Destroy(impactParticle, 5f);
+        Destroy(projectileParticleInstance, 3f);
+        Destroy(impactParticleInstance, 5f);
         Destroy(gameObject);
         //projectileParticle.Stop();
 

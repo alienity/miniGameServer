@@ -149,21 +149,24 @@ public class GroupAndCmdManager : MonoBehaviour {
             bool isAlive = gp.IsAlive;
             float penguRemainCoolingTime = gp.RemainCoolingTime(GroupPlayer.PlayerType.PENGU);
             float pigRemainCoolingTime = gp.RemainCoolingTime(GroupPlayer.PlayerType.PIG);
-
+            float penguMaxColdingTime = gp.MaxCoolingTime(GroupPlayer.PlayerType.PENGU);
+            float pigMaxColdingTime = gp.MaxCoolingTime(GroupPlayer.PlayerType.PIG);
             // 写出企鹅的状态
             PlayerStateMsg penguPsm = new PlayerStateMsg();
             penguPsm.gId = gId;
             penguPsm.uId = (int)GroupPlayer.PlayerType.PENGU;
             penguPsm.joystickAvailable = isAlive;
             penguPsm.coolingTime = penguRemainCoolingTime;
+            penguPsm.totalCoolingTime = penguMaxColdingTime;
             gameControllHandler.SendGroupStatus(penguPsm);
 
             // 写出猪的状态
             PlayerStateMsg pigPsm = new PlayerStateMsg();
             pigPsm.gId = gId;
-            pigPsm.uId = (int)GroupPlayer.PlayerType.PENGU;
+            pigPsm.uId = (int)GroupPlayer.PlayerType.PIG;
             pigPsm.joystickAvailable = isAlive;
             pigPsm.coolingTime = pigRemainCoolingTime;
+            pigPsm.totalCoolingTime = pigMaxColdingTime;
             gameControllHandler.SendGroupStatus(pigPsm);
 
             //// 写出企鹅的状态

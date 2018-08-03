@@ -18,11 +18,18 @@ public class ShotBall : MonoBehaviour {
         this.attackerId = ownerId;
         SetChargeAttackTime(chargeTime);
         GameObject cloneBall = Instantiate(gameObject, position, rotation);
+        Debug.Log("attackerId = " + cloneBall.GetComponent<ShotBall>().attackerId);
         Debug.Log(cloneBall.GetComponent<ShotBall>().isHitted ? "击中" : "未击中");
         //cloneBall.GetComponent<ShotBall>().SetChargeAttackTime(chargeAttackTime);
     }
-
-
+    
+    // 初始化Ball
+    public void InitiateBall(int ownerId, float chargeTime)
+    {
+        this.isHitted = false;
+        this.attackerId = ownerId;
+        this.chargeAttackTime = chargeTime;
+    }
 
     public void SetChargeAttackTime(float time = 0)
     {
