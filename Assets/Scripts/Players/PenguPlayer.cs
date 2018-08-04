@@ -66,9 +66,10 @@ public class PenguPlayer : MonoBehaviour
         if (IsDie || IsSturn) return;
 
         // 修改当前朝向
+        /*
         if (penguCurDirection.magnitude != 0)
             mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
-
+        */
 
         // ********************测试代码*******************
         /*
@@ -111,6 +112,7 @@ public class PenguPlayer : MonoBehaviour
     {
         if (dir.magnitude == 0 || IsSturn) return;
         penguCurDirection = dir;
+        mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
     }
 
     // 捡物品
