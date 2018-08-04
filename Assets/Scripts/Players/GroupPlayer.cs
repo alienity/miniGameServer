@@ -91,6 +91,9 @@ public class GroupPlayer : MonoBehaviour
 
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
+        //wwq
+        penguPlayer.transform.parent = pigPlayer.transform;
+        
         penguPlayer.SetArrowColor(groupColor);
     }
 
