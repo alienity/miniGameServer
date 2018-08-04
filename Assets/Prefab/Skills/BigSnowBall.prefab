@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 135828476656166958}
   - component: {fileID: 114021379439471926}
   m_Layer: 0
-  m_Name: SnowBall
+  m_Name: BigSnowBall
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 1979926799372360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.95, y: 11.29, z: 0.03}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4218833653576196}
   - {fileID: 4137730237439816}
@@ -719,10 +719,10 @@ MonoBehaviour:
   attackerId: 0
   isHitted: 0
   chargeAttackTime: 0.33140182
-  flySpeed: 15
+  flySpeed: 20
   flySpeedAdd: 3
   flyTime: 5
-  suddenSpeed: 20
+  suddenSpeed: 30
   attackStrength: 8
   cancelTouchDuring: 0.4
   impactParticle: {fileID: 1995517327239000}

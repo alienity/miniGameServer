@@ -13,7 +13,8 @@ public class PenguPlayer : MonoBehaviour
     // 企鹅转向速率
     public float penguRotateSpeed;
     // 企鹅原始默认投掷控制器
-    public ShotBallController snowBallController;
+    public SnowBallController snowBallController;
+    public SnowBallController defaultSnowBallController;
     // 且新捡到的投掷物品
     public ShotBallController curBallController;
     // 发雪球的音效
@@ -118,14 +119,21 @@ public class PenguPlayer : MonoBehaviour
         curBallController = shotController;
     }
     
-    // 检查SkillController并做替换
+    // 检查SkillController，如果没有雪球，则使用默认雪球
     public void CheckSkillController()
     {
+        if(defaultSnowBallController == null)
+        {
+            defaultSnowBallController = Instantiate(snowBallController, mTrans);
+            defaultSnowBallController.transform.position = mTrans.position;
+            defaultSnowBallController.transform.rotation = mTrans.rotation;
+        }
+
         if ((curBallController != null && curBallController.RemainNums() == 0) || (curBallController == null))
         {
             if(curBallController != null)
                 DestroyImmediate(curBallController);
-            curBallController = Instantiate(snowBallController, mTrans);
+            curBallController = defaultSnowBallController;
         }
     }
 

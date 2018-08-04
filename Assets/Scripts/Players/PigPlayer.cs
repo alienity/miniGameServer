@@ -5,7 +5,7 @@ public class PigPlayer : MonoBehaviour
 {
     public int gId { get; set; }
     private const int uId = 1;
-    
+
     // 更新函数
     public delegate void ContinueSkill(Transform pigCurTransform);
     // 持续更新函数
@@ -29,9 +29,10 @@ public class PigPlayer : MonoBehaviour
 
     // 猪冲撞时能冲撞走球
     public bool IsCrazy { get; set; }
-
     // 猪眩晕啥也不能干
     public bool IsSturn { get; set; }
+    // 猪位于悬崖边的自救区
+    private bool isSurivalSkillNow = false;
 
     // 猪的动画组件
     private Animator animator;
@@ -50,8 +51,16 @@ public class PigPlayer : MonoBehaviour
 
     // 猪默认技能
     public PigSkillController pigRushController;
-    // 且新捡到的投掷物品
+    // 猪自救技能
+    public PigSkillController pigSelfRescueController;
+    // 猪当前技能
     public PigSkillController curSkillController;
+
+    // 保存猪常用的两个技能
+    private PigSkillController pigRushControllerInstance;
+    private PigSkillController pigSelfRescueControllerInstance;
+
+    // 用于技能切换时暂存技能
 
     // Use this for initialization
     void Start()
@@ -79,7 +88,7 @@ public class PigPlayer : MonoBehaviour
         {
             shadowObj.transform.position = hit.point + 0.1f * Vector3.up;
         }
-
+        
     }
 
     private void FixedUpdate()
@@ -143,7 +152,7 @@ public class PigPlayer : MonoBehaviour
             continueSkills(mTrans);
 
         // ********************测试代码*******************
-        /*
+        /**/
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
@@ -168,7 +177,7 @@ public class PigPlayer : MonoBehaviour
         {
             PigPlayerAttack();
         }
-        */
+        
         // ********************测试代码*******************
     }
 
@@ -252,19 +261,47 @@ public class PigPlayer : MonoBehaviour
         groupRd.AddForce(addedForce);
     }
 
-    // 检查SkillController并做替换
-    public void CheckSkillController()
+    // 判断在悬崖上，然后更换技能
+    public bool IsSurivalSkillNow
     {
-        if ((curSkillController != null && curSkillController.RemainNums() == 0) || (curSkillController == null))
+        get { return isSurivalSkillNow; }
+        set
         {
-            if(curSkillController == null)
-                DestroyImmediate(curSkillController);
-            curSkillController = Instantiate(pigRushController, mTrans);
-            curSkillController.transform.position = mTrans.position;
-            curSkillController.transform.rotation = mTrans.rotation;
+            if (value == true)
+            {
+                curSkillController = pigSelfRescueControllerInstance;
+            }
+            else
+            {
+                curSkillController = pigRushControllerInstance;
+            }
         }
     }
 
+    // 检查SkillController并做替换
+    public void CheckSkillController()
+    {
+        if(pigRushControllerInstance == null)
+        {
+            pigRushControllerInstance = Instantiate(pigRushController, mTrans);
+            pigRushControllerInstance.transform.position = mTrans.position;
+            pigRushControllerInstance.transform.rotation = mTrans.rotation;
+        }
+        if(pigSelfRescueControllerInstance == null)
+        {
+            pigSelfRescueControllerInstance = Instantiate(pigSelfRescueController, mTrans);
+            pigSelfRescueControllerInstance.transform.position = mTrans.position;
+            pigSelfRescueControllerInstance.transform.rotation = mTrans.rotation;
+        }
+
+        if ((curSkillController != null && curSkillController.RemainNums() == 0) || (curSkillController == null))
+        {
+            if(curSkillController != null)
+                DestroyImmediate(curSkillController.gameObject);
+            curSkillController = pigRushControllerInstance;
+        }
+    }
+    
     // 返回技能剩余冷却时间，同步到手机端
     public float RemainingColdingTime()
     {

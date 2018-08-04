@@ -34,6 +34,12 @@ public class GroupPlayer : MonoBehaviour
     // 晕眩
     private bool isSturn = false;
 
+    // 队伍在悬崖上
+    public bool IsSurivalSkillNow {
+        get { return pigPlayer.IsSurivalSkillNow; }
+        set { pigPlayer.IsSurivalSkillNow = value; }
+    }
+
     // 猪对企鹅的限制角度
     public float pigLockPenguDegree = 180;
 
@@ -87,7 +93,7 @@ public class GroupPlayer : MonoBehaviour
         if (scoreController == null)
             scoreController = FindObjectOfType<ScoreController>();
         pigSlider.maxValue = pigSlider.value = pigPlayer.MaxColdingTime();
-        penguSlider.maxValue =penguSlider.value = penguPlayer.MaxColdingTime();
+        penguSlider.maxValue = penguSlider.value = penguPlayer.MaxColdingTime();
 
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
@@ -345,6 +351,11 @@ public class GroupPlayer : MonoBehaviour
         pigPlayer.ReceiveForce(addedForce);
     }
 
+    //// 猪是否在悬崖边的状态切换方法
+    //public void IsSurivalSkillNow(bool status)
+    //{
+    //    pigPlayer.isSurivalSkillNow = status;
+    //}
     // 猪发动技能
     public void PigAttack()
     {
@@ -361,7 +372,7 @@ public class GroupPlayer : MonoBehaviour
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
         Debug.Log(angle);
         //
-        if(angle < pigLockPenguDegree/2) penguPlayer.SetArrowDirection(dir.normalized);
+        if (angle < pigLockPenguDegree / 2) penguPlayer.SetArrowDirection(dir.normalized);
     }
     
     // 企鹅蓄力攻击
