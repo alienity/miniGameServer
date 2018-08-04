@@ -24,7 +24,13 @@ public class PenguPlayer : MonoBehaviour
     private int attackAnimId;
 
     // 企鹅箭头
-    public SpriteRenderer arrowRender;
+    public SpriteRenderer arrowBoundRender;
+
+    public SpriteRenderer filledArrowRender;
+
+    public FilledArrowSpriteController filledArrowSpriteController;
+//    private FilledArrowSpriteController filledArrowSpriteController;
+
     // 箭头最长距离
     public float arrowMaxRatio = 3f;
     // 箭头最短距离
@@ -41,6 +47,15 @@ public class PenguPlayer : MonoBehaviour
 
     // 死亡
     public bool IsDie { get; set; }
+
+
+    private void Awake()
+    {
+        if (filledArrowSpriteController == null)
+        {
+            filledArrowSpriteController = FindObjectOfType<FilledArrowSpriteController>();
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -69,6 +84,8 @@ public class PenguPlayer : MonoBehaviour
         if (penguCurDirection.magnitude != 0)
             mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
         */
+
+        filledArrowSpriteController.SetProgress(1 - RemainingColdingTime() / MaxColdingTime());
 
         // ********************测试代码*******************
         /*
@@ -134,15 +151,19 @@ public class PenguPlayer : MonoBehaviour
     // 设置箭头颜色
     public void SetArrowColor(Color arrowColor)
     {
-        arrowRender.color = arrowColor;
+        arrowBoundRender.color = arrowColor;
+        filledArrowRender.color = arrowColor;
+        filledArrowRender.material.color = arrowColor;
     }
 
     // 修改箭头长度
     public void SetArrowLen(float arrowRatio)
     {
-        Vector2 arrowSize = arrowRender.size;
+        Vector2 arrowSize = arrowBoundRender.size;
         arrowSize.y = Mathf.Lerp(arrowMinRatio, arrowMaxRatio, arrowRatio);
-        arrowRender.size = arrowSize;
+        arrowBoundRender.size = arrowSize;
+        filledArrowRender.size = arrowSize;
+        Debug.Log("filledArrowRender.size" + filledArrowRender.size + " arrowSize" + arrowSize + " arrowBoundRender.size: " + arrowBoundRender.size );
     }
 
     // 根据时间处理蓄力技能

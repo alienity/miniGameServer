@@ -9,6 +9,11 @@ public class GroupPlayer : MonoBehaviour
 
     //wwq slider
     public Slider pigSlider, penguSlider;
+
+    public Image pigColdDown;
+
+    public Image pigColdDownBound;
+//    public Canvas
     //wwq effect
     public ParticleSystem dieEffect;
     // 死亡爆炸幅度
@@ -88,6 +93,7 @@ public class GroupPlayer : MonoBehaviour
             scoreController = FindObjectOfType<ScoreController>();
         pigSlider.maxValue = pigSlider.value = pigPlayer.MaxColdingTime();
         penguSlider.maxValue =penguSlider.value = penguPlayer.MaxColdingTime();
+        pigColdDown.fillAmount = 1;
 
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
@@ -95,6 +101,9 @@ public class GroupPlayer : MonoBehaviour
         penguPlayer.transform.parent = pigPlayer.transform;
         
         penguPlayer.SetArrowColor(groupColor);
+
+        pigColdDown.color = groupColor;
+        pigColdDownBound.color = groupColor;
     }
 
     private void Update()
@@ -110,6 +119,7 @@ public class GroupPlayer : MonoBehaviour
         // 冷却倒计时
         pigSlider.value = pigSlider.maxValue - pigPlayer.RemainingColdingTime();
         penguSlider.value = penguSlider.maxValue - penguPlayer.RemainingColdingTime();
+        pigColdDown.fillAmount = 1 - pigPlayer.RemainingColdingTime() / pigPlayer.MaxColdingTime();
         //Debug.Log(penguSlider.value);
 
         // 当猪冲撞的时候，队伍是无敌的
@@ -362,7 +372,7 @@ public class GroupPlayer : MonoBehaviour
         if (!isAlive || isSturn) return;
         float dot = Vector3.Dot(pigPlayer.pigCurDirection, dir.normalized);
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-        Debug.Log(angle);
+//        Debug.Log(angle);
         //
         if(angle < pigLockPenguDegree/2) penguPlayer.SetArrowDirection(dir.normalized);
     }
