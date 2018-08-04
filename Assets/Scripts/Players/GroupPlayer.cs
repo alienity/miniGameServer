@@ -34,6 +34,9 @@ public class GroupPlayer : MonoBehaviour
     // 晕眩
     private bool isSturn = false;
 
+    // 猪对企鹅的限制角度
+    public float pigLockPenguDegree = 180;
+
     // 死亡后重生等待时间
     [SerializeField] private float rebornDelay = 0;
     //// 重生无敌时间
@@ -354,8 +357,11 @@ public class GroupPlayer : MonoBehaviour
     public void PenguMove(Vector3 dir)
     {
         if (!isAlive || isSturn) return;
-
-        penguPlayer.SetArrowDirection(dir.normalized);
+        float dot = Vector3.Dot(pigPlayer.pigCurDirection, dir.normalized);
+        float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
+        Debug.Log(angle);
+        //
+        if(angle < pigLockPenguDegree/2) penguPlayer.SetArrowDirection(dir.normalized);
     }
     
     // 企鹅蓄力攻击

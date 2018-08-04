@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class WorldController : MonoBehaviour {
 
     public static WorldController Instance { get; private set; }
 
+    // 游戏结束时的过场黑幕
+    public Image blockImage;
     // UI控制器
     public GameUIController gUIController;
     // 分数控制器
@@ -16,7 +20,7 @@ public class WorldController : MonoBehaviour {
     public GroupAndCmdManager gcManager;
     // TODO:将要修改 4个出生点
     public List<Transform> bornTrans;
-
+    
     // 将被传入的玩家数
     public int groupCounts;
     //// 下一个场景的名字，用于切换场景
@@ -99,8 +103,9 @@ public class WorldController : MonoBehaviour {
 
         // 加载下一个场景
         //SceneManager.LoadSceneAsync(nextSceneName);
-        
-        SceneTransformer.Instance.TransferToNextScene();
+
+        blockImage.DOFade(1, 2).OnComplete(SceneTransformer.Instance.TransferToNextScene);
+
     }
 
     // 重启游戏

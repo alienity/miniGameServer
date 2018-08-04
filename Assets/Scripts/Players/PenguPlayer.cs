@@ -105,12 +105,6 @@ public class PenguPlayer : MonoBehaviour
 
     }
 
-    //// 设置组ID
-    //public void SetId(int gId, int pId)
-    //{
-    //    this.gId = gId;
-    //}
-
     // 设置指向
     public void SetArrowDirection(Vector3 dir)
     {
@@ -134,28 +128,7 @@ public class PenguPlayer : MonoBehaviour
             curBallController = Instantiate(snowBallController, mTrans);
         }
     }
-    /*
-    // 开始蓄力
-    private void PenguPlayerStartCharge(float startTime)
-    {
-        chargeStartTime = startTime;
-        chargeCurrentTime = startTime;
-    }
 
-    // 蓄力进行中
-    private void PenguPlayerChargin(float curTime)
-    {
-        chargeCurrentTime = curTime;
-    }
-
-    // 结束蓄力
-    private void PenguPlayerFinishCharge()
-    {
-        chargeStartTime = -1;
-
-    }
-    */
-    
     // 设置箭头颜色
     public void SetArrowColor(Color arrowColor)
     {
@@ -177,19 +150,6 @@ public class PenguPlayer : MonoBehaviour
         float ratio = curBallController.HandleChargeAttack(processId, currrentTime, touchId);
         SetArrowLen(ratio);
         PenguPlayerAttack();
-        //if (!chargeReturn)
-        //{
-        //    float ratio = curBallController.HandleChargeAttack(chargeStartTime, chargeCurrentTime);
-        //    SetArrowLen(ratio);
-        //}
-        //else
-        //{
-        //    if(curBallController.chargeStarted)
-        //    {
-        //        SetArrowLen(0);
-        //        PenguPlayerAttack();
-        //    }
-        //}
     }
 
     // 发射雪球

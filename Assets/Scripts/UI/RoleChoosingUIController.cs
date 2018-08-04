@@ -55,7 +55,7 @@ public class RoleChoosingUIController : MonoBehaviour {
         CountDown.gameObject.SetActive(false);
 
         // 初始场景切换
-        StartCanvas.SetActive(true);
+//        StartCanvas.SetActive(true);
         ChooseRoleCanvas.SetActive(false);
     }
 
