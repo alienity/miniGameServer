@@ -280,6 +280,16 @@ Prefab:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 114980305437391298, guid: 327e73f5093ccfa4bb6d427299a191da,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114980305437391298, guid: 327e73f5093ccfa4bb6d427299a191da,
+        type: 2}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 327e73f5093ccfa4bb6d427299a191da, type: 2}
   m_IsPrefabParent: 0
@@ -515,6 +525,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114575635470979558, guid: 031f0cd86394f5b449fbd9826dc0f4af,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 031f0cd86394f5b449fbd9826dc0f4af, type: 2}
   m_IsPrefabParent: 0
@@ -696,21 +711,25 @@ Prefab:
     - target: {fileID: 224948753864822228, guid: 9bc265ce87d2512439589790b2b87b3e,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224948753864822228, guid: 9bc265ce87d2512439589790b2b87b3e,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224870710679866270, guid: 9bc265ce87d2512439589790b2b87b3e,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224870710679866270, guid: 9bc265ce87d2512439589790b2b87b3e,
         type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832277825541354, guid: 9bc265ce87d2512439589790b2b87b3e, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

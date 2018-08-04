@@ -13,12 +13,11 @@ public class GroupPlayer : MonoBehaviour
     public ParticleSystem dieEffect;
     // 死亡爆炸幅度
     public float exploseStrenth = 12f;
-    //public ParticleSystem rebornEffect;
-    //private ParticleSystem curEffect;
     // 重生光环
     public GameObject rebornCircleEffect;
     private GameObject rebornCircleEffectInstance;
-
+    // 眩晕对象
+    public GameObject stunEffect;
 
     public enum PlayerType
     {
@@ -32,6 +31,8 @@ public class GroupPlayer : MonoBehaviour
     private bool isAlive = true;
     // 无敌
     private bool isInvincible = false;
+    // 晕眩
+    private bool isSturn = false;
 
     // 死亡后重生等待时间
     [SerializeField] private float rebornDelay = 0;
@@ -42,7 +43,7 @@ public class GroupPlayer : MonoBehaviour
     private Color groupColor;
     // 队伍Trans
     public Transform groupTrans;
-
+    
     // 被某个组攻击到，该组的ID
     [SerializeField] private int attackerId = -1;
     // 重置攻击者倒计时时长
@@ -52,7 +53,7 @@ public class GroupPlayer : MonoBehaviour
 
     // 猪无敌
     [HideInInspector]
-    public bool isInvulnerable = false;
+    public bool isInvulnerable { get; private set; }
 
     // 分数控制器
     private ScoreController scoreController;
@@ -94,27 +95,79 @@ public class GroupPlayer : MonoBehaviour
     {
         if (!isAlive) return;
 
+        // 最后攻击者倒计时
         if (countdownPast > 0)
             countdownPast -= Time.deltaTime;
         else
             attackerId = -1;
-
+        
+        // 冷却倒计时
         pigSlider.value = pigSlider.maxValue - pigPlayer.RemainingColdingTime();
         penguSlider.value = penguSlider.maxValue - penguPlayer.RemainingColdingTime();
         //Debug.Log(penguSlider.value);
+
         // 当猪冲撞的时候，队伍是无敌的
         isInvulnerable = pigPlayer.IsCrazy;
+
+        // 眩晕倒计时
+        pigPlayer.IsSturn = isSturn;
+        penguPlayer.IsSturn = isSturn;
+
+        stunEffect.SetActive(isSturn);
+
     }
 
     // 玩家相互碰撞后记录碰撞体是谁的
-    private void OnCollisionEnter(Collision collision)
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        GroupPlayer otherGroup = collision.gameObject.GetComponent<GroupPlayer>();
+    //        attackerId = otherGroup.gId;
+    //        countdownPast = countdownTime;
+
+    //        Debug.Log("两只猪相撞");
+
+    //        if (pigPlayer.IsCrazy && !isSturn)
+    //        {
+    //            if (otherGroup.pigPlayer.curSkillController is PigRushController)
+    //            {
+    //                PigRushController pigCurSkill = otherGroup.pigPlayer.curSkillController as PigRushController;
+    //                float sturnDuring = pigCurSkill.sturnDuring;
+    //                StartCoroutine(SturnPlayer(sturnDuring, otherGroup));
+    //                pigPlayer.StopSkillNow();
+    //            }
+    //        }
+    //    }
+    //}
+
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            GroupPlayer attackGroup = collision.gameObject.GetComponent<GroupPlayer>();
-            attackerId = attackGroup.gId;
+            GroupPlayer otherGroup = collision.gameObject.GetComponent<GroupPlayer>();
+            attackerId = otherGroup.gId;
             countdownPast = countdownTime;
+            
+            if (pigPlayer.IsCrazy)
+            {
+                if (otherGroup.pigPlayer.curSkillController is PigRushController)
+                {
+                    PigRushController pigCurSkill = otherGroup.pigPlayer.curSkillController as PigRushController;
+                    float sturnDuring = pigCurSkill.sturnDuring;
+                    StartCoroutine(SturnPlayer(sturnDuring, otherGroup));
+                    pigPlayer.StopSkillNow();
+                }
+            }
         }
+    }
+
+    IEnumerator SturnPlayer(float during, GroupPlayer gp)
+    {
+        gp.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gp.isSturn = true;
+        yield return new WaitForSeconds(during);
+        gp.isSturn = false;
     }
 
     // 被攻击打中后设置攻击者是谁
@@ -189,11 +242,7 @@ public class GroupPlayer : MonoBehaviour
     // 在指定位置重生
     public IEnumerator ReBorn(Transform reBirthTrans)
     {
-        //if (isAlive == true) return;
-        //isAlive = true;
-        //groupTrans.position = reBirthTrans.position;
-        //StartCoroutine(InvincibleCoroutine());
-        if (isAlive != true /*&& !isInvincible*/)
+        if (isAlive != true)
         {
             //isInvincible = true;
             
@@ -206,29 +255,10 @@ public class GroupPlayer : MonoBehaviour
             selfAudioSource.clip = rebornAudio;
             selfAudioSource.Play();
             Debug.Log("Play");
-
-
+            
             StartCoroutine(LightCircleDown());
 
-
-            //curEffect = Instantiate(rebornEffect) as ParticleSystem;
-            //Vector3 temVector3 = gameObject.transform.position;
-            //curEffect.transform.position = temVector3;
-            ////new Vector3(temVector3.x,temVector3.y-149,temVector3.z);
-            //Debug.Log("wwq ok");
-            //curEffect.transform.parent = gameObject.transform;
-
-            //Destroy(curEffect.gameObject, 2f); 
-
-
-
-            //yield return new WaitForSeconds(rebornRestTime);
             isAlive = true;
-            //isInvincible = false;
-
-            //isInvincible = true;
-            //yield return new WaitForSeconds(rebornRestTime);
-            //isInvincible = false;
         }
     }
     void DieEffect()
@@ -237,7 +267,6 @@ public class GroupPlayer : MonoBehaviour
         curEffect = Instantiate(dieEffect) as  ParticleSystem;
         curEffect.transform.localScale = Vector3.one * exploseStrenth;
         curEffect.transform.position = gameObject.transform.position;
-        Debug.Log("oh! shut pig die");
         Destroy(curEffect.gameObject, 1);
     }
 
@@ -289,7 +318,7 @@ public class GroupPlayer : MonoBehaviour
     // 猪的控制
     public void PigMove(Vector3 dir)
     {
-        if (!isAlive) return;
+        if (!isAlive || isSturn) return;
 
         pigPlayer.SetDirection(dir.normalized);
     }
@@ -316,7 +345,7 @@ public class GroupPlayer : MonoBehaviour
     // 猪发动技能
     public void PigAttack()
     {
-        if (!isAlive) return;
+        if (!isAlive || isSturn) return;
 
         pigPlayer.PigPlayerAttack();
     }
@@ -324,7 +353,7 @@ public class GroupPlayer : MonoBehaviour
     // 企鹅的控制
     public void PenguMove(Vector3 dir)
     {
-        if (!isAlive) return;
+        if (!isAlive || isSturn) return;
 
         penguPlayer.SetArrowDirection(dir.normalized);
     }
@@ -332,7 +361,7 @@ public class GroupPlayer : MonoBehaviour
     // 企鹅蓄力攻击
     public void PenguChargeAttack(string processId, float currrentTime, int touchId)
     {
-        if (!isAlive) return;
+        if (!isAlive || isSturn) return;
     
         penguPlayer.HandleChargeSkill(processId, currrentTime, touchId);
     }

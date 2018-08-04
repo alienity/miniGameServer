@@ -7,7 +7,7 @@ public class PigPlayer : MonoBehaviour
     private const int uId = 1;
     
     // 更新函数
-    public delegate void ContinueSkill(Vector3 dir);
+    public delegate void ContinueSkill(Transform pigCurTransform);
     // 持续更新函数
     private ContinueSkill continueSkills;
 
@@ -29,6 +29,9 @@ public class PigPlayer : MonoBehaviour
 
     // 猪冲撞时能冲撞走球
     public bool IsCrazy { get; set; }
+
+    // 猪眩晕啥也不能干
+    public bool IsSturn { get; set; }
 
     // 猪的动画组件
     private Animator animator;
@@ -64,10 +67,8 @@ public class PigPlayer : MonoBehaviour
         if(selfAudioSource == null)
             selfAudioSource = GetComponent<AudioSource>();
         selfAudioSource.clip = runingClip;
-        
-        pigRushController = Instantiate(pigRushController, mTrans);
-        pigRushController.transform.position = mTrans.position;
-        pigRushController.transform.rotation = mTrans.rotation;
+
+        CheckSkillController();
     }
 
     private void Update()
@@ -78,11 +79,11 @@ public class PigPlayer : MonoBehaviour
         {
             shadowObj.transform.position = hit.point + 0.1f * Vector3.up;
         }
+
     }
 
     private void FixedUpdate()
     {
-        
         // 修改箭头指向
         mTrans.rotation = Quaternion.LookRotation(pigCurDirection);
         
@@ -139,10 +140,10 @@ public class PigPlayer : MonoBehaviour
         
         // 更新持续技能
         if (continueSkills != null)
-            continueSkills(pigCurDirection);
+            continueSkills(mTrans);
 
         // ********************测试代码*******************
-        /**/
+        /*
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
@@ -167,14 +168,21 @@ public class PigPlayer : MonoBehaviour
         {
             PigPlayerAttack();
         }
-
+        */
         // ********************测试代码*******************
+    }
+
+    public void StopSkillNow()
+    {
+        PigRushController csc = curSkillController as PigRushController;
+        csc.StopSkill();
     }
 
     public void Reset()
     {
         groupRd.velocity = Vector3.zero;
-        pigMoveDirection = Vector3.zero;
+        //pigMoveDirection = Vector3.zero;
+        continueSkills = null;
         selfAudioSource.Stop();
     }
 
@@ -194,6 +202,8 @@ public class PigPlayer : MonoBehaviour
     // 设置移动方向
     public void SetDirection(Vector3 dir)
     {
+        if (IsSturn) return;
+
         pigMoveDirection = dir;
         if (pigMoveDirection.magnitude == 0) return;
         pigCurDirection = pigMoveDirection.normalized;
@@ -202,6 +212,8 @@ public class PigPlayer : MonoBehaviour
     // 发动冲刺
     public void PigPlayerAttack()
     {
+        if (IsSturn || IsSturn) return;
+
         Debug.Log("pig Attack");
         CheckSkillController();
 
@@ -243,9 +255,14 @@ public class PigPlayer : MonoBehaviour
     // 检查SkillController并做替换
     public void CheckSkillController()
     {
-        if ((curSkillController != null && curSkillController.RemainNums() == 0)
-            || (curSkillController == null))
-            curSkillController = pigRushController;
+        if ((curSkillController != null && curSkillController.RemainNums() == 0) || (curSkillController == null))
+        {
+            if(curSkillController == null)
+                DestroyImmediate(curSkillController);
+            curSkillController = Instantiate(pigRushController, mTrans);
+            curSkillController.transform.position = mTrans.position;
+            curSkillController.transform.rotation = mTrans.rotation;
+        }
     }
 
     // 返回技能剩余冷却时间，同步到手机端

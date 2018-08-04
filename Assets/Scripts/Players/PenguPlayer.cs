@@ -36,32 +36,36 @@ public class PenguPlayer : MonoBehaviour
     // 自身transform
     private Transform mTrans;
 
+    // 猪眩晕啥也不能干
+    public bool IsSturn { get; set; }
+
     // 死亡
     public bool IsDie { get; set; }
 
     // Use this for initialization
     void Start()
     {
-        if(selfAudioSource == null)
+        if (selfAudioSource == null)
             selfAudioSource = GetComponent<AudioSource>();
 
         //暂时只加入一种声音
         selfAudioSource.clip = throwSnowBall;
-        
+
         mTrans = GetComponent<Transform>();
-        snowBallController = Instantiate(snowBallController, mTrans);
 
         animator = GetComponent<Animator>();
         attackAnimId = Animator.StringToHash("shot");
+
+        CheckSkillController();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (IsDie) return;
+        if (IsDie || IsSturn) return;
 
         // 修改当前朝向
-        if(penguCurDirection.magnitude != 0)
+        if (penguCurDirection.magnitude != 0)
             mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
 
 
@@ -98,7 +102,7 @@ public class PenguPlayer : MonoBehaviour
 
     public void Reset()
     {
-        
+
     }
 
     //// 设置组ID
@@ -110,7 +114,7 @@ public class PenguPlayer : MonoBehaviour
     // 设置指向
     public void SetArrowDirection(Vector3 dir)
     {
-        if (dir.magnitude == 0) return;
+        if (dir.magnitude == 0 || IsSturn) return;
         penguCurDirection = dir;
     }
 
@@ -123,11 +127,11 @@ public class PenguPlayer : MonoBehaviour
     // 检查SkillController并做替换
     public void CheckSkillController()
     {
-        if ((curBallController != null && curBallController.RemainNums() == 0)
-            || (curBallController == null))
+        if ((curBallController != null && curBallController.RemainNums() == 0) || (curBallController == null))
         {
-            curBallController = snowBallController;
-            //maxChargeTime = curBallController.MaxChargeTime();
+            if(curBallController != null)
+                DestroyImmediate(curBallController);
+            curBallController = Instantiate(snowBallController, mTrans);
         }
     }
     /*

@@ -15,6 +15,9 @@ public class PigRushController : PigSkillController {
     // 猪的放屁效果
     public ParticleSystem fartParticleEffects;
 
+    // 冲刺击晕持续时间
+    public float sturnDuring;
+    
     // 放屁效果实例化对象
     private ParticleSystem fartInstance;
 
@@ -31,20 +34,27 @@ public class PigRushController : PigSkillController {
     }
 
     // 持续效用的技能
-    public override void ContinueUpdate(Vector3 pigCurDirection)
+    public override void ContinueUpdate(Transform pigCurTransform)
     {
         if (pigPastTime < pigRushTime)
         {
-            pigRd.AddForce(pigCurDirection * pigRushForce);
+            pigRd.AddForce(pigCurTransform.forward * pigRushForce);
             //pigPlayer.IsCrazy = true;
-            Debug.Log("冲刺技能更新中，变无敌");
+            Debug.Log("冲刺技能更新中");
         }
         else
         {
             pigPlayer.RemoveContinueSkills(ContinueUpdate);
             //pigPlayer.IsCrazy = false;
-            Debug.Log("冲刺技能结束，无敌取消");
+            Debug.Log("冲刺技能结束");
         }
+    }
+
+    public void StopSkill()
+    {
+        StopCoroutine(Invulnerator());
+        this.pigPlayer.IsCrazy = false;
+        pigPlayer.RemoveContinueSkills(ContinueUpdate);
     }
 
     public override void UseSkill(PigPlayer pigPlayer)
@@ -63,6 +73,7 @@ public class PigRushController : PigSkillController {
             StartCoroutine(Invulnerator());
         }
     }
+
     public override int AvailableNow()
     {
         if (remainColdingTime <= 0)
@@ -72,9 +83,11 @@ public class PigRushController : PigSkillController {
 
     IEnumerator Invulnerator()
     {
+        Debug.Log("无敌开始");
         this.pigPlayer.IsCrazy = true;
         yield return new WaitForSeconds(invulnerableTime);
         this.pigPlayer.IsCrazy = false;
+        Debug.Log("无敌结束");
     }
 
     private void InitialParticles()

@@ -14,7 +14,7 @@ public abstract class PigSkillController : MonoBehaviour
     [SerializeField] protected float maxColdingTime;
 
     // 技能持续更新，只有部分技能会用到
-    public virtual void ContinueUpdate(Vector3 pigCurDirection)
+    public virtual void ContinueUpdate(Transform pigCurTransform)
     {
 
     }
