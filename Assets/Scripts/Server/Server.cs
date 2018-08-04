@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections.Generic;
 using System.Security.Policy;
+using Newtonsoft.Json;
 
 public class Server : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Server : MonoBehaviour
     protected static Server instance;
 
     // 连接客户端记录
-    public HashSet<int> connections = new HashSet<int>();
+//    public HashSet<int> connections = new HashSet<int>();
 
     // connectionId到gId和uId的映射表, roleId = gId * 2 + uId
     public Dictionary<int, int> role2connectionID = new Dictionary<int, int>();
@@ -39,6 +40,7 @@ public class Server : MonoBehaviour
     public Dictionary<int, int> session2role = new Dictionary<int, int>();
     public HashSet<int> sessionIsConfirmed = new HashSet<int>();
     public HashSet<int> kownSessions = new HashSet<int>();
+//    public HashSet<string> clientAddresses = new HashSet<string>();
     
     public Dictionary<int, string> session2name = new Dictionary<int, string>();
 
@@ -132,22 +134,39 @@ public class Server : MonoBehaviour
     // 断线记录
     public void OnClientDisConnect(NetworkMessage netmsg)
     {
-        Debug.Log("client disconnected");
-        connections.Remove(netmsg.conn.connectionId);
+        int connectionId = netmsg.conn.connectionId;
+        if (stage == Stage.Prepare)
+        {
+            int sessionId = connection2session[connectionId];
+            kownSessions.Remove(sessionId);
+            session2connection.Remove(sessionId);
+            connection2session.Remove(sessionId);
+            Debug.Log("client disconnected during prepare, sessions: " + kownSessions.Count);
+        }
+//        connections.Remove(netmsg.conn.connectionId);
+        Debug.Log("client disconnected :" + kownSessions.Count);
+
+
     }
 
     // 上线记录
     public void OnClientConnect(NetworkMessage netmsg)
     {
-        Debug.Log("client connected");
+        Debug.Log("client connected asddress" + netmsg.conn.address);
         
         reconnectHandler.OnClientConnect(netmsg);
-        connections.Add(netmsg.conn.connectionId);
+//        connections.Add(netmsg.conn.connectionId);
         // 人数到达游戏人数后，发送消息给client切换到选人界面 
-        if (stage == Stage.Prepare && connections.Count == roleChooseHandler.toNumberTransfer)
+        if (stage == Stage.Prepare )
         {
-            ClientScenChangeUtil.ChangeAllClientStage(Stage.ChoosingRoleStage);
-            stage = Stage.ChoosingRoleStage;
+            ClientScenChangeUtil.ChangeAllClientStage(Stage.Prepare);
+            if (kownSessions.Count == roleChooseHandler.toNumberTransfer)
+            {
+                ClientScenChangeUtil.ChangeAllClientStage(Stage.ChoosingRoleStage);
+                stage = Stage.ChoosingRoleStage;
+                Debug.Log("client switch to choosingRoleStage");
+            }
+
         }
     }
 
@@ -159,7 +178,7 @@ public class Server : MonoBehaviour
         session2connection.Clear();
         session2role.Clear();
         connection2session.Clear();
-        connections.Clear();
+//        connections.Clear();
         kownSessions.Clear();
         sessionIsConfirmed.Clear();
         session2name.Clear();

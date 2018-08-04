@@ -43,9 +43,9 @@ public class RoleChooseHandler : MonoBehaviour
     {
         if (roleChoosingUIController.StartCanvas.activeInHierarchy)
         {
-            roleChoosingUIController.ProgressBarPlay(server.connections.Count, toNumberTransfer);
+            roleChoosingUIController.ProgressBarPlay(server.kownSessions.Count, toNumberTransfer);
         }
-        if(!roleChoosingUIController.ChooseRoleCanvas.activeInHierarchy && server.connections.Count == toNumberTransfer)
+        if(!roleChoosingUIController.ChooseRoleCanvas.activeInHierarchy && server.kownSessions.Count == toNumberTransfer)
         {
             roleChoosingUIController.changeCanvas();
             Debug.Log("changeCanvas");

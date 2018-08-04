@@ -7,13 +7,6 @@ using Random = System.Random;
 // Todo 游戏结束后清空session，玩家回到开始界面，重新选择进入游戏进行连接
 public class ReConnectHandler : MonoBehaviour
 {
-//    /**********单例***********/
-//    public static ReConnectHandler Instance { get; private set; }
-//    private void Awake()
-//    {
-//        Instance = this;
-//    }
-//    
     private void Start()
     {
 
@@ -35,7 +28,7 @@ public class ReConnectHandler : MonoBehaviour
             case Stage.Prepare:
                 int sessionId = -1;
                 // 避免生成一样的sessionid的情况（可能性很小）
-                while (sessionId == -1 || Server.Instance.kownSessions.Contains(sessionId)  )
+                while (sessionId == -1 || Server.Instance.kownSessions.Contains(sessionId))
                 {
                     sessionId = random.Next();
                 }
@@ -71,13 +64,13 @@ public class ReConnectHandler : MonoBehaviour
             Server.Instance.session2connection[sessionId] = netmsg.conn.connectionId;
             switch (Server.Instance.stage)
             {
-                case Stage.Prepare: // 在准备阶段不会发生请求重连的情况
-                    //Todo 准备阶段断线重连可能会有问题
-                    SessionMsg sessionDuringPrepare = new SessionMsg(false, false, 0, Stage.Prepare, false, 0, 0, null, null, null);
-
-                    SendSessionMsg(netmsg.conn.connectionId, sessionDuringPrepare);
-                    Debug.LogError("received sesso    nmsg in prepare!");
-                    break;
+//                case Stage.Prepare: // 在准备阶段不会发生请求重连的情况
+//                    //Todo 准备阶段断线重连可能会有问题
+//                    SessionMsg sessionDuringPrepare = new SessionMsg(false, false, 0, Stage.Prepare, false, 0, 0, null, null, null);
+//
+//                    SendSessionMsg(netmsg.conn.connectionId, sessionDuringPrepare);
+//                    Debug.LogError("received session nmsg in prepare!");
+//                    break;
                 /*
                  * 断线重连成功，让玩家恢复状态
                  */
@@ -92,6 +85,9 @@ public class ReConnectHandler : MonoBehaviour
                     SessionMsg sessionDuringGamming = new SessionMsg(false, false, 0, Stage.GammingStage, true, roleId/2, roleId%2, null, null, null);
                     SendSessionMsg(netmsg.conn.connectionId, sessionDuringGamming);
                     Debug.Log("send roll back to Game: " + sessionDuringGamming);
+                    break;
+                case Stage.GameOverStage:
+                    NetworkServer.SendToClient(netmsg.conn.connectionId, CustomMsgType.Stage, new StageTransferMsg(Stage.StartStage));
                     break;
             }
         }
@@ -123,6 +119,6 @@ public class ReConnectHandler : MonoBehaviour
     {
         SessionMsg sessionMsg = new SessionMsg(false, true, sessionId, Stage.Prepare, false, 0, 0, null, null, null);
         NetworkServer.SendToClient(connectionId, CustomMsgType.Session, sessionMsg);
-        Debug.Log("distribute session " + sessionMsg);
+        Debug.Log("distribute session " + sessionMsg + "connectionId: " + connectionId );
     }
 }
