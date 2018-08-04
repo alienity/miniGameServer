@@ -325,8 +325,11 @@ public class GroupPlayer : MonoBehaviour
     public void PenguMove(Vector3 dir)
     {
         if (!isAlive) return;
-
-        penguPlayer.SetArrowDirection(dir.normalized);
+        float dot = Vector3.Dot(pigPlayer.pigCurDirection, dir.normalized);
+        float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
+        Debug.Log(angle);
+        //
+        if(angle<90f) penguPlayer.SetArrowDirection(dir.normalized);
     }
     
     // 企鹅蓄力攻击
