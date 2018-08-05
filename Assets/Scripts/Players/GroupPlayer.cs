@@ -352,7 +352,13 @@ public class GroupPlayer : MonoBehaviour
 
         pigPlayer.PigPlayerAttack();
     }
-    
+    // 猪在加速道路上的速度变化
+    public void PigSpeedupRoad()
+    {
+        if (!isAlive) return;
+
+        pigPlayer.PigPlayerSpeedupRoad();
+    }
     // 企鹅的控制
     public void PenguMove(Vector3 dir)
     {

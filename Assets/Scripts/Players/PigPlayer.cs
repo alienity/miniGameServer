@@ -53,9 +53,13 @@ public class PigPlayer : MonoBehaviour
     public PigSkillController pigRushController;
     // 猪自救技能
     public PigSkillController pigSelfRescueController;
+	// branzhao 当前地形效果附加技能
+	public PigSkillController mapSubSkillController;
     // 猪当前技能
     public PigSkillController curSkillController;
-
+	// branzhao 当前地形效果附加技能
+	public PigSkillController curMapSubSkillController;
+	
     // cd箭头控制器
     public FilledArrowSpriteController fillArrowSpriteController;
 
@@ -253,6 +257,20 @@ public class PigPlayer : MonoBehaviour
         }
     }
 
+    // branzhao 猪在加速道路
+    public void PigPlayerSpeedupRoad()
+    {
+        
+        CheckMapSubSkillController();
+
+        if (curMapSubSkillController.AvailableNow() == 1)
+        {
+            Debug.Log("PigPlayerSpeedupRoad AvailableNow!");
+            // TODO 加滑行音效
+            curMapSubSkillController.UseSkill(this);
+        }
+    }
+
     // 添加持续更新的技能
     public void AddContinueSkills(ContinueSkill cs)
     {
@@ -316,7 +334,20 @@ public class PigPlayer : MonoBehaviour
             curSkillController = pigRushControllerInstance;
         }
     }
-    
+	
+	// branzhao 检查地形附加技能并做替换
+    public void CheckMapSubSkillController()
+    {
+        if((curMapSubSkillController != null && curMapSubSkillController.RemainNums() == 0) || (curMapSubSkillController == null))
+        {
+            if(curMapSubSkillController == null)
+                DestroyImmediate(mapSubSkillController);
+            curMapSubSkillController = Instantiate(mapSubSkillController, mTrans);
+            curMapSubSkillController.transform.position = mTrans.position;
+            curMapSubSkillController.transform.rotation = mTrans.rotation;
+        }
+    }
+	
     // 返回技能剩余冷却时间，同步到手机端
     public float RemainingColdingTime()
     {
