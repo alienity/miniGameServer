@@ -320,13 +320,36 @@ public class GroupPlayer : MonoBehaviour
     }
     
     // 猪的控制
+    private float prePigAngle=-1;
     public void PigMove(Vector3 dir)
     {
+        
         if (!isAlive || isSturn) return;
 
         pigPlayer.SetDirection(dir.normalized);
+
+        
+
+        float maxRotation = pigLockPenguDegree/2;
+        float pigY = pigPlayer.transform.rotation.eulerAngles.y;
+        float penguY = penguPlayer.transform.rotation.eulerAngles.y;
+        float angle = Mathf.Abs(pigY-penguY);
+        if(angle >maxRotation)
+        {
+            float drtaY;
+            if (Mathf.Abs(pigY - prePigAngle) < 1e-4) return; 
+            Quaternion tem_p = penguPlayer.transform.rotation;
+            if (prePigAngle < 90f && pigY > 270f) drtaY = maxRotation;
+            else if (prePigAngle > 270f && pigY < 90f) drtaY = -maxRotation;
+            else if (prePigAngle > pigY) drtaY = maxRotation;
+            else drtaY = -maxRotation;
+            tem_p.eulerAngles= new Vector3(0, pigY+drtaY, 0);
+            penguPlayer.transform.rotation = tem_p;
+             Debug.Log(pigY+" okr "+ prePigAngle + " "+drtaY);
+            
+        }
+            prePigAngle = pigY;
     }
-    
     // 猪受到雪球等的攻击后被击退
     public void EffectSpeedMovement(Vector3 addedSpeed)
     {
