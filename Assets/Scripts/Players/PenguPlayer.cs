@@ -24,18 +24,18 @@ public class PenguPlayer : MonoBehaviour
     private Animator animator;
     private int attackAnimId;
 
-    // 企鹅箭头
-    public SpriteRenderer arrowBoundRender;
+    //// 企鹅箭头
+    //public SpriteRenderer arrowBoundRender;
 
-    public SpriteRenderer filledArrowRender;
+    //public SpriteRenderer filledArrowRender;
 
+    // cd箭头控制器
     public FilledArrowSpriteController filledArrowSpriteController;
-//    private FilledArrowSpriteController filledArrowSpriteController;
 
-    // 箭头最长距离
-    public float arrowMaxRatio = 3f;
-    // 箭头最短距离
-    public float arrowMinRatio = 1f;
+    //// 箭头最长距离
+    //public float arrowMaxRatio = 3f;
+    //// 箭头最短距离
+    //public float arrowMinRatio = 1f;
 
     // 雪球出生前向偏移
     public float birthForward = 0.02f;
@@ -45,24 +45,17 @@ public class PenguPlayer : MonoBehaviour
 
     // 猪眩晕啥也不能干
     public bool IsSturn { get; set; }
-
     // 死亡
     public bool IsDie { get; set; }
-
-
-    private void Awake()
-    {
-        if (filledArrowSpriteController == null)
-        {
-            filledArrowSpriteController = FindObjectOfType<FilledArrowSpriteController>();
-        }
-    }
 
     // Use this for initialization
     void Start()
     {
         if (selfAudioSource == null)
             selfAudioSource = GetComponent<AudioSource>();
+
+        if (filledArrowSpriteController == null)
+            filledArrowSpriteController = GetComponentInChildren<FilledArrowSpriteController>();
 
         //暂时只加入一种声音
         selfAudioSource.clip = throwSnowBall;
@@ -85,6 +78,7 @@ public class PenguPlayer : MonoBehaviour
             mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
         */
 
+        // 设置cd进度
         filledArrowSpriteController.SetProgress(1 - RemainingColdingTime() / MaxColdingTime());
 
         // ********************测试代码*******************
@@ -176,15 +170,16 @@ public class PenguPlayer : MonoBehaviour
             curBallController = defaultSnowBallController;
         }
     }
-
+    
     // 设置箭头颜色
     public void SetArrowColor(Color arrowColor)
     {
-        arrowBoundRender.color = arrowColor;
-        filledArrowRender.color = arrowColor;
-        filledArrowRender.material.color = arrowColor;
+        //arrowBoundRender.color = arrowColor;
+        //filledArrowRender.color = arrowColor;
+        //filledArrowRender.material.color = arrowColor;
+        filledArrowSpriteController.SetArrowColor(arrowColor);
     }
-
+    /*
     // 修改箭头长度
     public void SetArrowLen(float arrowRatio)
     {
@@ -194,13 +189,14 @@ public class PenguPlayer : MonoBehaviour
         filledArrowRender.size = arrowSize;
         Debug.Log("filledArrowRender.size" + filledArrowRender.size + " arrowSize" + arrowSize + " arrowBoundRender.size: " + arrowBoundRender.size );
     }
-
+    */
     // 根据时间处理蓄力技能
     public void HandleChargeSkill(string processId, float currrentTime, int touchId)
     {
         Debug.Log(touchId);
         float ratio = curBallController.HandleChargeAttack(processId, currrentTime, touchId);
-        SetArrowLen(ratio);
+        //SetArrowLen(ratio);
+        filledArrowSpriteController.SetArrowLen(ratio);
         if(touchId == 1)
             PenguPlayerAttack();
     }
@@ -216,7 +212,8 @@ public class PenguPlayer : MonoBehaviour
                 animator.SetTrigger(attackAnimId);
                 Vector3 ballBirthPlace = mTrans.position + mTrans.forward * birthForward;
                 curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);
-                SetArrowLen(0);
+                //SetArrowLen(0);
+                filledArrowSpriteController.SetArrowLen(0);
             }
         }
         CheckSkillController();

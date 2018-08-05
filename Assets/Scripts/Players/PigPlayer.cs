@@ -56,6 +56,9 @@ public class PigPlayer : MonoBehaviour
     // 猪当前技能
     public PigSkillController curSkillController;
 
+    // cd箭头控制器
+    public FilledArrowSpriteController fillArrowSpriteController;
+
     // 保存猪常用的两个技能
     private PigSkillController pigRushControllerInstance;
     private PigSkillController pigSelfRescueControllerInstance;
@@ -75,6 +78,10 @@ public class PigPlayer : MonoBehaviour
             groupRd = GetComponentInParent<Rigidbody>();
         if(selfAudioSource == null)
             selfAudioSource = GetComponent<AudioSource>();
+
+        if (fillArrowSpriteController == null)
+            fillArrowSpriteController = GetComponentInChildren<FilledArrowSpriteController>();
+
         selfAudioSource.clip = runingClip;
 
         CheckSkillController();
@@ -88,6 +95,8 @@ public class PigPlayer : MonoBehaviour
         {
             shadowObj.transform.position = hit.point + 0.1f * Vector3.up;
         }
+        // 根据cd填充箭头
+        fillArrowSpriteController.SetProgress(1 - RemainingColdingTime() / MaxColdingTime());
 
         // ********************测试代码*******************
         /**/
@@ -180,6 +189,15 @@ public class PigPlayer : MonoBehaviour
         if (continueSkills != null)
             continueSkills(mTrans);
 
+    }
+
+    // 设置箭头颜色
+    public void SetArrowColor(Color arrowColor)
+    {
+        //arrowBoundRender.color = arrowColor;
+        //filledArrowRender.color = arrowColor;
+        //filledArrowRender.material.color = arrowColor;
+        fillArrowSpriteController.SetArrowColor(arrowColor);
     }
 
     public void StopSkillNow()

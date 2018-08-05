@@ -6,14 +6,6 @@ public class GroupPlayer : MonoBehaviour
 {
     // wwq 音源
     private AudioSource selfAudioSource;
-
-    //wwq slider
-    public Slider pigSlider, penguSlider;
-
-    public Image pigColdDown;
-
-    public Image pigColdDownBound;
-//    public Canvas
     //wwq effect
     public ParticleSystem dieEffect;
     // 死亡爆炸幅度
@@ -101,11 +93,11 @@ public class GroupPlayer : MonoBehaviour
         penguPlayer.gId = gId;
         //wwq
         penguPlayer.transform.parent = pigPlayer.transform;
-        
-        penguPlayer.SetArrowColor(groupColor);
 
-        pigColdDown.color = groupColor;
-        pigColdDownBound.color = groupColor;
+        penguPlayer.SetArrowColor(groupColor);
+        pigPlayer.SetArrowColor(groupColor);
+        //pigColdDown.color = groupColor;
+        //pigColdDownBound.color = groupColor;
     }
 
     private void Update()
@@ -119,11 +111,11 @@ public class GroupPlayer : MonoBehaviour
             attackerId = -1;
 
         // 冷却倒计时
-        pigSlider.maxValue = pigPlayer.MaxColdingTime();
-        penguSlider.maxValue = penguPlayer.MaxColdingTime();
-        pigSlider.value = pigSlider.maxValue - pigPlayer.RemainingColdingTime();
-        penguSlider.value = penguSlider.maxValue - penguPlayer.RemainingColdingTime();
-        pigColdDown.fillAmount = 1 - pigPlayer.RemainingColdingTime() / pigPlayer.MaxColdingTime();
+        //pigSlider.maxValue = pigPlayer.MaxColdingTime();
+        //penguSlider.maxValue = penguPlayer.MaxColdingTime();
+        //pigSlider.value = pigSlider.maxValue - pigPlayer.RemainingColdingTime();
+        //penguSlider.value = penguSlider.maxValue - penguPlayer.RemainingColdingTime();
+        //pigColdDown.fillAmount = 1 - pigPlayer.RemainingColdingTime() / pigPlayer.MaxColdingTime();
         //Debug.Log(penguSlider.value);
 
         // 当猪冲撞的时候，队伍是无敌的

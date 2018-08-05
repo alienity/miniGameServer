@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ArrowSpriteMaterial
+  m_Name: CircleSpriteMaterial
   m_Shader: {fileID: 4800000, guid: 9ed05a64a1dfd4a55a47139d6a58bcba, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
