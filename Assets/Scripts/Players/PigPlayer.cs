@@ -88,7 +88,36 @@ public class PigPlayer : MonoBehaviour
         {
             shadowObj.transform.position = hit.point + 0.1f * Vector3.up;
         }
-        
+
+        // ********************测试代码*******************
+        /**/
+        Vector3 m_newDir = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            m_newDir += Vector3.forward;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            m_newDir += Vector3.back;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            m_newDir += Vector3.left;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            m_newDir += Vector3.right;
+        }
+        SetDirection(m_newDir.normalized);
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            PigPlayerAttack();
+        }
+
+        // ********************测试代码*******************
+
     }
 
     private void FixedUpdate()
@@ -151,34 +180,6 @@ public class PigPlayer : MonoBehaviour
         if (continueSkills != null)
             continueSkills(mTrans);
 
-        // ********************测试代码*******************
-        /**/
-        Vector3 m_newDir = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            m_newDir += Vector3.forward;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            m_newDir += Vector3.back;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            m_newDir += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            m_newDir += Vector3.right;
-        }
-        SetDirection(m_newDir.normalized);
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            PigPlayerAttack();
-        }
-        
-        // ********************测试代码*******************
     }
 
     public void StopSkillNow()
@@ -195,17 +196,13 @@ public class PigPlayer : MonoBehaviour
         selfAudioSource.Stop();
     }
 
-    //// 设置组ID
-    //public void SetId(int gId, int pId)
-    //{
-    //    this.gId = gId;
-    //    this.playerId = pId;
-    //}
-
     // 捡物品
     public void CatchItem(PigSkillController pigSkillController)
     {
         curSkillController = pigSkillController;
+        curSkillController.transform.parent = mTrans;
+        curSkillController.transform.position = mTrans.position;
+        curSkillController.transform.rotation = mTrans.rotation;
     }
 
     // 设置移动方向

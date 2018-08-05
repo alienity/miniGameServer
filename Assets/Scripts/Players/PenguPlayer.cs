@@ -14,7 +14,7 @@ public class PenguPlayer : MonoBehaviour
     public float penguRotateSpeed;
     // 企鹅原始默认投掷控制器
     public SnowBallController snowBallController;
-    public SnowBallController defaultSnowBallController;
+    private SnowBallController defaultSnowBallController;
     // 且新捡到的投掷物品
     public ShotBallController curBallController;
     // 发雪球的音效
@@ -60,19 +60,10 @@ public class PenguPlayer : MonoBehaviour
         CheckSkillController();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
-        if (IsDie || IsSturn) return;
-
-        // 修改当前朝向
-        /*
-        if (penguCurDirection.magnitude != 0)
-            mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
-        */
-
         // ********************测试代码*******************
-        /*
+        /**/
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -95,10 +86,29 @@ public class PenguPlayer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            PenguPlayerAttack();
+            Debug.Log("攻击键");
+            float tm = Time.time;
+            HandleChargeSkill(tm.ToString(), Time.time, 0);
+            HandleChargeSkill(tm.ToString(), Time.time, 1);
+
+            //PenguPlayerAttack();
         }
-        */
+
         // ********************测试代码*******************
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (IsDie || IsSturn) return;
+
+        // 修改当前朝向
+        /*
+        if (penguCurDirection.magnitude != 0)
+            mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
+        */
+
+
 
     }
 
@@ -119,6 +129,9 @@ public class PenguPlayer : MonoBehaviour
     public void CatchItem(ShotBallController shotController)
     {
         curBallController = shotController;
+        curBallController.transform.parent = mTrans;
+        curBallController.transform.position = mTrans.position;
+        curBallController.transform.rotation = mTrans.rotation;
     }
     
     // 检查SkillController，如果没有雪球，则使用默认雪球
@@ -134,7 +147,7 @@ public class PenguPlayer : MonoBehaviour
         if ((curBallController != null && curBallController.RemainNums() == 0) || (curBallController == null))
         {
             if(curBallController != null)
-                DestroyImmediate(curBallController);
+                DestroyImmediate(curBallController.gameObject);
             curBallController = defaultSnowBallController;
         }
     }
@@ -156,10 +169,11 @@ public class PenguPlayer : MonoBehaviour
     // 根据时间处理蓄力技能
     public void HandleChargeSkill(string processId, float currrentTime, int touchId)
     {
-
+        Debug.Log(touchId);
         float ratio = curBallController.HandleChargeAttack(processId, currrentTime, touchId);
         SetArrowLen(ratio);
-        PenguPlayerAttack();
+        if(touchId == 1)
+            PenguPlayerAttack();
     }
 
     // 发射雪球

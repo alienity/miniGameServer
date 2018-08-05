@@ -112,6 +112,8 @@ public class SnowBall : ShotBall
     // 启动时添加粒子效果
     private void AddParticles()
     {
+        Debug.Log("生成ball时的粒子效果");
+
         impactNormal = mTrans.forward;
         projectileParticleInstance = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
         projectileParticleInstance.transform.parent = transform;

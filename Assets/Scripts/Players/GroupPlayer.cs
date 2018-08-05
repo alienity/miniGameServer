@@ -92,8 +92,6 @@ public class GroupPlayer : MonoBehaviour
             selfAudioSource = GetComponent<AudioSource>();
         if (scoreController == null)
             scoreController = FindObjectOfType<ScoreController>();
-        pigSlider.maxValue = pigSlider.value = pigPlayer.MaxColdingTime();
-        penguSlider.maxValue = penguSlider.value = penguPlayer.MaxColdingTime();
 
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
@@ -112,8 +110,10 @@ public class GroupPlayer : MonoBehaviour
             countdownPast -= Time.deltaTime;
         else
             attackerId = -1;
-        
+
         // 冷却倒计时
+        pigSlider.maxValue = pigPlayer.MaxColdingTime();
+        penguSlider.maxValue = penguPlayer.MaxColdingTime();
         pigSlider.value = pigSlider.maxValue - pigPlayer.RemainingColdingTime();
         penguSlider.value = penguSlider.maxValue - penguPlayer.RemainingColdingTime();
         //Debug.Log(penguSlider.value);
@@ -242,15 +242,7 @@ public class GroupPlayer : MonoBehaviour
     {
         scoreController = sc;
     }
-
-    //// 计时无敌时间的协程
-    //IEnumerator InvincibleCoroutine()
-    //{
-    //    isInvincible = true;
-    //    yield return new WaitForSeconds(rebornRestTime);
-    //    isInvincible = false;
-    //}
-
+    
     // 在指定位置重生
     public IEnumerator ReBorn(Transform reBirthTrans)
     {
@@ -273,6 +265,7 @@ public class GroupPlayer : MonoBehaviour
             isAlive = true;
         }
     }
+
     void DieEffect()
     {
         ParticleSystem curEffect;
@@ -281,8 +274,7 @@ public class GroupPlayer : MonoBehaviour
         curEffect.transform.position = gameObject.transform.position;
         Destroy(curEffect.gameObject, 1);
     }
-
-
+    
     IEnumerator LightCircleDown()
     {
         if (rebornCircleEffectInstance == null)
@@ -354,12 +346,6 @@ public class GroupPlayer : MonoBehaviour
         pigPlayer.ReceiveForce(addedForce);
     }
 
-    //// 猪是否在悬崖边的状态切换方法
-    //public void IsSurivalSkillNow(bool status)
-    //{
-    //    pigPlayer.isSurivalSkillNow = status;
-    //}
-    // 猪发动技能
     public void PigAttack()
     {
         if (!isAlive || isSturn) return;

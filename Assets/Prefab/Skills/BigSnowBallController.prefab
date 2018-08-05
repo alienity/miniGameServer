@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4518124165353810}
-  - component: {fileID: 114138809279114266}
+  - component: {fileID: 114736487147631274}
   m_Layer: 0
   m_Name: BigSnowBallController
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114138809279114266
+--- !u!114 &114736487147631274
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,9 +48,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1781262889899974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccaa89f33999ebb43b69fb393c280e43, type: 3}
+  m_Script: {fileID: 11500000, guid: 45f2d1f9aaec4d64889cfab1069c7e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 114021379439471926, guid: 71b8cadf7aa4fc744af4dc731fc48ef6, type: 2}
-  maxColdingTime: 2
+  ball: {fileID: 114021379439471926, guid: 9ae8ec88a6996c34a9b5b62226697186, type: 2}
+  maxColdingTime: 5
   maxChargeTime: 3
+  remainBallNums: 5
