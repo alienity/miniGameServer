@@ -11,8 +11,8 @@ public class ClientScenChangeUtil
     }
     public static void ChangeAllClientStage(Stage stage)
     {
-        StageTransferMsg sceneTransferMsg = new StageTransferMsg(stage);
-        NetworkServer.SendToAll(CustomMsgType.Stage, sceneTransferMsg);
+        StageTransferMsg stageTransferMsg = new StageTransferMsg(stage);
+        NetworkServer.SendToAll(CustomMsgType.Stage, stageTransferMsg);
     }
 
 //    private string StageToScene(Stage stage)

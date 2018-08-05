@@ -155,11 +155,10 @@ public class Server : MonoBehaviour
         Debug.Log("client connected asddress" + netmsg.conn.address);
         
         reconnectHandler.OnClientConnect(netmsg);
-//        connections.Add(netmsg.conn.connectionId);
         // 人数到达游戏人数后，发送消息给client切换到选人界面 
         if (stage == Stage.Prepare )
         {
-            ClientScenChangeUtil.ChangeAllClientStage(Stage.Prepare);
+            ClientScenChangeUtil.ChangeAllClientStage(Stage.ConnectedToChooseRoomStage);
             if (kownSessions.Count == roleChooseHandler.toNumberTransfer)
             {
                 ClientScenChangeUtil.ChangeAllClientStage(Stage.ChoosingRoleStage);
@@ -169,7 +168,6 @@ public class Server : MonoBehaviour
 
         }
     }
-
 
     public void ClearData()
     {

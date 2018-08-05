@@ -6,5 +6,7 @@
     GammingStage,
     OfflineStage,    //客户端掉线界面
     GameOverStage,
-    ChangeNameStage
+    ChangeNameStage,
+    ProducerListStage,
+    ConnectedToChooseRoomStage // 表示开始游戏后连接到服务器但是还没开始选角色的界面
 }

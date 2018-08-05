@@ -40,7 +40,6 @@ public class GameOverSceneController : MonoBehaviour {
         //server.StopBroadCast();
         Server.Instance.stage = Stage.Prepare;
         Server.Instance.ClearData();
-//        NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.StartStage));
         SceneTransformer.TransferScene("ChooseRoleScene");
     }
 
