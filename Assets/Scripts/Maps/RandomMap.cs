@@ -10,6 +10,8 @@ public class RandomMap : MonoBehaviour {
     public int cloneNum;
     private int clonedNum;
     private System.Random rand;
+    public List<Transform> reBorns;
+   
     void Start () {
         pos = new int[10];
         clonedNum = 0;
@@ -35,7 +37,8 @@ public class RandomMap : MonoBehaviour {
 	}
     private void setMap(int idx)
     {
-        Instantiate(cloneObject,new Vector3(idx / 3 + 2.5f, 0, idx % 3 + 2.5f), Quaternion.identity);
+        Instantiate(cloneObject,reBorns[idx]);
+        Debug.Log("chu xian zai "+ reBorns[idx].position.ToString());
     }
     public void getObject()
     {
