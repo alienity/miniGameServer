@@ -53,7 +53,7 @@ public class PigPlayer : MonoBehaviour
     public PigSkillController pigRushController;
     // 猪自救技能
     public PigSkillController pigSelfRescueController;
-	// branzhao 当前地形效果附加技能
+	// branzhao 地形效果附加技能
 	public PigSkillController mapSubSkillController;
     // 猪当前技能
     public PigSkillController curSkillController;

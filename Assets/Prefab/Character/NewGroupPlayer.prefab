@@ -4172,7 +4172,11 @@ MonoBehaviour:
     type: 2}
   pigSelfRescueController: {fileID: 114582548477380434, guid: 6df05bcc3f19a1c4b9c7f67c0bdbe5c3,
     type: 2}
+  mapSubSkillController: {fileID: 114531140733444230, guid: 578d61a860ad1024c99e4d028af6b4fb,
+    type: 2}
   curSkillController: {fileID: 0}
+  curMapSubSkillController: {fileID: 114531140733444230, guid: 578d61a860ad1024c99e4d028af6b4fb,
+    type: 2}
   fillArrowSpriteController: {fileID: 114841675193736420}
 --- !u!114 &114044691137228308
 MonoBehaviour:
