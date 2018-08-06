@@ -11,8 +11,10 @@ public class RandomMap : MonoBehaviour {
     private int clonedNum;
     private System.Random rand;
     public List<Transform> reBorns;
-   
+    public float reBornCD;
+    private float reTimes;
     void Start () {
+        reTimes = -1;
         pos = new int[10];
         clonedNum = 0;
         for (int i = 0; i < 9; i++)
@@ -22,26 +24,31 @@ public class RandomMap : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (clonedNum <cloneNum)
+        if (reTimes < 0)
         {
-            int rpos = rand.Next(9 - clonedNum);
-            int x = pos[rpos];
-            setMap(x);
-            clonedNum++;
+            if (clonedNum < cloneNum)
+            {
+                int rpos = rand.Next(9 - clonedNum);
+                int x = pos[rpos];
+                setMap(x);
+                clonedNum++;
 
-            pos[rpos] += pos[9 - clonedNum];
-            pos[9 - clonedNum] = pos[rpos] - pos[9 - clonedNum];
-            pos[rpos] = pos[rpos] - pos[9 - clonedNum];
-            //x;
+                pos[rpos] += pos[9 - clonedNum];
+                pos[9 - clonedNum] = pos[rpos] - pos[9 - clonedNum];
+                pos[rpos] = pos[rpos] - pos[9 - clonedNum];
+                //x;
+            }
         }
+        else reTimes -= Time.deltaTime;
 	}
     private void setMap(int idx)
     {
         Instantiate(cloneObject,reBorns[idx]);
-        Debug.Log("chu xian zai "+ reBorns[idx].position.ToString());
+        
     }
     public void getObject()
     {
         clonedNum--;
+        reTimes = reBornCD;
     }
 }
