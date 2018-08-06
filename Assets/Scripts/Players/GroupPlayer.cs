@@ -91,8 +91,7 @@ public class GroupPlayer : MonoBehaviour
             scoreController = FindObjectOfType<ScoreController>();
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
-        //wwq
-        penguPlayer.transform.parent = pigPlayer.transform;
+       
 
         penguPlayer.SetArrowColor(groupColor);
         pigPlayer.SetArrowColor(groupColor);
