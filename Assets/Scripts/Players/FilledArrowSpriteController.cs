@@ -20,7 +20,7 @@ public class FilledArrowSpriteController : MonoBehaviour
     // 最小拉伸距离比例
     public float arrowMinRatio = 1.6f;
 
-    private void Start()
+    private void Awake()
 	{
         boardSpriteMaterial = boardSpriteRender.material;
         fillSpriteMaterial = fillSpriteRender.material;

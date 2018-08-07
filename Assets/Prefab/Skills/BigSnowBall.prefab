@@ -58,7 +58,7 @@ MonoBehaviour:
   flySpeed: 20
   flySpeedAdd: 3
   flyTime: 5
-  suddenSpeed: 30
+  suddenSpeed: 40
   attackStrength: 8
   cancelTouchDuring: 0.4
   impactParticle: {fileID: 153912, guid: 932046b7eaf3b554f8d74c81e2f00558, type: 2}

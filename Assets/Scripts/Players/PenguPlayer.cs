@@ -9,7 +9,7 @@ public class PenguPlayer : MonoBehaviour
     private const int uId = 1;
 
     // 企鹅攻击指向
-    public Vector3 penguCurDirection;
+    public Vector3 penguCurDirection = Vector3.forward;
     // 企鹅转向速率
     public float penguRotateSpeed;
     // 企鹅原始默认投掷控制器
@@ -23,20 +23,10 @@ public class PenguPlayer : MonoBehaviour
     // 动画控制器
     private Animator animator;
     private int attackAnimId;
-
-    //// 企鹅箭头
-    //public SpriteRenderer arrowBoundRender;
-
-    //public SpriteRenderer filledArrowRender;
-
+    
     // cd箭头控制器
     public FilledArrowSpriteController filledArrowSpriteController;
-
-    //// 箭头最长距离
-    //public float arrowMaxRatio = 3f;
-    //// 箭头最短距离
-    //public float arrowMinRatio = 1f;
-
+    
     // 雪球出生前向偏移
     public float birthForward = 0.02f;
 
@@ -47,7 +37,7 @@ public class PenguPlayer : MonoBehaviour
     public bool IsSturn { get; set; }
     // 死亡
     public bool IsDie { get; set; }
-
+    
     // Use this for initialization
     void Start()
     {
@@ -60,8 +50,10 @@ public class PenguPlayer : MonoBehaviour
         //暂时只加入一种声音
         selfAudioSource.clip = throwSnowBall;
 
+        // 自身Trans
         mTrans = GetComponent<Transform>();
 
+        // 动画播放
         animator = GetComponent<Animator>();
         attackAnimId = Animator.StringToHash("shot");
 
@@ -119,16 +111,11 @@ public class PenguPlayer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (IsDie || IsSturn) return;
-
         // 修改当前朝向
-        /*
-        if (penguCurDirection.magnitude != 0)
-            mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
-        */
-
-
-
+        mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
+        
+        if (IsDie || IsSturn) return;
+        
     }
 
     public void Reset()
@@ -141,12 +128,16 @@ public class PenguPlayer : MonoBehaviour
     {
         if (dir.magnitude == 0 || IsSturn) return;
         penguCurDirection = dir;
-        mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
+        //mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
     }
 
     // 捡物品
     public void CatchItem(ShotBallController shotController)
     {
+
+        if (curBallController != null)
+            Destroy(curBallController.gameObject);
+
         curBallController = shotController;
         curBallController.transform.parent = mTrans;
         curBallController.transform.position = mTrans.position;

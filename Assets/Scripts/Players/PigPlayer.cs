@@ -67,8 +67,9 @@ public class PigPlayer : MonoBehaviour
     private PigSkillController pigRushControllerInstance;
     private PigSkillController pigSelfRescueControllerInstance;
 
-    // 用于技能切换时暂存技能
-
+    // 临时存
+    public GroupPlayer curGroupPlayer;
+    
     // Use this for initialization
     void Start()
     {
@@ -79,7 +80,9 @@ public class PigPlayer : MonoBehaviour
         if (groupTrans == null)
             groupTrans = GetComponentInParent<Transform>();
         if(groupRd == null)
+        {
             groupRd = GetComponentInParent<Rigidbody>();
+        }
         if(selfAudioSource == null)
             selfAudioSource = GetComponent<AudioSource>();
 
@@ -103,7 +106,7 @@ public class PigPlayer : MonoBehaviour
         fillArrowSpriteController.SetProgress(1 - RemainingColdingTime() / MaxColdingTime());
 
         // ********************测试代码*******************
-        /**/
+        /*
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
@@ -128,15 +131,23 @@ public class PigPlayer : MonoBehaviour
         {
             PigPlayerAttack();
         }
-
+        */
         // ********************测试代码*******************
 
     }
-
+    /**/
     private void FixedUpdate()
     {
+
         // 修改箭头指向
         mTrans.rotation = Quaternion.LookRotation(pigCurDirection);
+
+        if (IsSturn)
+        {
+            animator.SetFloat(runSpeedId, 0);
+            selfAudioSource.Stop();
+            return;
+        }
         
         // 根据移动速度更改音乐播放
         Vector2 horizontalVel = new Vector2(groupRd.velocity.x, groupRd.velocity.z);
@@ -184,7 +195,7 @@ public class PigPlayer : MonoBehaviour
                     groupRd.AddForce(velocityDirection * groupRd.drag);
                 // 偏移
                 Vector3 biasForce = velocityCrossDirection * (groupRd.drag + accForce * sinDegree);
-                if(biasForce.magnitude != 0)
+                if(biasForce.magnitude >= 0.01)
                     groupRd.AddForce(biasForce);
             }
         }
@@ -198,9 +209,6 @@ public class PigPlayer : MonoBehaviour
     // 设置箭头颜色
     public void SetArrowColor(Color arrowColor)
     {
-        //arrowBoundRender.color = arrowColor;
-        //filledArrowRender.color = arrowColor;
-        //filledArrowRender.material.color = arrowColor;
         fillArrowSpriteController.SetArrowColor(arrowColor);
     }
 
@@ -240,7 +248,7 @@ public class PigPlayer : MonoBehaviour
     // 发动冲刺
     public void PigPlayerAttack()
     {
-        if (IsSturn || IsSturn) return;
+        if (IsSturn) return;
 
         Debug.Log("pig Attack");
         CheckSkillController();

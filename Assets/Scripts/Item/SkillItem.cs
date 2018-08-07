@@ -17,6 +17,9 @@ public class SkillItem : MonoBehaviour {
     // 正在获取道具的玩家是谁
     private GroupPlayer capturingGroupPlayer;
 
+    // 被拾取后的回调函数
+    public System.Action noticeGenerator;
+
 	// Use this for initialization
 	void Start () {
         if (skillController == null)
@@ -33,7 +36,14 @@ public class SkillItem : MonoBehaviour {
             GroupPlayer groupPlayer = other.GetComponent<GroupPlayer>();
             capturingGroupPlayer = groupPlayer;
             if (groupPlayer.CatchItem(this))
+            {
+                if (noticeGenerator != null)
+                {
+                    noticeGenerator();
+                    noticeGenerator = null;
+                }
                 Destroy(gameObject);
+            }
         }
     }
 

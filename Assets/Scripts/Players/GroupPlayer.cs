@@ -4,6 +4,13 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 public class GroupPlayer : MonoBehaviour
 {
+
+    public enum PlayerType
+    {
+        PENGU,  // 企鹅玩家
+        PIG     // 猪玩家
+    }
+
     // wwq 音源
     private AudioSource selfAudioSource;
     //wwq effect
@@ -16,12 +23,6 @@ public class GroupPlayer : MonoBehaviour
     // 眩晕对象
     public GameObject stunEffect;
 
-    public enum PlayerType
-    {
-        PENGU,  // 企鹅玩家
-        PIG     // 猪玩家
-    }
-
     // 组ID
     public int gId;
     // 活着
@@ -30,36 +31,26 @@ public class GroupPlayer : MonoBehaviour
     private bool isInvincible = false;
     // 晕眩
     private bool isSturn = false;
-
-    // 队伍在悬崖上
-    public bool IsSurivalSkillNow {
-        get { return pigPlayer.IsSurivalSkillNow; }
-        set { pigPlayer.IsSurivalSkillNow = value; }
-    }
-
-    // 猪对企鹅的限制角度
-    public float pigLockPenguDegree = 180;
-
+    
     // 死亡后重生等待时间
     [SerializeField] private float rebornDelay = 0;
-    //// 重生无敌时间
-    //public float rebornRestTime = 3f;
 
     // 组的颜色
-    private Color groupColor;
+    private Color groupColor = Color.black;
     // 队伍Trans
     public Transform groupTrans;
     
     // 被某个组攻击到，该组的ID
-    [SerializeField] private int attackerId = -1;
+    private int attackerId = -1;
     // 重置攻击者倒计时时长
-    [SerializeField] private float countdownTime = 30;
+    public float countdownTime = 30;
     // 重置计时
-    private float countdownPast = 0;
+    public float countdownPast = 0;
+    // 反弹强度
+    public float springStrength = 6f;
 
     // 猪无敌
-    [HideInInspector]
-    public bool isInvulnerable { get; private set; }
+    [HideInInspector] public bool isInvulnerable { get; private set; }
 
     // 分数控制器
     private ScoreController scoreController;
@@ -71,7 +62,7 @@ public class GroupPlayer : MonoBehaviour
     [SerializeField] private int toKillerScore = 15;
 
     // 组内玩家
-    [SerializeField] private PigPlayer pigPlayer;
+    [SerializeField] public PigPlayer pigPlayer;
     [SerializeField] private PenguPlayer penguPlayer;
 
     // 被撞击音效
@@ -79,7 +70,12 @@ public class GroupPlayer : MonoBehaviour
     public AudioClip rebornAudio;
     public bool IsAlive { get { return isAlive; } }
     public bool IsInvincible { get { return isInvincible; } }
-    
+    // 队伍在悬崖上
+    public bool IsSurivalSkillNow
+    {
+        get { return pigPlayer.IsSurivalSkillNow; }
+        set { pigPlayer.IsSurivalSkillNow = value; }
+    }
 
     private void Start()
     {
@@ -92,9 +88,9 @@ public class GroupPlayer : MonoBehaviour
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
        
-
         penguPlayer.SetArrowColor(groupColor);
         pigPlayer.SetArrowColor(groupColor);
+        pigPlayer.curGroupPlayer = this;
         //pigColdDown.color = groupColor;
         //pigColdDownBound.color = groupColor;
     }
@@ -109,14 +105,6 @@ public class GroupPlayer : MonoBehaviour
         else
             attackerId = -1;
 
-        // 冷却倒计时
-        //pigSlider.maxValue = pigPlayer.MaxColdingTime();
-        //penguSlider.maxValue = penguPlayer.MaxColdingTime();
-        //pigSlider.value = pigSlider.maxValue - pigPlayer.RemainingColdingTime();
-        //penguSlider.value = penguSlider.maxValue - penguPlayer.RemainingColdingTime();
-        //pigColdDown.fillAmount = 1 - pigPlayer.RemainingColdingTime() / pigPlayer.MaxColdingTime();
-        //Debug.Log(penguSlider.value);
-
         // 当猪冲撞的时候，队伍是无敌的
         isInvulnerable = pigPlayer.IsCrazy;
 
@@ -125,32 +113,8 @@ public class GroupPlayer : MonoBehaviour
         penguPlayer.IsSturn = isSturn;
 
         stunEffect.SetActive(isSturn);
-
+        
     }
-
-    // 玩家相互碰撞后记录碰撞体是谁的
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        GroupPlayer otherGroup = collision.gameObject.GetComponent<GroupPlayer>();
-    //        attackerId = otherGroup.gId;
-    //        countdownPast = countdownTime;
-
-    //        Debug.Log("两只猪相撞");
-
-    //        if (pigPlayer.IsCrazy && !isSturn)
-    //        {
-    //            if (otherGroup.pigPlayer.curSkillController is PigRushController)
-    //            {
-    //                PigRushController pigCurSkill = otherGroup.pigPlayer.curSkillController as PigRushController;
-    //                float sturnDuring = pigCurSkill.sturnDuring;
-    //                StartCoroutine(SturnPlayer(sturnDuring, otherGroup));
-    //                pigPlayer.StopSkillNow();
-    //            }
-    //        }
-    //    }
-    //}
 
     private void OnCollisionStay(Collision collision)
     {
@@ -164,6 +128,13 @@ public class GroupPlayer : MonoBehaviour
             {
                 if (otherGroup.pigPlayer.curSkillController is PigRushController)
                 {
+                    otherGroup.SendViberateToGroup();
+
+                    Vector3 curToTargetDirection = (otherGroup.transform.position - transform.position).normalized;
+
+                    GetComponent<Rigidbody>().velocity += -1 * curToTargetDirection * springStrength;
+                    otherGroup.GetComponent<Rigidbody>().velocity += curToTargetDirection * springStrength;
+
                     PigRushController pigCurSkill = otherGroup.pigPlayer.curSkillController as PigRushController;
                     float sturnDuring = pigCurSkill.sturnDuring;
                     StartCoroutine(SturnPlayer(sturnDuring, otherGroup));
@@ -172,10 +143,9 @@ public class GroupPlayer : MonoBehaviour
             }
         }
     }
-
+    
     IEnumerator SturnPlayer(float during, GroupPlayer gp)
     {
-        gp.GetComponent<Rigidbody>().velocity = Vector3.zero;
         gp.isSturn = true;
         yield return new WaitForSeconds(during);
         gp.isSturn = false;
@@ -204,6 +174,7 @@ public class GroupPlayer : MonoBehaviour
     public void Die()
     {
         isAlive = false;
+        isSturn = false;
 
         DieEffect();
         
@@ -319,7 +290,6 @@ public class GroupPlayer : MonoBehaviour
     }
     
     // 猪的控制
-    private float prePigAngle=-1;
     public void PigMove(Vector3 dir)
     {
         
@@ -327,8 +297,8 @@ public class GroupPlayer : MonoBehaviour
 
         pigPlayer.SetDirection(dir.normalized);
 
-        
 
+        /*
         float maxRotation = pigLockPenguDegree/2;
         float pigY = pigPlayer.transform.rotation.eulerAngles.y;
         float penguY = penguPlayer.transform.rotation.eulerAngles.y;
@@ -348,6 +318,7 @@ public class GroupPlayer : MonoBehaviour
             
         }
             prePigAngle = pigY;
+        */
     }
     // 猪受到雪球等的攻击后被击退
     public void EffectSpeedMovement(Vector3 addedSpeed)
@@ -387,9 +358,10 @@ public class GroupPlayer : MonoBehaviour
         if (!isAlive || isSturn) return;
         float dot = Vector3.Dot(pigPlayer.pigCurDirection, dir.normalized);
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-//        Debug.Log(angle);
+        //        Debug.Log(angle);
         //
-        if (angle < pigLockPenguDegree / 2) penguPlayer.SetArrowDirection(dir.normalized);
+        //if (angle < pigLockPenguDegree / 2) penguPlayer.SetArrowDirection(dir.normalized);
+        penguPlayer.SetArrowDirection(dir.normalized);
     }
     
     // 企鹅蓄力攻击
@@ -450,7 +422,7 @@ public class GroupPlayer : MonoBehaviour
     
     
     // 向猪和企鹅发送震动信息
-    private void SendViberateToGroup()
+    public void SendViberateToGroup()
     {
         int roleId = gId * 2;
         for (int i = 0; i < 2; i++)

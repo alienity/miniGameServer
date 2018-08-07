@@ -6,13 +6,14 @@ using System;
 public class RandomMap : MonoBehaviour {
 
 	private int[] pos;
-    public GameObject cloneObject;
+    public SkillItem skillItem;
     public int cloneNum;
     private int clonedNum;
     private System.Random rand;
     public List<Transform> reBorns;
     public float reBornCD;
     private float reTimes;
+
     void Start () {
         reTimes = -1;
         pos = new int[10];
@@ -41,11 +42,17 @@ public class RandomMap : MonoBehaviour {
         }
         else reTimes -= Time.deltaTime;
 	}
+
+    // 
     private void setMap(int idx)
     {
-        Instantiate(cloneObject,reBorns[idx]);
-        
+        GameObject curSkillItemObj = Instantiate(skillItem.gameObject, reBorns[idx]);
+        curSkillItemObj.transform.position = reBorns[idx].transform.position;
+        curSkillItemObj.transform.rotation = reBorns[idx].transform.rotation;
+        curSkillItemObj.GetComponent<SkillItem>().noticeGenerator = getObject;
     }
+
+    // 物品被拾取后的回调函数
     public void getObject()
     {
         clonedNum--;
