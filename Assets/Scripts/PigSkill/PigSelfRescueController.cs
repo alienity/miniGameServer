@@ -33,7 +33,8 @@ public class PigSelfRescueController : PigSkillController {
             PigPlayerSurvival(SelfRescueSpeed);
             remainColdingTime = maxColdingTime;
 
-            fartInstance.Emit(10);
+            fartInstance.Play();
+            //fartInstance.Emit(10);
         }
     }
 
@@ -55,7 +56,7 @@ public class PigSelfRescueController : PigSkillController {
     {
         fartInstance = Instantiate(fartParticleEffects) as ParticleSystem;
         fartInstance.transform.parent = transform;
-        fartInstance.transform.position = transform.position + Vector3.up + Vector3.left * 1.2f;
+        fartInstance.transform.position = transform.position + Vector3.up + Vector3.left * 2f;// 旧版屁特效此处是1.2f
         fartInstance.transform.rotation = Quaternion.Inverse(transform.rotation);
     }
 

@@ -67,7 +67,8 @@ public class PigRushController : PigSkillController {
             pigPastTime = 0;
             remainColdingTime = maxColdingTime;
 
-            fartInstance.Emit(10);
+            fartInstance.Play();
+            //fartInstance.Emit(10);
             //fartInstance.Simulate(3f);
 
             StartCoroutine(Invulnerator());
@@ -94,7 +95,7 @@ public class PigRushController : PigSkillController {
     {
         fartInstance = Instantiate(fartParticleEffects) as ParticleSystem;
         fartInstance.transform.parent = transform;
-        fartInstance.transform.position = transform.position + Vector3.up + Vector3.left * 1.2f;
+        fartInstance.transform.position = transform.position + Vector3.up + Vector3.left * 2f;// 旧版屁特效此处是1.2f
         fartInstance.transform.rotation = Quaternion.Inverse(transform.rotation);
     }
 
