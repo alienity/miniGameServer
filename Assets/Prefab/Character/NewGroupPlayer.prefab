@@ -1065,6 +1065,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1542160004828140
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4742213816036534}
+  m_Layer: 0
+  m_Name: attackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1547002879379270
 GameObject:
   m_ObjectHideFlags: 1
@@ -1140,6 +1155,21 @@ GameObject:
   - component: {fileID: 4215072173016000}
   m_Layer: 0
   m_Name: Elbow_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1585137787378214
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4796638340159420}
+  m_Layer: 0
+  m_Name: bum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2216,6 +2246,7 @@ Transform:
   - {fileID: 4327919970504636}
   - {fileID: 4339264230711338}
   - {fileID: 4678171427617536}
+  - {fileID: 4742213816036534}
   m_Father: {fileID: 4473423072795734}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3151,6 +3182,19 @@ Transform:
   m_Father: {fileID: 4269730571863760}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4742213816036534
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1542160004828140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.148, z: 0.623}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4221940229857294}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4748224361009682
 Transform:
   m_ObjectHideFlags: 1
@@ -3193,6 +3237,7 @@ Transform:
   - {fileID: 4558380527049806}
   - {fileID: 4147488812081846}
   - {fileID: 4375921022091978}
+  - {fileID: 4796638340159420}
   m_Father: {fileID: 4473423072795734}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3223,6 +3268,19 @@ Transform:
   - {fileID: 4855414397697076}
   m_Father: {fileID: 4132849688383482}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4796638340159420
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1585137787378214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.422, z: -0.662}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4763977565903024}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4808449891178174
 Transform:
@@ -4160,10 +4218,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groupTrans: {fileID: 4473423072795734}
   groupRd: {fileID: 0}
+  bumTrans: {fileID: 4796638340159420}
   accForce: 160
   pigCurDirection: {x: 1, y: 0, z: 0}
   pigMoveDirection: {x: 0, y: 0, z: 0}
   pigNormalSpeed: 8
+  pigRotateSpeed: 12
   runingClip: {fileID: 8300000, guid: fd086fef254f64f43b61ca633cfd94c7, type: 3}
   rushClip: {fileID: 8300000, guid: 27c34fdfa595ea8458bcf19cead4ba93, type: 3}
   maxAudioRatio: 1.5
@@ -4178,7 +4238,6 @@ MonoBehaviour:
   curMapSubSkillController: {fileID: 114531140733444230, guid: 578d61a860ad1024c99e4d028af6b4fb,
     type: 2}
   fillArrowSpriteController: {fileID: 114841675193736420}
-  curGroupPlayer: {fileID: 114496643577708858}
 --- !u!114 &114044691137228308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4269,7 +4328,8 @@ MonoBehaviour:
   curBallController: {fileID: 0}
   throwSnowBall: {fileID: 8300000, guid: 5715524742f313843a1b9986a0b379b2, type: 3}
   filledArrowSpriteController: {fileID: 114044691137228308}
-  birthForward: 0.02
+  attackTrans: {fileID: 4742213816036534}
+  rotateSpeed: 16
 --- !u!136 &136098461612531256
 CapsuleCollider:
   m_ObjectHideFlags: 1

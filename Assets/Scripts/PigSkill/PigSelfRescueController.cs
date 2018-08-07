@@ -54,10 +54,9 @@ public class PigSelfRescueController : PigSkillController {
     }
     private void InitialParticles()
     {
-        fartInstance = Instantiate(fartParticleEffects) as ParticleSystem;
-        fartInstance.transform.parent = transform;
-        fartInstance.transform.position = transform.position + Vector3.up + Vector3.left * 2f;// 旧版屁特效此处是1.2f
-        fartInstance.transform.rotation = Quaternion.Inverse(transform.rotation);
+        fartInstance = Instantiate(fartParticleEffects, transform) as ParticleSystem;
+        fartInstance.transform.position = transform.position;
+        fartInstance.transform.rotation = transform.rotation;
     }
 
 }

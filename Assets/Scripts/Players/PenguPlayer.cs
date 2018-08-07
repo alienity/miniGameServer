@@ -26,12 +26,13 @@ public class PenguPlayer : MonoBehaviour
     
     // cd箭头控制器
     public FilledArrowSpriteController filledArrowSpriteController;
-    
-    // 雪球出生前向偏移
-    public float birthForward = 0.02f;
 
+    // 雪球出生前向偏移
+    public Transform attackTrans;
     // 自身transform
     private Transform mTrans;
+    // 旋转速度
+    public float rotateSpeed;
 
     // 猪眩晕啥也不能干
     public bool IsSturn { get; set; }
@@ -74,7 +75,7 @@ public class PenguPlayer : MonoBehaviour
         filledArrowSpriteController.SetProgress(1 - RemainingColdingTime() / MaxColdingTime());
 
         // ********************测试代码*******************
-        /**/
+        /*
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -104,7 +105,7 @@ public class PenguPlayer : MonoBehaviour
 
             //PenguPlayerAttack();
         }
-
+        */
         // ********************测试代码*******************
     }
 
@@ -112,8 +113,9 @@ public class PenguPlayer : MonoBehaviour
     void FixedUpdate()
     {
         // 修改当前朝向
-        mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
-        
+        mTrans.rotation = Quaternion.Lerp(mTrans.rotation, Quaternion.LookRotation(penguCurDirection), Time.deltaTime * rotateSpeed);
+        //mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
+
         if (IsDie || IsSturn) return;
         
     }
@@ -201,8 +203,7 @@ public class PenguPlayer : MonoBehaviour
             {
                 selfAudioSource.Play();
                 animator.SetTrigger(attackAnimId);
-                Vector3 ballBirthPlace = mTrans.position + mTrans.forward * birthForward;
-                curBallController.UseBall(gId, ballBirthPlace, mTrans.rotation);
+                curBallController.UseBall(gId, attackTrans.position, mTrans.rotation);
                 //SetArrowLen(0);
                 filledArrowSpriteController.SetArrowLen(0);
             }

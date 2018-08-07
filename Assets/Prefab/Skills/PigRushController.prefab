@@ -55,6 +55,6 @@ MonoBehaviour:
   pigRushForce: 500
   pigRushTime: 0.2
   invulnerableTime: 2
-  fartParticleEffects: {fileID: 198217452433240598, guid: 6dd84d5ebde886b4d8b3dabc15871e24,
+  fartParticleEffects: {fileID: 19820506, guid: 836a6e787e3b11941b38b8fff2af4e5b,
     type: 2}
   sturnDuring: 0.5

@@ -53,5 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxColdingTime: 0.1
   SelfRescueSpeed: 2
-  fartParticleEffects: {fileID: 198217452433240598, guid: 6dd84d5ebde886b4d8b3dabc15871e24,
+  fartParticleEffects: {fileID: 19820506, guid: 836a6e787e3b11941b38b8fff2af4e5b,
     type: 2}

@@ -17,15 +17,19 @@ public class PigPlayer : MonoBehaviour
     private Transform mTrans;
     // 要移动的对象
     public Rigidbody groupRd;
-    
+    // 猪屁股的位置
+    public Transform bumTrans;
+
     // 维持猪的加速度给的力
     public float accForce;
     // 猪箭头指向
-    public Vector3 pigCurDirection = Vector3.forward;
+    [HideInInspector] public Vector3 pigCurDirection = Vector3.forward;
     // 猪移动向量
-    public Vector3 pigMoveDirection;
+    [HideInInspector] public Vector3 pigMoveDirection;
     // 猪正常移动速度
     public float pigNormalSpeed;
+    // 猪的旋转速度
+    public float pigRotateSpeed;
 
     // 猪冲撞时能冲撞走球
     public bool IsCrazy { get; set; }
@@ -66,11 +70,7 @@ public class PigPlayer : MonoBehaviour
     // 保存猪常用的两个技能
     private PigSkillController pigRushControllerInstance;
     private PigSkillController pigSelfRescueControllerInstance;
-
-    // 临时存
-    public GroupPlayer curGroupPlayer;
     
-    // Use this for initialization
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -140,7 +140,9 @@ public class PigPlayer : MonoBehaviour
     {
 
         // 修改箭头指向
-        mTrans.rotation = Quaternion.LookRotation(pigCurDirection);
+        mTrans.rotation = Quaternion.Lerp(mTrans.rotation, 
+            Quaternion.LookRotation(pigCurDirection), Time.deltaTime * pigRotateSpeed);
+        //mTrans.rotation = Quaternion.LookRotation(pigCurDirection);
 
         if (IsSturn)
         {
@@ -176,20 +178,20 @@ public class PigPlayer : MonoBehaviour
         //移动更新，加速到最大速度后匀速运动
         if (pigMoveDirection.magnitude != 0)
         {
-            if (groupRd.velocity.magnitude < 0.01)
+            if (horizontalVel.magnitude < 0.01)
             {
                 groupRd.AddForce(pigMoveDirection * (groupRd.drag + accForce));
             }
             else
             {
-                Vector3 velocityDirection = groupRd.velocity.normalized;
+                Vector3 velocityDirection = horizontalVel.normalized;
                 Vector3 velocityCrossDirection =
                     Vector3.Cross(Vector3.Cross(velocityDirection, pigMoveDirection), velocityDirection);
                 float cosDegree = Vector3.Dot(velocityDirection, pigMoveDirection);
                 float sinDegree = Mathf.Sqrt(1 - cosDegree * cosDegree);
 
                 // 加速
-                if (groupRd.velocity.magnitude < pigNormalSpeed)
+                if (horizontalVel.magnitude < pigNormalSpeed)
                     groupRd.AddForce(velocityDirection * (groupRd.drag + accForce * cosDegree));
                 else
                     groupRd.AddForce(velocityDirection * groupRd.drag);
@@ -325,14 +327,14 @@ public class PigPlayer : MonoBehaviour
         if(pigRushControllerInstance == null)
         {
             pigRushControllerInstance = Instantiate(pigRushController, mTrans);
-            pigRushControllerInstance.transform.position = mTrans.position;
-            pigRushControllerInstance.transform.rotation = mTrans.rotation;
+            pigRushControllerInstance.transform.position = bumTrans.position;
+            pigRushControllerInstance.transform.rotation = bumTrans.rotation;
         }
         if(pigSelfRescueControllerInstance == null)
         {
             pigSelfRescueControllerInstance = Instantiate(pigSelfRescueController, mTrans);
-            pigSelfRescueControllerInstance.transform.position = mTrans.position;
-            pigSelfRescueControllerInstance.transform.rotation = mTrans.rotation;
+            pigSelfRescueControllerInstance.transform.position = bumTrans.position;
+            pigSelfRescueControllerInstance.transform.rotation = bumTrans.rotation;
         }
 
         if ((curSkillController != null && curSkillController.RemainNums() == 0) || (curSkillController == null))

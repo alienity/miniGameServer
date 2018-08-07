@@ -90,9 +90,6 @@ public class GroupPlayer : MonoBehaviour
        
         penguPlayer.SetArrowColor(groupColor);
         pigPlayer.SetArrowColor(groupColor);
-        pigPlayer.curGroupPlayer = this;
-        //pigColdDown.color = groupColor;
-        //pigColdDownBound.color = groupColor;
     }
 
     private void Update()
