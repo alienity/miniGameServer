@@ -118,6 +118,15 @@ public class GroupPlayer : MonoBehaviour
     {
         if (first == null) first = "";
         if (second == null) second = "";
+        if (first.Length > 6)
+        {
+            first = first.Substring(0, 6);
+        }
+
+        if (second.Length > 6)
+        {
+            second = second.Substring(second.Length - 6, 6);
+        }
 
         string first_part = first.Substring(0, first.Length / 2);
         string second_part = second.Substring(second.Length / 2, second.Length/2);

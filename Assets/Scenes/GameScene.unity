@@ -2687,7 +2687,7 @@ Prefab:
     - target: {fileID: 224123135950295556, guid: d07fd6bd21fd9401ca00037d607a28c1,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.49
       objectReference: {fileID: 0}
     - target: {fileID: 114105313511323592, guid: d07fd6bd21fd9401ca00037d607a28c1,
         type: 2}
@@ -2698,6 +2698,16 @@ Prefab:
         type: 2}
       propertyPath: m_EffectDistance.y
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224123135950295556, guid: d07fd6bd21fd9401ca00037d607a28c1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 224123135950295556, guid: d07fd6bd21fd9401ca00037d607a28c1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d07fd6bd21fd9401ca00037d607a28c1, type: 2}

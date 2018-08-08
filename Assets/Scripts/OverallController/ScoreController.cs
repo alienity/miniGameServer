@@ -6,6 +6,7 @@ public class ScoreController : MonoBehaviour
 {
 
     public List<GroupPlayer> groupPlayers;
+    public float scorePopup = 0.06f;
     
     // 获取所有的组，并将对象加入到所有组
     public void SetGroupPlayers(List<GroupPlayer> groups)
@@ -41,16 +42,17 @@ public class ScoreController : MonoBehaviour
     {
         groupPlayers[gId].addScore.text = score.ToString();
         RectTransform rectTransform = groupPlayers[gId].addScore.GetComponent<RectTransform>();
+        Vector3 oldScale = rectTransform.localScale;
        
         Color tempColor = groupPlayers[gId].addScore.color;
         tempColor.a = 1;
         groupPlayers[gId].addScore.color = tempColor;
         Sequence seq = DOTween.Sequence();
-        seq.Append(rectTransform.DOScale(2, 0.5f)).OnComplete(delegate
+        seq.Append(rectTransform.DOScale(scorePopup, 0.5f)).OnComplete(delegate
         {
             tempColor.a = 0;
             groupPlayers[gId].addScore.color = tempColor;
-            rectTransform.localScale = Vector3.one;
+            rectTransform.localScale = oldScale;
         });
 //        seq.Append(groupPlayers[gId].addScore.DOFade())
     }
