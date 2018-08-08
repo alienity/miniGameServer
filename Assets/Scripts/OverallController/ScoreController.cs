@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class ScoreController : MonoBehaviour
 {
@@ -33,6 +34,25 @@ public class ScoreController : MonoBehaviour
     public void IncreaseScoreForPlayer(int score, int gId)
     {
         groupPlayers[gId].IncreaseScore(score);
+        PopupScore(score, gId);
+    }
+
+    private void PopupScore(int score, int gId)
+    {
+        groupPlayers[gId].addScore.text = score.ToString();
+        RectTransform rectTransform = groupPlayers[gId].addScore.GetComponent<RectTransform>();
+       
+        Color tempColor = groupPlayers[gId].addScore.color;
+        tempColor.a = 1;
+        groupPlayers[gId].addScore.color = tempColor;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(rectTransform.DOScale(2, 0.5f)).OnComplete(delegate
+        {
+            tempColor.a = 0;
+            groupPlayers[gId].addScore.color = tempColor;
+            rectTransform.localScale = Vector3.one;
+        });
+//        seq.Append(groupPlayers[gId].addScore.DOFade())
     }
 
     // 为所有玩家增加分数

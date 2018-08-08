@@ -23,19 +23,19 @@ public class ReConnectHandler : MonoBehaviour
     {
         Debug.Log("client connected");
 //        int clientConnectionId = netmsg.conn.connectionId;
-        switch (Server.Instance.stage)
+        switch (DataSaveController.Instance.stage)
         {
             case Stage.Prepare:
                 int sessionId = -1;
                 // 避免生成一样的sessionid的情况（可能性很小）
-                while (sessionId == -1 || Server.Instance.kownSessions.Contains(sessionId))
+                while (sessionId == -1 || DataSaveController.Instance.kownSessions.Contains(sessionId))
                 {
                     sessionId = random.Next();
                 }
                 DistributeSession(netmsg.conn.connectionId, sessionId);
-                Server.Instance.session2connection[sessionId] = netmsg.conn.connectionId;
-                Server.Instance.connection2session[netmsg.conn.connectionId] = sessionId;
-                Server.Instance.kownSessions.Add(sessionId);
+                DataSaveController.Instance.session2connection[sessionId] = netmsg.conn.connectionId;
+                DataSaveController.Instance.connection2session[netmsg.conn.connectionId] = sessionId;
+                DataSaveController.Instance.kownSessions.Add(sessionId);
                 break;
             /*
              * 在非选人阶段还收到连接请求，说明极其有可能是断线重连
@@ -59,10 +59,10 @@ public class ReConnectHandler : MonoBehaviour
         /*
          * 如果请求的重连玩家属于这场比赛，针对现在处于哪一阶段发送不同的指令
          */
-        if (Server.Instance.kownSessions.Contains(sessionId))
+        if (DataSaveController.Instance.kownSessions.Contains(sessionId))
         {
-            Server.Instance.session2connection[sessionId] = netmsg.conn.connectionId;
-            switch (Server.Instance.stage)
+            DataSaveController.Instance.session2connection[sessionId] = netmsg.conn.connectionId;
+            switch (DataSaveController.Instance.stage)
             {
 //                case Stage.Prepare: // 在准备阶段不会发生请求重连的情况
 //                    //Todo 准备阶段断线重连可能会有问题
@@ -75,13 +75,13 @@ public class ReConnectHandler : MonoBehaviour
                  * 断线重连成功，让玩家恢复状态
                  */
                 case Stage.ChoosingRoleStage:
-                    SessionMsg sessionDuringChoose = new SessionMsg(false, false, 0, Stage.ChoosingRoleStage, false, 0, 0, Server.Instance.session2role, Server.Instance.sessionIsConfirmed, Server.Instance.session2name);
+                    SessionMsg sessionDuringChoose = new SessionMsg(false, false, 0, Stage.ChoosingRoleStage, false, 0, 0, DataSaveController.Instance.session2role, DataSaveController.Instance.sessionIsConfirmed, DataSaveController.Instance.session2name);
                     SendSessionMsg(netmsg.conn.connectionId, sessionDuringChoose);
                     Debug.Log("send roll back to choosing: " + sessionDuringChoose);
 
                     break;
                 case Stage.GammingStage:
-                    int roleId = Server.Instance.session2role[sessionId];
+                    int roleId = DataSaveController.Instance.session2role[sessionId];
                     SessionMsg sessionDuringGamming = new SessionMsg(false, false, 0, Stage.GammingStage, true, roleId/2, roleId%2, null, null, null);
                     SendSessionMsg(netmsg.conn.connectionId, sessionDuringGamming);
                     Debug.Log("send roll back to Game: " + sessionDuringGamming);
@@ -107,7 +107,7 @@ public class ReConnectHandler : MonoBehaviour
 
     private void AskHasSession(int connectionId)
     {
-        SessionMsg askSessionMsg = new SessionMsg(true, false, 0, Server.Instance.stage, false, 0, 0, null, null, null);
+        SessionMsg askSessionMsg = new SessionMsg(true, false, 0, DataSaveController.Instance.stage, false, 0, 0, null, null, null);
         NetworkServer.SendToClient(connectionId, CustomMsgType.Session, askSessionMsg);
         Debug.Log("ask: " + askSessionMsg);
     }

@@ -13,8 +13,8 @@ public class FadeImage : MonoBehaviour
 	{
 		startCanvas.alpha = 0;
 		Sequence seq = DOTween.Sequence();
-		seq.Append(blackImage.DOFade(0f, 1));
-		seq.Append(blackImage.DOFade(0.5f, 3));
+		seq.Append(blackImage.DOFade(0f, 0.5f));
+		seq.Append(blackImage.DOFade(0.5f, 1.5f));
 		seq.Append(startCanvas.DOFade(1, 1.5f));
 
 

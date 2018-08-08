@@ -24,7 +24,7 @@ public class GameOverSceneController : MonoBehaviour {
         
         // 将阶段设为 gameover阶段, todo 发送gameover指令后，客户端会主动断开连接，后续就发送不了信息了，所以手机需要主动计时
         NetworkServer.SendToAll(CustomMsgType.Stage, new StageTransferMsg(Stage.GameOverStage));
-        Server.Instance.stage = Stage.GameOverStage;
+        DataSaveController.Instance.stage = Stage.GameOverStage;
         StartCoroutine(CountDownToPrepareStage(10));
     }
     
@@ -38,8 +38,8 @@ public class GameOverSceneController : MonoBehaviour {
         // 清除分数数据
         DataSaveController.Instance.CLearSocres();
         //server.StopBroadCast();
-        Server.Instance.stage = Stage.Prepare;
-        Server.Instance.ClearData();
+        DataSaveController.Instance.stage = Stage.Prepare;
+        DataSaveController.Instance.ClearData();
         SceneTransformer.TransferScene("ChooseRoleScene");
     }
 

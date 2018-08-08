@@ -58,9 +58,9 @@ public class GameControllHandler : MonoBehaviour
         int gId = psm.gId;
         int uId = psm.uId;
         int selectionId = gId * 2 + uId;
-        if (!server.role2connectionID.ContainsKey(selectionId)) // 要选择的角色已经不可用
+        if (!DataSaveController.Instance.role2connectionID.ContainsKey(selectionId)) // 要选择的角色已经不可用
             return;
-        int connectionId = server.role2connectionID[selectionId];
+        int connectionId = DataSaveController.Instance.role2connectionID[selectionId];
         NetworkServer.SendToClient(connectionId, CustomMsgType.GroupState, psm);
     }
     

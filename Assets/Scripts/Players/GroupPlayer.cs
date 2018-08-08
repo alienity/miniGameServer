@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
@@ -24,6 +25,9 @@ public class GroupPlayer : MonoBehaviour
     private GameObject rebornCircleEffectInstance;
     // 眩晕对象
     public GameObject stunEffect;
+    // 增加分数时会出现的字
+    public Text addScore;
+    public Text playerName;
 
     // 组ID
     public int gId;
@@ -90,10 +94,49 @@ public class GroupPlayer : MonoBehaviour
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
        
+
         penguPlayer.SetArrowColor(groupColor);
         pigPlayer.SetArrowColor(groupColor);
+        
+        SetUpPlayerInfo();
+       
     }
 
+    private void SetUpPlayerInfo()
+    {
+        playerName.color = groupColor;
+
+        string penguName = getRoleName(gId * 2);
+        string pigName = getRoleName(gId * 2 + 1);
+        playerName.text = ConcateName(penguName, pigName);
+        Color transColor = addScore.color;
+        transColor.a = 0;
+        addScore.color = transColor;
+    }
+
+    private string ConcateName(string first, string second)
+    {
+        if (first == null) first = "";
+        if (second == null) second = "";
+
+        string first_part = first.Substring(0, first.Length / 2);
+        string second_part = second.Substring(second.Length / 2, second.Length/2);
+        return String.Format("{0}.{1}", first_part, second_part);
+    }
+    
+    /*
+     * 辅助函数，只是用来查找角色的名字
+     */
+    private string getRoleName(int roleId)
+    {
+        if (!DataSaveController.Instance.role2connectionID.ContainsKey(roleId))
+        {
+            return "";
+        }
+        int connectionId = DataSaveController.Instance.role2connectionID[roleId];
+        int sessionId = DataSaveController.Instance.connection2session[connectionId];
+        return DataSaveController.Instance.session2name[sessionId];
+    }
     private void Update()
     {
         if (!isAlive) return;
@@ -292,6 +335,7 @@ public class GroupPlayer : MonoBehaviour
     }
     
     // 猪的控制
+    private float prePigAngle=-1;
     public void PigMove(Vector3 dir)
     {
         
@@ -429,9 +473,9 @@ public class GroupPlayer : MonoBehaviour
         int roleId = gId * 2;
         for (int i = 0; i < 2; i++)
         {
-            if (Server.Instance.role2connectionID.ContainsKey(roleId + i))
+            if (DataSaveController.Instance.role2connectionID.ContainsKey(roleId + i))
             {
-                NetworkServer.SendToClient(Server.Instance.role2connectionID[roleId + i], CustomMsgType.AdvanceControl,
+                NetworkServer.SendToClient(DataSaveController.Instance.role2connectionID[roleId + i], CustomMsgType.AdvanceControl,
                     new AdvanceControlMsg(AdvanceControlType.Viberate));
                 Debug.Log("振动");
             }

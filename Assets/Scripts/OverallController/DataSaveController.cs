@@ -24,7 +24,21 @@ public class DataSaveController : MonoBehaviour {
 
     protected static DataSaveController instance;
 
+    public Stage stage = Stage.Prepare;
+
+    
     // 记录所有要在不同使用的数据
+    
+    // connectionId到gId和uId的映射表, roleId = gId * 2 + uId
+    public Dictionary<int, int> role2connectionID = new Dictionary<int, int>();
+    public Dictionary<int, int> connectionID2role = new Dictionary<int, int>();
+    public Dictionary<int, int> session2connection = new Dictionary<int, int>();
+    public Dictionary<int, int> connection2session = new Dictionary<int, int>();
+    public Dictionary<int, int> session2role = new Dictionary<int, int>();
+    public HashSet<int> sessionIsConfirmed = new HashSet<int>();
+    public Dictionary<int, int> session2confirm = new Dictionary<int, int>();
+    public HashSet<int> kownSessions = new HashSet<int>();
+    public Dictionary<int, string> session2name = new Dictionary<int, string>();
 
     // *********在选人场景下**********
     // 玩家数
@@ -51,6 +65,18 @@ public class DataSaveController : MonoBehaviour {
     public void CLearSocres()
     {
         scores.Clear();
+    }
+    
+    public void ClearData()
+    {
+        role2connectionID.Clear();
+        connectionID2role.Clear();
+        session2connection.Clear();
+        session2role.Clear();
+        connection2session.Clear();
+        kownSessions.Clear();
+        sessionIsConfirmed.Clear();
+        session2name.Clear();
     }
 
 }

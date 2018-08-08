@@ -41,7 +41,7 @@ public class SceneTransformer : MonoBehaviour
          */
         if (nextSceneName == "GameScene")
         {
-            Server.Instance.stage = Stage.GammingStage;
+            DataSaveController.Instance.stage = Stage.GammingStage;
         }
     }
 

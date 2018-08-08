@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections.Generic;
@@ -29,20 +30,7 @@ public class Server : MonoBehaviour
 
     protected static Server instance;
 
-    // 连接客户端记录
-//    public HashSet<int> connections = new HashSet<int>();
 
-    // connectionId到gId和uId的映射表, roleId = gId * 2 + uId
-    public Dictionary<int, int> role2connectionID = new Dictionary<int, int>();
-    public Dictionary<int, int> connectionID2role = new Dictionary<int, int>();
-    public Dictionary<int, int> session2connection = new Dictionary<int, int>();
-    public Dictionary<int, int> connection2session = new Dictionary<int, int>();
-    public Dictionary<int, int> session2role = new Dictionary<int, int>();
-    public HashSet<int> sessionIsConfirmed = new HashSet<int>();
-    public HashSet<int> kownSessions = new HashSet<int>();
-//    public HashSet<string> clientAddresses = new HashSet<string>();
-    
-    public Dictionary<int, string> session2name = new Dictionary<int, string>();
 
     // 服务器配置
     const short ClientNum = 8;     //客户端数量+1个服务器=8
@@ -58,8 +46,9 @@ public class Server : MonoBehaviour
 
 
 
-    public Stage stage = Stage.Prepare;
-    
+    // 检测显示在否在检查进入游戏房间的人数
+    private bool checkingHeadCount;
+
     private void Awake()
     {
         if(Instance != this)
@@ -135,16 +124,16 @@ public class Server : MonoBehaviour
     public void OnClientDisConnect(NetworkMessage netmsg)
     {
         int connectionId = netmsg.conn.connectionId;
-        if (stage == Stage.Prepare)
+        if (DataSaveController.Instance.stage == Stage.Prepare)
         {
-            int sessionId = connection2session[connectionId];
-            kownSessions.Remove(sessionId);
-            session2connection.Remove(sessionId);
-            connection2session.Remove(sessionId);
-            Debug.Log("client disconnected during prepare, sessions: " + kownSessions.Count);
+            int sessionId = DataSaveController.Instance.connection2session[connectionId];
+            DataSaveController.Instance.kownSessions.Remove(sessionId);
+            DataSaveController.Instance.session2connection.Remove(sessionId);
+            DataSaveController.Instance.connection2session.Remove(sessionId);
+            Debug.Log("client disconnected during prepare, sessions: " + DataSaveController.Instance.kownSessions.Count);
         }
 //        connections.Remove(netmsg.conn.connectionId);
-        Debug.Log("client disconnected :" + kownSessions.Count);
+        Debug.Log("client disconnected :" + DataSaveController.Instance.kownSessions.Count);
 
 
     }
@@ -156,31 +145,34 @@ public class Server : MonoBehaviour
         
         reconnectHandler.OnClientConnect(netmsg);
         // 人数到达游戏人数后，发送消息给client切换到选人界面 
-        if (stage == Stage.Prepare )
+        if (DataSaveController.Instance.stage == Stage.Prepare )
         {
             ClientScenChangeUtil.ChangeAllClientStage(Stage.ConnectedToChooseRoomStage);
-            if (kownSessions.Count == roleChooseHandler.toNumberTransfer)
+            if (DataSaveController.Instance.kownSessions.Count == roleChooseHandler.toNumberTransfer && !checkingHeadCount)
             {
-                ClientScenChangeUtil.ChangeAllClientStage(Stage.ChoosingRoleStage);
-                stage = Stage.ChoosingRoleStage;
-                Debug.Log("client switch to choosingRoleStage");
+                StartCoroutine(CountDownToStart(3));
             }
-
         }
     }
 
-    public void ClearData()
+
+    private IEnumerator CountDownToStart(int seconds)
     {
-        role2connectionID.Clear();
-        connectionID2role.Clear();
-        session2connection.Clear();
-        session2role.Clear();
-        connection2session.Clear();
-//        connections.Clear();
-        kownSessions.Clear();
-        sessionIsConfirmed.Clear();
-        session2name.Clear();
+        checkingHeadCount = true;
+        // 先等待一段时间检查连接人数（避免同一个人重复连接"冒充"多个人）
+        yield return new WaitForSeconds(seconds);
+        if (DataSaveController.Instance.kownSessions.Count == roleChooseHandler.toNumberTransfer)
+        {
+            RoleChoosingUIController roleChoosingUIController = FindObjectOfType<RoleChoosingUIController>();
+            roleChoosingUIController.changeCanvas();
+            ClientScenChangeUtil.ChangeAllClientStage(Stage.ChoosingRoleStage);
+            DataSaveController.Instance.stage = Stage.ChoosingRoleStage;
+            Debug.Log("client switch to choosingRoleStage");
+        }
+        checkingHeadCount = false;
     }
+
+    
 
 
 }

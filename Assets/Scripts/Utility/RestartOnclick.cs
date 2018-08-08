@@ -10,7 +10,7 @@ public class RestartOnclick : MonoBehaviour {
 		Button prepareButton = GetComponent<Button>();
 		prepareButton.onClick.AddListener(delegate
 		{
-			Server.Instance.stage = Stage.StartStage;
+			DataSaveController.Instance.stage = Stage.StartStage;
 			SceneTransformer.Instance.TransferToNextScene();
 		});
 	}

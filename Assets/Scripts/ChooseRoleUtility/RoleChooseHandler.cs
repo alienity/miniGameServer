@@ -43,12 +43,7 @@ public class RoleChooseHandler : MonoBehaviour
     {
         if (roleChoosingUIController.StartCanvas.activeInHierarchy)
         {
-            roleChoosingUIController.ProgressBarPlay(server.kownSessions.Count, toNumberTransfer);
-        }
-        if(!roleChoosingUIController.ChooseRoleCanvas.activeInHierarchy && server.kownSessions.Count == toNumberTransfer)
-        {
-            roleChoosingUIController.changeCanvas();
-            Debug.Log("changeCanvas");
+            roleChoosingUIController.ProgressBarPlay(DataSaveController.Instance.kownSessions.Count, toNumberTransfer);
         }
     }
     /*
@@ -66,28 +61,28 @@ public class RoleChooseHandler : MonoBehaviour
             selectingUid = curRequest.uid,
             selectingRoleId = selectingGid * 2 + selectingUid;
         string playerName = curRequest.name;
-        server.session2name[server.connection2session[netmsg.conn.connectionId]] = playerName;
-        if (!server.role2connectionID.ContainsKey(selectingGid * 2 + selectingUid)) // 只有选择的人物可选，才更改玩家和人物的对应关系
+        DataSaveController.Instance.session2name[DataSaveController.Instance.connection2session[netmsg.conn.connectionId]] = playerName;
+        if (!DataSaveController.Instance.role2connectionID.ContainsKey(selectingGid * 2 + selectingUid)) // 只有选择的人物可选，才更改玩家和人物的对应关系
         {
-            if (server.connectionID2role.ContainsKey(curConnectionID)) // 如果之前已经选择过角色
+            if (DataSaveController.Instance.connectionID2role.ContainsKey(curConnectionID)) // 如果之前已经选择过角色
             {
 
-                int oldRoleId = server.connectionID2role[curConnectionID];
-                server.session2role.Remove(server.connection2session[curConnectionID]);
-                server.connectionID2role.Remove(curConnectionID);
-                server.role2connectionID.Remove(oldRoleId);
+                int oldRoleId = DataSaveController.Instance.connectionID2role[curConnectionID];
+                DataSaveController.Instance.session2role.Remove(DataSaveController.Instance.connection2session[curConnectionID]);
+                DataSaveController.Instance.connectionID2role.Remove(curConnectionID);
+                DataSaveController.Instance.role2connectionID.Remove(oldRoleId);
             }
             else // 如果之前没有选择过角色
             {
                 roleChoosingUIController.SetButtonRoleSelected(selectingGid, selectingUid);
             }
             // 新的角色和用户对应关系添加入记录中
-            server.connectionID2role[curConnectionID] = selectingRoleId;
-            server.role2connectionID[selectingRoleId] = curConnectionID;
-            server.session2role[server.connection2session[curConnectionID]] = selectingRoleId;
+            DataSaveController.Instance.connectionID2role[curConnectionID] = selectingRoleId;
+            DataSaveController.Instance.role2connectionID[selectingRoleId] = curConnectionID;
+            DataSaveController.Instance.session2role[DataSaveController.Instance.connection2session[curConnectionID]] = selectingRoleId;
         }
 
-        var roleStatesMsg = new RoleStateMsg(server.session2role, server.sessionIsConfirmed, server.session2name);
+        var roleStatesMsg = new RoleStateMsg(DataSaveController.Instance.session2role, DataSaveController.Instance.sessionIsConfirmed, DataSaveController.Instance.session2name);
         SendRoleMessageToALl(roleStatesMsg);
         Debug.Log("send " + roleStatesMsg);
         UpdateRoleChoosingUI();
@@ -100,24 +95,24 @@ public class RoleChooseHandler : MonoBehaviour
             roleChoosingUIController.SetButtonRoleAvailable(i / 2, i % 2);
         }
 
-        foreach (KeyValuePair<int,int> connection2role in server.connectionID2role)
+        foreach (KeyValuePair<int,int> connection2role in DataSaveController.Instance.connectionID2role)
         {
             int gid = connection2role.Value / 2;
             int uid = connection2role.Value % 2;
             roleChoosingUIController.SetButtonRoleSelected(gid, uid);
         }
 
-        foreach (int sessionId in server.sessionIsConfirmed)
+        foreach (int sessionId in DataSaveController.Instance.sessionIsConfirmed)
         {
-            int roleId = server.session2role[sessionId];
+            int roleId = DataSaveController.Instance.session2role[sessionId];
             roleChoosingUIController.SetButtonRoleLocked(roleId/2, roleId%2);
         }
         
         Dictionary<int, string> role2name = new Dictionary<int, string>();
-        foreach (int sessionid in server.session2name.Keys)
+        foreach (int sessionid in DataSaveController.Instance.session2name.Keys)
         {
-            string name = server.session2name[sessionid];
-            int role = server.session2role[sessionid];
+            string name = DataSaveController.Instance.session2name[sessionid];
+            int role = DataSaveController.Instance.session2role[sessionid];
             role2name.Add(role, name);
         }
         roleChoosingUIController.SetRoleNames(role2name);
@@ -131,26 +126,31 @@ public class RoleChooseHandler : MonoBehaviour
          * 更新sessionIsConfirmed变量
          */
         ConfirmChooseMsg ccm = netmsg.ReadMessage<ConfirmChooseMsg>();
-        int playerSessionId = Server.Instance.connection2session[netmsg.conn.connectionId];
-        if (Server.Instance.sessionIsConfirmed.Contains(playerSessionId)) return;
-        Server.Instance.sessionIsConfirmed.Add(playerSessionId);
-        Debug.Log("玩家确认!!! session2role " + JsonConvert.SerializeObject(Server.Instance.session2role));
+        int selectingRoleId = ccm.gid * 2 + ccm.uid;
+        int playerSessionId = DataSaveController.Instance.connection2session[netmsg.conn.connectionId];
+        if (DataSaveController.Instance.session2confirm.ContainsKey(playerSessionId) || 
+            DataSaveController.Instance.session2confirm.ContainsValue(selectingRoleId))
+        {
+            
+        }
+        DataSaveController.Instance.sessionIsConfirmed.Add(playerSessionId);
+//        Debug.Log("玩家确认!!! session2role " + JsonConvert.SerializeObject(DataSaveController.Instance.session2role));
         
         /*
          * 2. 设置button样式
          */
-        foreach (int session in Server.Instance.sessionIsConfirmed)
+        foreach (int session in DataSaveController.Instance.sessionIsConfirmed)
         {
-            int roleId = Server.Instance.session2role[session];
+            int roleId = DataSaveController.Instance.session2role[session];
             roleChoosingUIController.SetButtonRoleLocked(roleId/2, roleId%2);
         }
-        if (server.sessionIsConfirmed.Count == toNumberTransfer)
+        if (DataSaveController.Instance.sessionIsConfirmed.Count == toNumberTransfer)
         {
             roleChoosingUIController.CountDownTextSetActive();
             StartCoroutine(CountDownToStartGame(countDownTime));
-			DataSaveController.Instance.playerNumber = Server.Instance.kownSessions.Count;
+			DataSaveController.Instance.playerNumber = DataSaveController.Instance.kownSessions.Count;
         }
-        SendRoleMessageToALl(new RoleStateMsg(server.session2role, server.sessionIsConfirmed, server.session2name));
+        SendRoleMessageToALl(new RoleStateMsg(DataSaveController.Instance.session2role, DataSaveController.Instance.sessionIsConfirmed, DataSaveController.Instance.session2name));
     }
 
     IEnumerator CountDownToStartGame(int time)
@@ -162,7 +162,7 @@ public class RoleChooseHandler : MonoBehaviour
             --time;
         }
         //server.StopBroadCast();
-        Server.Instance.stage = Stage.GammingStage;
+        DataSaveController.Instance.stage = Stage.GammingStage;
         SceneTransformer.Instance.TransferToNextScene();
     }
 
@@ -175,7 +175,7 @@ public class RoleChooseHandler : MonoBehaviour
     {
         NetworkServer.SendToClient(connectionID, CustomMsgType.Choose, roleState);
     }
-
+   
     private void SendChooseMessage(ChooseResultMsg result, int connectionId)
     {
         NetworkServer.SendToClient(connectionId, CustomMsgType.Choose, result);
