@@ -15,6 +15,8 @@ public class GroupPlayer : MonoBehaviour
     private AudioSource selfAudioSource;
     //wwq effect
     public ParticleSystem dieEffect;
+    public ParticleSystem HitEffect;
+    
     // 死亡爆炸幅度
     public float exploseStrenth = 12f;
     // 重生光环
@@ -144,6 +146,9 @@ public class GroupPlayer : MonoBehaviour
     IEnumerator SturnPlayer(float during, GroupPlayer gp)
     {
         gp.isSturn = true;
+        //wwq
+        Destroy(Instantiate(HitEffect,transform) as ParticleSystem, 2);
+        
         yield return new WaitForSeconds(during);
         gp.isSturn = false;
     }
