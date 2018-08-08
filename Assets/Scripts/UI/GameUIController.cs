@@ -102,10 +102,9 @@ public class GameUIController : MonoBehaviour
     // 更新“火苗”ICone在积分第一的玩家头上
     public void updateFireICone(List<KeyValuePair<int, int>> IDandScoreList, int winnerID, int winnerScore)
     {
-        int id = 0;
         foreach (KeyValuePair<int, int> lst in IDandScoreList)
         {
-            if (lst.Value >= winnerScore)
+            if (lst.Value > 0 && lst.Value >= winnerScore)
                 coldingText[lst.Key].fireICone.gameObject.SetActive(true);
             else
                 coldingText[lst.Key].fireICone.gameObject.SetActive(false);

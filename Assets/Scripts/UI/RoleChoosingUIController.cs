@@ -63,7 +63,7 @@ public class RoleChoosingUIController : MonoBehaviour {
     public void ProgressBarPlay(int numerator, int denominator)
     {
         BlueProgressBar.fillAmount = (float)numerator / (float)denominator;
-        FractionalText.text = numerator.ToString() + " / " + denominator.ToString();
+        FractionalText.text = numerator.ToString() + "/" + denominator.ToString();
     }
     // 切换Canvas
     public void changeCanvas()
