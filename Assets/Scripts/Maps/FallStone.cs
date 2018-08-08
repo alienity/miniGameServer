@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FallStone : MonoBehaviour {
 
-    public RandomMap map_;
     public ParticleSystem explosion;
     public ParticleSystem Trail;
     public ParticleSystem markCircle;
@@ -25,7 +24,7 @@ public class FallStone : MonoBehaviour {
         {
             Destroy(Instantiate(explosion, transform.position, Quaternion.identity), 1);
             Destroy(this.gameObject, 0.2f);
-            map_.getObject();
+            
         }
     }
 }

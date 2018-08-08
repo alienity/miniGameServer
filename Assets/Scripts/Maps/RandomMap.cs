@@ -22,30 +22,26 @@ public class RandomMap : MonoBehaviour {
         rand = new System.Random();
     }
 	
-	// Update is called once per frame
 	void Update () {
         if (reTimes < 0)
         {
+            clonedNum = 0;
             int len = reBorns.Count;
-            if (clonedNum < cloneNum)
+            while (clonedNum < cloneNum)
             {
-                int rpos = rand.Next(len - clonedNum);
+                int rpos = rand.Next(cloneNum);
                 int x = pos[rpos];
                 setMap(x);
                 clonedNum++;
-
-                pos[rpos] += pos[len - clonedNum];
-                pos[len - clonedNum] = pos[rpos] - pos[len - clonedNum];
-                pos[rpos] = pos[rpos] - pos[len - clonedNum];
-                //x;
+                Debug.Log(x);
             }
+            reTimes = reBornCD;
         }
         else reTimes -= Time.deltaTime;
 	}
     private void setMap(int idx)
     {
         Instantiate(cloneObject,reBorns[idx]);
-        
     }
     public void getObject()
     {
