@@ -8,17 +8,20 @@ public class GameOverUIController : MonoBehaviour {
 
     public List<Sprite> WinnerFlagSprites;
     public List<Sprite> OthersFlagSprites;
+    public List<Sprite> BackgroundSprites;
 
     [System.Serializable]
     public struct PlayerNameScoreOutput
     {
         public Image FlagImage;
-        public Text  name;
+        public Text  panguName;
+        public Text  pigName;
         public Text  score;
     }
     public List<PlayerNameScoreOutput> playerNameScore;
 
     public Text CountdownText;
+    public Image BackgroundImage;
     // 倒计时时长
     public float totalCountdownTime = 10f;
 
@@ -26,14 +29,16 @@ public class GameOverUIController : MonoBehaviour {
     private void Awake()
     {
         Instance = this;
+        BackgroundImage.sprite = BackgroundSprites[0];
         playerNameScore[0].FlagImage.sprite = WinnerFlagSprites[0]; // 初始设置，防止显示为空
         playerNameScore[1].FlagImage.sprite = OthersFlagSprites[1];
         playerNameScore[2].FlagImage.sprite = OthersFlagSprites[2];
         playerNameScore[3].FlagImage.sprite = OthersFlagSprites[3];
         for (int i = 0; i < playerNameScore.Count; ++i)
         {
-            playerNameScore[i].name.text = "";
-            playerNameScore[i].score.text = "";
+            //playerNameScore[i].panguName.text = "";
+            //playerNameScore[i].pigName.text = "";
+            playerNameScore[i].score.text = "0";
         }
     }
 
@@ -60,19 +65,23 @@ public class GameOverUIController : MonoBehaviour {
 
     public void gameResultsDisplay(List<KeyValuePair<int, int>> lst, int groupNumbers)
     {
+        // TODO: 用户名替换成真实用户名
         for (int i = 0; i < groupNumbers; ++i)
         {
             if (i == 0)
             {
+                BackgroundImage.sprite = BackgroundSprites[lst[i].Key];
                 playerNameScore[i].FlagImage.sprite = WinnerFlagSprites[lst[i].Key];
-                playerNameScore[i].name.text = "P" + (lst[i].Key + 1).ToString();
+                playerNameScore[i].panguName.text = "P" + (lst[i].Key + 1).ToString();
+                playerNameScore[i].pigName.text = "P" + (lst[i].Key + 1).ToString();
                 playerNameScore[i].score.text = lst[i].Value.ToString();
             }
             else
             {
                 playerNameScore[i].FlagImage.sprite = OthersFlagSprites[lst[i].Key];
-                playerNameScore[i].name.text = "P" + (lst[i].Key + 1).ToString();
-                playerNameScore[i].score.text = "SCORE - " + lst[i].Value.ToString();
+                playerNameScore[i].panguName.text = "P" + (lst[i].Key + 1).ToString();
+                playerNameScore[i].pigName.text = "P" + (lst[i].Key + 1).ToString();
+                playerNameScore[i].score.text = lst[i].Value.ToString();
             }
         }
     }
