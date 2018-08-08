@@ -47,6 +47,7 @@ public class WorldController : MonoBehaviour {
         if (gcManager == null)
             gcManager = FindObjectOfType<GroupAndCmdManager>();
 
+        gUIController.InitScores();
         // ********************测试生成角色代码*********************
         InstanceAllGroups();
         // ********************测试生成角色代码*********************
@@ -82,12 +83,44 @@ public class WorldController : MonoBehaviour {
             float pigRemainColdingTime = gcManager.groupPlayers[gId].RemainCoolingTime(GroupPlayer.PlayerType.PIG);
             float penguMaxColdingTime = gcManager.groupPlayers[gId].MaxCoolingTime(GroupPlayer.PlayerType.PENGU);
             float pigMaxColdingTime = gcManager.groupPlayers[gId].MaxCoolingTime(GroupPlayer.PlayerType.PIG);
-            gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PENGU, penguRemainColdingTime, penguMaxColdingTime);
-            gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PIG, pigRemainColdingTime, pigMaxColdingTime);
+            //gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PENGU, penguRemainColdingTime, penguMaxColdingTime);
+            //gUIController.UpdateColdingTime(gId, (int)GroupPlayer.PlayerType.PIG, pigRemainColdingTime, pigMaxColdingTime);
             // 更新分数
             gUIController.UpdateScores(gId, scoreController.GetScore(gId));
         }
-        gUIController.UpdateRemainTimes(totalGameTime - totalPastGameTime);
+        gUIController.UpdateRemainTimes(totalGameTime, totalGameTime - totalPastGameTime);
+        SortScoresAndDisplay();
+    }
+
+    // 排序并且显示火苗
+    private void SortScoresAndDisplay()
+    {
+        // 获取当前玩家分数
+        List<int> scores = scoreController.GetAllScores();
+
+        Dictionary<int, int> nameScoreDic = new Dictionary<int, int>();
+        int winnerId = 0;
+        int winnerScores = 0;
+        int i = 0;
+        foreach (int score in scores)
+        {
+            // TODO:替换成真实用户名
+            nameScoreDic.Add(i, score);
+            if (winnerScores < score)
+            {
+                winnerScores = score;
+                winnerId = i;
+            }
+            i++;
+        }
+        List<KeyValuePair<int, int>> lst = new List<KeyValuePair<int, int>>(nameScoreDic);
+        // Sort
+        lst.Sort(delegate (KeyValuePair<int, int> s1, KeyValuePair<int, int> s2)
+        {
+            return s2.Value.CompareTo(s1.Value);
+        });
+
+        gUIController.updateFireICone(lst, winnerId, winnerScores);
     }
 
     // 结束游戏，并终止所有角色控制和效果影响
@@ -125,7 +158,7 @@ public class WorldController : MonoBehaviour {
             gcManager.AddPlayerGroup(i, bornTrans[i], DataSaveController.Instance.groupColor[i]);
         }
         scoreController.SetGroupPlayers(gcManager.groupPlayers);
-        gUIController.SetGroupInitial(groupCounts);
+        //gUIController.SetGroupInitial(groupCounts);
     }
 
     //// 实例化组对象
