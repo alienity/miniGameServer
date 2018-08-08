@@ -895,6 +895,66 @@ Prefab:
       propertyPath: playerNumber
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[0].g
+      value: 0.04705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[0].b
+      value: 0.7686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[0].r
+      value: 0.8705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[1].r
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[1].g
+      value: 0.078431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[1].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[2].r
+      value: 0.30980393
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[2].g
+      value: 0.24313727
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[2].b
+      value: 0.9725491
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[3].r
+      value: 0.17254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[3].g
+      value: 0.78823537
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028060413635368, guid: be22eb765f289e748a3ffbc76686f70f,
+        type: 2}
+      propertyPath: groupColor.Array.data[3].b
+      value: 0.5882353
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be22eb765f289e748a3ffbc76686f70f, type: 2}
   m_IsPrefabParent: 0
