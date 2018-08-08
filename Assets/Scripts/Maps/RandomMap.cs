@@ -6,14 +6,13 @@ using System;
 public class RandomMap : MonoBehaviour {
 
 	private int[] pos;
-    public SkillItem skillItem;
+    public GameObject cloneObject;
     public int cloneNum;
     private int clonedNum;
     private System.Random rand;
     public List<Transform> reBorns;
     public float reBornCD;
     private float reTimes;
-
     void Start () {
         reTimes = -1;
         pos = new int[10];
@@ -27,32 +26,27 @@ public class RandomMap : MonoBehaviour {
 	void Update () {
         if (reTimes < 0)
         {
+            int len = reBorns.Count;
             if (clonedNum < cloneNum)
             {
-                int rpos = rand.Next(9 - clonedNum);
+                int rpos = rand.Next(len - clonedNum);
                 int x = pos[rpos];
                 setMap(x);
                 clonedNum++;
 
-                pos[rpos] += pos[9 - clonedNum];
-                pos[9 - clonedNum] = pos[rpos] - pos[9 - clonedNum];
-                pos[rpos] = pos[rpos] - pos[9 - clonedNum];
+                pos[rpos] += pos[len - clonedNum];
+                pos[len - clonedNum] = pos[rpos] - pos[len - clonedNum];
+                pos[rpos] = pos[rpos] - pos[len - clonedNum];
                 //x;
             }
         }
         else reTimes -= Time.deltaTime;
 	}
-
-    // 
     private void setMap(int idx)
     {
-        GameObject curSkillItemObj = Instantiate(skillItem.gameObject, reBorns[idx]);
-        curSkillItemObj.transform.position = reBorns[idx].transform.position;
-        curSkillItemObj.transform.rotation = reBorns[idx].transform.rotation;
-        curSkillItemObj.GetComponent<SkillItem>().noticeGenerator = getObject;
+        Instantiate(cloneObject,reBorns[idx]);
+        
     }
-
-    // 物品被拾取后的回调函数
     public void getObject()
     {
         clonedNum--;
