@@ -41,7 +41,9 @@ public class RandomMap : MonoBehaviour {
 	}
     private void setMap(int idx)
     {
-        Instantiate(cloneObject,reBorns[idx]);
+        //Instantiate(cloneObject,reBorns[idx]);
+        Vector3 p = reBorns[idx].position;
+        Instantiate(cloneObject, p, Quaternion.identity);
     }
     public void getObject()
     {

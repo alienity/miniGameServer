@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9ab3ef3f7af4b43ab1b5f5fc59c520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map_: {fileID: 1221651457632966, guid: 09d54169e3b2b0047a89dd8d4be63453, type: 2}
   explosion: {fileID: 19848870, guid: a7c694f0877ea874fa57e033221095c3, type: 2}
   Trail: {fileID: 19894080, guid: f6d2b583bc3983c4b9b6dcac3122a734, type: 2}
   markCircle: {fileID: 19895582, guid: 24e29d528f11acf42974643bee14a607, type: 2}
@@ -126,5 +125,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}

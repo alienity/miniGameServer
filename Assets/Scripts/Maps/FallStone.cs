@@ -15,16 +15,15 @@ public class FallStone : MonoBehaviour {
         Vector3 circlePos = transform.position;
         circlePos.y = 10;
         /*markCircle =*/
-            Destroy(Instantiate(markCircle,circlePos,new Quaternion(0,90,0,0)),5);
+            Destroy(Instantiate(markCircle,circlePos,new Quaternion(0,90,0,0)).gameObject,5);
     }
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("line explosion"+" "+collision.gameObject.tag);
         if (collision.gameObject.tag != "FallStone")
         {
-            Destroy(Instantiate(explosion, transform.position, Quaternion.identity), 1);
+            Destroy(Instantiate(explosion, transform.position, Quaternion.identity).gameObject, 1);
             Destroy(this.gameObject, 0.2f);
-            
         }
     }
 }
