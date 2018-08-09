@@ -4750,7 +4750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDownTime: 5
-  toNumberTransfer: 1
+  toNumberTransfer: 3
 --- !u!114 &1936375475
 MonoBehaviour:
   m_ObjectHideFlags: 0

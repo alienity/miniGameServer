@@ -10,9 +10,10 @@ public class SessionMsg : MessageBase
      * 客户端回应sessionid需要的字段
      *     privideSessionId
      *     sessionId
-     * 服务器分配sessionId需要的字段
-     *     provideSessionId
+     * 服务器分配sessionId, roomId需要的字段
+     *     provideSessionInfo
      *     sessiondId
+     *     roomId
      * 选人阶段重连需要的信息：
      *     session2role
      *     session2confirm
@@ -22,8 +23,9 @@ public class SessionMsg : MessageBase
      *     uid
      */
     public bool askSession;
-    public bool provideSessionId;
+    public bool provideSessionInfo;
     public int sessionId;
+    public int roomId;
     public int stage;
     public bool provideRoleId;
     public int gid;
@@ -36,11 +38,12 @@ public class SessionMsg : MessageBase
     {
     }
 
-    public SessionMsg(bool askSession, bool provideSessionId, int sessionId, Stage stage, bool provideRoleId, int gid, int uid, Dictionary<int, int> session2role, HashSet<int> session2confirm, Dictionary<int,string> session2name)
+    public SessionMsg(bool askSession, bool provideSessionInfo, int sessionId, int roomId, Stage stage, bool provideRoleId, int gid, int uid, Dictionary<int, int> session2role, HashSet<int> session2confirm, Dictionary<int,string> session2name)
     {
         this.askSession = askSession;
-        this.provideSessionId = provideSessionId;
+        this.provideSessionInfo = provideSessionInfo;
         this.sessionId = sessionId;
+        this.roomId = roomId;
         this.stage = (int)stage;
         this.provideRoleId = provideRoleId;
         this.gid = gid;
@@ -73,6 +76,6 @@ public class SessionMsg : MessageBase
 
     public override string ToString()
     {
-        return string.Format("AskSession: {0}, ProvideSessionId: {1}, SessionId: {2}, Stage: {3}, ProvideRoleId: {4}, Gid: {5}, Uid: {6}, Session2Role: {7}, Session2Confirm: {8}, Session2Name: {9}", askSession, provideSessionId, sessionId, stage, provideRoleId, gid, uid, session2role, session2confirm, session2name);
+        return string.Format("AskSession: {0}, ProvideSessionInfo: {1}, SessionId: {2}, RoomId: {3}, Stage: {4}, ProvideRoleId: {5}, Gid: {6}, Uid: {7}, Session2Role: {8}, Session2Confirm: {9}, Session2Name: {10}", askSession, provideSessionInfo, sessionId, roomId, stage, provideRoleId, gid, uid, session2role, session2confirm, session2name);
     }
 }

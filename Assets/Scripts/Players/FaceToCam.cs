@@ -23,7 +23,7 @@ public class FaceToCam : MonoBehaviour
 			faceToCamVector.y = transform.forward.y;
 		if (!z)
 			faceToCamVector.z = transform.forward.z;
-		transform.forward = faceToCamVector;
+		transform.forward = -faceToCamVector;
 	}
 
 }

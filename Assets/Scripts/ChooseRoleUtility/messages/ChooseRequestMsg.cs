@@ -2,12 +2,16 @@
 
 public class ChooseRequestMsg : MessageBase
 {
+    // 房间Id, 表示每一场游戏
+    public int roomId;
     public int gid;
     public int uid;
+    // 玩家的名字
     public string name;
 
-    public ChooseRequestMsg(int gid, int uid, string name)
+    public ChooseRequestMsg(int roomId, int gid, int uid, string name)
     {
+        this.roomId = roomId;
         this.gid = gid;
         this.uid = uid;
         this.name = name;
@@ -19,7 +23,7 @@ public class ChooseRequestMsg : MessageBase
 
     public override string ToString()
     {
-        return string.Format("Gid: {0}, Uid: {1}, Name: {2}", gid, uid, name);
+        return string.Format("RoomId: {0}, Gid: {1}, Uid: {2}, Name: {3}", roomId, gid, uid, name);
     }
 }
 

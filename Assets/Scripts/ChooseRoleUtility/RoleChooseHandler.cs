@@ -131,9 +131,11 @@ public class RoleChooseHandler : MonoBehaviour
         if (DataSaveController.Instance.session2confirm.ContainsKey(playerSessionId) || 
             DataSaveController.Instance.session2confirm.ContainsValue(selectingRoleId))
         {
-            
+//            SendConfirmMsg(new ConfirmChooseMsg(ccm.gid, ccm.uid, false), netmsg.conn.connectionId);
+            return;
         }
         DataSaveController.Instance.sessionIsConfirmed.Add(playerSessionId);
+//        SendConfirmMsg(new ConfirmChooseMsg(ccm.gid, ccm.uid, true), netmsg.conn.connectionId);
 //        Debug.Log("玩家确认!!! session2role " + JsonConvert.SerializeObject(DataSaveController.Instance.session2role));
         
         /*
@@ -169,6 +171,12 @@ public class RoleChooseHandler : MonoBehaviour
     private void SendRoleMessageToALl(RoleStateMsg roleState)
     {
         NetworkServer.SendToAll(CustomMsgType.RoleState, roleState);
+    }
+
+    private void SendConfirmMsg(ConfirmChooseMsg confirmChooseMsg, int connectionId)
+    {
+        NetworkServer.SendToClient(connectionId, CustomMsgType.Confirm, confirmChooseMsg);
+
     }
 
     private void SendRoleMessage(RoleStateMsg roleState, int connectionID)

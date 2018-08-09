@@ -18,6 +18,7 @@ public class ReConnectHandler : MonoBehaviour
     
     /*
      * 在准备阶段客户端进行连接是正常情况，为每一个客户端分配一个sessionid用来标记客户端
+     * 返回一个是否可以由ReConnectHandler完全处理，如果不需要其他人处理，返回true
      */
     public void OnClientConnect(NetworkMessage netmsg)
     {
@@ -26,6 +27,9 @@ public class ReConnectHandler : MonoBehaviour
         switch (DataSaveController.Instance.stage)
         {
             case Stage.Prepare:
+                /*
+                 * 分配sessionID，客户端会根据roomID进行判断是否切换到准备界面
+                 */
                 int sessionId = -1;
                 // 避免生成一样的sessionid的情况（可能性很小）
                 while (sessionId == -1 || DataSaveController.Instance.kownSessions.Contains(sessionId))
@@ -36,6 +40,7 @@ public class ReConnectHandler : MonoBehaviour
                 DataSaveController.Instance.session2connection[sessionId] = netmsg.conn.connectionId;
                 DataSaveController.Instance.connection2session[netmsg.conn.connectionId] = sessionId;
                 DataSaveController.Instance.kownSessions.Add(sessionId);
+//                ClientScenChangeUtil.ChangeAllClientStage(Stage.ConnectedToChooseRoomStage);
                 break;
             /*
              * 在非选人阶段还收到连接请求，说明极其有可能是断线重连
@@ -48,8 +53,9 @@ public class ReConnectHandler : MonoBehaviour
                 // 在游戏结束连接到客户端，让客户端回到开始界面
                 NetworkServer.SendToClient(netmsg.conn.connectionId, CustomMsgType.Stage, new StageTransferMsg(Stage.StartStage));
                 break;
+            default:
+                break;
         }
-        
     }
     
     private void OnReceiveSeesionResponse(NetworkMessage netmsg)
@@ -75,14 +81,14 @@ public class ReConnectHandler : MonoBehaviour
                  * 断线重连成功，让玩家恢复状态
                  */
                 case Stage.ChoosingRoleStage:
-                    SessionMsg sessionDuringChoose = new SessionMsg(false, false, 0, Stage.ChoosingRoleStage, false, 0, 0, DataSaveController.Instance.session2role, DataSaveController.Instance.sessionIsConfirmed, DataSaveController.Instance.session2name);
+                    SessionMsg sessionDuringChoose = new SessionMsg(false, false, 0, 0, Stage.ChoosingRoleStage, false, 0, 0, DataSaveController.Instance.session2role, DataSaveController.Instance.sessionIsConfirmed, DataSaveController.Instance.session2name);
                     SendSessionMsg(netmsg.conn.connectionId, sessionDuringChoose);
                     Debug.Log("send roll back to choosing: " + sessionDuringChoose);
 
                     break;
                 case Stage.GammingStage:
                     int roleId = DataSaveController.Instance.session2role[sessionId];
-                    SessionMsg sessionDuringGamming = new SessionMsg(false, false, 0, Stage.GammingStage, true, roleId/2, roleId%2, null, null, null);
+                    SessionMsg sessionDuringGamming = new SessionMsg(false, false, 0, 0, Stage.GammingStage, true, roleId/2, roleId%2, null, null, null);
                     SendSessionMsg(netmsg.conn.connectionId, sessionDuringGamming);
                     Debug.Log("send roll back to Game: " + sessionDuringGamming);
                     break;
@@ -107,7 +113,7 @@ public class ReConnectHandler : MonoBehaviour
 
     private void AskHasSession(int connectionId)
     {
-        SessionMsg askSessionMsg = new SessionMsg(true, false, 0, DataSaveController.Instance.stage, false, 0, 0, null, null, null);
+        SessionMsg askSessionMsg = new SessionMsg(true, false, 0, 0, DataSaveController.Instance.stage, false, 0, 0, null, null, null);
         NetworkServer.SendToClient(connectionId, CustomMsgType.Session, askSessionMsg);
         Debug.Log("ask: " + askSessionMsg);
     }
@@ -117,7 +123,7 @@ public class ReConnectHandler : MonoBehaviour
      */
     private void DistributeSession(int connectionId, int sessionId)
     {
-        SessionMsg sessionMsg = new SessionMsg(false, true, sessionId, Stage.Prepare, false, 0, 0, null, null, null);
+        SessionMsg sessionMsg = new SessionMsg(false, true, sessionId, DataSaveController.Instance.curRoomId,Stage.Prepare, false, 0, 0, null, null, null);
         NetworkServer.SendToClient(connectionId, CustomMsgType.Session, sessionMsg);
         Debug.Log("distribute session " + sessionMsg + "connectionId: " + connectionId );
     }

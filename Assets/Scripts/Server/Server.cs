@@ -147,7 +147,7 @@ public class Server : MonoBehaviour
         // 人数到达游戏人数后，发送消息给client切换到选人界面 
         if (DataSaveController.Instance.stage == Stage.Prepare )
         {
-            ClientScenChangeUtil.ChangeAllClientStage(Stage.ConnectedToChooseRoomStage);
+//            ClientScenChangeUtil.ChangeAllClientStage(Stage.ConnectedToChooseRoomStage);
             if (DataSaveController.Instance.kownSessions.Count == roleChooseHandler.toNumberTransfer && !checkingHeadCount)
             {
                 StartCoroutine(CountDownToStart(3));

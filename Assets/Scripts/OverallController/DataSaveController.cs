@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
+
 
 public class DataSaveController : MonoBehaviour {
 
@@ -25,8 +27,9 @@ public class DataSaveController : MonoBehaviour {
     protected static DataSaveController instance;
 
     public Stage stage = Stage.Prepare;
+    public int curRoomId = -1;
 
-    
+    private Random random = new Random();
     // 记录所有要在不同使用的数据
     
     // connectionId到gId和uId的映射表, roleId = gId * 2 + uId
@@ -57,7 +60,8 @@ public class DataSaveController : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
-        
+
+        curRoomId = random.Next();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -77,6 +81,19 @@ public class DataSaveController : MonoBehaviour {
         kownSessions.Clear();
         sessionIsConfirmed.Clear();
         session2name.Clear();
+    }
+
+    public void FlushRoomId()
+    {
+        curRoomId = random.Next();
+    }
+
+    public void RestartRoom()
+    {
+        ClearData();
+        FlushRoomId();
+        CLearSocres();
+        stage = Stage.Prepare;
     }
 
 }

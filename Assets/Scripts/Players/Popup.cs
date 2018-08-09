@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Popup : MonoBehaviour
 {
     public bool popUp;
-    public float popScale = 2;
+    public float popScale = 0.02f;
 
 //    public float bigx = 10
     private RectTransform rectTransform;
@@ -23,17 +23,18 @@ public class Popup : MonoBehaviour
      {
          if (popUp)
          {
+             popUp = false;
+             Vector3 oldScale = rectTransform.localScale;
+       
              Color tempColor = text.color;
              tempColor.a = 1;
              text.color = tempColor;
-             popUp = false;
-             enabled = true;
              Sequence seq = DOTween.Sequence();
-             seq.Append(rectTransform.DOScale(popScale, 0.5f)).OnComplete(delegate
+             seq.Append(rectTransform.DOScale(popScale, 3f)).OnComplete(delegate
              {
                  tempColor.a = 0;
                  text.color = tempColor;
-                 rectTransform.localScale = Vector3.one;
+                 rectTransform.localScale = oldScale;
              });
          }
      }
