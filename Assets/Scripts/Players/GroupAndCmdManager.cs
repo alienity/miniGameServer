@@ -64,11 +64,13 @@ public class GroupAndCmdManager : MonoBehaviour {
     }
 
     // 生成组对象
-    public void AddPlayerGroup(int gId, Transform bornTrans, Color groupColor)
+    public GroupPlayer AddPlayerGroup(int gId, Transform bornTrans, Color groupColor)
     {
         GroupPlayer groupPlayerInstance = groupPlayerToInstance.FirstBorn(gId, bornTrans.position, groupColor);
         //GroupPlayer gp = groupPlayerInstance.GetComponent<GroupPlayer>();
         AddGroupPlayerToList(groupPlayerInstance);
+
+        return groupPlayerInstance;
     }
 
     // 添加生成的组对象

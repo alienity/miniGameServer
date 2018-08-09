@@ -4,102 +4,116 @@ using UnityEngine;
 
 public class TrackCamera : MonoBehaviour {
 
+    public static TrackCamera Instance { get; private set; }
+
     // 所有的组
-    public List<GroupPlayer> groups;
+    public List<Transform> groups;
+
     // 玩家距离边框的最小半径
     public float boardRadius;
-    // 最大偏移角
-    public float maxBiasDegree;
-
-    // 竖直角度
-    public float verticalDegree = 42.0f;
-    // 当前相机到目标的距离
-    public float curCam2TargetLength = 56.0f;
     // 相机到目标的最小距离
     public float minCam2TargetLength = 42.0f;
     // 相机到目标的最大距离
     public float maxCam2TargetLength = 62.0f;
 
-    // 逆时针角度
-    public float ccwDegree = 45;
-    // 水平逆时针旋转角(弧度表示)
-    private float ccwRadian = Mathf.PI * 3 / 2;
+    // 镜头移动速度
+    public float camMoveSpeed = 6f;
+    // 镜头的朝向的反向
+    private Vector3 toCameraDirection;
 
-    // 改变镜头远近的速度
-    public float changeCamLenSpeed = 0.02f;
-    // 上下左右移动镜头的速度
-    public float camMoveSpeed = 0.2f;
+    //// 竖直角度
+    //public float verticalDegree = 42.0f;
+    //// 逆时针角度
+    //public float ccwDegree = 45;
+    //// 水平逆时针旋转角(弧度表示)
+    //private float ccwRadian;
 
-    private Vector3 offset = Vector3.zero;
-    
-    // 测试目标对象
-    public Transform target;
-    
-    private void Start ()
+    private void Awake()
     {
-        ccwRadian = ccwDegree / 180 * Mathf.PI;
+        Instance = this;
     }
-	
-	private void Update ()
-    {
 
-    }
-    
-    // 计算所有角色包围盒的投影
-    private void PlayerBoundBox(List<GroupPlayer> gps)
+    private void Start()
     {
-        float yMax = float.NegativeInfinity, yMin = float.PositiveInfinity;
-        float xMax = float.NegativeInfinity, xMin = float.PositiveInfinity;
-        List<Vector3> viewportPoses = new List<Vector3>();
-        foreach (GroupPlayer gp in gps)
+        //ccwRadian = ccwDegree * Mathf.Deg2Rad;
+        toCameraDirection = -1 * Camera.main.transform.forward;
+    }
+
+    private void Update()
+    {
+        //Vector3 toCameraDirection = ReCalculateCameraDirection();
+        Vector3 finalPos = PlayerBoundBox_1(groups, toCameraDirection);
+        ChangeTransform(finalPos, toCameraDirection);
+    }
+
+    private Vector3 PlayerBoundBox_1(List<Transform> gps, Vector3 toCameraDirection)
+    {
+        Vector3 tmpWorldCenterPos = Vector3.zero;
+        List<Vector3> worldGps = new List<Vector3>();
+        foreach (Transform gp in gps)
         {
-            Vector3 gpPos = gp.transform.position;
-
-            Vector3 gpViewportPosForward = Camera.main.WorldToViewportPoint(gpPos + Vector3.forward * boardRadius);
-            Vector3 gpViewportPosBackward = Camera.main.WorldToViewportPoint(gpPos + Vector3.back * boardRadius);
-            Vector3 gpViewportPosLeft = Camera.main.WorldToViewportPoint(gpPos + Vector3.left * boardRadius);
-            Vector3 gpViewportPosRight = Camera.main.WorldToViewportPoint(gpPos + Vector3.right * boardRadius);
-
-            viewportPoses.Add(gpViewportPosForward);
-            viewportPoses.Add(gpViewportPosBackward);
-            viewportPoses.Add(gpViewportPosLeft);
-            viewportPoses.Add(gpViewportPosRight);
-
-            foreach (Vector3 viewportPos in viewportPoses)
-            {
-                
-            }
+            tmpWorldCenterPos += gp.position;
+            worldGps.Add(gp.position);
         }
+        tmpWorldCenterPos /= gps.Count;
+
+        Vector3 tmpOrigin = Camera.main.transform.position;
+        Camera.main.transform.position = tmpWorldCenterPos;
+        Matrix4x4 worldToCamTmp = Camera.main.worldToCameraMatrix;
+        Camera.main.transform.position = tmpOrigin;
+
+        Vector3 tmpCamCenterPos = worldToCamTmp.MultiplyPoint(Vector3.one);
+
+        Debug.DrawRay(Vector3.zero, worldToCamTmp.inverse.MultiplyVector(Vector3.forward), Color.blue);
+        Debug.DrawRay(Vector3.zero, worldToCamTmp.inverse.MultiplyVector(Vector3.right), Color.red);
+        Debug.DrawRay(Vector3.zero, worldToCamTmp.inverse.MultiplyVector(Vector3.up), Color.green);
+
+        float yTan = Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
+        float xTan = Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad) * Camera.main.aspect;
+
+        float curCam2TargetLength = -1;
+
+        foreach (Vector3 tmpWorldPos in worldGps)
+        {
+            Vector3 tmpCamPos = worldToCamTmp.MultiplyPoint(tmpWorldPos);
+
+            float tmpOffsetDis = (Mathf.Abs(tmpCamPos.x) + boardRadius) / xTan;
+            tmpOffsetDis += tmpCamPos.z;
+            curCam2TargetLength = curCam2TargetLength > tmpOffsetDis ? curCam2TargetLength : tmpOffsetDis;
+
+            tmpOffsetDis = (Mathf.Abs(tmpCamPos.y) + boardRadius) / yTan;
+            tmpOffsetDis += tmpCamPos.z;
+            curCam2TargetLength = curCam2TargetLength > tmpOffsetDis ? curCam2TargetLength : tmpOffsetDis;
+        }
+
+        curCam2TargetLength = curCam2TargetLength > minCam2TargetLength ? curCam2TargetLength : minCam2TargetLength;
+        curCam2TargetLength = curCam2TargetLength < maxCam2TargetLength ? curCam2TargetLength : maxCam2TargetLength;
+
+        return tmpWorldCenterPos + toCameraDirection * curCam2TargetLength;
     }
 
-    void ChangeCam2TargetLength()
-    {
+    //// 计算镜头的方向
+    //private Vector3 ReCalculateCameraDirection()
+    //{
+    //    float verticalRadian = (90 - verticalDegree) / 180 * Mathf.PI;
+    //    ccwRadian = ccwDegree * Mathf.Deg2Rad;
+    //    Vector3 cameraDirection = new Vector3(Mathf.Sin(verticalRadian) * Mathf.Cos(ccwRadian), Mathf.Cos(verticalRadian), Mathf.Sin(verticalRadian) * Mathf.Sin(ccwRadian));
+    //    return cameraDirection;
+    //}
 
-    }
-
-    void ReCalculateOffset()
-    {
-        float verticalRadian = (90 - verticalDegree) / 180 * Mathf.PI;
-        offset = new Vector3(Mathf.Sin(verticalRadian) * Mathf.Cos(ccwRadian), Mathf.Cos(verticalRadian), Mathf.Sin(verticalRadian) * Mathf.Sin(ccwRadian)) * curCam2TargetLength;
-    }
-
-    void ChangeTransform()
+    // 改变镜头位置
+    void ChangeTransform(Vector3 finalPos, Vector3 toCameraDirection)
     {
         if (Time.timeScale != 0)
         {
-            transform.position = Vector3.Lerp(transform.position, target.position + offset, Time.deltaTime);
-            transform.forward = -offset;
+            transform.position = Vector3.Lerp(transform.position, finalPos, camMoveSpeed * Time.deltaTime);
+            transform.forward = -toCameraDirection;
         }
         else
         {
-            FastRepos();
+            transform.position = Vector3.Lerp(transform.position, finalPos, camMoveSpeed);
+            transform.forward = -toCameraDirection;
         }
-    }
-
-    void FastRepos()
-    {
-        transform.position = Vector3.Lerp(transform.position, target.position + offset, camMoveSpeed);
-        transform.forward = -offset;
     }
 
 }

@@ -155,7 +155,8 @@ public class WorldController : MonoBehaviour {
         if (groupCounts <= 0) return;
         for (int i = 0; i < groupCounts; ++i)
         {
-            gcManager.AddPlayerGroup(i, bornTrans[i], DataSaveController.Instance.groupColor[i]);
+            GroupPlayer gpInstance = gcManager.AddPlayerGroup(i, bornTrans[i], DataSaveController.Instance.groupColor[i]);
+            TrackCamera.Instance.groups.Add(gpInstance.transform);
         }
         scoreController.SetGroupPlayers(gcManager.groupPlayers);
         //gUIController.SetGroupInitial(groupCounts);
