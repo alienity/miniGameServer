@@ -50,7 +50,7 @@ public class BigSnowBallManager : MonoBehaviour {
         int pointIndex = Random.Range(0, spawnPoints.Length);
 
         GameObject ball = Instantiate(bigSnowBall, spawnPoints[pointIndex].position, spawnPoints[pointIndex].rotation);
-        BigSnowball bigSnowball = ball.GetComponent<BigSnowball>();
+        BoxEffects bigSnowball = ball.GetComponent<BoxEffects>();
         bigSnowball.EndPointChange(endPoint[pointIndex]);
         //bigSnowball.EndPointChange(endPoint[pointIndex]);
     }

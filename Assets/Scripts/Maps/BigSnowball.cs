@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigSnowball : MonoBehaviour
+public class BigSnowball : BoxEffects
 {
     // 说明：大雪球推着玩家走，通过刚体组件
     public static BigSnowball Instance { get; private set; }
-    // 移动速度
-    public float Speed;
-    // 死亡地点
-    public Transform end;
+    //// 移动速度
+    //public float Speed;
+    //// 死亡地点
+    //public Transform end;
 
     // 特效组件
     public GameObject impactParticle;
@@ -51,10 +51,10 @@ public class BigSnowball : MonoBehaviour
     }
 
     // 更改运动轨迹结束地点
-    public void EndPointChange(Transform point)
-    {
-        end = point;
-    }
+    //public override void EndPointChange(Transform point)
+    //{
+    //    end = point;
+    //}
 
     // 启动时添加粒子效果
     private void AddParticles()

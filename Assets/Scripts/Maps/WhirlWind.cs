@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WhirlWind : MonoBehaviour {
+public class WhirlWind : BoxEffects {
 
     public float windCenterR = 1;
     // 引力半径
@@ -10,6 +10,10 @@ public class WhirlWind : MonoBehaviour {
     public ParticleSystem wind;
     // 最大引力
     public float maxAttractForce;
+    //// 移动速度
+    //public float Speed;
+    //// 死亡地点
+    //public Transform end;
 
     // 受影响对象列表
     private List<GroupPlayer> groupPlayers;
@@ -17,10 +21,12 @@ public class WhirlWind : MonoBehaviour {
     // 自有对象
     private SphereCollider attractiveCollider;
     private Transform mTrans;
+    private BigSnowBallManager bigSnowBallManager;
 
     // Use this for initialization
     void Start()
     {
+        bigSnowBallManager = BigSnowBallManager.Instance;
         attractiveCollider = GetComponent<SphereCollider>();
         attractiveCollider.radius = atrRadius;
 
@@ -38,7 +44,12 @@ public class WhirlWind : MonoBehaviour {
 
     private void FixedUpdate()
     {
-
+        mTrans.position = Vector3.MoveTowards(mTrans.position, end.position, Speed * Time.deltaTime);
+        if ((mTrans.position - end.position).magnitude <= 0.1f)
+        {
+            bigSnowBallManager.IsReBornBigSnowBall(true);
+            Destroy(gameObject);
+        }
         foreach (GroupPlayer gpObj in groupPlayers)
         {
             Vector3 attrFoceDir = mTrans.position - gpObj.groupTrans.position;
@@ -57,6 +68,12 @@ public class WhirlWind : MonoBehaviour {
 
         }
     }
+
+    // 更改运动轨迹结束地点
+    //public override void EndPointChange(Transform point)
+    //{
+    //    end = point;
+    //}
 
     private void OnTriggerEnter(Collider collider)
     {

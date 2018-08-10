@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30187be04e810d94aa7317ad185b4a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 10
+  end: {fileID: 0}
   windCenterR: 1
   atrRadius: 5
   wind: {fileID: 19872470, guid: e83fb83871ed1ac4d978b22b0f2a4d71, type: 2}
