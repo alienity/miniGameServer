@@ -455,17 +455,22 @@ public class GroupPlayer : MonoBehaviour
     
     
     // 向猪和企鹅发送震动信息
-    public void SendViberateToGroup()
+    public void SendViberateToGroup(float duration=0.05f, float interval=0.05f)
     {
         int roleId = gId * 2;
         for (int i = 0; i < 2; i++)
         {
-            if (DataSaveController.Instance.role2connectionID.ContainsKey(roleId + i))
-            {
-                NetworkServer.SendToClient(DataSaveController.Instance.role2connectionID[roleId + i], CustomMsgType.AdvanceControl,
-                    new AdvanceControlMsg(AdvanceControlType.Viberate));
-                Debug.Log("振动");
-            }
+            SendViberationToRole(roleId + i, duration, interval);
+        }
+    }
+
+    public void SendViberationToRole(int roleId, float duration, float interval)
+    {
+        if (DataSaveController.Instance.role2connectionID.ContainsKey(roleId))
+        {
+            NetworkServer.SendToClient(DataSaveController.Instance.role2connectionID[roleId], CustomMsgType.AdvanceControl,
+                new AdvanceControlMsg(AdvanceControlType.Viberate, duration, interval ));
+            Debug.Log("振动");
         }
     }
 

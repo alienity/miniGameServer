@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Runtime.CompilerServices;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,17 +26,22 @@ public class Popup : MonoBehaviour
          {
              popUp = false;
              Vector3 oldScale = rectTransform.localScale;
+             Quaternion quaternion = rectTransform.rotation;
        
              Color tempColor = text.color;
              tempColor.a = 1;
              text.color = tempColor;
              Sequence seq = DOTween.Sequence();
-             seq.Append(rectTransform.DOScale(popScale, 3f)).OnComplete(delegate
+             seq.Append(rectTransform.DOScale(popScale, 3f));
+
+             seq.Insert(0, text.DOColor(Color.red, 0.5f)).OnComplete(delegate
              {
                  tempColor.a = 0;
                  text.color = tempColor;
                  rectTransform.localScale = oldScale;
+                 rectTransform.rotation = quaternion;
              });
+
          }
      }
  }
