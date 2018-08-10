@@ -55,7 +55,8 @@ public class TrackCamera : MonoBehaviour {
             tmpWorldCenterPos += gp.position;
             worldGps.Add(gp.position);
         }
-        tmpWorldCenterPos /= gps.Count;
+        if(gps.Count != 0)
+            tmpWorldCenterPos /= gps.Count;
 
         Vector3 tmpOrigin = Camera.main.transform.position;
         Camera.main.transform.position = tmpWorldCenterPos;

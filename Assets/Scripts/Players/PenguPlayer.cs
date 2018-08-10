@@ -9,7 +9,7 @@ public class PenguPlayer : MonoBehaviour
     private const int uId = 1;
 
     // 企鹅攻击指向
-    public Vector3 penguCurDirection = Vector3.forward;
+    [HideInInspector] public Vector3 penguCurDirection = Vector3.forward;
     // 企鹅转向速率
     public float penguRotateSpeed;
     // 企鹅原始默认投掷控制器
@@ -29,8 +29,6 @@ public class PenguPlayer : MonoBehaviour
 
     // 雪球出生前向偏移
     public Transform attackTrans;
-    // 自身transform
-    private Transform mTrans;
     // 旋转速度
     public float rotateSpeed;
 
@@ -50,10 +48,7 @@ public class PenguPlayer : MonoBehaviour
 
         //暂时只加入一种声音
         selfAudioSource.clip = throwSnowBall;
-
-        // 自身Trans
-        mTrans = GetComponent<Transform>();
-
+        
         // 动画播放
         animator = GetComponent<Animator>();
         attackAnimId = Animator.StringToHash("shot");
@@ -75,7 +70,7 @@ public class PenguPlayer : MonoBehaviour
         filledArrowSpriteController.SetProgress(1 - RemainingColdingTime() / MaxColdingTime());
 
         // ********************测试代码*******************
-        /*
+        /**/
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -105,7 +100,7 @@ public class PenguPlayer : MonoBehaviour
 
             //PenguPlayerAttack();
         }
-        */
+        
         // ********************测试代码*******************
     }
 
@@ -113,7 +108,7 @@ public class PenguPlayer : MonoBehaviour
     void FixedUpdate()
     {
         // 修改当前朝向
-        mTrans.rotation = Quaternion.Lerp(mTrans.rotation, Quaternion.LookRotation(penguCurDirection), Time.deltaTime * rotateSpeed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(penguCurDirection), Time.deltaTime * rotateSpeed);
         //mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
 
         if (IsDie || IsSturn) return;
@@ -141,9 +136,9 @@ public class PenguPlayer : MonoBehaviour
             Destroy(curBallController.gameObject);
 
         curBallController = shotController;
-        curBallController.transform.parent = mTrans;
-        curBallController.transform.position = mTrans.position;
-        curBallController.transform.rotation = mTrans.rotation;
+        curBallController.transform.parent = transform;
+        curBallController.transform.position = transform.position;
+        curBallController.transform.rotation = transform.rotation;
     }
     
     // 检查SkillController，如果没有雪球，则使用默认雪球
@@ -151,9 +146,9 @@ public class PenguPlayer : MonoBehaviour
     {
         if(defaultSnowBallController == null)
         {
-            defaultSnowBallController = Instantiate(snowBallController, mTrans);
-            defaultSnowBallController.transform.position = mTrans.position;
-            defaultSnowBallController.transform.rotation = mTrans.rotation;
+            defaultSnowBallController = Instantiate(snowBallController, transform);
+            defaultSnowBallController.transform.position = transform.position;
+            defaultSnowBallController.transform.rotation = transform.rotation;
         }
 
         if ((curBallController != null && curBallController.RemainNums() == 0) || (curBallController == null))
@@ -203,7 +198,7 @@ public class PenguPlayer : MonoBehaviour
             {
                 selfAudioSource.Play();
                 animator.SetTrigger(attackAnimId);
-                curBallController.UseBall(gId, attackTrans.position, mTrans.rotation);
+                curBallController.UseBall(gId, attackTrans.position, transform.rotation);
                 //SetArrowLen(0);
                 filledArrowSpriteController.SetArrowLen(0);
             }

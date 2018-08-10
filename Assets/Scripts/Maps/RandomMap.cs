@@ -55,7 +55,8 @@ public class RandomMap : MonoBehaviour
     {
         if(cloneObject.tag =="FallStone")
         {
-            Instantiate(cloneObject, reBorns[idx].position,reBorns[idx].rotation);
+            GameObject cloneObjInstance = Instantiate(cloneObject, transform);
+            cloneObjInstance.transform.position = reBorns[idx].position;
             getObject();
         }
     }

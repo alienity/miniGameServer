@@ -4510,7 +4510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 19823922, guid: c3162dfcad030c241919e903dbd4aeab, type: 2}
-  HitEffect: {fileID: 0}
+  HitEffect: {fileID: 19867606, guid: 45b74d42e5559bf49a14a707b4842b51, type: 2}
   exploseStrenth: 12
   rebornCircleEffect: {fileID: 1324001765682460, guid: 6b89588e13a8a4b1f9d9e39e9c9ee6ea,
     type: 2}

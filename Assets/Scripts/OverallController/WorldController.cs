@@ -16,6 +16,8 @@ public class WorldController : MonoBehaviour {
     public GameUIController gUIController;
     // 分数控制器
     public ScoreController scoreController;
+    // 天气控制器
+    public WeatherController weatherController;
     // 组管理和命令解析
     public GroupAndCmdManager gcManager;
     // TODO:将要修改 4个出生点
@@ -27,11 +29,13 @@ public class WorldController : MonoBehaviour {
     //public string nextSceneName;
 
     // 计时器，以秒计
-    public float totalGameTime = 180;
+    public float totalGameTime = 300;
     // 游戏已经进行时长
     private float totalPastGameTime = 0;
     // 游戏已经结束了
     private bool isGameOver = false;
+    // 转换天气的时间
+    public float timeToTransfer = 180;
     
     private void Awake()
     {
@@ -71,6 +75,9 @@ public class WorldController : MonoBehaviour {
         // 更新UI
         UpdateUIParams();
 
+        // 更新天气
+        if(totalPastGameTime > timeToTransfer)
+            weatherController.UpdateAccordingTime();
     }
 
     // 更新所有的UI界面
@@ -161,24 +168,18 @@ public class WorldController : MonoBehaviour {
         scoreController.SetGroupPlayers(gcManager.groupPlayers);
         //gUIController.SetGroupInitial(groupCounts);
     }
-
-    //// 实例化组对象
-    //public void InstanceAllGroups(int gps)
-    //{
-    //    groupCounts = gps;
-    //    for (int i = 0; i < groupCounts; ++i)
-    //    {
-    //        gcManager.AddPlayerGroup(i, bornTrans[i]);
-    //    }
-    //    scoreController.SetGroupPlayers(gcManager.groupPlayers);
-    //    gUIController.SetGroupInitial(groupCounts);
-    //}
-
+    
     // 返回游戏剩余时长
     public float GetRemainGameTime()
     {
         float remainGameTime = totalGameTime - totalPastGameTime;
         return remainGameTime > 0 ? remainGameTime : 0;
+    }
+
+    // 更新天气
+    public void ChangeElimate()
+    {
+
     }
 
 }

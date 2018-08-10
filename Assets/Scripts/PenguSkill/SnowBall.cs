@@ -72,12 +72,14 @@ public class SnowBall : ShotBall
         {
 
             GroupPlayer gp = other.GetComponent<GroupPlayer>();
+            /*
             // 当组是无敌的时候，执行组的对应的方法
             if (gp.isInvulnerable)
             {
                 gp.ReflectAttack(transform);
                 return;
             }
+            */
             // 正常情况下执行触碰攻击方法
             if (!canTouchSelf)
             {
