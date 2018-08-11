@@ -37,6 +37,9 @@ public class PenguPlayer : MonoBehaviour
     // 死亡
     public bool IsDie { get; set; }
     
+    
+    // 企鹅对应队伍的颜色，这个颜色用于箭头颜色和雪球颜色
+    private Color groupColor = Color.black;
     // Use this for initialization
     void Start()
     {
@@ -160,12 +163,13 @@ public class PenguPlayer : MonoBehaviour
     }
     
     // 设置箭头颜色
-    public void SetArrowColor(Color arrowColor)
+    public void SetArrowAndSnowballColor(Color color)
     {
         //arrowBoundRender.color = arrowColor;
         //filledArrowRender.color = arrowColor;
         //filledArrowRender.material.color = arrowColor;
-        filledArrowSpriteController.SetArrowColor(arrowColor);
+        filledArrowSpriteController.SetArrowColor(color);
+        groupColor = color;
     }
     /*
     // 修改箭头长度
@@ -198,7 +202,7 @@ public class PenguPlayer : MonoBehaviour
             {
                 selfAudioSource.Play();
                 animator.SetTrigger(attackAnimId);
-                curBallController.UseBall(gId, attackTrans.position, transform.rotation);
+                curBallController.UseBall(gId, attackTrans.position, transform.rotation, groupColor);
                 //SetArrowLen(0);
                 filledArrowSpriteController.SetArrowLen(0);
             }

@@ -46,7 +46,7 @@ public class SnowBall : ShotBall
         fliedTime = 0;
         
         AddParticles();
-
+        SetSnowBallColor(ballColor);
         StartCoroutine(CountDownTouchSelf(cancelTouchDuring));
     }
     
@@ -126,6 +126,21 @@ public class SnowBall : ShotBall
             muzzleParticleInstance.transform.localScale = Vector3.one;
             Destroy(muzzleParticleInstance, 1.5f); // Lifetime of muzzle effect.
         }
+    }
+
+
+    private void SetSnowBallColor(Color color)
+    {
+        ParticleSystem[] pss = projectileParticleInstance.GetComponentsInChildren<ParticleSystem>();
+        for (int i = 0; i < pss.Length; i++)
+        {
+            ParticleSystem ps = pss[i];
+//            if (ps.gameObject.name.Contains("FrostSpikes"))
+//            {
+                ps.startColor = color;
+//            }
+        }
+        
     }
 
     // 碰撞到时，添加粒子特效

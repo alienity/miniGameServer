@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class ShotBallController : MonoBehaviour {
 
@@ -27,7 +28,7 @@ public abstract class ShotBallController : MonoBehaviour {
     public bool attackFinished { get; protected set; }
 
     // 使用一个Ball
-    public abstract void UseBall(int ownerId, Vector3 position, Quaternion rotation);
+    public abstract void UseBall(int ownerId, Vector3 position, Quaternion rotation, Color ballColor);
 
     public float HandleChargeAttack(string processId, float chargeCurrentTime, int touchId)
     {

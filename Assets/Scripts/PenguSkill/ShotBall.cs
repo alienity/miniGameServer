@@ -11,6 +11,8 @@ public class ShotBall : MonoBehaviour {
     public bool isHitted = false;
     [HideInInspector]
     public float chargeAttackTime = 0;
+
+    protected Color ballColor = Color.black;
     
     public void SpawnBall(int ownerId, Vector3 position, Quaternion rotation, float chargeTime)
     {
@@ -24,11 +26,12 @@ public class ShotBall : MonoBehaviour {
     }
     
     // 初始化Ball
-    public void InitiateBall(int ownerId, float chargeTime)
+    public virtual void InitiateBall(int ownerId, float chargeTime, Color color)
     {
         this.isHitted = false;
         this.attackerId = ownerId;
         this.chargeAttackTime = chargeTime;
+        this.ballColor = color;
     }
 
     public void SetChargeAttackTime(float time = 0)

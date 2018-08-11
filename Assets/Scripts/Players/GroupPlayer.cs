@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 public class GroupPlayer : MonoBehaviour
@@ -82,6 +83,10 @@ public class GroupPlayer : MonoBehaviour
         get { return pigPlayer.IsSurivalSkillNow; }
         set { pigPlayer.IsSurivalSkillNow = value; }
     }
+    
+    public float scorePopupScale = 0.02f;
+    public float popupDuration = 0.3f;
+    public Text remainBallText;
 
     private void Start()
     {
@@ -95,7 +100,7 @@ public class GroupPlayer : MonoBehaviour
         penguPlayer.gId = gId;
        
 
-        penguPlayer.SetArrowColor(groupColor);
+        penguPlayer.SetArrowAndSnowballColor(groupColor);
         pigPlayer.SetArrowColor(groupColor);
         
         SetUpPlayerInfo();
@@ -112,6 +117,10 @@ public class GroupPlayer : MonoBehaviour
         Color transColor = addScore.color;
         transColor.a = 0;
         addScore.color = transColor;
+
+        Color remainballColor = remainBallText.color;
+        remainballColor.a = 0;
+        remainBallText.color = remainballColor;
     }
 
     private string ConcateName(string first, string second)
@@ -178,9 +187,10 @@ public class GroupPlayer : MonoBehaviour
             
             if (pigPlayer.IsCrazy)
             {
+                SendViberationToPig();
                 if (otherGroup.pigPlayer.curSkillController is PigRushController)
                 {
-                    otherGroup.SendViberateToGroup();
+                    otherGroup.SendViberateToGroup(0.5f);
 
                     Vector3 curToTargetDirection = (otherGroup.transform.position - transform.position).normalized;
 
@@ -339,6 +349,11 @@ public class GroupPlayer : MonoBehaviour
         }
         else if(skillItem.playerType == PlayerType.PENGU)
         {
+            if (skillItem.GetPenguSkillController() is PickableSnowBallController)
+            {
+                PickableSnowBallController pickableSnowBallController = (PickableSnowBallController) skillItem.GetPenguSkillController();
+                pickableSnowBallController.SetCountRemainingText(remainBallText);
+            }
             penguPlayer.CatchItem(skillItem.GetPenguSkillController());
         }
         return true;
@@ -451,8 +466,26 @@ public class GroupPlayer : MonoBehaviour
     public void IncreaseScore(int scoreToAdd)
     {
         totalScore += scoreToAdd;
+        PopupScore(scoreToAdd);
+
     }
-    
+    private void PopupScore(int score)
+    {
+        addScore.text = score.ToString();
+        RectTransform rectTransform = addScore.GetComponent<RectTransform>();
+        Vector3 oldScale = rectTransform.localScale;
+       
+        Color tempColor = addScore.color;
+        tempColor.a = 1;
+        addScore.color = tempColor;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(rectTransform.DOScale(scorePopupScale, popupDuration)).OnComplete(delegate
+        {
+            tempColor.a = 0;
+            addScore.color = tempColor;
+            rectTransform.localScale = oldScale;
+        });
+    }
     
     // 向猪和企鹅发送震动信息
     public void SendViberateToGroup(float duration=0.05f, float interval=0.05f)
@@ -462,6 +495,16 @@ public class GroupPlayer : MonoBehaviour
         {
             SendViberationToRole(roleId + i, duration, interval);
         }
+    }
+
+    public void SendViberationToPengu(float duation=0.5f, float interval=0.5f)
+    {
+        SendViberationToRole(gId*2, duation, interval);
+    }
+
+    public void SendViberationToPig(float duration = 0.5f, float interval=0.5f)
+    {
+        SendViberationToRole(gId*2+1, duration, interval);
     }
 
     public void SendViberationToRole(int roleId, float duration, float interval)

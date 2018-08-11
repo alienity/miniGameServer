@@ -26,13 +26,13 @@ public class SnowBallController : ShotBallController
     }
 
     // 充能结束后释放
-    public override void UseBall(int ownerId, Vector3 position, Quaternion rotation)
+    public override void UseBall(int ownerId, Vector3 position, Quaternion rotation, Color ballColor)
     {
         if (0 == AvailableNow()) return;
         float chargedPastTime = this.chargeCurrentTime - this.chargeStartTime;
         //ball.SpawnBall(ownerId, position, rotation, Mathf.Clamp(chargedPastTime, 0, maxChargeTime));
         SnowBall snowBall = Instantiate(ball, position, rotation) as SnowBall;
-        snowBall.InitiateBall(ownerId, Mathf.Clamp(chargedPastTime, 0, maxChargeTime));
+        snowBall.InitiateBall(ownerId, Mathf.Clamp(chargedPastTime, 0, maxChargeTime), ballColor);
         remainColdingTime = maxColdingTime;
         ResetCharge();
     }

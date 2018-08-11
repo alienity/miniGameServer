@@ -29,7 +29,7 @@ public class AttractForceBallController : ShotBallController {
         remainBallNums = totalBallNums;
     }
 
-    public override void UseBall(int ownerId, Vector3 position, Quaternion rotation)
+    public override void UseBall(int ownerId, Vector3 position, Quaternion rotation, Color ballColor)
     {
         if (0 == AvailableNow()) return;
         ball.SpawnBall(ownerId, position, rotation, 0);
