@@ -148,12 +148,12 @@ public class GroupPlayer : MonoBehaviour
      */
     private string getRoleName(int roleId)
     {
-        if (!DataSaveController.Instance.role2connectionID.ContainsKey(roleId))
+        if (!DataSaveController.Instance.role2session.ContainsKey(roleId))
         {
             return "";
         }
-        int connectionId = DataSaveController.Instance.role2connectionID[roleId];
-        int sessionId = DataSaveController.Instance.connection2session[connectionId];
+
+        int sessionId = DataSaveController.Instance.role2session[roleId];
         return DataSaveController.Instance.session2name[sessionId];
     }
 
@@ -510,9 +510,11 @@ public class GroupPlayer : MonoBehaviour
 
     public void SendViberationToRole(int roleId, float duration, float interval)
     {
-        if (DataSaveController.Instance.role2connectionID.ContainsKey(roleId))
+        if (DataSaveController.Instance.role2session.ContainsKey(roleId))
         {
-            NetworkServer.SendToClient(DataSaveController.Instance.role2connectionID[roleId], CustomMsgType.AdvanceControl,
+            int sessionId = DataSaveController.Instance.role2session[roleId];
+            int connectionId = DataSaveController.Instance.session2connection[sessionId];
+            NetworkServer.SendToClient(connectionId, CustomMsgType.AdvanceControl,
                 new AdvanceControlMsg(AdvanceControlType.Viberate, duration, interval ));
             Debug.Log("振动");
         }
