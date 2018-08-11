@@ -167,7 +167,8 @@ public class Server : MonoBehaviour
             roleChoosingUIController.changeCanvas();
             ClientScenChangeUtil.ChangeAllClientStage(Stage.ChoosingRoleStage);
             DataSaveController.Instance.stage = Stage.ChoosingRoleStage;
-            Debug.Log("client switch to choosingRoleStage");
+            Debug.Log("进入选人界面:  sessionCount:"  + DataSaveController.Instance.kownSessions.Count + " numberToTransfer: " + roleChooseHandler.toNumberTransfer);
+
         }
         checkingHeadCount = false;
     }

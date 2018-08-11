@@ -58,10 +58,10 @@ public class GameControllHandler : MonoBehaviour
         int gId = psm.gId;
         int uId = psm.uId;
         int selectionId = gId * 2 + uId;
-        if (!DataSaveController.Instance.role2connectionID.ContainsKey(selectionId)) // 要选择的角色已经不可用
+        if (!DataSaveController.Instance.session2role.ContainsValue(selectionId)) // 要选择的角色已经不可用
             return;
-        int connectionId = DataSaveController.Instance.role2connectionID[selectionId];
-        NetworkServer.SendToClient(connectionId, CustomMsgType.GroupState, psm);
+//        int connectionId = DataSaveController.Instance.role2connectionID[selectionId];
+//        NetworkServer.SendToClient(connectionId, CustomMsgType.GroupState, psm);
     }
     
     public Queue<JoystickMsg> GetJoystickQueue()

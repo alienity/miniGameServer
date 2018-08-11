@@ -8,13 +8,15 @@ public class ChooseRequestMsg : MessageBase
     public int uid;
     // 玩家的名字
     public string name;
+    public int sessionId;
 
-    public ChooseRequestMsg(int roomId, int gid, int uid, string name)
+    public ChooseRequestMsg(int roomId, int gid, int uid, string name, int sessionId)
     {
         this.roomId = roomId;
         this.gid = gid;
         this.uid = uid;
         this.name = name;
+        this.sessionId = sessionId;
     }
 
     public ChooseRequestMsg()
