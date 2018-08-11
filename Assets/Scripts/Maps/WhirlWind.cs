@@ -51,7 +51,7 @@ public class WhirlWind : BoxEffects {
             Vector3 attrFoceDir = mTrans.position - gpObj.groupTrans.position;
             attrFoceDir.y = 0;
 
-            Vector3 attrVelocity = (10 - attrFoceDir.magnitude) * attrFoceDir.normalized;
+            Vector3 attrVelocity = (atrRadius - attrFoceDir.magnitude) * attrFoceDir.normalized;
             attrVelocity = attrVelocity * maxAttractForce*0.01f;
 
             //自然规律
