@@ -12,7 +12,6 @@ public class SnowBall : ShotBall
     public float flyTime;
     // 已经飞行时间
     private float fliedTime = 0;
-    private float fliedDist = 0;
     // 击退加成速度
     public float suddenSpeed;
     // 蓄力击退强度
@@ -42,7 +41,6 @@ public class SnowBall : ShotBall
     private void Start()
     {
         mTrans = GetComponent<Transform>();
-        flyDist = flyTime * flySpeed;
         fliedTime = 0;
         
         AddParticles();
@@ -52,12 +50,11 @@ public class SnowBall : ShotBall
     
     private void FixedUpdate()
     {
-        if ((fliedTime < flyTime) && ( fliedDist < flyDist))
+        if (fliedTime < flyTime)
         {
             float newSpeed = flySpeed + flySpeedAdd * chargeAttackTime;
             mTrans.position += mTrans.forward * newSpeed * Time.deltaTime;
             fliedTime += Time.deltaTime;
-            fliedDist += Time.deltaTime * newSpeed;
         }
         else
         {

@@ -23,11 +23,6 @@ public class GameUIController : MonoBehaviour
     public Text countdownText;
     public Image countdownShade;
 
-    //private void Awake()
-    //{
-    //    Instance = this;
-    //}
-
     // 渐入
     public void DoFade(float endValue, float during)
     {
@@ -57,7 +52,13 @@ public class GameUIController : MonoBehaviour
     // 更新分数数据
     public void UpdateScores(int gId, int score)
     {
-        coldingText[gId].groupScores.text = score.ToString();
+        string newScore = score.ToString();
+        if (coldingText[gId].groupScores.text != score.ToString())
+        {
+            coldingText[gId].groupScores.transform.localScale = Vector3.one;
+            coldingText[gId].groupScores.text = newScore;
+            coldingText[gId].groupScores.transform.DOShakeScale(0.1f, 0.4f);
+        }
     }
 
     // 更新cd数据

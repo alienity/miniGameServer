@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1021660576459894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.5, y: 59, z: 4.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -115,8 +115,9 @@ MonoBehaviour:
   explosion: {fileID: 19848870, guid: a7c694f0877ea874fa57e033221095c3, type: 2}
   Trail: {fileID: 19894080, guid: f6d2b583bc3983c4b9b6dcac3122a734, type: 2}
   markCircle: {fileID: 19895582, guid: 24e29d528f11acf42974643bee14a607, type: 2}
-  explosionRadius: 0
-  radio: 7
+  lineColor: {r: 0.8490566, g: 0.32092494, b: 0.20425417, a: 0.5372549}
+  explosionRadius: 6
+  radio: 20
 --- !u!135 &135426362948463716
 SphereCollider:
   m_ObjectHideFlags: 1

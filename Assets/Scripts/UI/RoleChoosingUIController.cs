@@ -66,7 +66,6 @@ public class RoleChoosingUIController : MonoBehaviour {
 
     private void Start()
     {
-        InitArray();
         Title.gameObject.SetActive(true);
         CountDown.gameObject.SetActive(false);
 
@@ -87,34 +86,6 @@ public class RoleChoosingUIController : MonoBehaviour {
         // 切换至选人界面
         StartCanvas.SetActive(false);
         ChooseRoleCanvas.SetActive(true);
-    }
-    private void InitArray()
-    {
-        buttons = new Button[8];
-
-        int i = 0;
-        foreach (PlayerIcone pIcone in playerIcone)
-        {
-            // 主机端不需要button
-            buttons[i].interactable = false;
-            buttons[i++] = pIcone.button;
-        }
-        //buttons[0] = P1Pengu;
-        //buttons[1] = P1Pig;
-        //buttons[2] = P2Pengu;
-        //buttons[3] = P2Pig;
-        //buttons[4] = P3Pengu;
-        //buttons[5] = P3Pig;
-        //buttons[6] = P4Pengu;
-        //buttons[7] = P4Pig;
-
-        //for(int i = 0; i < 4; ++i )
-        //{
-        //    //button.image.color = Color.white;D:\github_MiniGame\miniGameServer\Assets\Resource\Textures\ChooseRoleSceneICon
-        //    buttons[2 * i].GetComponent<Image>().sprite = PenguHeadAltern;
-        //    buttons[2 * i + 1].GetComponent<Image>().sprite = PigHeadAltern;
-        //}
-
     }
 
     // todo 到时候在这里为 button 设置效果

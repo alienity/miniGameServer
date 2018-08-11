@@ -1,0 +1,324 @@
+fileFormatVersion: 2
+guid: c63060de6e6c57145804589e2194dad4
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Chest_M
+    100002: ConstraintSystem
+    100004: DeformationSystem
+    100006: Elbow_L
+    100008: Elbow_R
+    100010: FKElbow_L
+    100012: FKElbow_R
+    100014: FKExtraElbow_L
+    100016: FKExtraElbow_R
+    100018: FKExtraHip_L
+    100020: FKExtraHip_R
+    100022: FKExtraScapula_L
+    100024: FKExtraScapula_R
+    100026: FKExtraShoulder_L
+    100028: FKExtraShoulder_R
+    100030: FKHip_L
+    100032: FKHip_R
+    100034: FKOffsetElbow_L
+    100036: FKOffsetElbow_R
+    100038: FKOffsetHip_L
+    100040: FKOffsetHip_R
+    100042: FKOffsetScapula_L
+    100044: FKOffsetScapula_R
+    100046: FKOffsetShoulder_L
+    100048: FKOffsetShoulder_R
+    100050: FKParentConstraintToChest_M
+    100052: FKParentConstraintToRoot_M
+    100054: FKScapula_L
+    100056: FKScapula_R
+    100058: FKShoulder_L
+    100060: FKShoulder_R
+    100062: FKSystem
+    100064: FKXElbow_R
+    100066: FKXScapula_L
+    100068: FKXScapula_R
+    100070: FKXShoulder_L
+    100072: FKXShoulder_R
+    100074: Group
+    100076: HEAD_A
+    100078: HEAD_B
+    100080: HEAD_C
+    100082: HEAD_D
+    100084: HEAD_E
+    100086: Hip_L
+    100088: Hip_R
+    100090: joint1_L
+    100092: joint1_R
+    100094: Knee_L
+    100096: Knee_R
+    100098: Main
+    100100: MotionSystem
+    100102: Neck_M
+    100104: qie_g_1:basket
+    100106: qie_g_1:body1
+    100108: qie_g_1:group1
+    100110: qie_g_1:mouth_foot
+    100112: qie_g_1:snow
+    100114: Root_M
+    100116: Scapula_L
+    100118: Scapula_R
+    100120: Shoulder_L
+    100122: Shoulder_R
+    100124: ShoulderPart1_L
+    100126: ShoulderPart1_R
+    100128: ShoulderPart2_L
+    100130: ShoulderPart2_R
+    100132: Spine1_M
+    100134: TwistBalancerElbow_R
+    100136: TwistBalancerShoulder_R
+    100138: TwisterShoulder0_R
+    100140: TwistFollowParentElbow_R
+    100142: TwistFollowParentOffsetElbow_R
+    100144: TwistFollowParentOffsetShoulder_R
+    100146: TwistFollowParentShoulder_R
+    100148: TwistSystem
+    100150: UnTwistElbow_R
+    100152: UnTwistShoulder_R
+    100154: //RootNode
+    400000: Chest_M
+    400002: ConstraintSystem
+    400004: DeformationSystem
+    400006: Elbow_L
+    400008: Elbow_R
+    400010: FKElbow_L
+    400012: FKElbow_R
+    400014: FKExtraElbow_L
+    400016: FKExtraElbow_R
+    400018: FKExtraHip_L
+    400020: FKExtraHip_R
+    400022: FKExtraScapula_L
+    400024: FKExtraScapula_R
+    400026: FKExtraShoulder_L
+    400028: FKExtraShoulder_R
+    400030: FKHip_L
+    400032: FKHip_R
+    400034: FKOffsetElbow_L
+    400036: FKOffsetElbow_R
+    400038: FKOffsetHip_L
+    400040: FKOffsetHip_R
+    400042: FKOffsetScapula_L
+    400044: FKOffsetScapula_R
+    400046: FKOffsetShoulder_L
+    400048: FKOffsetShoulder_R
+    400050: FKParentConstraintToChest_M
+    400052: FKParentConstraintToRoot_M
+    400054: FKScapula_L
+    400056: FKScapula_R
+    400058: FKShoulder_L
+    400060: FKShoulder_R
+    400062: FKSystem
+    400064: FKXElbow_R
+    400066: FKXScapula_L
+    400068: FKXScapula_R
+    400070: FKXShoulder_L
+    400072: FKXShoulder_R
+    400074: Group
+    400076: HEAD_A
+    400078: HEAD_B
+    400080: HEAD_C
+    400082: HEAD_D
+    400084: HEAD_E
+    400086: Hip_L
+    400088: Hip_R
+    400090: joint1_L
+    400092: joint1_R
+    400094: Knee_L
+    400096: Knee_R
+    400098: Main
+    400100: MotionSystem
+    400102: Neck_M
+    400104: qie_g_1:basket
+    400106: qie_g_1:body1
+    400108: qie_g_1:group1
+    400110: qie_g_1:mouth_foot
+    400112: qie_g_1:snow
+    400114: Root_M
+    400116: Scapula_L
+    400118: Scapula_R
+    400120: Shoulder_L
+    400122: Shoulder_R
+    400124: ShoulderPart1_L
+    400126: ShoulderPart1_R
+    400128: ShoulderPart2_L
+    400130: ShoulderPart2_R
+    400132: Spine1_M
+    400134: TwistBalancerElbow_R
+    400136: TwistBalancerShoulder_R
+    400138: TwisterShoulder0_R
+    400140: TwistFollowParentElbow_R
+    400142: TwistFollowParentOffsetElbow_R
+    400144: TwistFollowParentOffsetShoulder_R
+    400146: TwistFollowParentShoulder_R
+    400148: TwistSystem
+    400150: UnTwistElbow_R
+    400152: UnTwistShoulder_R
+    400154: //RootNode
+    2100000: HEAD_A1
+    2100002: HEAD_B1
+    2100004: HEAD_C1
+    2100006: HEAD_D1
+    2100008: HEAD_E1
+    2100010: qie_g_1_body
+    2100012: qie_g_1_mouth
+    2100014: qie_g_1_basket1
+    2100016: snow1
+    2300000: HEAD_A
+    2300002: HEAD_B
+    2300004: HEAD_C
+    2300006: HEAD_D
+    2300008: HEAD_E
+    2300010: qie_g_1:basket
+    2300012: qie_g_1:mouth_foot
+    2300014: qie_g_1:snow
+    3300000: HEAD_A
+    3300002: HEAD_B
+    3300004: HEAD_C
+    3300006: HEAD_D
+    3300008: HEAD_E
+    3300010: qie_g_1:basket
+    3300012: qie_g_1:mouth_foot
+    3300014: qie_g_1:snow
+    4300000: HEAD_A
+    4300002: HEAD_B
+    4300004: HEAD_C
+    4300006: HEAD_D
+    4300008: HEAD_E
+    4300010: qie_g_1:body1
+    4300012: qie_g_1:mouth_foot
+    4300014: qie_g_1:basket
+    4300016: qie_g_1:snow
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: qie_g_1:body1
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HEAD_A1
+    second: {fileID: 2100000, guid: daa8aea51a873da47a4e9ab703022df2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HEAD_B1
+    second: {fileID: 2100000, guid: d64b139cdcfdf3744be64ccbd33cc558, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HEAD_C1
+    second: {fileID: 2100000, guid: 2ad04c5ce591ba7449e2e791338c3b94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HEAD_D1
+    second: {fileID: 2100000, guid: 7308ff0509e09ac4ba1151d585632a47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HEAD_E1
+    second: {fileID: 2100000, guid: 2e948190bd90ece42a7ec08a27df2e44, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: qie_g_1_basket1
+    second: {fileID: 2100000, guid: 1497cd8bb17c4ad4d904818a62623288, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: qie_g_1_body
+    second: {fileID: 2100000, guid: 1a1d9b9c50bcd2c45b97cbc7f2fb4dde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: qie_g_1_mouth
+    second: {fileID: 2100000, guid: d796d4f8c8e202b47994f1c688ee125c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: snow1
+    second: {fileID: 2100000, guid: 2aa3295e19827454cb0bd9e641fb6c98, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

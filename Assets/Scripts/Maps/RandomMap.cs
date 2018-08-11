@@ -51,6 +51,8 @@ public class RandomMap : MonoBehaviour
         }
         else reTimes -= Time.deltaTime;
     }
+
+    // 写法非常糟糕，有时间再改
     private void setMap(int idx)
     {
         if(cloneObject.tag =="FallStone")
@@ -59,7 +61,15 @@ public class RandomMap : MonoBehaviour
             cloneObjInstance.transform.position = reBorns[idx].position;
             getObject();
         }
+        else if (cloneObject.tag == "SkillItem")
+        {
+            GameObject cloneObjInstance = Instantiate(cloneObject, transform);
+            cloneObjInstance.transform.position = reBorns[idx].position;
+            SkillItem bigSnowBallItem = cloneObjInstance.GetComponent<SkillItem>();
+            bigSnowBallItem.noticeGenerator = getObject;
+        }
     }
+    
     //保持地图上 随机的物品数，由物品的 触发器函数调用
     public void getObject()
     {

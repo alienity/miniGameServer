@@ -8,21 +8,38 @@ public class FallStone : MonoBehaviour {
     public ParticleSystem Trail;
     public ParticleSystem markCircle;
 
+    // 画线
+    private LineRenderer lineRenderer;
+    // 画的线的颜色
+    public Color lineColor;
     //wwq 爆炸半径
     public float explosionRadius;
     // 力度
     public float radio = 7;
-    
+
+    // 地面上的圈
+    //private ParticleSystem groundCircle;
+
     private void Start()
     {
         ParticleSystem trailSystem = Instantiate(Trail, transform);
         trailSystem.transform.position = transform.position;
         
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+        lineRenderer.material.SetColor("_TintColor", lineColor);
+        lineRenderer.widthMultiplier = 0.1f;
+    }
+
+    private void Update()
+    {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit))
         {
-            Vector3 circlePos = hit.point + Vector3.up;
-            Destroy(Instantiate(markCircle, circlePos, Quaternion.LookRotation(Vector3.up)).gameObject, 3);
+            Vector3[] points = new Vector3[2];
+            points[0] = transform.position;
+            points[1] = hit.point;
+            lineRenderer.SetPositions(points);
         }
     }
 

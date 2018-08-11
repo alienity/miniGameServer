@@ -110,9 +110,11 @@ public class PenguPlayer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (penguCurDirection.magnitude == 0)
+            penguCurDirection = Vector3.forward;
         // 修改当前朝向
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(penguCurDirection), Time.deltaTime * rotateSpeed);
-        //mTrans.rotation = Quaternion.LookRotation(penguCurDirection);
+        //transform.rotation = Quaternion.LookRotation(penguCurDirection);
 
         if (IsDie || IsSturn) return;
         

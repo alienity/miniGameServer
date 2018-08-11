@@ -353,8 +353,8 @@ public class GroupPlayer : MonoBehaviour
             {
                 PickableSnowBallController pickableSnowBallController = (PickableSnowBallController) skillItem.GetPenguSkillController();
                 pickableSnowBallController.SetCountRemainingText(remainBallText);
+                penguPlayer.CatchItem(skillItem.GetPenguSkillController());
             }
-            penguPlayer.CatchItem(skillItem.GetPenguSkillController());
         }
         return true;
     }
