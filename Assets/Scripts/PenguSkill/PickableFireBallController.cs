@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PickableSnowBallController : SnowBallController
+public class PickableFireBallController : SnowBallController
 {
 
     // 剩余可用的ball的数量
@@ -49,7 +49,7 @@ public class PickableSnowBallController : SnowBallController
     {
         if (0 == AvailableNow()) return;
         float chargedPastTime = this.chargeCurrentTime - this.chargeStartTime;
-        SnowBall snowBall = Instantiate(ball, position, rotation) as SnowBall;
+        FireBall snowBall = Instantiate(ball, position, rotation) as FireBall;
         snowBall.InitiateBall(ownerId, Mathf.Clamp(chargedPastTime, 0, maxChargeTime), ballColor);
         remainColdingTime = maxColdingTime;
         remainBallNums -= 1;

@@ -11,7 +11,6 @@ public class SpringWall :BoxEffects
     {
         selfAudioSource = GetComponent<AudioSource>(); ;
         selfAudioSource.clip = hittedAudio;
-        Debug.Log("spring start");
     }
 
     private void OnTriggerEnter(Collider collider)

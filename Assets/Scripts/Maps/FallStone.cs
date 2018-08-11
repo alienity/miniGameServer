@@ -17,6 +17,11 @@ public class FallStone : MonoBehaviour {
     // 力度
     public float radio = 7;
 
+    // 检查半径，如果以该半径为球中没有火球物品就生成火球物品
+    public float fireBallItemRadius = 6f;
+    // 生成的火球
+    public GameObject fireBallItem;
+
     // 地面上的圈
     //private ParticleSystem groundCircle;
 
@@ -43,10 +48,10 @@ public class FallStone : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("line explosion" + collision.gameObject.tag);
-        if (collision.gameObject.tag == "Plane"|| collision.gameObject.tag == "Player")
+        Debug.Log("line explosion" + other.gameObject.tag);
+        if (other.gameObject.tag == "Plane"|| other.gameObject.tag == "Player")
         {
             Destroy(Instantiate(explosion, transform.position, Quaternion.identity).gameObject, 1);
             explode();
@@ -69,6 +74,22 @@ public class FallStone : MonoBehaviour {
             GroupPlayer gp = col[i].GetComponent<GroupPlayer>();
             gp.EffectSpeedMovement(explosionvelocity);
         }
+
+        CreateFireBallItem();
         Destroy(this.gameObject);
     }
+
+    public void CreateFireBallItem()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, fireBallItemRadius);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.tag == "SkillItem")
+                return;
+        }
+
+        GameObject item = Instantiate(fireBallItem);
+        item.transform.position = transform.position;
+    }
+
 }

@@ -9,61 +9,71 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1608176710754550}
+  m_RootGameObject: {fileID: 1979926799372360}
   m_IsPrefabParent: 1
---- !u!1 &1608176710754550
+--- !u!1 &1979926799372360
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4764198915708922}
-  - component: {fileID: 135954297152426206}
-  - component: {fileID: 114357661891428622}
+  - component: {fileID: 4197125448290924}
+  - component: {fileID: 135828476656166958}
+  - component: {fileID: 114608106251854162}
   m_Layer: 0
-  m_Name: BigWind
-  m_TagString: Untagged
+  m_Name: BigFireBall
+  m_TagString: FireBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4764198915708922
+--- !u!4 &4197125448290924
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608176710754550}
+  m_GameObject: {fileID: 1979926799372360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.8, y: 6.07, z: 10.85}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.95, y: 11.29, z: 0.03}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114357661891428622
+--- !u!114 &114608106251854162
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608176710754550}
+  m_GameObject: {fileID: 1979926799372360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30187be04e810d94aa7317ad185b4a50, type: 3}
+  m_Script: {fileID: 11500000, guid: 12938e7b99cabba449579535ac155eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 8
-  end: {fileID: 0}
-  windCenterR: 0.1
-  atrRadius: 5
-  wind: {fileID: 19872470, guid: e83fb83871ed1ac4d978b22b0f2a4d71, type: 2}
-  maxAttractForce: 15
---- !u!135 &135954297152426206
+  attackerId: 0
+  isHitted: 0
+  chargeAttackTime: 0
+  flySpeed: 30
+  flySpeedAdd: 10
+  flyTime: 5
+  suddenSpeed: 50
+  attackStrength: 15
+  cancelTouchDuring: 0.4
+  boomRadius: 2
+  explosionRatio: 60
+  impactParticle: {fileID: 130848, guid: d16221e794fe16e4e8994a7f8c770561, type: 2}
+  projectileParticle: {fileID: 131070, guid: 4b21d8abf8d26b449b109c8edb5cc78a, type: 2}
+  muzzleParticle: {fileID: 193574, guid: 5c2bdcf6f0badc34f9f192b0995e4a79, type: 2}
+  trailParticles: []
+  impactNormal: {x: 0, y: 0, z: 0}
+--- !u!135 &135828476656166958
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608176710754550}
+  m_GameObject: {fileID: 1979926799372360}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1

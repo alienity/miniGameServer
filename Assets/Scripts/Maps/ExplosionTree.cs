@@ -1,17 +1,29 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplosionTree : BoxEffects
 {
+    // 南瓜id
+    public int pumpkinId;
+
     // 最大生命值
     public short lifeNumber = 3;
+
+    // 出生从最小放大到正常时长
+    public float startScaleDuring = 0.5f;
+
+    // 爆炸的缩放
+    public float readyToExplodeScale = 1.2f;
     // 爆炸延迟
     public float explosionDelay = 2f;
+
     // 爆炸范围
     public float explosionRadius = 50;
     // 爆炸强度
     public float radio = -30.5f;
+
     // 爆炸音效
     public AudioClip explosionAudio;
     // 被击打音效
@@ -23,6 +35,10 @@ public class ExplosionTree : BoxEffects
     // 重生特效播放时间
     public float rebornAnimDuring = 2;
 
+    // 死亡后通知管理器
+    public delegate void noticeViwer(int id);
+    public noticeViwer noticeFunc;
+
     private AudioSource selfAudioSource;
     private short totalLife;
 
@@ -31,16 +47,9 @@ public class ExplosionTree : BoxEffects
         totalLife = lifeNumber;
         selfAudioSource = gameObject.AddComponent<AudioSource>();
         selfAudioSource.clip = explosionAudio;
-    }
 
-    private void Update()
-    {
-        //rebornPastTime += Time.deltaTime;
-        //if(lifeNumber == 0 && rebornPastTime > rebornDelay)
-        //{
-        //    lifeNumber = totalLife;
-        //    ResetExplosionTree();
-        //}
+        transform.localScale = Vector3.one * 0.1f;
+        transform.DOScale(Vector3.one, startScaleDuring);
     }
 
     // 受到攻击爆炸
@@ -63,11 +72,15 @@ public class ExplosionTree : BoxEffects
             GroupPlayer gp = col[i].GetComponent<GroupPlayer>();
             gp.EffectSpeedMovement(explosionvelocity);
         }
+        if (noticeFunc != null)
+            noticeFunc(pumpkinId);
+        transform.DOScale(Vector3.one * 0.1f, 0.3f);
+        Destroy(this.gameObject, 0.5f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Ball")
+        if(other.gameObject.tag == "Ball" || other.gameObject.tag == "FireBall")
         {
             if (lifeNumber == 0) return;
 
@@ -85,37 +98,14 @@ public class ExplosionTree : BoxEffects
             lifeNumber--;
 
             if (lifeNumber == 0)
-                StartCoroutine(CountDownToExplode(explosionDelay));
+            {
+                Sequence mySequence = DOTween.Sequence();
+                mySequence.Append(transform.DOScale(readyToExplodeScale, explosionDelay))
+                    .AppendCallback(()=> {
+                        explode();
+                    });
+            }
         }
-    }
-
-    IEnumerator CountDownToExplode(float during)
-    {
-        Debug.Log("播放特效");
-        yield return new WaitForSeconds(during);
-        explode();
-        
-        ResetExplosionTree();
-    }
-
-    // 重置南瓜
-    public void ResetExplosionTree()
-    {
-        StartCoroutine(CountDownToReborn(rebornDelay, rebornAnimDuring));
-    }
-
-    IEnumerator CountDownToReborn(float delay, float during)
-    {
-        yield return new WaitForSeconds(delay);
-        Debug.Log("播放重生动画");
-        yield return new WaitForSeconds(during);
-        lifeNumber = totalLife;
-    }
-
-    // 更改模型
-    public void ExchangeModel(Mesh modelMesh)
-    {
-        // 冬天会把模型变更成雪人
     }
 
 }

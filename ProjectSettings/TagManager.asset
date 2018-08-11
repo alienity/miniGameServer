@@ -8,6 +8,8 @@ TagManager:
   - FallStone
   - Plane
   - SkillItem
+  - FireBall
+  - SpringWall
   layers:
   - Default
   - TransparentFX

@@ -1,8 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class SnowBall : ShotBall
+public class FireBall : ShotBall
 {
+
     // 移动速度
     public float flySpeed;
     // 飞行速度加成
@@ -20,6 +22,10 @@ public class SnowBall : ShotBall
     private bool canTouchSelf = false;
     // 多少秒之后取消自己的碰撞
     public float cancelTouchDuring = 0.4f;
+    // 爆炸半径
+    public float boomRadius = 6f;
+    // 半径威力加成
+    public float explosionRatio = 2;
 
     // 特效组件
     public GameObject impactParticle;
@@ -42,12 +48,12 @@ public class SnowBall : ShotBall
     {
         mTrans = GetComponent<Transform>();
         fliedTime = 0;
-        
+
         AddParticles();
         SetSnowBallColor(ballColor);
         StartCoroutine(CountDownTouchSelf(cancelTouchDuring));
     }
-    
+
     private void FixedUpdate()
     {
         if (fliedTime < flyTime)
@@ -67,33 +73,32 @@ public class SnowBall : ShotBall
     {
         if (other.tag == "Player")
         {
-
-            GroupPlayer gp = other.GetComponent<GroupPlayer>();
-            /*
-            // 当组是无敌的时候，执行组的对应的方法
-            if (gp.isInvulnerable)
-            {
-                gp.ReflectAttack(transform);
-                return;
-            }
-            */
-            // 正常情况下执行触碰攻击方法
-            if (!canTouchSelf)
-            {
-                int otherId = other.GetComponent<GroupPlayer>().gId;
-                if (otherId == attackerId) return;
-            }
-
-            if (isHitted) return;
-            isHitted = true;
-
-            gp.EffectSpeedMovement(transform.forward * (suddenSpeed + chargeAttackTime * attackStrength));
-            gp.SetAttacker(attackerId); // 设置攻击者Id
-
-            ShowHitParticleEffects(impactNormal);
-
-            DestroySelf();
+            int otherId = other.GetComponent<GroupPlayer>().gId;
+            if (!canTouchSelf && (otherId == attackerId)) return;
         }
+
+        if (isHitted) return;
+        isHitted = true;
+
+        ShowHitParticleEffects(impactNormal);
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, boomRadius);
+        foreach (Collider collider in colliders)
+        {
+            if(collider.gameObject.tag == "Player")
+            {
+                Debug.Log(collider.gameObject.name);
+                int otherId = collider.GetComponent<GroupPlayer>().gId;
+                if (!canTouchSelf && otherId == attackerId) continue;
+
+                GroupPlayer gp = other.GetComponent<GroupPlayer>();
+                Vector3 explosionDir = gp.transform.position - transform.position;
+                gp.EffectSpeedMovement(explosionDir.normalized * explosionRatio);
+                gp.SetAttacker(attackerId); // 设置攻击者Id
+            }
+        }
+
+        DestroySelf();
     }
 
     IEnumerator CountDownTouchSelf(float time)
@@ -137,7 +142,7 @@ public class SnowBall : ShotBall
             ps.startColor = color;
             //            }
         }
-        
+
     }
 
     // 碰撞到时，添加粒子特效
