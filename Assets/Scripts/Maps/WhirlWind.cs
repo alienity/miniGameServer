@@ -10,10 +10,6 @@ public class WhirlWind : BoxEffects {
     public ParticleSystem wind;
     // 最大引力
     public float maxAttractForce;
-    //// 移动速度
-    //public float Speed;
-    //// 死亡地点
-    //public Transform end;
 
     // 受影响对象列表
     private List<GroupPlayer> groupPlayers;

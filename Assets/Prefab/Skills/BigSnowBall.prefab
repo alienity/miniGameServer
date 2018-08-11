@@ -55,11 +55,11 @@ MonoBehaviour:
   attackerId: 0
   isHitted: 0
   chargeAttackTime: 0.33140182
-  flySpeed: 20
-  flySpeedAdd: 3
+  flySpeed: 30
+  flySpeedAdd: 10
   flyTime: 5
-  suddenSpeed: 40
-  attackStrength: 8
+  suddenSpeed: 50
+  attackStrength: 15
   cancelTouchDuring: 0.4
   impactParticle: {fileID: 153912, guid: 932046b7eaf3b554f8d74c81e2f00558, type: 2}
   projectileParticle: {fileID: 160792, guid: 7e9a3591984cda1499dc675622a57b0b, type: 2}

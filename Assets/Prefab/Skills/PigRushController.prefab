@@ -57,4 +57,4 @@ MonoBehaviour:
   invulnerableTime: 2
   fartParticleEffects: {fileID: 19820506, guid: 836a6e787e3b11941b38b8fff2af4e5b,
     type: 2}
-  sturnDuring: 0.5
+  sturnDuring: 1.5

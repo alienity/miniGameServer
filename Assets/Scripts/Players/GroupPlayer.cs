@@ -44,8 +44,6 @@ public class GroupPlayer : MonoBehaviour
 
     // 组的颜色
     private Color groupColor = Color.black;
-    // 队伍Trans
-    public Transform groupTrans;
     
     // 被某个组攻击到，该组的ID
     private int attackerId = -1;
@@ -72,6 +70,13 @@ public class GroupPlayer : MonoBehaviour
     [SerializeField] public PigPlayer pigPlayer;
     [SerializeField] private PenguPlayer penguPlayer;
 
+    // 队伍Trans
+    public Transform groupTrans;
+
+    public float scorePopupScale = 0.02f;
+    public float popupDuration = 0.3f;
+    public Text remainBallText;
+
     // 被撞击音效
     public AudioClip hittedAudio;
     public AudioClip rebornAudio;
@@ -84,10 +89,6 @@ public class GroupPlayer : MonoBehaviour
         set { pigPlayer.IsSurivalSkillNow = value; }
     }
     
-    public float scorePopupScale = 0.02f;
-    public float popupDuration = 0.3f;
-    public Text remainBallText;
-
     private void Start()
     {
         groupTrans = GetComponent<Transform>();

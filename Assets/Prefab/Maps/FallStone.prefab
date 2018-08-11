@@ -116,8 +116,8 @@ MonoBehaviour:
   Trail: {fileID: 19894080, guid: f6d2b583bc3983c4b9b6dcac3122a734, type: 2}
   markCircle: {fileID: 19895582, guid: 24e29d528f11acf42974643bee14a607, type: 2}
   lineColor: {r: 0.8490566, g: 0.32092494, b: 0.20425417, a: 0.5372549}
-  explosionRadius: 6
-  radio: 20
+  explosionRadius: 10
+  radio: 10
 --- !u!135 &135426362948463716
 SphereCollider:
   m_ObjectHideFlags: 1

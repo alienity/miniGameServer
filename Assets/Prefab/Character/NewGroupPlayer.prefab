@@ -7142,10 +7142,10 @@ MonoBehaviour:
   groupTrans: {fileID: 4870675648886274}
   groupRd: {fileID: 54540502401991008}
   bumTrans: {fileID: 4831369391273666}
-  accForce: 160
+  accForce: 180
   pigCurDirection: {x: 1, y: 0, z: 0}
   pigMoveDirection: {x: 0, y: 0, z: 0}
-  pigNormalSpeed: 8
+  pigNormalSpeed: 12
   pigRotateSpeed: 12
   runingClip: {fileID: 8300000, guid: fd086fef254f64f43b61ca633cfd94c7, type: 3}
   rushClip: {fileID: 8300000, guid: 27c34fdfa595ea8458bcf19cead4ba93, type: 3}
@@ -7453,7 +7453,7 @@ MonoBehaviour:
   stunEffect: {fileID: 1815968215473704}
   addScore: {fileID: 114664458489351432}
   playerName: {fileID: 114778045575488668}
-  gId: 3
+  gId: 1
   rebornDelay: 0
   groupTrans: {fileID: 4870675648886274}
   countdownTime: 30

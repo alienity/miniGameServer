@@ -5,28 +5,31 @@ using System;
 
 public class RandomMap : MonoBehaviour
 {
-
     private int[] pos;
 
-    private System.Random rand;
+    private System.Random rand = new System.Random();
+
+    // 需要随机的对象
     public GameObject cloneObject;
-
+    // 总共要出现的数量
     public int cloneNum;
+    // 已经出现的数量
     private int clonedNum;
-
+    // 重生的位置
     public List<Transform> reBorns;
-
+    // 重生设定时间
     public float reBornCD;
+    // 重生剩余时间
     private float reTimes;
 
     void Start()
     {
         reTimes = -1; clonedNum = 0;
 
-        pos = new int[10];
-        rand = new System.Random();
-
-        for (int i = 0; i < 9; i++) pos[i] = i;
+        int posNum = reBorns.Count;
+        pos = new int[posNum];
+        for (int i = 0; i < posNum; i++)
+            pos[i] = i;
     }
 
     void Update()
