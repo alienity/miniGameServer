@@ -1223,6 +1223,38 @@ Prefab:
       propertyPath: playerIcone.Array.data[7].button
       value: 
       objectReference: {fileID: 1829658107}
+    - target: {fileID: 114786747272029260, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9699ab040311f144cbe137046aecd627,
+        type: 3}
+    - target: {fileID: 114957284793301222, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a7218695a12ed5a41b3a2efc5a26897b,
+        type: 3}
+    - target: {fileID: 224881858550416102, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 611
+      objectReference: {fileID: 0}
+    - target: {fileID: 224881858550416102, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 246
+      objectReference: {fileID: 0}
+    - target: {fileID: 224881858550416102, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 297
+      objectReference: {fileID: 0}
+    - target: {fileID: 224881858550416102, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -450
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114996007197153810, guid: 9b62672c8495c714b988cc7c01533b6e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9b62672c8495c714b988cc7c01533b6e, type: 2}
