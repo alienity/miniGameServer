@@ -294,7 +294,7 @@ public class GroupPlayer : MonoBehaviour
 
             selfAudioSource.clip = rebornAudio;
             selfAudioSource.Play();
-            Debug.Log("Play");
+
             
             StartCoroutine(LightCircleDown());
 
@@ -413,9 +413,10 @@ public class GroupPlayer : MonoBehaviour
         if (!isAlive || isSturn) return;
         float dot = Vector3.Dot(pigPlayer.pigCurDirection, dir.normalized);
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-        //        Debug.Log(angle);
-        //
-        //if (angle < pigLockPenguDegree / 2) penguPlayer.SetArrowDirection(dir.normalized);
+        
+        
+        
+        
         penguPlayer.SetArrowDirection(dir.normalized);
     }
     
@@ -520,9 +521,10 @@ public class GroupPlayer : MonoBehaviour
         {
             int sessionId = DataSaveController.Instance.role2session[roleId];
             int connectionId = DataSaveController.Instance.session2connection[sessionId];
+            
             NetworkServer.SendToClient(connectionId, CustomMsgType.AdvanceControl,
                 new AdvanceControlMsg(AdvanceControlType.Viberate, duration, interval ));
-            Debug.Log("振动");
+                
         }
     }
 
