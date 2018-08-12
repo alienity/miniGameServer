@@ -161,6 +161,7 @@ public class RoleChooseHandler : MonoBehaviour
             yield return new WaitForSeconds(1);
             --time;
         }
+        roleChoosingUIController.CountDownPlay(time);
         //server.StopBroadCast();
         DataSaveController.Instance.stage = Stage.GammingStage;
         SceneTransformer.Instance.TransferToNextScene();

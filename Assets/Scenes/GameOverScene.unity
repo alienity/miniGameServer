@@ -1977,12 +1977,12 @@ Prefab:
     - target: {fileID: 224549477409265314, guid: f78d05e6e606c064c8fbb2c968659b79,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224750260167541594, guid: f78d05e6e606c064c8fbb2c968659b79,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114795939096846844, guid: f78d05e6e606c064c8fbb2c968659b79,
         type: 2}
@@ -2166,6 +2166,21 @@ Prefab:
       propertyPath: m_Text
       value: CountDown
       objectReference: {fileID: 0}
+    - target: {fileID: 82899210553366288, guid: f78d05e6e606c064c8fbb2c968659b79,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114795939096846844, guid: f78d05e6e606c064c8fbb2c968659b79,
+        type: 2}
+      propertyPath: CountDownAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 0a69c1f1b388fb846b77d009d8137930, type: 3}
+    - target: {fileID: 114795939096846844, guid: f78d05e6e606c064c8fbb2c968659b79,
+        type: 2}
+      propertyPath: CountDownOverAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 8283542b06be9aa4280a9577d9efc9ff, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f78d05e6e606c064c8fbb2c968659b79, type: 2}
   m_IsPrefabParent: 0

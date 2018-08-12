@@ -16,21 +16,6 @@ public class RoleChoosingUIController : MonoBehaviour {
     public Image BlueProgressBar;
     // 进度显示分数（1/8）
     public Text FractionalText;
-    // ChooseRoleScene的Button
-    //public Button P1Pengu;
-    //public Button P1Pig;
-    //public Button P2Pengu;
-    //public Button P2Pig;
-    //public Button P3Pengu;
-    //public Button P3Pig;
-    //public Button P4Pengu;
-    //public Button P4Pig;
-    //public Sprite PenguHeadAltern;
-    //public Sprite PenguHeadSelect;
-    //public Sprite PenguHeadLock;
-    //public Sprite PigHeadAltern;
-    //public Sprite PigHeadSelect;
-    //public Sprite PigHeadLock;
 
     [System.Serializable]
     public struct PlayerIcone
@@ -47,6 +32,8 @@ public class RoleChoosingUIController : MonoBehaviour {
     private Button[] buttons;
     // 进入GameScene前的倒计时
     public Text CountDown;
+    public AudioClip CountDownAudio;
+    public AudioClip CountDownOverAudio;
     // Title 请选择你的英雄和战队
     public Text Title; 
     
@@ -128,11 +115,18 @@ public class RoleChoosingUIController : MonoBehaviour {
     {
         Title.gameObject.SetActive(false);
         CountDown.gameObject.SetActive(true);
+        CountDown.gameObject.GetComponent<AudioSource>().clip = CountDownAudio;
+        CountDown.gameObject.GetComponent<AudioSource>().Play();
     }
 
     public void CountDownPlay(int time)
     {
         CountDown.text = time.ToString();
+        if(time < 1)
+        {
+            CountDown.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
+            CountDown.gameObject.GetComponent<AudioSource>().Play();
+        }
     }
 
     public void SetRoleNames(Dictionary<int, string> role2Name)

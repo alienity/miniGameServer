@@ -447,7 +447,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 24735739c5bb040ffaead25a38bf0c6b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2a60ba2ff117aac41b07294ca2be7fb8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1254,6 +1254,46 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.x
       value: -450
+      objectReference: {fileID: 0}
+    - target: {fileID: 114892009298087592, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: CountDownAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 0a69c1f1b388fb846b77d009d8137930, type: 3}
+    - target: {fileID: 114892009298087592, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: CountDownOverAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 8283542b06be9aa4280a9577d9efc9ff, type: 3}
+    - target: {fileID: 82633606684220488, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82633606684220488, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 82633606684220488, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224815099007995570, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114129058963723622, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 114129058963723622, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114996007197153810, guid: 9b62672c8495c714b988cc7c01533b6e, type: 2}
