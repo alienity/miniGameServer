@@ -54,6 +54,12 @@ public class PigPlayer : MonoBehaviour
     public GameObject shadowObj;
     // 猪的移动特效
     public ParticleSystem walkClouds;
+    // 猪冲刺特效
+    public ParticleSystem rushSpark;
+
+    // 猪盔甲
+    public SkinnedMeshRenderer clothRender;
+    private Material clothMaterial;
 
     // 猪默认技能
     public PigSkillController pigRushController;
@@ -91,7 +97,7 @@ public class PigPlayer : MonoBehaviour
 
         selfAudioSource.clip = runingClip;
 
-        walkClouds.Stop();
+        clothMaterial = clothRender.material;
 
         CheckSkillController();
     }
@@ -137,7 +143,7 @@ public class PigPlayer : MonoBehaviour
         // ********************测试代码*******************
 
     }
-    /**/
+    
     private void FixedUpdate()
     {
 
@@ -225,12 +231,19 @@ public class PigPlayer : MonoBehaviour
 
     }
 
+    // 设置头盔颜色
+    public void setClothColor(Color color)
+    {
+        clothMaterial.SetColor("_MainColor", color);
+    }
+
     // 设置箭头颜色
     public void SetArrowColor(Color arrowColor)
     {
         fillArrowSpriteController.SetArrowColor(arrowColor);
     }
 
+    // 停止技能
     public void StopSkillNow()
     {
         PigRushController csc = curSkillController as PigRushController;
@@ -239,6 +252,8 @@ public class PigPlayer : MonoBehaviour
 
     public void Reset()
     {
+        curSkillController.Reset();
+
         groupRd.velocity = Vector3.zero;
         //pigMoveDirection = Vector3.zero;
         continueSkills = null;
@@ -281,6 +296,7 @@ public class PigPlayer : MonoBehaviour
                 selfAudioSource.PlayOneShot(rushClip);
             }
             curSkillController.UseSkill(this);
+            rushSpark.Play();
         }
     }
 
@@ -329,10 +345,12 @@ public class PigPlayer : MonoBehaviour
         {
             if (value == true)
             {
+                rushSpark.transform.rotation = Quaternion.LookRotation(Vector3.down);
                 curSkillController = pigSelfRescueControllerInstance;
             }
             else
             {
+                rushSpark.transform.rotation = Quaternion.LookRotation(-transform.forward);
                 curSkillController = pigRushControllerInstance;
             }
         }

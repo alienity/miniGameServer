@@ -14,7 +14,7 @@ public class PickableFireBallController : ShotBallController
     private Text CountRemainingText;
     // 火球图标
     private Image fireBallIcon;
-
+    
     public void SetCountRemainingText(Text t, Image fbIcon)
     {
         if (t != null)

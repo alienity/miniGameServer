@@ -103,8 +103,10 @@ public class GroupPlayer : MonoBehaviour
        
         penguPlayer.SetArrowAndSnowballColor(groupColor);
         penguPlayer.setHatColor(groupColor);
+
         pigPlayer.SetArrowColor(groupColor);
-        
+        pigPlayer.setClothColor(groupColor);
+
         SetUpPlayerInfo();
        
     }
@@ -418,12 +420,6 @@ public class GroupPlayer : MonoBehaviour
     public void PenguMove(Vector3 dir)
     {
         if (!isAlive || isSturn) return;
-        float dot = Vector3.Dot(pigPlayer.pigCurDirection, dir.normalized);
-        float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-        
-        
-        
-        
         penguPlayer.SetArrowDirection(dir.normalized);
     }
     

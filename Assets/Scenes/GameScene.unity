@@ -845,7 +845,7 @@ MonoBehaviour:
   icePlane: {fileID: 488842357}
   planeMeshRender: {fileID: 1914682440}
   seasonDuring: 1.2
-  fallStoneRandomer: {fileID: 2026459000}
+  fallStoneRandomer: {fileID: 0}
   fallStoneCdMinus: 0
 --- !u!4 &811037478 stripped
 Transform:
@@ -1779,10 +1779,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 1891178229196442, guid: d07fd6bd21fd9401ca00037d607a28c1, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d07fd6bd21fd9401ca00037d607a28c1, type: 2}
   m_IsPrefabParent: 0
@@ -1791,9 +1787,3 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 23001141933353746, guid: 031f0cd86394f5b449fbd9826dc0f4af,
     type: 2}
   m_PrefabInternal: {fileID: 1022930877}
---- !u!114 &2026459000 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114456360301641170, guid: 37c53d5511262f04f9ee6f5e3506e374,
-    type: 2}
-  m_PrefabInternal: {fileID: 1163305080}
-  m_Script: {fileID: 11500000, guid: 6eb06523b490a5f45b7358d681270d39, type: 3}

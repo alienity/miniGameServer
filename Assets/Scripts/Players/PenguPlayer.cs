@@ -128,7 +128,8 @@ public class PenguPlayer : MonoBehaviour
 
     public void Reset()
     {
-        
+        curBallController.ResetCharge();
+        filledArrowSpriteController.SetArrowLen(0);
     }
 
     // 设置指向

@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionTree : BoxEffects
+public class ExplosionTree : MonoBehaviour
 {
     // 南瓜id
-    public int pumpkinId;
+    [HideInInspector] public int pumpkinId;
 
     // 最大生命值
     public short lifeNumber = 3;
@@ -42,7 +42,7 @@ public class ExplosionTree : BoxEffects
     // 南瓜模型对象
     public Transform modelTrans;
     // 原始缩放
-    public Vector3 originalScale;
+    [HideInInspector] public Vector3 originalScale;
 
     private AudioSource selfAudioSource;
     private short totalLife;
@@ -108,7 +108,7 @@ public class ExplosionTree : BoxEffects
             if (lifeNumber == 0)
             {
                 Sequence mySequence = DOTween.Sequence();
-                mySequence.Append(modelTrans.DOScale(readyToExplodeScale * originalScale, explosionDelay))
+                mySequence.Append(modelTrans.DOShakeScale(explosionDelay, readyToExplodeScale))
                     .AppendCallback(()=> {
                         explode();
                     });

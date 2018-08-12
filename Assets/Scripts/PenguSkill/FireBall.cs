@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FireBall : SnowBall
 {
-
     // 爆炸半径
     public float boomRadius = 6f;
     // 半径威力加成

@@ -515,12 +515,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a820b1620ebf02d4eac7aceaa88343a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
-  end: {fileID: 0}
   pumpkinId: 0
   lifeNumber: 3
   startScaleDuring: 0.5
-  readyToExplodeScale: 1.2
+  readyToExplodeScale: 1
   explosionDelay: 2
   explosionRadius: 50
   radio: 1

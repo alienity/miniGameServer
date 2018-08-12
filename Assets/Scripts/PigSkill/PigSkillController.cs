@@ -34,6 +34,12 @@ public abstract class PigSkillController : MonoBehaviour
         return 1;
     }
 
+    // 重置技能
+    public virtual void Reset()
+    {
+        remainColdingTime = 0;
+    }
+
     // 剩余冷却时间
     public float RemainColdingTime()
     {

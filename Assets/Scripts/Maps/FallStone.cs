@@ -22,8 +22,8 @@ public class FallStone : MonoBehaviour {
     // 生成的火球
     public GameObject fireBallItem;
 
-    // 地面上的圈
-    //private ParticleSystem groundCircle;
+    // 陨石控制器
+    public FallStoneRandomMap fallStoneRandomMap;
 
     private void Start()
     {
@@ -75,7 +75,8 @@ public class FallStone : MonoBehaviour {
             gp.EffectSpeedMovement(explosionvelocity);
         }
 
-        CreateFireBallItem();
+        if(fallStoneRandomMap.BeableToInstantiateFireBall())
+            CreateFireBallItem();
         Destroy(this.gameObject);
     }
 
@@ -88,8 +89,22 @@ public class FallStone : MonoBehaviour {
                 return;
         }
 
+        Vector3 finalInstantiatePos = Vector3.zero;
+
+        int layerMask = 1 << 9;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100.0f, layerMask))
+        {
+            Vector3 hitPos = hit.point;
+            finalInstantiatePos = hitPos + Vector3.up * 1.2f;
+        }
+
         GameObject item = Instantiate(fireBallItem);
-        item.transform.position = transform.position;
+        item.transform.position = finalInstantiatePos;
+        item.GetComponent<SkillItem>().noticeGenerator = fallStoneRandomMap.DecreaseFireBallNumbers;
+
+        fallStoneRandomMap.IncreaseFireBallNumbers();
+
     }
 
 }

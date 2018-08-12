@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4341935996304302}
-  - component: {fileID: 114456360301641170}
+  - component: {fileID: 114786335150998590}
   m_Layer: 0
   m_Name: FallStoneController
   m_TagString: Untagged
@@ -379,32 +379,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.8
   color: {r: 0.9962424, g: 1, b: 0, a: 1}
---- !u!114 &114456360301641170
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1715170366375226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb06523b490a5f45b7358d681270d39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cloneObject: {fileID: 1021660576459894, guid: 46072cc38d03f8040bcb9dfb1537bf3f,
-    type: 2}
-  cloneNum: 1
-  reBorns:
-  - {fileID: 4950799995090858}
-  - {fileID: 4522201852100820}
-  - {fileID: 4349170508233340}
-  - {fileID: 4800337750397734}
-  - {fileID: 4025207245858348}
-  - {fileID: 4204187101201736}
-  - {fileID: 4035148043628404}
-  - {fileID: 4061723863930884}
-  - {fileID: 4035148043628404}
-  - {fileID: 4061723863930884}
-  reBornCD: 5
 --- !u!114 &114502129721487444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -470,6 +444,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.8
   color: {r: 0.9962424, g: 1, b: 0, a: 1}
+--- !u!114 &114786335150998590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1715170366375226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a86350b62073f4082d8f273a1fe434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloneObject: {fileID: 1021660576459894, guid: 46072cc38d03f8040bcb9dfb1537bf3f,
+    type: 2}
+  cloneNum: 3
+  reBorns:
+  - {fileID: 4950799995090858}
+  - {fileID: 4522201852100820}
+  - {fileID: 4349170508233340}
+  - {fileID: 4800337750397734}
+  - {fileID: 4025207245858348}
+  - {fileID: 4204187101201736}
+  - {fileID: 4035148043628404}
+  - {fileID: 4061723863930884}
+  - {fileID: 4933169049074598}
+  - {fileID: 4516536973414414}
+  reBornCD: 5
+  maxFireBallItemNumbers: 3
 --- !u!114 &114833814278838032
 MonoBehaviour:
   m_ObjectHideFlags: 1
