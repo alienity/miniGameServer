@@ -57,11 +57,9 @@ public class WhirlWind : BoxEffects {
             //自然规律
             if (attrFoceDir.magnitude < windCenterR)
             {
-
                 continue;
             }
             gpObj.EffectSpeedMovement(attrVelocity);
-
         }
     }
 
@@ -75,7 +73,6 @@ public class WhirlWind : BoxEffects {
     {
         if (collider.tag == "Player")
         {
-            Debug.Log(collider.name);
             GroupPlayer clGp = collider.GetComponent<GroupPlayer>();
             if (!groupPlayers.Contains(clGp))
                 groupPlayers.Add(clGp);

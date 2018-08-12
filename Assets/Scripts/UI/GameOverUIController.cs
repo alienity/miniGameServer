@@ -21,6 +21,8 @@ public class GameOverUIController : MonoBehaviour {
     public List<PlayerNameScoreOutput> playerNameScore;
 
     public Text CountdownText;
+    public AudioClip CountDownAudio;
+    public AudioClip CountDownOverAudio;
     public Image BackgroundImage;
     // 倒计时时长
     public float totalCountdownTime = 10f;
@@ -41,7 +43,11 @@ public class GameOverUIController : MonoBehaviour {
             playerNameScore[i].score.text = "0";
         }
     }
-
+    private void Start()
+    {
+        CountdownText.gameObject.GetComponent<AudioSource>().clip = CountDownAudio;
+        CountdownText.gameObject.GetComponent<AudioSource>().Play();
+    }
     //// Update is called once per frame
     void Update()
     {
@@ -61,6 +67,11 @@ public class GameOverUIController : MonoBehaviour {
     {
         int remainTimeInteger = (int)remainTimes;
         CountdownText.text = remainTimeInteger.ToString();
+        if (remainTimeInteger < 1)
+        {
+            CountdownText.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
+            CountdownText.gameObject.GetComponent<AudioSource>().Play();
+        }
     }
 
     public void gameResultsDisplay(List<KeyValuePair<int, int>> lst, int groupNumbers)

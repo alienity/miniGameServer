@@ -21,6 +21,7 @@ public class GameUIController : MonoBehaviour
     public List<GroupColdingTime> coldingText;
     // 剩余游戏时长计时显示
     public Text countdownText;
+    public AudioClip CountDownOverAudio;
     public Image countdownShade;
 
     // 渐入
@@ -84,6 +85,11 @@ public class GameUIController : MonoBehaviour
     {
         countdownShade.fillAmount = remainTimes / totalGameTime;
         countdownText.text = TimeToShow(remainTimes);
+        if ((int)remainTimes < 1)
+        {
+            countdownText.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
+            countdownText.gameObject.GetComponent<AudioSource>().Play();
+        }
     }
 
     private string TimeToShow(float time)
