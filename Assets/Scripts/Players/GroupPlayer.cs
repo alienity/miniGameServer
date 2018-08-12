@@ -76,6 +76,7 @@ public class GroupPlayer : MonoBehaviour
     public float scorePopupScale = 0.02f;
     public float popupDuration = 0.3f;
     public Text remainBallText;
+    public Image fireIcon;
 
     // 被撞击音效
     public AudioClip hittedAudio;
@@ -100,8 +101,8 @@ public class GroupPlayer : MonoBehaviour
         pigPlayer.gId = gId;
         penguPlayer.gId = gId;
        
-
         penguPlayer.SetArrowAndSnowballColor(groupColor);
+        penguPlayer.setHatColor(groupColor);
         pigPlayer.SetArrowColor(groupColor);
         
         SetUpPlayerInfo();
@@ -122,6 +123,10 @@ public class GroupPlayer : MonoBehaviour
         Color remainballColor = remainBallText.color;
         remainballColor.a = 0;
         remainBallText.color = remainballColor;
+
+        Color fireIconColor = fireIcon.color;
+        fireIconColor.a = 0;
+        fireIcon.color = fireIconColor;
     }
 
     private string ConcateName(string first, string second)
@@ -220,6 +225,8 @@ public class GroupPlayer : MonoBehaviour
     // 被攻击打中后设置攻击者是谁
     public void SetAttacker(int atkId)
     {
+        if (atkId == gId) return;
+
         attackerId = atkId;
         countdownPast = countdownTime;
     }
@@ -269,7 +276,7 @@ public class GroupPlayer : MonoBehaviour
         GroupPlayer group = Instantiate(this, bornPos, Quaternion.identity);
         group.gId = gId;
         group.groupColor = groupColor;
-
+        
         return group;
     }
 
@@ -350,16 +357,16 @@ public class GroupPlayer : MonoBehaviour
         }
         else if(skillItem.playerType == PlayerType.PENGU)
         {
-            if (skillItem.GetPenguSkillController() is PickableSnowBallController)
-            {
-                PickableSnowBallController pickableSnowBallController = (PickableSnowBallController) skillItem.GetPenguSkillController();
-                pickableSnowBallController.SetCountRemainingText(remainBallText);
-                penguPlayer.CatchItem(skillItem.GetPenguSkillController());
-            }
+            //if (skillItem.GetPenguSkillController() is PickableSnowBallController)
+            //{
+            //    PickableSnowBallController pickableSnowBallController = (PickableSnowBallController) skillItem.GetPenguSkillController();
+            //    pickableSnowBallController.SetCountRemainingText(remainBallText);
+            //    penguPlayer.CatchItem(skillItem.GetPenguSkillController());
+            //}
             if (skillItem.GetPenguSkillController() is PickableFireBallController)
             {
                 PickableFireBallController pickableSnowBallController = (PickableFireBallController)skillItem.GetPenguSkillController();
-                pickableSnowBallController.SetCountRemainingText(remainBallText);
+                pickableSnowBallController.SetCountRemainingText(remainBallText, fireIcon);
                 penguPlayer.CatchItem(skillItem.GetPenguSkillController());
             }
         }

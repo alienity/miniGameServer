@@ -529,6 +529,8 @@ MonoBehaviour:
   explosionParticles: {fileID: 198590456069321588}
   rebornDelay: 5
   rebornAnimDuring: 2
+  modelTrans: {fileID: 4060848128176494}
+  originalScale: {x: 0, y: 0, z: 0}
 --- !u!114 &114877711362484432
 MonoBehaviour:
   m_ObjectHideFlags: 1

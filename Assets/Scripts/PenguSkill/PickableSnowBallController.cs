@@ -50,7 +50,7 @@ public class PickableSnowBallController : SnowBallController
         if (0 == AvailableNow()) return;
         float chargedPastTime = this.chargeCurrentTime - this.chargeStartTime;
         SnowBall snowBall = Instantiate(ball, position, rotation) as SnowBall;
-        snowBall.InitiateBall(ownerId, Mathf.Clamp(chargedPastTime, 0, maxChargeTime), ballColor);
+        snowBall.InitiateBall(ownerId, Mathf.Clamp(chargedPastTime, 0, maxChargeTime), ballColor, ShotBall.BallType.SnowBall);
         remainColdingTime = maxColdingTime;
         remainBallNums -= 1;
 

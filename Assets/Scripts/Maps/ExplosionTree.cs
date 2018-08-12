@@ -39,6 +39,11 @@ public class ExplosionTree : BoxEffects
     public delegate void noticeViwer(int id);
     public noticeViwer noticeFunc;
 
+    // 南瓜模型对象
+    public Transform modelTrans;
+    // 原始缩放
+    public Vector3 originalScale;
+
     private AudioSource selfAudioSource;
     private short totalLife;
 
@@ -47,9 +52,10 @@ public class ExplosionTree : BoxEffects
         totalLife = lifeNumber;
         selfAudioSource = gameObject.AddComponent<AudioSource>();
         selfAudioSource.clip = explosionAudio;
-
-        transform.localScale = Vector3.one * 0.1f;
-        transform.DOScale(Vector3.one, startScaleDuring);
+        
+        originalScale = modelTrans.localScale;
+        modelTrans.localScale = originalScale * 0.1f;
+        modelTrans.DOScale(originalScale, startScaleDuring);
     }
 
     // 受到攻击爆炸
@@ -74,7 +80,7 @@ public class ExplosionTree : BoxEffects
         }
         if (noticeFunc != null)
             noticeFunc(pumpkinId);
-        transform.DOScale(Vector3.one * 0.1f, 0.3f);
+        modelTrans.DOScale(originalScale * 0.1f, 0.3f);
         Destroy(this.gameObject, 0.5f);
     }
 
@@ -88,6 +94,8 @@ public class ExplosionTree : BoxEffects
             selfAudioSource.clip = hittedAudio;
             selfAudioSource.Play();
 
+            modelTrans.DOShakeScale(0.2f, 0.2f);
+
             Vector3 symmetryAxis = (gameObject.transform.position - other.transform.position).normalized;
             Vector3 forward = other.transform.forward;
 
@@ -100,7 +108,7 @@ public class ExplosionTree : BoxEffects
             if (lifeNumber == 0)
             {
                 Sequence mySequence = DOTween.Sequence();
-                mySequence.Append(transform.DOScale(readyToExplodeScale, explosionDelay))
+                mySequence.Append(modelTrans.DOScale(readyToExplodeScale * originalScale, explosionDelay))
                     .AppendCallback(()=> {
                         explode();
                     });

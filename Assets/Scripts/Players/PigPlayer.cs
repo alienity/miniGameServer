@@ -31,7 +31,7 @@ public class PigPlayer : MonoBehaviour
     // 猪的旋转速度
     public float pigRotateSpeed;
 
-    // 猪冲撞时能冲撞走球
+    // 猪冲撞时
     public bool IsCrazy { get; set; }
     // 猪眩晕啥也不能干
     public bool IsSturn { get; set; }
@@ -52,6 +52,8 @@ public class PigPlayer : MonoBehaviour
 
     // 猪的阴影
     public GameObject shadowObj;
+    // 猪的移动特效
+    public ParticleSystem walkClouds;
 
     // 猪默认技能
     public PigSkillController pigRushController;
@@ -80,9 +82,7 @@ public class PigPlayer : MonoBehaviour
         if (groupTrans == null)
             groupTrans = GetComponentInParent<Transform>();
         if(groupRd == null)
-        {
             groupRd = GetComponentInParent<Rigidbody>();
-        }
         if(selfAudioSource == null)
             selfAudioSource = GetComponent<AudioSource>();
 
@@ -90,6 +90,8 @@ public class PigPlayer : MonoBehaviour
             fillArrowSpriteController = GetComponentInChildren<FilledArrowSpriteController>();
 
         selfAudioSource.clip = runingClip;
+
+        walkClouds.Stop();
 
         CheckSkillController();
     }
@@ -174,6 +176,21 @@ public class PigPlayer : MonoBehaviour
             if (!selfAudioSource.isPlaying)
                 selfAudioSource.Stop();
         }
+
+        // 根据速度播放烟雾动画
+        if(horizontalVel.magnitude > 4f)
+        {
+            // 播放行走烟雾
+            if (!walkClouds.isPlaying)
+                walkClouds.Play();
+        }
+        else
+        {
+            // 停止播放行走烟雾
+            if (walkClouds.isPlaying)
+                walkClouds.Stop();
+        }
+
         
         //移动更新，加速到最大速度后匀速运动
         if (pigMoveDirection.magnitude != 0)

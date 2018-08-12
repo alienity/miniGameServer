@@ -32,7 +32,7 @@ public class SnowBallController : ShotBallController
         float chargedPastTime = this.chargeCurrentTime - this.chargeStartTime;
         //ball.SpawnBall(ownerId, position, rotation, Mathf.Clamp(chargedPastTime, 0, maxChargeTime));
         SnowBall snowBall = Instantiate(ball, position, rotation) as SnowBall;
-        snowBall.InitiateBall(ownerId, Mathf.Clamp(chargedPastTime, 0, maxChargeTime), ballColor);
+        snowBall.InitiateBall(ownerId, Mathf.Clamp(chargedPastTime, 0, maxChargeTime), ballColor, ShotBall.BallType.SnowBall);
         remainColdingTime = maxColdingTime;
         ResetCharge();
     }

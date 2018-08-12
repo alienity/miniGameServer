@@ -37,10 +37,13 @@ public class PenguPlayer : MonoBehaviour
     // 死亡
     public bool IsDie { get; set; }
     
-    
     // 企鹅对应队伍的颜色，这个颜色用于箭头颜色和雪球颜色
     private Color groupColor = Color.black;
-    // Use this for initialization
+
+    // 头盔
+    [SerializeField] private MeshRenderer hatRender;
+    private Material hatMeterial;
+
     void Start()
     {
         if (selfAudioSource == null)
@@ -48,6 +51,9 @@ public class PenguPlayer : MonoBehaviour
 
         if (filledArrowSpriteController == null)
             filledArrowSpriteController = GetComponentInChildren<FilledArrowSpriteController>();
+
+        if (hatRender != null)
+            hatMeterial = hatRender.material;
 
         //暂时只加入一种声音
         selfAudioSource.clip = throwSnowBall;
@@ -116,13 +122,13 @@ public class PenguPlayer : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(penguCurDirection), Time.deltaTime * rotateSpeed);
         //transform.rotation = Quaternion.LookRotation(penguCurDirection);
 
-        if (IsDie || IsSturn) return;
+        //if (IsDie || IsSturn) return;
         
     }
 
     public void Reset()
     {
-
+        
     }
 
     // 设置指向
@@ -164,26 +170,19 @@ public class PenguPlayer : MonoBehaviour
         }
     }
     
+    // 设置头盔颜色
+    public void setHatColor(Color color)
+    {
+        hatMeterial.SetColor("_MainColor", color);
+    }
+
     // 设置箭头颜色
     public void SetArrowAndSnowballColor(Color color)
     {
-        //arrowBoundRender.color = arrowColor;
-        //filledArrowRender.color = arrowColor;
-        //filledArrowRender.material.color = arrowColor;
         filledArrowSpriteController.SetArrowColor(color);
         groupColor = color;
     }
-    /*
-    // 修改箭头长度
-    public void SetArrowLen(float arrowRatio)
-    {
-        Vector2 arrowSize = arrowBoundRender.size;
-        arrowSize.y = Mathf.Lerp(arrowMinRatio, arrowMaxRatio, arrowRatio);
-        arrowBoundRender.size = arrowSize;
-        filledArrowRender.size = arrowSize;
-        Debug.Log("filledArrowRender.size" + filledArrowRender.size + " arrowSize" + arrowSize + " arrowBoundRender.size: " + arrowBoundRender.size );
-    }
-    */
+
     // 根据时间处理蓄力技能
     public void HandleChargeSkill(string processId, float currrentTime, int touchId)
     {

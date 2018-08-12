@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PickableFireBallController : SnowBallController
+public class PickableFireBallController : ShotBallController
 {
-
+    // 球类型
+    public ShotBall.BallType ballType;
     // 剩余可用的ball的数量
     public int remainBallNums = 5;
     
+    // 火球计数器
     private Text CountRemainingText;
+    // 火球图标
+    private Image fireBallIcon;
 
-    public void SetCountRemainingText(Text t)
+    public void SetCountRemainingText(Text t, Image fbIcon)
     {
         if (t != null)
         {
@@ -20,6 +24,11 @@ public class PickableFireBallController : SnowBallController
             temp.a = 1;
             CountRemainingText.color = temp;
             CountRemainingText.text = remainBallNums.ToString();
+
+            this.fireBallIcon = fbIcon;
+            Color fireBallIconColor = fireBallIcon.color;
+            fireBallIconColor.a = 1;
+            fireBallIcon.color = fireBallIconColor;
         }
         else
         {
@@ -27,14 +36,14 @@ public class PickableFireBallController : SnowBallController
         }
     }
     
-    void Start()
+    protected void Start()
     {
         if (ball == null)
-            ball = FindObjectOfType<SnowBall>();
+            ball = FindObjectOfType<FireBall>();
         remainColdingTime = 0;
     }
 
-    void Update()
+    protected void Update()
     {
         // 没有开始蓄力，就是释放结束了
         if (this.attackFinished)
@@ -49,8 +58,8 @@ public class PickableFireBallController : SnowBallController
     {
         if (0 == AvailableNow()) return;
         float chargedPastTime = this.chargeCurrentTime - this.chargeStartTime;
-        FireBall snowBall = Instantiate(ball, position, rotation) as FireBall;
-        snowBall.InitiateBall(ownerId, Mathf.Clamp(chargedPastTime, 0, maxChargeTime), ballColor);
+        FireBall shotBall = Instantiate(ball, position, rotation) as FireBall;
+        shotBall.InitiateBall(ownerId, Mathf.Clamp(chargedPastTime, 0, maxChargeTime), ballColor, ShotBall.BallType.FireBall);
         remainColdingTime = maxColdingTime;
         remainBallNums -= 1;
 
@@ -62,6 +71,10 @@ public class PickableFireBallController : SnowBallController
                 Color temp = CountRemainingText.color;
                 temp.a = 0;
                 CountRemainingText.color = temp;
+
+                Color fireBallIconColor = fireBallIcon.color;
+                fireBallIconColor.a = 0;
+                fireBallIcon.color = fireBallIconColor;
             }
         }
         ResetCharge();

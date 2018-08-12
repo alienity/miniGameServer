@@ -80,45 +80,6 @@ public abstract class ShotBallController : MonoBehaviour {
         return chargePastTime / maxChargeTime;
     }
 
-    // 持续充能
-    //public float HandleChargeAttack(float chargeStartTime, float chargeCurrentTime)
-    //{
-    //    //Debug.Log("chargeCurrentTime = " + chargeCurrentTime);
-
-    //    if (chargeStartTime == 0) return 0;
-
-    //    if ((remainColdingTime > 0) || (chargeStarted && this.chargeStartTime != chargeStartTime)
-    //        || (!chargeStarted && chargeCurrentTime == 0))
-    //    {
-    //        ResetCharge();
-    //        return 0;
-    //    }
-        
-    //    if (!chargeStarted)
-    //    {
-    //        chargeStarted = true;
-    //        this.chargeStartTime = chargeStartTime;
-    //        if (chargeStartTime != chargeCurrentTime)
-    //            this.chargeBiasTime = chargeCurrentTime - chargeStartTime;
-    //    }
-
-    //    if (chargeStarted && !chargeFinished)
-    //    {
-    //        this.chargeCurrentTime = chargeCurrentTime;
-    //    }
-
-    //    float chargedPastTime = this.chargeCurrentTime - (this.chargeBiasTime + this.chargeStartTime);
-
-    //    if (chargedPastTime >= maxChargeTime)
-    //    {
-    //        chargeFinished = true;
-    //    }
-
-    //    Debug.Log("Internal Time = " + chargedPastTime);
-
-    //    return Mathf.Lerp(0, 1, chargedPastTime / maxChargeTime);
-    //}
-
     // 重置充能
     public void ResetCharge()
     {

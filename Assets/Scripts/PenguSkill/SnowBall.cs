@@ -8,16 +8,16 @@ public class SnowBall : ShotBall
     // 飞行速度加成
     public float flySpeedAdd;
     // 持续时间
-    private float flyDist;
+    protected float flyDist;
     public float flyTime;
     // 已经飞行时间
-    private float fliedTime = 0;
+    protected float fliedTime = 0;
     // 击退加成速度
     public float suddenSpeed;
     // 蓄力击退强度
     public float attackStrength = 8;
     // 可以碰到自己
-    private bool canTouchSelf = false;
+    protected bool canTouchSelf = false;
     // 多少秒之后取消自己的碰撞
     public float cancelTouchDuring = 0.4f;
 
@@ -30,17 +30,13 @@ public class SnowBall : ShotBall
     public Vector3 impactNormal; //Used to rotate impactparticle.
 
     // 特效组建实例
-    private GameObject impactParticleInstance;
-    private GameObject projectileParticleInstance;
-    private GameObject muzzleParticleInstance;
-    private GameObject[] trailParticlesInstance;
-
-    // 自有组件
-    private Transform mTrans;
-
+    protected GameObject impactParticleInstance;
+    protected GameObject projectileParticleInstance;
+    protected GameObject muzzleParticleInstance;
+    protected GameObject[] trailParticlesInstance;
+    
     private void Start()
     {
-        mTrans = GetComponent<Transform>();
         fliedTime = 0;
         
         AddParticles();
@@ -53,7 +49,7 @@ public class SnowBall : ShotBall
         if (fliedTime < flyTime)
         {
             float newSpeed = flySpeed + flySpeedAdd * chargeAttackTime;
-            mTrans.position += mTrans.forward * newSpeed * Time.deltaTime;
+            transform.position += transform.forward * newSpeed * Time.deltaTime;
             fliedTime += Time.deltaTime;
         }
         else
@@ -63,20 +59,12 @@ public class SnowBall : ShotBall
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-
             GroupPlayer gp = other.GetComponent<GroupPlayer>();
-            /*
-            // 当组是无敌的时候，执行组的对应的方法
-            if (gp.isInvulnerable)
-            {
-                gp.ReflectAttack(transform);
-                return;
-            }
-            */
+
             // 正常情况下执行触碰攻击方法
             if (!canTouchSelf)
             {
@@ -95,7 +83,7 @@ public class SnowBall : ShotBall
             DestroySelf();
         }
     }
-
+    
     IEnumerator CountDownTouchSelf(float time)
     {
         canTouchSelf = false;
@@ -103,9 +91,9 @@ public class SnowBall : ShotBall
         canTouchSelf = true;
     }
 
-    private void DestroySelf()
+    protected void DestroySelf()
     {
-        Destroy(gameObject, 5f); // 后期优化做修改
+        Destroy(gameObject, 3f); // 后期优化做修改
     }
 
     // 启动时添加粒子效果
@@ -113,7 +101,7 @@ public class SnowBall : ShotBall
     {
         Debug.Log("生成ball时的粒子效果");
 
-        impactNormal = mTrans.forward;
+        impactNormal = transform.forward;
         projectileParticleInstance = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
         projectileParticleInstance.transform.parent = transform;
         projectileParticleInstance.transform.localScale = Vector3.one;
@@ -125,23 +113,20 @@ public class SnowBall : ShotBall
         }
     }
 
-
-    private void SetSnowBallColor(Color color)
+    // 设置球的颜色
+    protected void SetSnowBallColor(Color color)
     {
         ParticleSystem[] pss = projectileParticleInstance.GetComponentsInChildren<ParticleSystem>();
         for (int i = 0; i < pss.Length; i++)
         {
-            ParticleSystem ps = pss[i];
-            //            if (ps.gameObject.name.Contains("FrostSpikes"))
-            //            {
-            ps.startColor = color;
-            //            }
+            var main = pss[i].main;
+            main.startColor = color;
         }
         
     }
 
     // 碰撞到时，添加粒子特效
-    private void ShowHitParticleEffects(Vector3 impactNormal)
+    protected void ShowHitParticleEffects(Vector3 impactNormal)
     {
 
         impactParticleInstance = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;

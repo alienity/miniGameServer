@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12938e7b99cabba449579535ac155eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballType: 1
   attackerId: 0
   isHitted: 0
   chargeAttackTime: 0
@@ -60,14 +61,14 @@ MonoBehaviour:
   flyTime: 5
   suddenSpeed: 50
   attackStrength: 15
-  cancelTouchDuring: 0.4
-  boomRadius: 2
-  explosionRatio: 60
+  cancelTouchDuring: 0.2
   impactParticle: {fileID: 130848, guid: d16221e794fe16e4e8994a7f8c770561, type: 2}
   projectileParticle: {fileID: 131070, guid: 4b21d8abf8d26b449b109c8edb5cc78a, type: 2}
   muzzleParticle: {fileID: 193574, guid: 5c2bdcf6f0badc34f9f192b0995e4a79, type: 2}
   trailParticles: []
   impactNormal: {x: 0, y: 0, z: 0}
+  boomRadius: 2
+  explosionRatio: 2
 --- !u!135 &135828476656166958
 SphereCollider:
   m_ObjectHideFlags: 1

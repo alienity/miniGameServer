@@ -8,7 +8,7 @@ public class StraightToCamera : MonoBehaviour
 
 	void Start ()
 	{
-		m_Camera = Camera.allCameras [0];
+		m_Camera = Camera.main;
 	}
 
 	void Update ()

@@ -8,18 +8,20 @@
     }
     SubShader
     {
-        Tags { "RenderType"="TransparentCutout" "Queue"="AlphaTest" "IgnoreProjector"="True" "LightMode"="ForwardBase"}
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         LOD 100
- 
+
         Pass
         {
-            CGPROGRAM
+
+			Blend SrcAlpha OneMinusSrcAlpha
+			ZWrite Off
+
+			CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
- 
-             
+
             #include "UnityCG.cginc"
-            #include "Lighting.cginc"
             struct appdata
             {
                 float4 vertex : POSITION;
@@ -49,10 +51,8 @@
             {
  
                 fixed4 texColor = tex2D(_MainTex,i.uv);
-                texColor.a =(1-i.uv.y) * texColor.a;
-                //Alpha Test
-                clip(texColor.a - (_Cutoff+0.01));
-                return fixed4(texColor.rgb * _Color.rgb,1.0);
+				clip(1 - i.uv.y - (_Cutoff + 0.01));
+				return texColor * _Color;
             }
             ENDCG
         }
