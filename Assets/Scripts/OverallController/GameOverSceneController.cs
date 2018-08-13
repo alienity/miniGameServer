@@ -63,7 +63,7 @@ public class GameOverSceneController : MonoBehaviour {
             return s2.Value.CompareTo(s1.Value);
         });
 
-        gOverUIController.gameResultsDisplay(lst, groupNumbers);
+        gOverUIController.gameResultsDisplay(lst, groupNumbers, dataSaveController.role2session, dataSaveController.session2name);
     }
 
     // 测试代码
@@ -90,7 +90,7 @@ public class GameOverSceneController : MonoBehaviour {
             return s2.Value.CompareTo(s1.Value);
         });
 
-        gOverUIController.gameResultsDisplay(lst, groupNumbers);
+        gOverUIController.gameResultsDisplay(lst, groupNumbers, dataSaveController.role2session, dataSaveController.session2name);
     }
 
 }

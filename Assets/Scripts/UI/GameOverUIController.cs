@@ -74,7 +74,7 @@ public class GameOverUIController : MonoBehaviour {
         }
     }
 
-    public void gameResultsDisplay(List<KeyValuePair<int, int>> lst, int groupNumbers)
+    public void gameResultsDisplay(List<KeyValuePair<int, int>> lst, int groupNumbers, Dictionary<int, int> role2session, Dictionary<int, string> session2name)
     {
         // TODO: 用户名替换成真实用户名
         for (int i = 0; i < groupNumbers; ++i)
@@ -83,15 +83,19 @@ public class GameOverUIController : MonoBehaviour {
             {
                 BackgroundImage.sprite = BackgroundSprites[lst[i].Key];
                 playerNameScore[i].FlagImage.sprite = WinnerFlagSprites[lst[i].Key];
-                playerNameScore[i].panguName.text = "P" + (lst[i].Key + 1).ToString();
-                playerNameScore[i].pigName.text = "P" + (lst[i].Key + 1).ToString();
+                //playerNameScore[i].panguName.text = "P" + (lst[i].Key + 1).ToString();
+                //playerNameScore[i].pigName.text = "P" + (lst[i].Key + 1).ToString();
+                playerNameScore[i].panguName.text = session2name[role2session[lst[i].Key * 2 + 0]];
+                playerNameScore[i].pigName.text = session2name[role2session[lst[i].Key * 2 + 1]];
                 playerNameScore[i].score.text = lst[i].Value.ToString();
             }
             else
             {
                 playerNameScore[i].FlagImage.sprite = OthersFlagSprites[lst[i].Key];
-                playerNameScore[i].panguName.text = "P" + (lst[i].Key + 1).ToString();
-                playerNameScore[i].pigName.text = "P" + (lst[i].Key + 1).ToString();
+                //playerNameScore[i].panguName.text = "P" + (lst[i].Key + 1).ToString();
+                //playerNameScore[i].pigName.text = "P" + (lst[i].Key + 1).ToString();
+                playerNameScore[i].panguName.text = session2name[role2session[lst[i].Key * 2 + 0]];
+                playerNameScore[i].pigName.text = session2name[role2session[lst[i].Key + 1]];
                 playerNameScore[i].score.text = lst[i].Value.ToString();
             }
         }
