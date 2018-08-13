@@ -34,16 +34,6 @@ public class PickableSnowBallController : SnowBallController
         remainColdingTime = 0;
     }
 
-    void Update()
-    {
-        // 没有开始蓄力，就是释放结束了
-        if (this.attackFinished)
-        {
-            if (remainColdingTime > 0)
-                remainColdingTime -= Time.deltaTime;
-        }
-    }
-
     // 充能结束后释放
     public override void UseBall(int ownerId, Vector3 position, Quaternion rotation, Color ballColor)
     {

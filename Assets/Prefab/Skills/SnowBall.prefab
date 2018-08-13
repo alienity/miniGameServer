@@ -36,7 +36,7 @@ Transform:
   m_GameObject: {fileID: 1979926799372360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.95, y: 11.29, z: 0.03}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,14 +52,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fab6409794bdf5488644e21450e6a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballType: 0
   attackerId: 0
   isHitted: 0
   chargeAttackTime: 0.33140182
-  flySpeed: 15
-  flySpeedAdd: 10
-  flyTime: 2.5
+  flySpeed: 25
+  flySpeedAdd: 15
+  flyTime: 3
   suddenSpeed: 25
-  attackStrength: 5
+  attackStrength: 25
   cancelTouchDuring: 0.4
   impactParticle: {fileID: 153912, guid: 932046b7eaf3b554f8d74c81e2f00558, type: 2}
   projectileParticle: {fileID: 160792, guid: 7e9a3591984cda1499dc675622a57b0b, type: 2}

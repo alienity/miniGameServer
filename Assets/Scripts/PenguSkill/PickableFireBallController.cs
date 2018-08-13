@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class PickableFireBallController : ShotBallController
 {
-    // 球类型
-    public ShotBall.BallType ballType;
     // 剩余可用的ball的数量
     public int remainBallNums = 5;
     
@@ -41,16 +39,6 @@ public class PickableFireBallController : ShotBallController
         if (ball == null)
             ball = FindObjectOfType<FireBall>();
         remainColdingTime = 0;
-    }
-
-    protected void Update()
-    {
-        // 没有开始蓄力，就是释放结束了
-        if (this.attackFinished)
-        {
-            if (remainColdingTime > 0)
-                remainColdingTime -= Time.deltaTime;
-        }
     }
 
     // 充能结束后释放

@@ -29,7 +29,9 @@ public class FireBall : SnowBall
             {
                 Debug.Log(collider.gameObject.name);
                 GroupPlayer aroundPlayer = collider.GetComponent<GroupPlayer>();
-                
+
+                if (attackerId == aroundPlayer.gId) continue;
+
                 Vector3 explosionDir = aroundPlayer.transform.position - transform.position;
                 aroundPlayer.EffectSpeedMovement(explosionDir.normalized * explosionRatio * (suddenSpeed + chargeAttackTime * attackStrength));
                 aroundPlayer.SetAttacker(attackerId); // 设置攻击者Id

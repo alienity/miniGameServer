@@ -81,6 +81,9 @@ public class GroupPlayer : MonoBehaviour
     // 被撞击音效
     public AudioClip hittedAudio;
     public AudioClip rebornAudio;
+    // 眩晕音效
+    public AudioClip dizzyAudio;
+
     public bool IsAlive { get { return isAlive; } }
     public bool IsInvincible { get { return isInvincible; } }
     // 队伍在悬崖上
@@ -182,7 +185,19 @@ public class GroupPlayer : MonoBehaviour
         penguPlayer.IsSturn = isSturn;
 
         stunEffect.SetActive(isSturn);
-        
+        if (isSturn)
+        {
+            selfAudioSource.clip = dizzyAudio;
+            if(selfAudioSource.clip == dizzyAudio)
+            {
+                if (!selfAudioSource.isPlaying)
+                {
+                    selfAudioSource.Play();
+                    selfAudioSource.volume = 0.2f;
+                }
+            }
+        }
+
     }
 
     private void OnCollisionStay(Collision collision)

@@ -69,7 +69,9 @@ public class FallStoneRandomMap : MonoBehaviour {
             GameObject cloneObjInstance = Instantiate(cloneObject, transform);
             FallStone fallStoneInstance = cloneObjInstance.GetComponent<FallStone>();
             fallStoneInstance.transform.position = reBorns[idx].position;
-            fallStoneInstance.fallStoneRandomMap = this;
+            fallStoneInstance.beableToInstantiateFireBall = this.BeableToInstantiateFireBall;
+            fallStoneInstance.increaseFireBallNumbers = this.IncreaseFireBallNumbers;
+            fallStoneInstance.decreaseFireBallNumbers = this.DecreaseFireBallNumbers;
             getObject();
         }
     }

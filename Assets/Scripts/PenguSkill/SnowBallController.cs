@@ -4,25 +4,16 @@ using UnityEngine;
 
 public class SnowBallController : ShotBallController
 {
-    
+
     //// Ball的冷却时间
     //public float snowBallColdingTime;
     //// Ball的指向箭头
     //public Sprite snowArrow;
-    
+
     void Start () {
         if (ball == null)
             ball = FindObjectOfType<SnowBall>();
         remainColdingTime = 0;
-    }
-	
-	void Update () {
-        // 没有开始蓄力，就是释放结束了
-        if (this.attackFinished)
-        {
-            if (remainColdingTime > 0)
-                remainColdingTime -= Time.deltaTime;
-        }
     }
 
     // 充能结束后释放

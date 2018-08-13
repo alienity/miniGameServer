@@ -1,4 +1,4 @@
-﻿Shader "Alpha/AlphaTest"
+﻿Shader "Unlit/TextureYAxisTest"
 {
     Properties
     {

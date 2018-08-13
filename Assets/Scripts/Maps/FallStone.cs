@@ -22,8 +22,18 @@ public class FallStone : MonoBehaviour {
     // 生成的火球
     public GameObject fireBallItem;
 
-    // 陨石控制器
-    public FallStoneRandomMap fallStoneRandomMap;
+    // 陨石掉落音效
+    public AudioClip dropAudioClip;
+    // 陨石爆炸音效
+    public AudioClip exposionAudioClip;
+    private AudioSource myAudioSource;
+
+    // 陨石控制器毁掉，判断能否生成物品
+    public delegate bool JudgeAction();
+    public JudgeAction beableToInstantiateFireBall;
+
+    public System.Action increaseFireBallNumbers;
+    public System.Action decreaseFireBallNumbers;
 
     private void Start()
     {
@@ -34,6 +44,16 @@ public class FallStone : MonoBehaviour {
         lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
         lineRenderer.material.SetColor("_TintColor", lineColor);
         lineRenderer.widthMultiplier = 0.1f;
+
+        if(dropAudioClip != null)
+        {
+            if (myAudioSource == null)
+                myAudioSource = GetComponent<AudioSource>();
+            if (myAudioSource == null)
+                myAudioSource = gameObject.AddComponent<AudioSource>();
+            myAudioSource.clip = dropAudioClip;
+            myAudioSource.Play();
+        }
     }
 
     private void Update()
@@ -66,17 +86,25 @@ public class FallStone : MonoBehaviour {
         {
             if (col[i].gameObject.tag != "Player") continue;
 
-            Vector3 velocityDir = transform.position - col[i].transform.position;
+            Vector3 velocityDir = col[i].transform.position - transform.position;
             velocityDir.y = 0;
 
-            Vector3 explosionvelocity = (explosionRadius - velocityDir.magnitude) * velocityDir.normalized;
-            explosionvelocity = -radio * explosionvelocity;
+            Vector3 explosionvelocity = (explosionRadius - velocityDir.magnitude) * velocityDir.normalized * radio;
             GroupPlayer gp = col[i].GetComponent<GroupPlayer>();
             gp.EffectSpeedMovement(explosionvelocity);
         }
 
-        if(fallStoneRandomMap.BeableToInstantiateFireBall())
+        if(beableToInstantiateFireBall())
             CreateFireBallItem();
+
+        if(myAudioSource != null)
+        {
+            if (myAudioSource.isPlaying)
+                myAudioSource.Stop();
+            myAudioSource.clip = exposionAudioClip;
+            myAudioSource.Play();
+        }
+
         Destroy(this.gameObject);
     }
 
@@ -101,10 +129,19 @@ public class FallStone : MonoBehaviour {
 
         GameObject item = Instantiate(fireBallItem);
         item.transform.position = finalInstantiatePos;
-        item.GetComponent<SkillItem>().noticeGenerator = fallStoneRandomMap.DecreaseFireBallNumbers;
+        item.GetComponent<SkillItem>().noticeGenerator = decreaseFireBallNumbers;
 
-        fallStoneRandomMap.IncreaseFireBallNumbers();
+        increaseFireBallNumbers();
 
+    }
+
+    private void CreateFinalBoom(AudioClip finalAudioClip)
+    {
+        float audioLength = finalAudioClip.length;
+        GameObject finalBoom = new GameObject();
+        AudioSource boomSource = finalBoom.AddComponent<AudioSource>();
+        boomSource.clip = finalAudioClip;
+        boomSource.Play();
     }
 
 }

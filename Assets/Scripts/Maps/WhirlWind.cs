@@ -7,7 +7,7 @@ public class WhirlWind : BoxEffects {
     public float windCenterR = 1;
     // 引力半径
     public float atrRadius = 5;
-    public ParticleSystem wind;
+    public ParticleSystem windParticle;
     // 最大引力
     public float maxAttractForce;
 
@@ -19,6 +19,11 @@ public class WhirlWind : BoxEffects {
     private Transform mTrans;
     private BigSnowBallManager bigSnowBallManager;
 
+    // 风音效
+    public AudioClip windAudioClip;
+
+    private AudioSource windAudioSource;
+
     // Use this for initialization
     void Start()
     {
@@ -29,8 +34,12 @@ public class WhirlWind : BoxEffects {
         mTrans = GetComponent<Transform>();
         groupPlayers = new List<GroupPlayer>();
 
-        //wind.transform.localScale = new Vector3(3, 3, 3);
-        Instantiate(wind, transform);
+        windParticle.Play(true);
+        windParticle.transform.position = transform.position;
+
+        windAudioSource = GetComponent<AudioSource>();
+        windAudioSource.clip = windAudioClip;
+        windAudioSource.Play();
     }
 
     private void Update()
@@ -51,8 +60,7 @@ public class WhirlWind : BoxEffects {
             Vector3 attrFoceDir = mTrans.position - gpObj.groupTrans.position;
             attrFoceDir.y = 0;
 
-            Vector3 attrVelocity = (atrRadius - attrFoceDir.magnitude) * attrFoceDir.normalized;
-            attrVelocity = attrVelocity * maxAttractForce*0.01f;
+            Vector3 attrVelocity = (atrRadius - attrFoceDir.magnitude) * attrFoceDir.normalized * maxAttractForce * 0.01f;
 
             //自然规律
             if (attrFoceDir.magnitude < windCenterR)

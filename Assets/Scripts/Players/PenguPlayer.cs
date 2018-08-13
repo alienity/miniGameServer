@@ -19,7 +19,7 @@ public class PenguPlayer : MonoBehaviour
     public ShotBallController curBallController;
     // 发雪球的音效
     public AudioClip throwSnowBall;
-
+    
     // 动画控制器
     private Animator animator;
     private int attackAnimId;
@@ -123,7 +123,7 @@ public class PenguPlayer : MonoBehaviour
         //transform.rotation = Quaternion.LookRotation(penguCurDirection);
 
         //if (IsDie || IsSturn) return;
-        
+
     }
 
     public void Reset()

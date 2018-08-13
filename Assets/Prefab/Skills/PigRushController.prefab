@@ -51,10 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11acfd27a9281df48a91912b94047ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxColdingTime: 5
-  pigRushForce: 500
-  pigRushTime: 0.2
-  invulnerableTime: 2
+  maxColdingTime: 3
+  pigRushForce: 2000
+  pigRushTime: 0.1
+  invulnerableTime: 0.5
   fartParticleEffects: {fileID: 19820506, guid: 836a6e787e3b11941b38b8fff2af4e5b,
     type: 2}
   sturnDuring: 1.5
