@@ -10,6 +10,7 @@ public class Popup : MonoBehaviour
 {
     public bool popUp;
     public float popScale = 0.02f;
+    public float popDuration = 0.5f;
 
     private RectTransform rectTransform;
     private Text text;
@@ -37,9 +38,11 @@ public class Popup : MonoBehaviour
              tempColor.a = 1;
              text.color = tempColor;
              Sequence seq = DOTween.Sequence();
-             seq.Append(rectTransform.DOScale(popScale, 0.5f));
+             seq.Append(rectTransform.DOScale(popScale, popDuration));
+//             seq.Append(rectTransform.DOScale(popScale, popDuration/2));
 
-             seq.Insert(0, text.DOColor(Color.red, 0.5f)).OnComplete(delegate
+
+             seq.Insert(0, text.DOColor(Color.red, popDuration)).OnComplete(delegate
              {
                  tempColor.a = 0;
                  text.color = tempColor;

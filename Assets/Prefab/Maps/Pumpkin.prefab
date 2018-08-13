@@ -523,7 +523,7 @@ MonoBehaviour:
   explosionRadius: 40
   ratio: 1
   explosionAudio: {fileID: 8300000, guid: 55722e6fb6c40e74d8ed9dc753e32be1, type: 3}
-  hittedAudio: {fileID: 8300000, guid: 78bdfcfce5574cc4191955ca1fb4ed6d, type: 3}
+  hittedAudio: {fileID: 8300000, guid: ee70e25e856db48e387d48c42bffc897, type: 3}
   explosionParticles: {fileID: 198590456069321588}
   rebornDelay: 5
   rebornAnimDuring: 2

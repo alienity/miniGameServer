@@ -57,6 +57,8 @@ public class Server : MonoBehaviour
             return;
         }
         
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        
         DontDestroyOnLoad(gameObject);
     }
 
