@@ -769,7 +769,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1487632010}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1962,7 +1962,7 @@ Prefab:
     - target: {fileID: 224960058333997946, guid: f78d05e6e606c064c8fbb2c968659b79,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1219681950249360, guid: f78d05e6e606c064c8fbb2c968659b79, type: 2}
       propertyPath: m_IsActive
@@ -1982,7 +1982,7 @@ Prefab:
     - target: {fileID: 224750260167541594, guid: f78d05e6e606c064c8fbb2c968659b79,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114795939096846844, guid: f78d05e6e606c064c8fbb2c968659b79,
         type: 2}
@@ -2181,6 +2181,11 @@ Prefab:
       propertyPath: CountDownOverAudio
       value: 
       objectReference: {fileID: 8300000, guid: 8283542b06be9aa4280a9577d9efc9ff, type: 3}
+    - target: {fileID: 224725777762723082, guid: f78d05e6e606c064c8fbb2c968659b79,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f78d05e6e606c064c8fbb2c968659b79, type: 2}
   m_IsPrefabParent: 0

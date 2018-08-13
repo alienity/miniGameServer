@@ -4980,7 +4980,7 @@ MonoBehaviour:
   stunEffect: {fileID: 1815968215473704}
   addScore: {fileID: 114664458489351432}
   playerName: {fileID: 114778045575488668}
-  gId: 3
+  gId: 1
   rebornDelay: 0
   countdownTime: 30
   countdownPast: 0
@@ -4992,7 +4992,7 @@ MonoBehaviour:
   penguPlayer: {fileID: 114506082914902490}
   groupTrans: {fileID: 4870675648886274}
   scorePopupScale: 0.02
-  popupDuration: 0.3
+  popupDuration: 0.8
   remainBallText: {fileID: 114703211227399852}
   fireIcon: {fileID: 114139624179251078}
   hittedAudio: {fileID: 8300000, guid: 4fdd77fd809d7064487156e43484d810, type: 3}
