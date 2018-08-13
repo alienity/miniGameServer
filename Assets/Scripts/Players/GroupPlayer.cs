@@ -50,7 +50,7 @@ public class GroupPlayer : MonoBehaviour
     // 重置攻击者倒计时时长
     public float countdownTime = 30;
     // 重置计时
-    public float countdownPast = 0;
+    [HideInInspector] public float countdownPast = 0;
     // 反弹强度
     public float springStrength = 6f;
 
@@ -60,7 +60,7 @@ public class GroupPlayer : MonoBehaviour
     // 分数控制器
     private ScoreController scoreController;
     // 本局获得的分数
-    [SerializeField] private int totalScore = 0;
+    private int totalScore = 0;
     // 自杀身亡给所有的平均加分
     [SerializeField] private int suicideScore = 5;
     // 被杀身亡给凶手的加分
@@ -75,7 +75,7 @@ public class GroupPlayer : MonoBehaviour
 
     public float scorePopupScale = 0.02f;
     public float popupDuration = 0.3f;
-    public Text remainBallText;
+    //public Text remainBallText;
     public Image fireIcon;
 
     // 被撞击音效
@@ -125,9 +125,9 @@ public class GroupPlayer : MonoBehaviour
         transColor.a = 0;
         addScore.color = transColor;
 
-        Color remainballColor = remainBallText.color;
-        remainballColor.a = 0;
-        remainBallText.color = remainballColor;
+        //Color remainballColor = remainBallText.color;
+        //remainballColor.a = 0;
+        //remainBallText.color = remainballColor;
 
         Color fireIconColor = fireIcon.color;
         fireIconColor.a = 0;
@@ -383,7 +383,7 @@ public class GroupPlayer : MonoBehaviour
             if (skillItem.GetPenguSkillController() is PickableFireBallController)
             {
                 PickableFireBallController pickableSnowBallController = (PickableFireBallController)skillItem.GetPenguSkillController();
-                pickableSnowBallController.SetCountRemainingText(remainBallText, fireIcon);
+                pickableSnowBallController.SetCountRemainingText(fireIcon);
                 penguPlayer.CatchItem(skillItem.GetPenguSkillController());
             }
         }

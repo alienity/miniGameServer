@@ -64,3 +64,5 @@ MonoBehaviour:
   groupCounts: 0
   totalGameTime: 240
   timeToTransfer: 180
+  backgroundMusic: {fileID: 0}
+  backgroundMusicRatio: 1.3

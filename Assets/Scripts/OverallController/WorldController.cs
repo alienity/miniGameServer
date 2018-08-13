@@ -36,7 +36,13 @@ public class WorldController : MonoBehaviour {
     private bool isGameOver = false;
     // 转换天气的时间
     public float timeToTransfer = 180;
-    
+
+    // 背景音乐
+    public AudioSource backgroundMusic;
+    // 变快的音乐的速度
+    public float backgroundMusicRatio;
+
+
     private void Awake()
     {
         Instance = this;
@@ -58,13 +64,13 @@ public class WorldController : MonoBehaviour {
         // 游戏初始化游戏计时
         totalPastGameTime = 0;
     }
-    
-    void Update () {
+
+    void Update() {
 
         if (isGameOver) return;
 
         // 计数游戏时长
-        if(totalPastGameTime < totalGameTime)
+        if (totalPastGameTime < totalGameTime)
             totalPastGameTime += Time.deltaTime;
         else
             GameOver();
@@ -76,8 +82,11 @@ public class WorldController : MonoBehaviour {
         UpdateUIParams();
 
         // 更新天气
-        if(totalPastGameTime > timeToTransfer)
+        if (totalPastGameTime > timeToTransfer)
+        {
+            backgroundMusic.pitch = backgroundMusicRatio;
             weatherController.UpdateAccordingTime();
+        }
     }
 
     // 更新所有的UI界面
@@ -174,12 +183,6 @@ public class WorldController : MonoBehaviour {
     {
         float remainGameTime = totalGameTime - totalPastGameTime;
         return remainGameTime > 0 ? remainGameTime : 0;
-    }
-
-    // 更新天气
-    public void ChangeElimate()
-    {
-
     }
 
 }

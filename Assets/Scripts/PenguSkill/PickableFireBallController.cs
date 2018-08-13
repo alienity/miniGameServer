@@ -8,20 +8,21 @@ public class PickableFireBallController : ShotBallController
     // 剩余可用的ball的数量
     public int remainBallNums = 5;
     
-    // 火球计数器
-    private Text CountRemainingText;
+    //// 火球计数器
+    //private Text CountRemainingText;
     // 火球图标
     private Image fireBallIcon;
-    
-    public void SetCountRemainingText(Text t, Image fbIcon)
+    /**/
+    public void SetCountRemainingText(Image fbIcon)
     {
+        /*
         if (t != null)
         {
-            CountRemainingText = t;
-            Color temp = CountRemainingText.color;
-            temp.a = 1;
-            CountRemainingText.color = temp;
-            CountRemainingText.text = remainBallNums.ToString();
+            //CountRemainingText = t;
+            //Color temp = CountRemainingText.color;
+            //temp.a = 1;
+            //CountRemainingText.color = temp;
+            //CountRemainingText.text = remainBallNums.ToString();
 
             this.fireBallIcon = fbIcon;
             Color fireBallIconColor = fireBallIcon.color;
@@ -32,6 +33,11 @@ public class PickableFireBallController : ShotBallController
         {
             Debug.LogError("CountRemainingText is null");
         }
+        */
+        this.fireBallIcon = fbIcon;
+        Color fireBallIconColor = fireBallIcon.color;
+        fireBallIconColor.a = 1;
+        fireBallIcon.color = fireBallIconColor;
     }
     
     protected void Start()
@@ -51,20 +57,20 @@ public class PickableFireBallController : ShotBallController
         remainColdingTime = maxColdingTime;
         remainBallNums -= 1;
 
-        if (CountRemainingText != null)
-        {
-            CountRemainingText.text = remainBallNums.ToString();
+        //if (CountRemainingText != null)
+        //{
+        //    CountRemainingText.text = remainBallNums.ToString();
             if (remainBallNums <= 0)
             {
-                Color temp = CountRemainingText.color;
-                temp.a = 0;
-                CountRemainingText.color = temp;
+                //Color temp = CountRemainingText.color;
+                //temp.a = 0;
+                //CountRemainingText.color = temp;
 
                 Color fireBallIconColor = fireBallIcon.color;
                 fireBallIconColor.a = 0;
                 fireBallIcon.color = fireBallIconColor;
             }
-        }
+        //}
         ResetCharge();
     }
 

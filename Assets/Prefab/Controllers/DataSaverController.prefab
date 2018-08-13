@@ -51,11 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf2d80e78c046c4f92ecebf61464259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stage: 1
+  curRoomId: -1
   playerNumber: 0
   playerName: []
   groupColor:
-  - {r: 0, g: 0.92156863, b: 1, a: 1}
-  - {r: 1, g: 0.56078434, b: 0.02745098, a: 1}
-  - {r: 0.99215686, g: 0.15294118, b: 0.15294118, a: 1}
-  - {r: 0.43137255, g: 0, b: 0.5372549, a: 1}
+  - {r: 0.9176471, g: 0.1137255, b: 0, a: 1}
+  - {r: 1, g: 0.57254905, b: 0.078431375, a: 1}
+  - {r: 0.15686275, g: 0.2627451, b: 1, a: 1}
+  - {r: 0, g: 0.8431373, b: 0.34117648, a: 1}
   scores: 00000000000000000000000000000000

@@ -53,4 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icePlane: {fileID: 0}
   planeMeshRender: {fileID: 0}
+  snowParticles: {fileID: 0}
   seasonDuring: 1.2

@@ -52,4 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trans: 0
-  nextSceneName: GameScene
+  nextSceneName: GameOverScene

@@ -52,5 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groupPlayers: []
-  groupPlayerToInstance: {fileID: 114496643577708858, guid: 9bc265ce87d2512439589790b2b87b3e,
+  groupPlayerToInstance: {fileID: 114981537792811700, guid: d07fd6bd21fd9401ca00037d607a28c1,
     type: 2}

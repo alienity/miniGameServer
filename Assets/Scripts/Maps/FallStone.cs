@@ -124,7 +124,7 @@ public class FallStone : MonoBehaviour {
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100.0f, layerMask))
         {
             Vector3 hitPos = hit.point;
-            finalInstantiatePos = hitPos + Vector3.up * 1.2f;
+            finalInstantiatePos = hitPos + Vector3.up;
         }
 
         GameObject item = Instantiate(fireBallItem);
