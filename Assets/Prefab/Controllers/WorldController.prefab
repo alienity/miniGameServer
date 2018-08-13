@@ -51,8 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec9ce63f2db40b4eb02988d05a82d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockImage: {fileID: 0}
   gUIController: {fileID: 0}
   scoreController: {fileID: 0}
+  weatherController: {fileID: 0}
   gcManager: {fileID: 0}
   bornTrans:
   - {fileID: 0}
@@ -60,4 +62,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   groupCounts: 0
-  totalGameTime: 180
+  totalGameTime: 240
+  timeToTransfer: 180

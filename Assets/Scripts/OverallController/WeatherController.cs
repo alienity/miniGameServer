@@ -10,16 +10,13 @@ public class WeatherController : MonoBehaviour {
     public MeshRenderer planeMeshRender;
     // 地板材质
     private Material planeMaterial;
+    // 天气粒子
+    public ParticleSystem snowParticles;
     // 季节转换时间
     public float seasonDuring;
     // 当前季节 0表示春天 1表示冬天
     private int season = 0;
-
-    // 陨石控制器
-    public RandomMap fallStoneRandomer;
-    // 陨石减掉的cd
-    public float fallStoneCdMinus;
-
+    
     private void Start ()
     {
         icePlane.SetActive(false);
@@ -45,6 +42,7 @@ public class WeatherController : MonoBehaviour {
     // 溶解变换协程
     IEnumerator GradientDissovle(float during)
     {
+        snowParticles.Play(true);
         float totalDuring = during;
         while (during > 0)
         {
@@ -54,7 +52,7 @@ public class WeatherController : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         icePlane.SetActive(true);
-        fallStoneRandomer.reBornCD -= fallStoneCdMinus;
+        snowParticles.Stop();
     }
 
 }

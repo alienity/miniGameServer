@@ -366,6 +366,26 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba943a91f83958d48ba046be72574c32, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &466811698 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4448284740332404, guid: ba943a91f83958d48ba046be72574c32,
+    type: 2}
+  m_PrefabInternal: {fileID: 466811697}
+--- !u!4 &466811699 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4143685294038446, guid: ba943a91f83958d48ba046be72574c32,
+    type: 2}
+  m_PrefabInternal: {fileID: 466811697}
+--- !u!4 &466811700 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4156464697265102, guid: ba943a91f83958d48ba046be72574c32,
+    type: 2}
+  m_PrefabInternal: {fileID: 466811697}
+--- !u!4 &466811701 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4418917879152512, guid: ba943a91f83958d48ba046be72574c32,
+    type: 2}
+  m_PrefabInternal: {fileID: 466811697}
 --- !u!1 &488842357 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1354407202319266, guid: 031f0cd86394f5b449fbd9826dc0f4af,
@@ -687,9 +707,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icePlane: {fileID: 488842357}
   planeMeshRender: {fileID: 1914682440}
+  snowParticles: {fileID: 0}
   seasonDuring: 1.2
-  fallStoneRandomer: {fileID: 0}
-  fallStoneCdMinus: 0
 --- !u!4 &811037478 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4789338642583052, guid: 047d1695ffbd9e240900c6d38c372b1a,
@@ -771,11 +790,6 @@ Prefab:
     - target: {fileID: 4940937332428190, guid: 031f0cd86394f5b449fbd9826dc0f4af, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114575635470979558, guid: 031f0cd86394f5b449fbd9826dc0f4af,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 031f0cd86394f5b449fbd9826dc0f4af, type: 2}
@@ -1086,9 +1100,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
         type: 2}
+      propertyPath: blockImage
+      value: 
+      objectReference: {fileID: 1561788758}
+    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
+        type: 2}
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 263169483}
+    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
+        type: 2}
+      propertyPath: weatherController
+      value: 
+      objectReference: {fileID: 1643079923}
     - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
         type: 2}
       propertyPath: gcManager
@@ -1098,42 +1122,22 @@ Prefab:
         type: 2}
       propertyPath: bornTrans.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 466811701}
     - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
         type: 2}
       propertyPath: bornTrans.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 466811700}
     - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
         type: 2}
       propertyPath: bornTrans.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 466811699}
     - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
         type: 2}
       propertyPath: bornTrans.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
-        type: 2}
-      propertyPath: totalGameTime
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
-        type: 2}
-      propertyPath: blockImage
-      value: 
-      objectReference: {fileID: 1561788758}
-    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
-        type: 2}
-      propertyPath: weatherController
-      value: 
-      objectReference: {fileID: 1643079923}
-    - target: {fileID: 114189108698777476, guid: 862201f92af0b71468e74dcef3ae9855,
-        type: 2}
-      propertyPath: timeToTransfer
-      value: 240
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 466811698}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 862201f92af0b71468e74dcef3ae9855, type: 2}
   m_IsPrefabParent: 0
@@ -1236,6 +1240,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e53a97d7c5e0744e95029be82413f29, type: 2}
   m_IsPrefabParent: 0
+--- !u!198 &1608841746 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 198715104766756652, guid: 031f0cd86394f5b449fbd9826dc0f4af,
+    type: 2}
+  m_PrefabInternal: {fileID: 1022930877}
 --- !u!1001 &1643079922
 Prefab:
   m_ObjectHideFlags: 0
@@ -1289,6 +1298,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114879089771799642, guid: 047d1695ffbd9e240900c6d38c372b1a,
+        type: 2}
+      propertyPath: snowParticles
+      value: 
+      objectReference: {fileID: 1608841746}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 047d1695ffbd9e240900c6d38c372b1a, type: 2}
   m_IsPrefabParent: 0
@@ -1389,15 +1403,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114981537792811700, guid: d07fd6bd21fd9401ca00037d607a28c1,
-        type: 2}
-      propertyPath: suicideScore
-      value: 66
-      objectReference: {fileID: 0}
-    - target: {fileID: 114981537792811700, guid: d07fd6bd21fd9401ca00037d607a28c1,
-        type: 2}
-      propertyPath: toKillerScore
-      value: 188
+    - target: {fileID: 1891178229196442, guid: d07fd6bd21fd9401ca00037d607a28c1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d07fd6bd21fd9401ca00037d607a28c1, type: 2}

@@ -114,6 +114,15 @@ public class RoleChoosingUIController : MonoBehaviour {
             CountDown.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
             CountDown.gameObject.GetComponent<AudioSource>().Play();
         }
+        else
+        {
+            CountDown.gameObject.GetComponent<AudioSource>().clip = CountDownAudio;
+            CountDown.gameObject.GetComponent<AudioSource>().Play();
+            //AudioSource countDownAudioSource = CountDown.gameObject.GetComponent<AudioSource>();
+            //if (countDownAudioSource.clip != CountDownAudio)
+            //    countDownAudioSource.clip = CountDownAudio;
+            //countDownAudioSource.Play();
+        }
     }
 
     public void SetRoleNames(Dictionary<int, string> role2Name)

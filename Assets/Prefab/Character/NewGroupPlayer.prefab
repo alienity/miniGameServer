@@ -4986,8 +4986,8 @@ MonoBehaviour:
   countdownPast: 0
   springStrength: 6
   totalScore: 0
-  suicideScore: 5
-  toKillerScore: 15
+  suicideScore: 66
+  toKillerScore: 188
   pigPlayer: {fileID: 114005201692986936}
   penguPlayer: {fileID: 114506082914902490}
   groupTrans: {fileID: 4870675648886274}

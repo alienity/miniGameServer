@@ -79,7 +79,7 @@ public class PenguPlayer : MonoBehaviour
         filledArrowSpriteController.SetProgress(1 - RemainingColdingTime() / MaxColdingTime());
 
         // ********************测试代码*******************
-        /**/
+        /*
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -109,7 +109,7 @@ public class PenguPlayer : MonoBehaviour
 
             //PenguPlayerAttack();
         }
-        
+        */
         // ********************测试代码*******************
     }
 

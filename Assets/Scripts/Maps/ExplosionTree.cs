@@ -22,7 +22,7 @@ public class ExplosionTree : MonoBehaviour
     // 爆炸范围
     public float explosionRadius = 50;
     // 爆炸强度
-    public float radio = -30.5f;
+    public float ratio = -30.5f;
 
     // 爆炸音效
     public AudioClip explosionAudio;
@@ -74,7 +74,7 @@ public class ExplosionTree : MonoBehaviour
             velocityDir.y = 0;
 
             Vector3 explosionvelocity = (explosionRadius - velocityDir.magnitude) * velocityDir.normalized;
-            explosionvelocity = -radio * explosionvelocity;
+            explosionvelocity = -ratio * explosionvelocity;
             GroupPlayer gp = col[i].GetComponent<GroupPlayer>();
             gp.EffectSpeedMovement(explosionvelocity);
         }
