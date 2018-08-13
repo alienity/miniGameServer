@@ -81,11 +81,6 @@ public class RoleChoosingUIController : MonoBehaviour {
         playerIcone[gid * 2 + uid].HeadSelect.gameObject.SetActive(false);
         playerIcone[gid * 2 + uid].NameText.text = defaultNames[gid * 2 + uid];
         playerIcone[gid * 2 + uid].ChooseFrameImage.gameObject.SetActive(false);
-        //playerIcone[gid * 2 + uid].CrownImage.gameObject.SetActive(false);
-        //BarImages[gid].gameObject.SetActive(false);
-        //buttons[gid * 2 + uid].interactable = true;
-        // 旧版本
-        //buttons[gid * 2 + uid].GetComponent<Image>().sprite = (uid == 0) ? PenguHeadAltern : PigHeadAltern;
     }
 
     // todo 到时候在这里为 button 设置效果
@@ -95,20 +90,12 @@ public class RoleChoosingUIController : MonoBehaviour {
         playerIcone[gid * 2 + uid].ConfirmMaskImage.gameObject.SetActive(false);
         //playerIcone[gid * 2 + uid].NameText.text = playerName;
         playerIcone[gid * 2 + uid].ConfirmFrameImage.gameObject.SetActive(false);
-        //playerIcone[gid * 2 + uid].ChooseFrameImage.gameObject.SetActive(true);
-        //playerIcone[gid * 2 + uid].CrownImage.gameObject.SetActive(false);
-        // 旧版本
-        // buttons[gid * 2 + uid].GetComponent<Image>().sprite = (uid == 0) ? PenguHeadSelect : PigHeadSelect;
     }
 
     public void SetButtonRoleLocked(int gid, int uid)
     {
         playerIcone[gid * 2 + uid].HeadSelect.gameObject.SetActive(true);
-        playerIcone[gid * 2 + uid].ConfirmFrameImage.gameObject.SetActive(true);
-        //playerIcone[gid * 2 + uid].ChooseFrameImage.gameObject.SetActive(false);
-        //playerIcone[gid * 2 + uid].CrownImage.gameObject.SetActive(true);
-        // 旧版本
-        //buttons[gid * 2 + uid].GetComponent<Image>().sprite = (uid == 0) ? PenguHeadLock : PigHeadLock;
+        //playerIcone[gid * 2 + uid].ConfirmFrameImage.gameObject.SetActive(true);
     }
 
     public void CountDownTextSetActive()
@@ -134,8 +121,6 @@ public class RoleChoosingUIController : MonoBehaviour {
         for (int i = 0; i < 8; i++)
         {
             playerIcone[i].NameText.text = role2Name.ContainsKey(i) ? role2Name[i] : defaultNames[i];
-            // 旧版本
-            //playerNames[i].text = role2Name.ContainsKey(i) ? role2Name[i] : defaultNames[i];
         }
     }
 }
