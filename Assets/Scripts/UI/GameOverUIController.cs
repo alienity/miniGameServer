@@ -100,7 +100,7 @@ public class GameOverUIController : MonoBehaviour {
                 //playerNameScore[i].panguName.text = "P" + (lst[i].Key + 1).ToString();
                 //playerNameScore[i].pigName.text = "P" + (lst[i].Key + 1).ToString();
                 playerNameScore[i].panguName.text = session2name[role2session[lst[i].Key * 2 + 0]];
-                playerNameScore[i].pigName.text = session2name[role2session[lst[i].Key + 1]];
+                playerNameScore[i].pigName.text = session2name[role2session[lst[i].Key * 2 + 1]];
                 playerNameScore[i].score.text = lst[i].Value.ToString();
             }
         }
