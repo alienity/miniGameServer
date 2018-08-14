@@ -263,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionTree: {fileID: 114077653339431164, guid: ded0a6ae4d0d43b43b68fd759dcd0bfe,
     type: 2}
-  rebornDelay: 5
+  rebornDelay: 8
   explosionTrans:
   - {fileID: 4773518160691468}
   - {fileID: 4905722570509696}

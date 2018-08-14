@@ -242,7 +242,7 @@ MonoBehaviour:
   Trail: {fileID: 198203518404371880, guid: 0f3cb7a4db126a14cb61d2a3903a065e, type: 2}
   markCircle: {fileID: 19895582, guid: 24e29d528f11acf42974643bee14a607, type: 2}
   lineColor: {r: 0.8490566, g: 0.32092494, b: 0.20425417, a: 0.5372549}
-  explosionRadius: 10
+  explosionRadius: 11
   radio: 12
   fireBallItemRadius: 2
   fireBallItem: {fileID: 1673072308406190, guid: e9b6593b15541944d9c6885f40e4596e,

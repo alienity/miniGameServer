@@ -67,7 +67,7 @@ MonoBehaviour:
   muzzleParticle: {fileID: 193574, guid: 5c2bdcf6f0badc34f9f192b0995e4a79, type: 2}
   trailParticles: []
   impactNormal: {x: 0, y: 0, z: 0}
-  boomRadius: 4
+  boomRadius: 10
   explosionRatio: 4
 --- !u!135 &135828476656166958
 SphereCollider:
