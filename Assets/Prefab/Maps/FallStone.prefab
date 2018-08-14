@@ -213,12 +213,13 @@ MonoBehaviour:
   markCircle: {fileID: 19895582, guid: 24e29d528f11acf42974643bee14a607, type: 2}
   lineColor: {r: 0.8490566, g: 0.32092494, b: 0.20425417, a: 0.5372549}
   explosionRadius: 10
-  radio: 10
+  radio: 12
   fireBallItemRadius: 2
   fireBallItem: {fileID: 1673072308406190, guid: e9b6593b15541944d9c6885f40e4596e,
     type: 2}
   dropAudioClip: {fileID: 8300000, guid: 015e73f08d115e1418ee2917ae4db597, type: 3}
   exposionAudioClip: {fileID: 8300000, guid: 0e1ffa22143fdda4992d38c6ca9ee8db, type: 3}
+  planeLayer: 512
 --- !u!135 &135426362948463716
 SphereCollider:
   m_ObjectHideFlags: 1

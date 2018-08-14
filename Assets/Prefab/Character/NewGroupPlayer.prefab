@@ -682,7 +682,6 @@ GameObject:
   - component: {fileID: 224657780697981068}
   - component: {fileID: 33477533694878954}
   - component: {fileID: 23556013524879916}
-  - component: {fileID: 64464223610151768}
   m_Layer: 5
   m_Name: nabla
   m_TagString: Untagged
@@ -4261,20 +4260,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!64 &64464223610151768
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1318259752930138}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!82 &82068225769482134
 AudioSource:
   m_ObjectHideFlags: 1
@@ -4895,7 +4880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 19823922, guid: e6e6f5beacfc73b41883f0becc4e2a67, type: 2}
   HitEffect: {fileID: 19867606, guid: 45b74d42e5559bf49a14a707b4842b51, type: 2}
-  exploseStrenth: 12
+  exploseStrenth: 25
   rebornCircleEffect: {fileID: 1324001765682460, guid: 6b89588e13a8a4b1f9d9e39e9c9ee6ea,
     type: 2}
   stunEffect: {fileID: 1815968215473704}
@@ -4905,7 +4890,7 @@ MonoBehaviour:
   rebornDelay: 0
   countdownTime: 30
   countdownPast: 0
-  springStrength: 6
+  springStrength: 21
   suicideScore: 66
   toKillerScore: 188
   pigPlayer: {fileID: 114005201692986936}

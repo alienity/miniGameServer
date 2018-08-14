@@ -469,7 +469,7 @@ MonoBehaviour:
   - {fileID: 4061723863930884}
   - {fileID: 4933169049074598}
   - {fileID: 4516536973414414}
-  reBornCD: 5
+  reBornCD: 9
   maxFireBallItemNumbers: 3
 --- !u!114 &114833814278838032
 MonoBehaviour:

@@ -4066,7 +4066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea058b19b59269249b8dadff7123396e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radio: 4
+  radio: 3
 --- !u!114 &114974026907580050
 MonoBehaviour:
   m_ObjectHideFlags: 1

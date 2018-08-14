@@ -28,6 +28,9 @@ public class FallStone : MonoBehaviour {
     public AudioClip exposionAudioClip;
     private AudioSource myAudioSource;
 
+    // 地面特效
+    private ParticleSystem markCircleInstance;
+
     // 陨石控制器毁掉，判断能否生成物品
     public delegate bool JudgeAction();
     public JudgeAction beableToInstantiateFireBall;
@@ -35,11 +38,16 @@ public class FallStone : MonoBehaviour {
     public System.Action increaseFireBallNumbers;
     public System.Action decreaseFireBallNumbers;
 
+    // 地图层
+    public int planeLayer = 1 << 9;
+
     private void Start()
     {
         ParticleSystem trailSystem = Instantiate(Trail, transform);
         trailSystem.transform.position = transform.position;
-        
+
+        markCircleInstance = Instantiate(markCircle, transform);
+
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
         lineRenderer.material.SetColor("_TintColor", lineColor);
@@ -59,18 +67,19 @@ public class FallStone : MonoBehaviour {
     private void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, planeLayer))
         {
             Vector3[] points = new Vector3[2];
             points[0] = transform.position;
             points[1] = hit.point;
             lineRenderer.SetPositions(points);
+
+            markCircleInstance.transform.position = hit.point;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("line explosion" + other.gameObject.tag);
         if (other.gameObject.tag == "Plane"|| other.gameObject.tag == "Player")
         {
             Destroy(Instantiate(explosion, transform.position, Quaternion.identity).gameObject, 1);

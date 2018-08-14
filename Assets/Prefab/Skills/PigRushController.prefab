@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxColdingTime: 3
-  pigRushForce: 2000
+  pigRushForce: 1500
   pigRushTime: 0.1
   invulnerableTime: 0.5
   fartParticleEffects: {fileID: 19820506, guid: 836a6e787e3b11941b38b8fff2af4e5b,
