@@ -1044,7 +1044,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1049110078092854}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -25.44, y: 309, z: 24}
+  m_LocalPosition: {x: -25.44, y: -160, z: 24}
   m_LocalScale: {x: 0.8, y: 0.7999998, z: 0.7999998}
   m_Children: []
   m_Father: {fileID: 4940937332428190}
@@ -1277,7 +1277,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460881155481566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 93.6, z: 0}
+  m_LocalPosition: {x: 0, y: 45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4940937332428190}
@@ -3983,8 +3983,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skyCloud: {fileID: 145100, guid: 67a918a11a2e84c5f88e3eda2cb4141f, type: 2}
   center: {fileID: 4923247848136034}
-  minRadius: 180
-  maxRadius: 450
+  minRadius: 120
+  maxRadius: 360
   cloudNum: 40
   minSpeed: 0.01
   maxSpeed: 0.05

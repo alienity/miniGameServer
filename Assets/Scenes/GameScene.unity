@@ -181,7 +181,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 1500
   field of view: 18
   orthographic: 0
   orthographic size: 5
@@ -860,30 +860,6 @@ Prefab:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 114904987361787620, guid: 327e73f5093ccfa4bb6d427299a191da,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 319652629d6bbee4ca1e58b118aa94bd,
-        type: 3}
-    - target: {fileID: 114271337965642330, guid: 327e73f5093ccfa4bb6d427299a191da,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 6a36ba0cda5f5134ca4b4174f70e1802,
-        type: 3}
-    - target: {fileID: 114461430576455688, guid: 327e73f5093ccfa4bb6d427299a191da,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f9c00d5f4bce3404abbb05c241b2227b,
-        type: 3}
-    - target: {fileID: 114210768214293536, guid: 327e73f5093ccfa4bb6d427299a191da,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2254b4c4ffef75945a3de96fc2d76f0c,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 327e73f5093ccfa4bb6d427299a191da, type: 2}
   m_IsPrefabParent: 0
