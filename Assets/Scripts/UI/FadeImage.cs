@@ -21,8 +21,8 @@ public class FadeImage : MonoBehaviour
         seq.Append(blackImage.DOFade(0f, 0.5f));
         seq.Append(blackImage.DOFade(0.5f, 1f));
         seq.Append(gameNameImage.DOFade(1f, 1f));
-        seq.Append(gameNameImage.DOFade(0f, 1f));
-        seq.Append(blackImage.DOFade(1f, 1f));    // 全部关闭
+        //seq.Append(gameNameImage.DOFade(0f, 1f));
+        seq.Append(blackImage.DOFade(0.768627f, 1f));    // 全部关闭  196/255s
         seq.Append(startCanvas.DOFade(1, 1.5f));
 
         //Sequence DonQuixoeSeq = DOTween.Sequence();
