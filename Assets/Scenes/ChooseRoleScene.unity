@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7293,33 +7293,33 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9699ab040311f144cbe137046aecd627,
+      objectReference: {fileID: 21300000, guid: 45437fae279e0974ca471fcee3bc44ab,
         type: 3}
     - target: {fileID: 114957284793301222, guid: 9b62672c8495c714b988cc7c01533b6e,
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a7218695a12ed5a41b3a2efc5a26897b,
+      objectReference: {fileID: 21300000, guid: 133dd403bb34dad45b74ae905e7c685a,
         type: 3}
     - target: {fileID: 224881858550416102, guid: 9b62672c8495c714b988cc7c01533b6e,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 611
+      value: 487
       objectReference: {fileID: 0}
     - target: {fileID: 224881858550416102, guid: 9b62672c8495c714b988cc7c01533b6e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 246
+      value: 231
       objectReference: {fileID: 0}
     - target: {fileID: 224881858550416102, guid: 9b62672c8495c714b988cc7c01533b6e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 297
+      value: -359
       objectReference: {fileID: 0}
     - target: {fileID: 224881858550416102, guid: 9b62672c8495c714b988cc7c01533b6e,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -450
+      value: -614
       objectReference: {fileID: 0}
     - target: {fileID: 114892009298087592, guid: 9b62672c8495c714b988cc7c01533b6e,
         type: 2}
@@ -7360,6 +7360,58 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MaxSize
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 114540828515976782, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6da43c4300403ca439b67e81228c26db,
+        type: 3}
+    - target: {fileID: 224986402491359510, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 253
+      objectReference: {fileID: 0}
+    - target: {fileID: 224986402491359510, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 306
+      objectReference: {fileID: 0}
+    - target: {fileID: 114643630464798930, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 70a2cfd8cb46da647b1214f1cb44dc0f,
+        type: 3}
+    - target: {fileID: 224728735992951022, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 253
+      objectReference: {fileID: 0}
+    - target: {fileID: 224728735992951022, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 306
+      objectReference: {fileID: 0}
+    - target: {fileID: 114643630464798930, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_FillAmount
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114469163561257580, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114957284793301222, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114623774042994348, guid: 9b62672c8495c714b988cc7c01533b6e,
+        type: 2}
+      propertyPath: m_Text
+      value: 4/8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114996007197153810, guid: 9b62672c8495c714b988cc7c01533b6e, type: 2}
