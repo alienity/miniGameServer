@@ -111,8 +111,8 @@ public class RoleChoosingUIController : MonoBehaviour {
         CountDown.text = time.ToString();
         if(time < 1)
         {
-            CountDown.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
-            CountDown.gameObject.GetComponent<AudioSource>().Play();
+            //CountDown.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
+            //CountDown.gameObject.GetComponent<AudioSource>().Play();
         }
         else
         {

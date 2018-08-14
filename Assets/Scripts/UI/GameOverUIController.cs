@@ -69,8 +69,13 @@ public class GameOverUIController : MonoBehaviour {
         CountdownText.text = remainTimeInteger.ToString();
         if (remainTimeInteger < 1)
         {
-            CountdownText.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
-            CountdownText.gameObject.GetComponent<AudioSource>().Play();
+            //CountdownText.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
+            //CountdownText.gameObject.GetComponent<AudioSource>().Play();
+        }
+        else
+        {
+            //CountdownText.gameObject.GetComponent<AudioSource>().clip = CountDownAudio;
+            //CountdownText.gameObject.GetComponent<AudioSource>().Play();
         }
     }
 

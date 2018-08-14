@@ -87,8 +87,8 @@ public class GameUIController : MonoBehaviour
         countdownText.text = TimeToShow(remainTimes);
         if ((int)remainTimes < 1)
         {
-            countdownText.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
-            countdownText.gameObject.GetComponent<AudioSource>().Play();
+            //countdownText.gameObject.GetComponent<AudioSource>().clip = CountDownOverAudio;
+            //countdownText.gameObject.GetComponent<AudioSource>().Play();
         }
     }
 
