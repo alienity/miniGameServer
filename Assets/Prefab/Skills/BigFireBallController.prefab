@@ -54,5 +54,5 @@ MonoBehaviour:
   ball: {fileID: 114608106251854162, guid: 3be541e59d24e0142b0f4f1dc2611ad6, type: 2}
   maxColdingTime: 2
   maxChargeTime: 2.5
-  chargeAudioClip: {fileID: 8300000, guid: 6534f7e572f994f788f83ca57275bfc9, type: 3}
+  chargeAudioClip: {fileID: 8300000, guid: 969d978d5458a4443b1e439e0db5a721, type: 3}
   remainBallNums: 3

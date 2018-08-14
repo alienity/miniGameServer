@@ -22,10 +22,8 @@ public class FilledArrowSpriteController : MonoBehaviour
     // 闪现时长
     public float shineDuring = 0.8f;
     
-    [SerializeField] private Color curArrowColor;
-    [SerializeField] private Vector2 arrowSize;
-
-    private bool flashed = false;
+    // 原始精灵尺寸
+    private Vector2 arrowSize;
 
     private void Awake()
 	{
@@ -34,10 +32,6 @@ public class FilledArrowSpriteController : MonoBehaviour
 
     private void Start()
     {
-        Color tmpColor = shineSpriteRender.color;
-        tmpColor.a = 0;
-        shineSpriteRender.color = tmpColor;
-
         arrowSize = boardSpriteRender.size;
     }
 
@@ -64,7 +58,6 @@ public class FilledArrowSpriteController : MonoBehaviour
     // 设置箭头颜色
     public void SetArrowColor(Color color)
     {
-        curArrowColor = color;
         boardSpriteRender.color = color;
         shineSpriteRender.color = color;
         fillSpriteMaterial.SetColor("_Color", color);
@@ -73,11 +66,11 @@ public class FilledArrowSpriteController : MonoBehaviour
     // 根据比例设置箭头长度
     public void SetArrowLen(float arrowRatio)
     {
-        Vector2 newArrowSize = arrowSize;
-        newArrowSize.y = Mathf.Lerp(arrowMinRatio, arrowMaxRatio, arrowRatio) * arrowSize.y;
-        boardSpriteRender.size = arrowSize;
-        fillSpriteRender.size = arrowSize;
-        shineSpriteRender.size = arrowSize;
+        Vector2 tmpArrowSize = arrowSize;
+        tmpArrowSize.y *= Mathf.Lerp(arrowMinRatio, arrowMaxRatio, arrowRatio);
+        boardSpriteRender.size = tmpArrowSize;
+        fillSpriteRender.size = tmpArrowSize;
+        shineSpriteRender.size = tmpArrowSize;
     }
 
 }

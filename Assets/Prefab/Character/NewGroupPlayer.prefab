@@ -4715,8 +4715,6 @@ MonoBehaviour:
   arrowMaxRatio: 1.6
   arrowMinRatio: 1
   shineDuring: 0.8
-  curArrowColor: {r: 0, g: 0, b: 0, a: 0}
-  arrowSize: {x: 0, y: 0}
 --- !u!114 &114506082914902490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4852,11 +4850,9 @@ MonoBehaviour:
   fillSpriteRender: {fileID: 212550326151712910}
   shineSpriteRender: {fileID: 212197733721608010}
   progress: 0
-  arrowMaxRatio: 3
-  arrowMinRatio: 1.6
+  arrowMaxRatio: 1.6
+  arrowMinRatio: 1
   shineDuring: 0.8
-  curArrowColor: {r: 0, g: 0, b: 0, a: 0}
-  arrowSize: {x: 0, y: 0}
 --- !u!114 &114829162976856730
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,15 +19,31 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4326452630252260}
-  - component: {fileID: 33002159529587886}
-  - component: {fileID: 23687953491703870}
   - component: {fileID: 135426362948463716}
-  - component: {fileID: 114973642501239442}
   - component: {fileID: 54773553959693792}
+  - component: {fileID: 114973642501239442}
   - component: {fileID: 82446719389698608}
   m_Layer: 0
   m_Name: FallStone
   m_TagString: FallStone
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1056112392551654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4400139234608594}
+  - component: {fileID: 33565450232995274}
+  - component: {fileID: 23495804185071034}
+  - component: {fileID: 114990261101926310}
+  m_Layer: 0
+  m_Name: FallStoneTexture
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,18 +55,32 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021660576459894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.5, y: 59, z: 4.2}
+  m_LocalPosition: {x: 12.5, y: 13.56, z: 4.2}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children: []
+  m_Children:
+  - {fileID: 4400139234608594}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23687953491703870
+--- !u!4 &4400139234608594
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056112392551654}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4326452630252260}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23495804185071034
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1021660576459894}
+  m_GameObject: {fileID: 1056112392551654}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +90,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b29d993a916c5134e99951100067a863, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,13 +110,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33002159529587886
+--- !u!33 &33565450232995274
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1021660576459894}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_GameObject: {fileID: 1056112392551654}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54773553959693792
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -209,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 19848870, guid: a7c694f0877ea874fa57e033221095c3, type: 2}
-  Trail: {fileID: 19894080, guid: f6d2b583bc3983c4b9b6dcac3122a734, type: 2}
+  Trail: {fileID: 198203518404371880, guid: 0f3cb7a4db126a14cb61d2a3903a065e, type: 2}
   markCircle: {fileID: 19895582, guid: 24e29d528f11acf42974643bee14a607, type: 2}
   lineColor: {r: 0.8490566, g: 0.32092494, b: 0.20425417, a: 0.5372549}
   explosionRadius: 10
@@ -220,6 +250,21 @@ MonoBehaviour:
   dropAudioClip: {fileID: 8300000, guid: 015e73f08d115e1418ee2917ae4db597, type: 3}
   exposionAudioClip: {fileID: 8300000, guid: 0e1ffa22143fdda4992d38c6ca9ee8db, type: 3}
   planeLayer: 512
+--- !u!114 &114990261101926310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056112392551654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888c41fa685cee7459a872ee6e7c8261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 0}
+  x: 1
+  y: 1
+  z: 1
 --- !u!135 &135426362948463716
 SphereCollider:
   m_ObjectHideFlags: 1
