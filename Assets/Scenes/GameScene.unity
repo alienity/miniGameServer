@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groups: []
-  boardRadius: 5
+  boardRadius: 8
   minCam2TargetLength: 80
   maxCam2TargetLength: 240
   camMoveSpeed: 6
