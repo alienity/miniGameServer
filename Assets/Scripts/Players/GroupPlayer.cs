@@ -29,7 +29,9 @@ public class GroupPlayer : MonoBehaviour
     // 增加分数时会出现的字
     public Text addScore;
     public Text playerName;
-
+    // 头上三角形
+    public Image upTriangle;
+    
     // 组ID
     public int gId;
     // 活着
@@ -293,7 +295,9 @@ public class GroupPlayer : MonoBehaviour
         GroupPlayer group = Instantiate(this, bornPos, Quaternion.identity);
         group.gId = gId;
         group.groupColor = groupColor;
-        
+
+        group.upTriangle.color = groupColor;
+
         return group;
     }
 

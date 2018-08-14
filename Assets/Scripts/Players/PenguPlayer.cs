@@ -78,8 +78,9 @@ public class PenguPlayer : MonoBehaviour
         // 设置cd进度
         filledArrowSpriteController.SetProgress(1 - RemainingColdingTime() / MaxColdingTime());
 
+
         // ********************测试代码*******************
-        /*
+        /**/
         Vector3 m_newDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -109,7 +110,7 @@ public class PenguPlayer : MonoBehaviour
 
             //PenguPlayerAttack();
         }
-        */
+        
         // ********************测试代码*******************
     }
 
@@ -189,7 +190,6 @@ public class PenguPlayer : MonoBehaviour
     {
         Debug.Log(touchId);
         float ratio = curBallController.HandleChargeAttack(processId, currrentTime, touchId);
-        //SetArrowLen(ratio);
         filledArrowSpriteController.SetArrowLen(ratio);
         if(touchId == 1)
             PenguPlayerAttack();

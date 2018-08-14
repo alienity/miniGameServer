@@ -4,7 +4,7 @@
 	{
 		_MainTex("主纹理", 2D) = "white" {}
 		_MainColor("主体颜色", Color) = (1,1,1,1)
-		_Outline("轮廓宽度", Float) = 0.2
+		_Outline("轮廓宽度", Float) = 0.08
 		_OutlineColor ("轮廓颜色", Color) = (0, 0, 0, 1)
 	}
 	SubShader
